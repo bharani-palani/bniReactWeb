@@ -23,61 +23,61 @@ function App() {
                     <div id="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span className="fa fa-angle-down"></span></a>
+                                <a href={"javasript:void(0)"} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span className="fa fa-angle-down"></span></a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 01</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 02</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 03</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 04</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 05</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 06</a></li>
                                 </ul>
                             </li>
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span className="fa fa-angle-down"></span></a>
+                                <a href={"javasript:void(0)"} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span className="fa fa-angle-down"></span></a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 01</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 02</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 03</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 04</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 05</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 06</a></li>
                                 </ul>
                             </li>
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <span className="fa fa-angle-down"></span></a>
+                                <a href={"javasript:void(0)"} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <span className="fa fa-angle-down"></span></a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 01</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 02</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 03</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 04</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 05</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 06</a></li>
                                 </ul>
                             </li>
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span className="fa fa-angle-down"></span></a>
+                                <a href={"javasript:void(0)"} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span className="fa fa-angle-down"></span></a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 01</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 02</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 03</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 04</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 05</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 06</a></li>
                                 </ul>
                             </li>
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog <span className="fa fa-angle-down"></span></a>
+                                <a href={"javasript:void(0)"} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog <span className="fa fa-angle-down"></span></a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 01</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 02</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 03</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 04</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 05</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 06</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href={"javasript:void(0)"}>Contact</a></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li><a href="https://html.design">Download <i className="fa fa-shopping-bag"></i></a></li>
@@ -96,26 +96,26 @@ function App() {
                     <div className="margin-block"></div>
 
                     <ul className="primary-menu">
-                        {/* <li className="child-menu"><a href="#">Pages <i className="fa fa-angle-right"></i></a>
+                        {/* <li className="child-menu"><a href={"javasript:void(0)"}>Pages <i className="fa fa-angle-right"></i></a>
                             <div className="sub-menu-wrapper">
                                 <ul className="sub-menu center-content">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 01</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 02</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 03</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 04</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 05</a></li>
+                                    <li><a href={"javasript:void(0)"}>Menu Example 06</a></li>
                                 </ul>
                             </div>
                         </li> */}
-                        <li className="child-menu"><a href="#">About</a></li>
-                        <li className="child-menu"><a href="#">Technolgies</a></li>
-                        <li className="child-menu"><a href="#">Projects</a></li>
-                        <li className="child-menu"><a href="#">Skills</a></li>
-                        <li className="child-menu"><a href="#">Awards</a></li>
-                        <li className="child-menu"><a href="#">Education</a></li>
-                        <li className="child-menu"><a href="#">Contact</a></li>
-                        <li className="child-menu"><a href="#">Resume</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>About</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>Technolgies</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>Projects</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>Skills</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>Awards</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>Education</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>Contact</a></li>
+                        <li className="child-menu"><a href={"javasript:void(0)"}>Resume</a></li>
                     </ul>
                     
                     <div className="margin-block"></div>
@@ -133,10 +133,10 @@ function App() {
 
                     <div className="menu-social">
                         <ul className="list-inline text-center">
-                            <li><a href="#"><i className="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i className="fa fa-instagram"></i></a></li>
+                            <li><a href={"javasript:void(0)"}><i className="fa fa-facebook"></i></a></li>
+                            <li><a href={"javasript:void(0)"}><i className="fa fa-linkedin"></i></a></li>
+                            <li><a href={"javasript:void(0)"}><i className="fa fa-twitter"></i></a></li>
+                            <li><a href={"javasript:void(0)"}><i className="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -206,7 +206,7 @@ function App() {
                           <div className="text-widget">
                               <h3>Powerful template features</h3>
 
-                              <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in <a href="#">semper vel</a>, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringill torquent per conubia nostra.</p>
+                              <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in <a href={"javasript:void(0)"}>semper vel</a>, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringill torquent per conubia nostra.</p>
 
                               <div className="clearfix"></div>
 
@@ -265,11 +265,11 @@ function App() {
                               <button className="btn btn-custom dropdown-toggle" type="button" data-toggle="dropdown">Product Filter
                               <span className="fa fa-angle-down"></span></button>
                               <ul className="dropdown-menu">
-                                  <li><a className="active" href="#" data-filter="*">All Projects</a></li>
-                                  <li><a className="" href="#" data-filter=".cat1">Web Design</a></li>
-                                  <li><a className="" href="#" data-filter=".cat2">Motion Design</a></li>
-                                  <li><a className="" href="#" data-filter=".cat3">Graphic Design</a></li>
-                                  <li><a className="" href="#" data-filter=".cat4">Development</a></li>
+                                  <li><a className="active" href={"javasript:void(0)"} data-filter="*">All Projects</a></li>
+                                  <li><a className="" href={"javasript:void(0)"} data-filter=".cat1">Web Design</a></li>
+                                  <li><a className="" href={"javasript:void(0)"} data-filter=".cat2">Motion Design</a></li>
+                                  <li><a className="" href={"javasript:void(0)"} data-filter=".cat3">Graphic Design</a></li>
+                                  <li><a className="" href={"javasript:void(0)"} data-filter=".cat4">Development</a></li>
                               </ul>
                           </div>
                       </div>
@@ -282,13 +282,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_01.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Plumeria Logo Design</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Plumeria Logo Design</a></h4>
                                       <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed sed. </p>
                                   </div>
                               </div>
@@ -297,13 +297,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_02.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Back to Life</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Back to Life</a></h4>
                                       <p>Aliquam erat volutpat. Donec pharetra imperdiet metus, eget cras.</p>
                                   </div>
                               </div>
@@ -312,13 +312,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_03.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Creative Share App</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Creative Share App</a></h4>
                                       <p>Aenean consectetur semper lorem, sit amet volutpat. </p>
                                   </div>
                               </div>
@@ -327,13 +327,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_04.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Luana 3D Max</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Luana 3D Max</a></h4>
                                       <p>Nunc vitae metus sagittis, pharetra risus non, luctus ligula volutpat. </p>
                                   </div>
                               </div>
@@ -342,13 +342,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_05.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Custom M Logo</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Custom M Logo</a></h4>
                                       <p>Proin non mollis orci, quis maximus nisi. In imperdiet neque eu metus. </p>
                                   </div>
                               </div>
@@ -357,13 +357,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_06.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Internal App Project</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Internal App Project</a></h4>
                                       <p>Etiam fermentum, urna sed varius aliquet, sem enim ultrices arcu amet. </p>
                                   </div>
                               </div>
@@ -372,13 +372,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_07.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Audio Player App</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Audio Player App</a></h4>
                                       <p>Ut convallis mollis est, eu tincidunt magna varius dignissim. Sed sed.</p>
                                   </div>
                               </div>
@@ -387,13 +387,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_08.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Geek Vector Design</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Geek Vector Design</a></h4>
                                       <p>Ut porttitor aliquet auctor. Donec pellentesque libero et mattis amet. </p>
                                   </div>
                               </div>
@@ -402,13 +402,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_09.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Sweet Admin Dashboard</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Sweet Admin Dashboard</a></h4>
                                       <p>Aliquam quis euismod metus, vitae iaculis ipsum. Aliquam non enim sed.</p>
                                   </div>
                               </div>
@@ -417,13 +417,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_10.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Smooth Keyboard Design</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Smooth Keyboard Design</a></h4>
                                       <p>Nunc aliquet mi ante. Nulla magna ante, porttitor in sagittis posuere. </p>
                                   </div>
                               </div>
@@ -432,13 +432,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_11.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Click Smart App</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Click Smart App</a></h4>
                                       <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
                                   </div>
                               </div>
@@ -447,13 +447,13 @@ function App() {
                                   <div className="entry">
                                       <img src={require("./images/upload/desc_work_12.png")} alt="" className="img-responsive" />
                                       <div className="magnifier">
-                                          <a className="golink" href="#">
+                                          <a className="golink" href={"javasript:void(0)"}>
                                             <i className="fa fa-link"></i>
                                           </a>
                                       </div>
                                   </div>
                                   <div className="item-desc">
-                                      <h4><a href="#">Gabfire Vector Logo</a></h4>
+                                      <h4><a href={"javasript:void(0)"}>Gabfire Vector Logo</a></h4>
                                       <p>Maecenas nisl magna, ultricies lobortis tortor vel, dapibus cras amet. </p>
                                   </div>
                               </div>
@@ -499,10 +499,10 @@ function App() {
                           <div className="magnifier">
                               <div className="magni-desc">
                                   <h4>
-                                      <a href="#">Website Template</a>
+                                      <a href={"javasript:void(0)"}>Website Template</a>
                                       <small>in: websites</small>
                                   </h4>
-                                  <a className="goitem" href="#"><i className="fa fa-link"></i></a>
+                                  <a className="goitem" href={"javasript:void(0)"}><i className="fa fa-link"></i></a>
                               </div>
                           </div>
                       </div>
@@ -512,10 +512,10 @@ function App() {
                           <div className="magnifier">
                               <div className="magni-desc">
                                   <h4>
-                                      <a href="#">CSS3 Animation</a>
+                                      <a href={"javasript:void(0)"}>CSS3 Animation</a>
                                       <small>in: animations</small>
                                   </h4>
-                                  <a className="goitem" href="#"><i className="fa fa-link"></i></a>
+                                  <a className="goitem" href={"javasript:void(0)"}><i className="fa fa-link"></i></a>
                               </div>
                           </div>
                       </div>
@@ -525,10 +525,10 @@ function App() {
                           <div className="magnifier">
                               <div className="magni-desc">
                                   <h4>
-                                      <a href="#">Mockup Template</a>
+                                      <a href={"javasript:void(0)"}>Mockup Template</a>
                                       <small>in: mockups</small>
                                   </h4>
-                                  <a className="goitem" href="#"><i className="fa fa-link"></i></a>
+                                  <a className="goitem" href={"javasript:void(0)"}><i className="fa fa-link"></i></a>
                               </div>
                           </div>
                       </div>
@@ -538,10 +538,10 @@ function App() {
                           <div className="magnifier">
                               <div className="magni-desc">
                                   <h4>
-                                      <a href="#">Mockup Template</a>
+                                      <a href={"javasript:void(0)"}>Mockup Template</a>
                                       <small>in: css3</small>
                                   </h4>
-                                  <a className="goitem" href="#"><i className="fa fa-link"></i></a>
+                                  <a className="goitem" href={"javasript:void(0)"}><i className="fa fa-link"></i></a>
                               </div>
                           </div>
                       </div>
@@ -627,19 +627,19 @@ function App() {
                       <div className="col-lg-4 col-md-12">
                           <div className="blog-box">
                               <div className="post-media">
-                                  <a href="#"><img src={require("./images/upload/blog_01.jpg")} alt="" className="img-responsive" /></a>
+                                  <a href={"javasript:void(0)"}><img src={require("./images/upload/blog_01.jpg")} alt="" className="img-responsive" /></a>
                               </div>
 
                               <div className="blog-desc">
-                                  <h4><a href="#">The most suitable web design</a></h4>
+                                  <h4><a href={"javasript:void(0)"}>The most suitable web design</a></h4>
                                   <p>Praesent at suscipit ligula. Suspendisse pre neque, quis suscipit enim. sed maximus, mia auctor.</p>
                               </div>
 
                               <div className="post-meta">
                                   <ul className="list-inline">
-                                      <li><a href="#">21 March 2017</a></li>
-                                      <li><a href="#">by HTML Design</a></li>
-                                      <li><a href="#">14 Share</a></li>
+                                      <li><a href={"javasript:void(0)"}>21 March 2017</a></li>
+                                      <li><a href={"javasript:void(0)"}>by HTML Design</a></li>
+                                      <li><a href={"javasript:void(0)"}>14 Share</a></li>
                                   </ul>
                               </div>
                           </div>
@@ -648,19 +648,19 @@ function App() {
                       <div className="col-lg-4 col-md-12">
                           <div className="blog-box">
                               <div className="post-media">
-                                  <a href="#"><img src={require("./images/upload/blog_02.jpg")} alt="" className="img-responsive" /></a>
+                                  <a href={"javasript:void(0)"}><img src={require("./images/upload/blog_02.jpg")} alt="" className="img-responsive" /></a>
                               </div>
 
                               <div className="blog-desc">
-                                  <h4><a href="#">The most suitable web design</a></h4>
+                                  <h4><a href={"javasript:void(0)"}>The most suitable web design</a></h4>
                                   <p>Sed suscipit neque in erat posuere tristique aliquam porta vestibulum. Cras placerat tincidunt. </p>
                               </div>
 
                               <div className="post-meta">
                                   <ul className="list-inline">
-                                      <li><a href="#">20 March 2017</a></li>
-                                      <li><a href="#">by HTML Design</a></li>
-                                      <li><a href="#">11 Share</a></li>
+                                      <li><a href={"javasript:void(0)"}>20 March 2017</a></li>
+                                      <li><a href={"javasript:void(0)"}>by HTML Design</a></li>
+                                      <li><a href={"javasript:void(0)"}>11 Share</a></li>
                                   </ul>
                               </div>
                           </div>
@@ -669,19 +669,19 @@ function App() {
                       <div className="col-lg-4 col-md-12">
                           <div className="blog-box">
                               <div className="post-media">
-                                  <a href="#"><img src={require("./images/upload/blog_03.jpg")} alt="" className="img-responsive" /></a>
+                                  <a href={"javasript:void(0)"}><img src={require("./images/upload/blog_03.jpg")} alt="" className="img-responsive" /></a>
                               </div>
 
                               <div className="blog-desc">
-                                  <h4><a href="#">Design for all mobile devices</a></h4>
+                                  <h4><a href={"javasript:void(0)"}>Design for all mobile devices</a></h4>
                                   <p>Suspendisse scelerisque ex ac mattis molestie vel enim ut massa placerat faucibus sed ut dui vivamus. </p>
                               </div>
 
                               <div className="post-meta">
                                   <ul className="list-inline">
-                                      <li><a href="#">19 March 2017</a></li>
-                                      <li><a href="#">by HTML Design</a></li>
-                                      <li><a href="#">44 Share</a></li>
+                                      <li><a href={"javasript:void(0)"}>19 March 2017</a></li>
+                                      <li><a href={"javasript:void(0)"}>by HTML Design</a></li>
+                                      <li><a href={"javasript:void(0)"}>44 Share</a></li>
                                   </ul>
                               </div>
                           </div>
@@ -692,7 +692,7 @@ function App() {
 
           <section className="section bgcolor">
               <div className="container">
-                  <a href="#">
+                  <a href={"javasript:void(0)"}>
                   <div className="row callout">
                       <div className="col-md-4 text-center">
                           <h3><sup>$</sup>49.99</h3>
@@ -713,7 +713,7 @@ function App() {
                       <div className="col-lg-6 col-md-12">
                           <div className="widget clearfix">
                               <div className="newsletter-widget">
-                                  <p>You can opt out of our newsletters at any time.<br /> See our <a href="#">privacy policy</a>.</p>
+                                  <p>You can opt out of our newsletters at any time.<br /> See our <a href={"javasript:void(0)"}>privacy policy</a>.</p>
                                   <form className="form-inline" role="search">
                                       <div className="form-1">
                                           <input type="text" className="form-control" placeholder="Enter email here.." />
