@@ -1,13 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 
 class Menu extends React.Component {
     render() {
         return (
             <Router>
                 <div className="menu-wrapper">
-                    <div className="mobile-menu">
+                <Navbar bg="dark" expand="lg">
+                    <Navbar.Brand href="#home"><a className="navbar-brand" href="index.html"><img src={require("../../images/logo-normal.png")} alt="" /></a></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                        </button>
+                        
+                    </Navbar.Collapse>
+                </Navbar>
+                    {/* <div className="mobile-menu">
                         <nav className="navbar navbar-inverse">
                             <div className="container-fluid">
                                 <div className="navbar-header">
@@ -84,7 +98,7 @@ class Menu extends React.Component {
                                 </div>
                             </div>
                         </nav>
-                    </div>
+                    </div> */}
                     <header className="vertical-header">
                         <div className="vertical-header-wrapper">
                             <nav className="nav-menu">
