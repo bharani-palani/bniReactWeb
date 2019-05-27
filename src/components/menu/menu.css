@@ -1,0 +1,10 @@
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 4px;
+    width: 50px;
+    border: solid 2px #ddd;
+    font-size: 25px;
+}

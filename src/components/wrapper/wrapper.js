@@ -1,38 +1,20 @@
-import React from 'react';
-import { Route } from "react-router-dom";
-import About from '../about';
-import Technologies from '../technologies';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import About from "../about";
+import Technologies from "../technologies";
+import ErrorPage from "../errorpage";
 
-const routes = [
-    {
-        path: "/",
-        exact: true,
-        sidebar: () => <About />,
-      },
-      {
-      path: "/about",
-      exact: true,
-      sidebar: () => <About />,
-    },
-    {
-      path: "/technologies",
-      sidebar: () => <Technologies />,
-    },
-];
-  
 class Wrapper extends React.Component {
-    render() {
-        return (
-            routes.map((route, index) => (
-                <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={route.sidebar}
-                />
-            ))
-        );
-    }
+  render() {
+    return (
+        <Switch>
+            <Route exact path="/" component={About} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/technologies" component={Technologies} />
+            <Route component={ErrorPage} />
+        </Switch>
+    )
+  }
 }
 
 export default Wrapper;
