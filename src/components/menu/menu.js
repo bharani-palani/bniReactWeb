@@ -48,6 +48,10 @@ class Menu extends React.Component {
         return (
             <Router>
                 <div className="menu-wrapper">
+                <video className="videoTag" autoPlay loop muted>
+                    <source src={require("../../videos/video.mp4")} type='video/mp4' />
+                </video>
+
                     <div className="mobile-menu">
                         <Navbar bg="light" expand="lg" sticky="top">
                             <Navbar.Brand className="navbar-brand">
@@ -74,10 +78,9 @@ class Menu extends React.Component {
                             <nav className="nav-menu">
                                 <div className="logo">
                                     <Link to={"/"}>
-                                        <img src={require("../../images/logo.png")} alt="" />
+                                        <img src={require("../../images/avatar/bniBlack.png")} alt="" />
                                     </Link>
                                 </div>
-                                <div className="margin-block"></div>
                                 <ul className="primary-menu">
                                     {
                                         this.state.menus.map((menu, i) => (

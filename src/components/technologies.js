@@ -39,7 +39,7 @@ class Technologies extends React.Component {
                     name: "Jquery",
                     sort: 6,
                     imageRoot: "jquery.png",
-                    description: "A JavaScript library designed to simplify HTML DOM tree traversal and manipulation, featuring event handling, CSS animation, and Ajax"
+                    description: "A JavaScript library designed to simplify HTML DOM tree traversal and manipulation, featuring event handling, CSS animation and Ajax"
                 },
                 {
                     name: "Node.JS",
@@ -63,13 +63,39 @@ class Technologies extends React.Component {
                     name: "Spring Boot",
                     sort: 10,
                     imageRoot: "spring-boot-logo.png",
-                    description: "Annotaions, REST service, configuring pom.xml for dependency injection, connecting MySql with varied Microservices"
+                    description: "Annotaions, Java collections, REST service, configuring pom.xml for dependency injection, connecting MySql with varied Microservices"
                 },
                 {
                     name: "Google Cloud",
                     sort: 11,
                     imageRoot: "google-cloud-logo.png",
                     description: "Deploy application on clients instance. Cloud engine, network services, disable/shutdown instances etc.."
+                },
+            ],
+            ideTechs: [
+                {
+                    name: "Visual Studio Code",
+                    sort: 1,
+                    imageRoot: "vscode.png",
+                    description: "Code editor redefined and optimized for building and debugging modern web and cloud applications."
+                },
+                {
+                    name: "Mysql Workbench",
+                    sort: 2,
+                    imageRoot: "mysqlWb.jpg",
+                    description: "Database design for SQL development, administration, database design, creation and maintenance for MySQL database system."
+                },
+                {
+                    name: "Spring Tool Suite",
+                    sort: 3,
+                    imageRoot: "STS.png",
+                    description: "Code backend sprint boot files, which has an embeded Tomcat server"
+                },
+                {
+                    name: "IntelliJ Idea CE",
+                    sort: 4,
+                    imageRoot: "IntelliJ.png",
+                    description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
                 },
             ]
         };
@@ -80,26 +106,79 @@ class Technologies extends React.Component {
                 <section className="section lb">
                     <div className="container">
                         <div className="section-title text-center">
-                            <h3>Technology</h3>
-                            <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
+
+                        <div style={{ backgroundColor: "transparent" }} className="process-box">
+                            <div className="process-front text-center">
+                                <h2 style={{ color: "#aaa" }}>Technology</h2>
+                                <hr />
+                                <i className="flaticon-computer"></i>
+                                <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
+                            </div>
+                        </div>
+
                         </div>
                         {
                             this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
-                            <div key={i} className={`text-center ${(i+1)%3 === 0 ? "row form-group" : null}`}>
-                                <div className="col-lg-4 col-md-12">
-                                    <div className="blog-box">
-                                        <div className="post-media">
-                                            <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
-                                        </div>
-                                        <div className="blog-desc">
-                                            <h4>{tech.name}</h4>
-                                            <p>{tech.description}</p>
+                                <div key={i} className={`text-center ${(i+1)%3 === 0 ? "row form-group" : null}`}>
+                                    <div className="col-lg-4 hidden-md">
+                                        <div className="blog-box">
+                                            <div className="post-media">
+                                                <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
+                                            </div>
+                                            <div className="blog-desc">
+                                                <h4>{tech.name}</h4>
+                                                <p>{tech.description}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             ))
                         }
+                        {
+                            this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
+                                <div key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
+                                    <div className="col-md-6 visible-md-block">
+                                        <div className="blog-box">
+                                            <div className="post-media">
+                                                <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
+                                            </div>
+                                            <div className="blog-desc">
+                                                <h4>{tech.name}</h4>
+                                                <p>{tech.description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+
+                        <div style={{ backgroundColor: "transparent" }} className="process-box">
+                            <div className="process-front text-center">
+                                <h2 style={{ color: "#aaa" }}>IDE</h2>
+                                <i className="flaticon-monitor"></i>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            {
+                                this.state.ideTechs.map((ide, i) => (
+                                    <div key={i} className="col-lg-3 col-md-6">
+                                        <div className="process-box">
+                                            <div className="process-front text-center">
+                                                {/* <i class="flaticon-lightbulb-idea"></i> */}
+                                                <img style={{ width: "150px", height: "100px", margin: "0 auto" }} src={require(`../images/ide/${ide.imageRoot}`)} alt="" className="img-responsive" />
+                                                <h3>{ide.name}</h3>
+                                            </div>
+
+                                            <div className="process-end text-center">
+                                                <h3>Typo's</h3>
+                                                <p>{ide.description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 </section>
             </div>
