@@ -97,6 +97,20 @@ class Technologies extends React.Component {
                     imageRoot: "IntelliJ.png",
                     description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
                 },
+            ],
+            osTechs: [
+                {
+                    name: "Windows",
+                    sort: 4,
+                    imageRoot: "windows.png",
+                    description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
+                },
+                {
+                    name: "MAC OS",
+                    sort: 4,
+                    imageRoot: "macos.png",
+                    description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
+                },
             ]
         };
     }
@@ -179,6 +193,35 @@ class Technologies extends React.Component {
                                 ))
                             }
                         </div>
+
+                        <div style={{ backgroundColor: "transparent" }} className="process-box">
+                            <div className="process-front text-center">
+                                <h2 style={{ color: "#aaa" }}>OS</h2>
+                                <i className="flaticon-point-mark-on-a-circle"></i>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            {
+                                this.state.osTechs.map((os, i) => (
+                                    <div key={i} className="col-lg-3 col-md-6">
+                                        <div className="process-box">
+                                            <div className="process-front text-center">
+                                                {/* <i class="flaticon-lightbulb-idea"></i> */}
+                                                <img style={{ width: "100px", height: "100px", margin: "0 auto" }} src={require(`../images/technology/${os.imageRoot}`)} alt="" className="img-responsive" />
+                                                <h3>{os.name}</h3>
+                                            </div>
+
+                                            <div className="process-end text-center">
+                                                <h3>Typo's</h3>
+                                                <p>{os.description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+
                     </div>
                 </section>
             </div>
