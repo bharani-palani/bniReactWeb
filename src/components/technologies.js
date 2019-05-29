@@ -125,16 +125,14 @@ class Technologies extends React.Component {
             <div id="wrapper">
                 <section className="section lb">
                     <div className="section-title text-center">
-
-                    <div style={{ backgroundColor: "transparent" }} className="process-box">
-                        <div className="process-front text-center">
-                            <h2 style={{ color: "#aaa" }}>Technologies</h2>
-                            <hr />
-                            <i className="flaticon-computer"></i>
-                            <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
+                        <div style={{ backgroundColor: "transparent" }} className="process-box">
+                            <div className="process-front text-center">
+                                <h2 style={{ color: "#aaa" }}>Technologies</h2>
+                                <hr />
+                                <i className="flaticon-computer"></i>
+                                <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
+                            </div>
                         </div>
-                    </div>
-
                     </div>
                     {
                         this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
@@ -155,7 +153,7 @@ class Technologies extends React.Component {
                     }
                     {
                         this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
-                            <div key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
+                            <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
                                 <div className="col-md-6 visible-md-block">
                                     <div className="blog-box">
                                         <div className="post-media">

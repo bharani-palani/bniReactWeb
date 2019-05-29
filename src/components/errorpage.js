@@ -37,7 +37,7 @@ class ErrorPage extends React.Component {
                 <h1 style={{ color: "#ddd" }}>Oops!</h1>
                 <h2 style={{ color: "#ddd" }}>404 Not Found</h2>
                 <div className="error-details" style={{ color: "#ddd" }}>
-                    Sorry, an error has occured, Requested page not found!
+                    Sorry, an error has occured, Requested page cannot be found!
                 </div>
                 <hr />
                 <div className="error-actions">
