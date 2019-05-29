@@ -730,7 +730,7 @@ SECTIONS
 }
 
 .section-title {
-    margin-bottom: 45px;
+    /* margin-bottom: 45px; */
 }
 
 .text-widget h3,
@@ -2075,7 +2075,6 @@ fieldset[disabled] .btn-default.focus,
 /*********************
 RESPONSIVE
 *********************/
-
 @media(max-width:768px) {
     .navbar-default .navbar-nav>.open>a,
     .navbar-default .navbar-nav>.open>a:focus,
@@ -2130,6 +2129,10 @@ RESPONSIVE
     body.left-menu #wrapper {
         padding-left: 260px;
     }
+    .vertical-header {
+        display: block;
+    }
+
 }
 
 @media(max-width:1198px) {
