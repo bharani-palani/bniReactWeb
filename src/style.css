@@ -398,6 +398,23 @@ MENU
     color: #c2d82e;
 }
 
+ul.mobile-menu-social {
+    list-style: none;
+    position: fixed;
+    top: 135px;
+    left: -35px;
+}
+.mobile-menu-social li {
+    border-radius: 30px;
+    width: 50px;
+    border: solid 1px #c2d82e;
+    height: 50px;
+    padding: 12px;
+    margin: 10px 0 10px 0;
+}
+.mobile-menu-social li a{
+    color: #c2d82e;
+}
 /*!
      * Yamm!3 - Yet another megamenu for Bootstrap 3
      * http://geedmo.github.com/yamm3
@@ -700,7 +717,7 @@ SECTIONS
 }
 
 .section {
-    padding: 90px 30px;
+    padding: 10px 0px;
     position: relative;
     overflow: hidden;
     display: block;
@@ -2083,6 +2100,10 @@ RESPONSIVE
     .mobile-menu {
         display: block;
         background: #000;
+        position: fixed;
+        width: 100%;
+        z-index: 9999;
+        opacity: 0.9;
     }
     .vertical-header {
         display: none;
@@ -2213,4 +2234,10 @@ RESPONSIVE
     z-index: -100;
     background-size: cover;
     overflow: hidden;
+}
+.ml-0 {
+    margin-left:0 !important;
+}
+.mr-0 {
+    margin-right:0 !important;
 }

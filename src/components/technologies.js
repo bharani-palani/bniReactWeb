@@ -71,6 +71,12 @@ class Technologies extends React.Component {
                     imageRoot: "google-cloud-logo.png",
                     description: "Deploy application on clients instance. Cloud engine, network services, disable/shutdown instances etc.."
                 },
+                {
+                    name: "AWS",
+                    sort: 12,
+                    imageRoot: "aws.jpg",
+                    description: "Infrastructure as a service (IaaS), platform as a service (PaaS) and packaged software as a service (SaaS). Cloud instance and D3 bucket."
+                },
             ],
             ideTechs: [
                 {
@@ -118,111 +124,108 @@ class Technologies extends React.Component {
         return (
             <div id="wrapper">
                 <section className="section lb">
-                    <div className="container">
-                        <div className="section-title text-center">
+                    <div className="section-title text-center">
 
-                        <div style={{ backgroundColor: "transparent" }} className="process-box">
-                            <div className="process-front text-center">
-                                <h2 style={{ color: "#aaa" }}>Technology</h2>
-                                <hr />
-                                <i className="flaticon-computer"></i>
-                                <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
-                            </div>
+                    <div style={{ backgroundColor: "transparent" }} className="process-box">
+                        <div className="process-front text-center">
+                            <h2 style={{ color: "#aaa" }}>Technologies</h2>
+                            <hr />
+                            <i className="flaticon-computer"></i>
+                            <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
                         </div>
-
-                        </div>
-                        {
-                            this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
-                                <div key={i} className={`text-center ${(i+1)%3 === 0 ? "row form-group" : null}`}>
-                                    <div className="col-lg-4 hidden-md">
-                                        <div className="blog-box">
-                                            <div className="post-media">
-                                                <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
-                                            </div>
-                                            <div className="blog-desc">
-                                                <h4>{tech.name}</h4>
-                                                <p>{tech.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                        {
-                            this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
-                                <div key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
-                                    <div className="col-md-6 visible-md-block">
-                                        <div className="blog-box">
-                                            <div className="post-media">
-                                                <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
-                                            </div>
-                                            <div className="blog-desc">
-                                                <h4>{tech.name}</h4>
-                                                <p>{tech.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-
-                        <div style={{ backgroundColor: "transparent" }} className="process-box">
-                            <div className="process-front text-center">
-                                <h2 style={{ color: "#aaa" }}>IDE</h2>
-                                <i className="flaticon-monitor"></i>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            {
-                                this.state.ideTechs.map((ide, i) => (
-                                    <div key={i} className="col-lg-3 col-md-6">
-                                        <div className="process-box">
-                                            <div className="process-front text-center">
-                                                {/* <i class="flaticon-lightbulb-idea"></i> */}
-                                                <img style={{ width: "150px", height: "100px", margin: "0 auto" }} src={require(`../images/ide/${ide.imageRoot}`)} alt="" className="img-responsive" />
-                                                <h3>{ide.name}</h3>
-                                            </div>
-
-                                            <div className="process-end text-center">
-                                                <h3>Typo's</h3>
-                                                <p>{ide.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-
-                        <div style={{ backgroundColor: "transparent" }} className="process-box">
-                            <div className="process-front text-center">
-                                <h2 style={{ color: "#aaa" }}>OS</h2>
-                                <i className="flaticon-point-mark-on-a-circle"></i>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            {
-                                this.state.osTechs.map((os, i) => (
-                                    <div key={i} className="col-lg-3 col-md-6">
-                                        <div className="process-box">
-                                            <div className="process-front text-center">
-                                                {/* <i class="flaticon-lightbulb-idea"></i> */}
-                                                <img style={{ width: "100px", height: "100px", margin: "0 auto" }} src={require(`../images/technology/${os.imageRoot}`)} alt="" className="img-responsive" />
-                                                <h3>{os.name}</h3>
-                                            </div>
-
-                                            <div className="process-end text-center">
-                                                <h3>Typo's</h3>
-                                                <p>{os.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
+                    </div>
 
                     </div>
+                    {
+                        this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
+                            <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%3 === 0 ? "row form-group ml-0 mr-0" : null}`}>
+                                <div className="col-lg-4 hidden-md">
+                                    <div className="blog-box">
+                                        <div className="post-media">
+                                            <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
+                                        </div>
+                                        <div className="blog-desc">
+                                            <h4>{tech.name}</h4>
+                                            <p>{tech.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                    {
+                        this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
+                            <div key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
+                                <div className="col-md-6 visible-md-block">
+                                    <div className="blog-box">
+                                        <div className="post-media">
+                                            <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
+                                        </div>
+                                        <div className="blog-desc">
+                                            <h4>{tech.name}</h4>
+                                            <p>{tech.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                    <div style={{ backgroundColor: "transparent" }} className="process-box">
+                        <div className="process-front text-center">
+                            <h2 style={{ color: "#aaa" }}>IDE</h2>
+                            <i className="flaticon-monitor"></i>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        {
+                            this.state.ideTechs.map((ide, i) => (
+                                <div key={i} className="col-lg-3 col-md-6">
+                                    <div className="process-box">
+                                        <div className="process-front text-center">
+                                            {/* <i class="flaticon-lightbulb-idea"></i> */}
+                                            <img style={{ width: "150px", height: "100px", margin: "0 auto" }} src={require(`../images/ide/${ide.imageRoot}`)} alt="" className="img-responsive" />
+                                            <h3>{ide.name}</h3>
+                                        </div>
+
+                                        <div className="process-end text-center">
+                                            <h3>Typo's</h3>
+                                            <p>{ide.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+
+                    <div style={{ backgroundColor: "transparent" }} className="process-box">
+                        <div className="process-front text-center">
+                            <h2 style={{ color: "#aaa" }}>OS</h2>
+                            <i className="flaticon-point-mark-on-a-circle"></i>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        {
+                            this.state.osTechs.map((os, i) => (
+                                <div key={i} className="col-lg-3 col-md-6">
+                                    <div className="process-box">
+                                        <div className="process-front text-center">
+                                            {/* <i class="flaticon-lightbulb-idea"></i> */}
+                                            <img style={{ width: "100px", height: "100px", margin: "0 auto" }} src={require(`../images/technology/${os.imageRoot}`)} alt="" className="img-responsive" />
+                                            <h3>{os.name}</h3>
+                                        </div>
+
+                                        <div className="process-end text-center">
+                                            <h3>Typo's</h3>
+                                            <p>{os.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+
                 </section>
             </div>
         );
