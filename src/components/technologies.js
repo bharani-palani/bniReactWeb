@@ -66,6 +66,12 @@ class Technologies extends React.Component {
                     description: "Annotaions, Java collections, REST service, configuring pom.xml for dependency injection, connecting MySql with varied Microservices"
                 },
                 {
+                    name: "GIT",
+                    sort: 10.1,
+                    imageRoot: "git.png",
+                    description: "A distributed version-control system. Actions like Cloning, Merging, branching, pull request, approve and merge activities handled."
+                },
+                {
                     name: "Google Cloud",
                     sort: 11,
                     imageRoot: "google-cloud-logo.png",
@@ -74,7 +80,7 @@ class Technologies extends React.Component {
                 {
                     name: "AWS",
                     sort: 12,
-                    imageRoot: "aws.jpg",
+                    imageRoot: "aws.png",
                     description: "Infrastructure as a service (IaaS), platform as a service (PaaS) and packaged software as a service (SaaS). Cloud instance and D3 bucket."
                 },
             ],
