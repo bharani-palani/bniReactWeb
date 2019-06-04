@@ -125,6 +125,7 @@ class Technologies extends React.Component {
                 },
             ]
         };
+        document.title = "Bharani | Technologies"
     }
     render() {
         return (

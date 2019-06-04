@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 class ErrorPage extends React.Component {
   render() {
+    document.title = "Bharani | Error Page";
     return (
       <div id="wrapper" className="text-center">
         {/* <div className="section lb">

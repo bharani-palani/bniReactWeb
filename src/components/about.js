@@ -2,6 +2,7 @@ import React from 'react';
 
 class About extends React.Component {
     render() {
+        document.title = "Bharani | About";
         return (
             <div id="wrapper"> 
                 <div className="video-section">

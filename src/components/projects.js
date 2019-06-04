@@ -55,7 +55,8 @@ class Projects extends React.Component {
                     sort: 9,
                 },
             ]
-        }
+        };
+        document.title = "Bharani | Projects"
     }
     render() {
         return (

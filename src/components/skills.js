@@ -58,7 +58,8 @@ class Skills extends React.Component {
                     description: "Pre-processors extend CSS with variables, operators, interpolations, functions, mixins and many more other usable assets. SASS, LESS and Stylus are the well known ones"
                 },
             ]
-        }
+        };
+        document.title = "Bharani | Skills"
     }
     render() {
         return (
@@ -79,7 +80,7 @@ class Skills extends React.Component {
                         this.state.skills.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((skills, i) => (
                             <div key={i} className="blog-box col-lg-12 col-md-12 form-group">
                                 <div className="post-media col-lg-4 col-md-6">
-                                    <img src={require(`../images/skills/${skills.imageRoot}`)} alt="" className="img-responsive" />
+                                    <img src={require(`../images/skills/${skills.imageRoot}`)} alt="" className="img-responsive lefty" />
                                 </div>
                                 <div className="blog-desc col-lg-8 col-md-6">
                                     <h4 className="text-center">{skills.name}</h4>
