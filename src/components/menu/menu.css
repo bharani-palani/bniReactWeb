@@ -28,3 +28,15 @@
     left: -15px;
     top: 20px;
 }
+
+.slideup, .slidedown {
+    max-height: 0;            
+    overflow-y: hidden;
+    -webkit-transition: max-height 0.2s ease-in-out;
+    -moz-transition: max-height 0.2s ease-in-out;
+    -o-transition: max-height 0.2s ease-in-out;
+    transition: max-height 0.2s ease-in-out;
+}
+.slidedown {            
+    max-height: 250px;         
+}

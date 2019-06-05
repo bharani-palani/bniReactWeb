@@ -68,7 +68,10 @@ class Menu extends React.Component {
         }
     }
     onNavBarToggle = () => {
-        this.setState({ navBarExpanded: !this.state.navBarExpanded })
+        this.setState({ navBarExpanded: !this.state.navBarExpanded });
+    }
+    onNavBarClose = () => {
+        this.setState({ navBarExpanded: false });
     }
     render() {
         return (
@@ -81,7 +84,7 @@ class Menu extends React.Component {
                     <div className="mobile-menu">
                         <Navbar fixed={"top"} bg="dark" onToggle={this.onNavBarToggle} expanded={this.state.navBarExpanded} expand="lg">
                             <Navbar.Brand className="navbar-brand">
-                                <Link to={"/"}>
+                                <Link onClick={this.onNavBarClose} to={"/"}>
                                     <img className="mobLogoImg " src={require("../../images/avatar/bniBlack.png")} alt="" />
                                     <div className="mobLogoCaption">Bharani</div>
                                 </Link>
@@ -90,7 +93,7 @@ class Menu extends React.Component {
                                 <i className="fa fa-bars" />
                             </Navbar.Toggle>
                             <Navbar.Collapse style={{ marginTop: "80px" }} id="basic-navbar-nav">
-                            <ul className={`mobile-menu-social text-center ${this.state.navBarExpanded ? "show" : "hidden"}`}>
+                            <ul className={`mobile-menu-social text-center ${this.state.navBarExpanded ? "slidedown" : "slideup"}`}>
                                 {
                                     this.state.socialMedias.map((media, i) => (
                                         <li key={i}><a href={media.href} rel={media.name} target="_blank"><i className={media.icon}></i></a></li>
@@ -100,8 +103,8 @@ class Menu extends React.Component {
                             <ul className="primary-menu">
                                 {
                                     this.state.menus.map((menu, i) => (
-                                        <li onClick={this.onNavBarToggle} key={i} className="child-menu">
-                                            <Link to={menu.href}>{menu.label}</Link>
+                                        <li  key={i} className="child-menu">
+                                            <Link onClick={this.onNavBarToggle} to={menu.href}>{menu.label}</Link>
                                         </li>
                                     ))
                                 }
