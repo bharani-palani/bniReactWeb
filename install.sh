@@ -1,3 +1,6 @@
+echo -e "Pulling recent codes from GIT...\n"
+git reset --hard
+git pull
 echo -e "Installing node modules...\n"
 npm install
 echo -e "npm install completed.\n"
