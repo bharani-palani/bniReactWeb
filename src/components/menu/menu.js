@@ -73,6 +73,10 @@ class Menu extends React.Component {
     onNavBarClose = () => {
         this.setState({ navBarExpanded: false });
     }
+    openBlank = (url) => {
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
     render() {
         return (
             <Router>
@@ -96,7 +100,7 @@ class Menu extends React.Component {
                             <ul className={`mobile-menu-social text-center ${this.state.navBarExpanded ? "slidedown" : "slideup"}`}>
                                 {
                                     this.state.socialMedias.map((media, i) => (
-                                        <li key={i}><a href={media.href} rel={media.name} target="_blank"><i className={media.icon}></i></a></li>
+                                        <li key={i}><Link onClick={() => this.openBlank(media.href)}><i className={media.icon}></i></Link></li>
                                     ))
                                 }
                             </ul>
@@ -143,7 +147,7 @@ class Menu extends React.Component {
                                     <ul className="list-inline text-center">
                                     {
                                         this.state.socialMedias.map((media, i) => (
-                                            <li key={i}><a href={media.href} rel={media.name} target="_blank"><i className={media.icon}></i></a></li>
+                                            <li key={i}><Link onClick={() => this.openBlank(media.href)}><i className={media.icon}></i></Link></li>
                                         ))
                                     }
                                     </ul>
