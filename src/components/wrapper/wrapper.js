@@ -6,6 +6,7 @@ import ErrorPage from "../errorpage";
 import Projects from "../projects";
 import Skills from "../skills";
 import Awards from "../awards";
+import Utilities from "../utilities";
 
 class Wrapper extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class Wrapper extends React.Component {
             <Route exact path="/projects" component={Projects} />
             <Route exact path="/skills" component={Skills} />
             <Route exact path="/awards" component={Awards} />
+            <Route exact path="/utilities" component={Utilities} />
             <Route component={ErrorPage} />
         </Switch>
     )

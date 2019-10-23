@@ -31,16 +31,16 @@ class Menu extends React.Component {
                     label: "Awards"
                 },
                 {
-                    href:"/education",
-                    label: "Education"
-                },
-                {
                     href:"/contact",
                     label: "Contact"
                 },
                 {
                     href:"/resume",
                     label: "Resume"
+                },
+                {
+                    href:"/utilities",
+                    label: "JS Utilities"
                 },
             ],
             socialMedias: [
