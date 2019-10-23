@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
-import "./menu.css";
+import "./menu.scss";
 
 class Menu extends React.Component {
     constructor(props) {
