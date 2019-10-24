@@ -45,5 +45,9 @@ code {
   .#{"pb"}-#{$i} {
     padding-bottom: $i#{"px !important"};
   }
+  // border-radius
+  .#{"br"}-#{$i} {
+    border-radius: $i#{"px !important"};
+  }
  }
  

@@ -136,7 +136,7 @@ class Technologies extends React.Component {
                             <div className="process-front text-center">
                                 <h2 style={{ color: "#aaa" }}>Technologies</h2>
                                 <hr />
-                                <i className="flaticon-computer"></i>
+                                <i className="fi-creative-computer"></i>
                                 <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
                             </div>
                         </div>

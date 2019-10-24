@@ -1,0 +1,20 @@
+.util {
+    .card-header {
+        background: #111;
+        border-bottom: solid 1px #000;
+        .btn-link {
+            color: rgba(255, 255, 255, 0.7);
+            outline:0;
+            display: block;
+            width: 100%;
+            text-align: left;
+            &:hover, &:active, &:focus {
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: none;
+            }
+        }
+    }
+    svg {
+        stroke: rgba(255, 255, 255, 0.7);
+    }
+}

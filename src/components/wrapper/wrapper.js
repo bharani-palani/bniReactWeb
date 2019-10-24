@@ -6,7 +6,7 @@ import ErrorPage from "../errorpage";
 import Projects from "../projects";
 import Skills from "../skills";
 import Awards from "../awards";
-import Utilities from "../utilities";
+import Utilities from "../utilities/utilities";
 
 class Wrapper extends React.Component {
   render() {

@@ -100,7 +100,7 @@ class Menu extends React.Component {
                             <ul className={`mobile-menu-social text-center ${this.state.navBarExpanded ? "slidedown" : "slideup"}`}>
                                 {
                                     this.state.socialMedias.map((media, i) => (
-                                        <li key={i}><Link onClick={() => this.openBlank(media.href)}><i className={media.icon}></i></Link></li>
+                                        <li key={i}><Link to="" onClick={() => this.openBlank(media.href)}><i className={media.icon}></i></Link></li>
                                     ))
                                 }
                             </ul>
@@ -147,7 +147,7 @@ class Menu extends React.Component {
                                     <ul className="list-inline text-center">
                                     {
                                         this.state.socialMedias.map((media, i) => (
-                                            <li key={i}><Link onClick={() => this.openBlank(media.href)}><i className={media.icon}></i></Link></li>
+                                            <li key={i}><Link to="" onClick={() => this.openBlank(media.href)}><i className={media.icon}></i></Link></li>
                                         ))
                                     }
                                     </ul>
