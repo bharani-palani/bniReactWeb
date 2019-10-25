@@ -9,11 +9,7 @@ class Utilities extends React.Component {
         this.state = {
             utils: [
                 {
-                    heading: "Date / Time difference",
-                    component: <DateTime />
-                },
-                {
-                    heading: "String",
+                    heading: "Date / Time",
                     component: <DateTime />
                 }
             ]
