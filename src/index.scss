@@ -49,5 +49,14 @@ code {
   .#{"br"}-#{$i} {
     border-radius: $i#{"px !important"};
   }
+  // border
+  .#{"b"}-#{$i} {
+    border: $i#{"px !important"};
+  }
+  // z-index
+  .#{"z"}-#{$i} {
+    z-index: $i#{"!important"};
+  }
+
  }
  

@@ -16,7 +16,6 @@ class Utilities extends React.Component {
         }
     }
     render() {
-        console.log(this.state)
         return (
             <div id="wrapper">
                 <section className="section lb" style={{ minHeight: window.screen.height }}>
