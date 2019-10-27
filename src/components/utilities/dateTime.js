@@ -51,7 +51,7 @@ class DateTime extends React.Component {
                                     <div className="input-group-addon ">
                                         <div className="input-group-text">
                                             <input type="checkbox" onChange={() => this.setState({ isInc: !this.state.isInc })} value="inc" defaultChecked id="nType" />
-                                            &nbsp;<label htmlFor="nType">{this.state.isInc ? "Increment" : "Decrement"}</label>
+                                            &nbsp;<label style={{ fontWeight: 100, cursor: "pointer" }} htmlFor="nType">{this.state.isInc ? "Increment" : "Decrement"}</label>
                                         </div>
                                     </div>
                                     <select ref={this.hh} className="form-control b-1 z-0">
@@ -70,12 +70,12 @@ class DateTime extends React.Component {
                                 
                             </div>
                     </div>
-                        <button onClick={this.onDateConvert} className="btn mt-10 p-10 btn-block br-4">Calculate</button>
+                        <button onClick={this.onDateConvert} className="btn btn-bni mt-10 p-10 btn-block br-4">Calculate</button>
                     </div>
                 </div>
                 <div className="col-lg-6">
                     <div className="mt-10 mb-10">
-                        <textarea value={this.state.newDate} readOnly style={{ resize: "none" }} rows="6" className="form-control" />
+                        <textarea placeholder="Select HH:MM and click calculate" value={this.state.newDate} readOnly style={{ resize: "none" }} rows="6" className="form-control" />
                     </div>
                 </div>
 
