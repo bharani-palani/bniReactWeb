@@ -25,7 +25,7 @@ class DateTime extends React.Component {
         const nd = this.state.isInc ? selectedDate.setHours( selectedDate.getHours() + hh ) : selectedDate.setHours( selectedDate.getHours() - hh );
 
         newDate = `${new Date(nd)}\r`;
-        newDate += `Selected Time = ${selectedDateformat}\r`
+        newDate = `Selected Time = ${selectedDateformat}\r`
         newDate += `${this.state.isInc ? "Increment" : "Decrement"} (hrs) = ${hh < 10 ? "0"+hh : hh}:${mm < 10 ? "0"+mm : mm}\r`
         const resultDateformat = `${selectedDate.getFullYear()}/${selectedDate.getMonth()+1}/${selectedDate.getDate()} ${selectedDate.getHours() < 10 ? "0"+selectedDate.getHours() : selectedDate.getHours()}:${selectedDate.getMinutes() < 10 ? "0"+selectedDate.getMinutes() : selectedDate.getMinutes()}`
         newDate += `${this.state.isInc ? "Increment" : "Decrement"} Time = ${resultDateformat} `
