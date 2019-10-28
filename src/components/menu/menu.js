@@ -1,8 +1,7 @@
 import React from 'react';
-import { Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
-import history from "../../history";
 import "./menu.scss";
 
 class Menu extends React.Component {
@@ -80,7 +79,7 @@ class Menu extends React.Component {
     }
     render() {
         return (
-            <Router history={history}>
+            <Router>
                 <div className="menu-wrapper">
                     <video className="videoTag" autoPlay loop muted>
                         <source src={require("../../videos/video.mp4")} type='video/mp4' />
@@ -109,7 +108,7 @@ class Menu extends React.Component {
                                 {
                                     this.state.menus.map((menu, i) => (
                                         <li  key={i} className="child-menu">
-                                            <Link onClick={this.onNavBarToggle && history.push(menu.href)} to={menu.href}>{menu.label}</Link>
+                                            <Link onClick={this.onNavBarToggle} to={menu.href}>{menu.label}</Link>
                                         </li>
                                     ))
                                 }
@@ -121,7 +120,7 @@ class Menu extends React.Component {
                         <div className="vertical-header-wrapper">
                             <nav className="nav-menu">
                                 <div className="logo">
-                                    <Link to={"/"}  onClick={() => history.push('/')}>
+                                    <Link to={"/"}>
                                         <img src={require("../../images/avatar/bniBlack.png")} alt="" />
                                     </Link>
                                 </div>
@@ -129,7 +128,7 @@ class Menu extends React.Component {
                                     {
                                         this.state.menus.map((menu, i) => (
                                             <li key={i} className="child-menu">
-                                                <Link  onClick={() => history.push(menu.href)} to={menu.href}>{menu.label}</Link>
+                                                <Link to={menu.href}>{menu.label}</Link>
                                             </li>
                                         ))
                                     }
