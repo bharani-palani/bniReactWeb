@@ -32,6 +32,9 @@ class DateTime extends React.Component {
         this.setState({ newDate})
     }
     onChange = date => this.setState({ date })
+    clearResult = () => {
+        this.setState({ newDate: "" })
+    }
     render() {
         return (
             <div className="row">
@@ -75,6 +78,9 @@ class DateTime extends React.Component {
                 </div>
                 <div className="col-lg-6">
                     <div className="mt-10 mb-10">
+                        {
+                            this.state.newDate ? <div className="closeWrapper"><i onClick={this.clearResult} className="fa fa-times closeIcon" /></div> : null
+                        }
                         <textarea placeholder="Select HH:MM and click calculate" value={this.state.newDate} readOnly style={{ resize: "none" }} rows="6" className="form-control" />
                     </div>
                 </div>
