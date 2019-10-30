@@ -1,27 +1,17 @@
 import React from 'react';
-import PDFViewer from 'pdf-viewer-reactjs';
-
-const ExamplePDFViewer = () => {
-    return (
-        <PDFViewer
-            scale={1}
-            navbarOnTop={true}
-            document={{
-                url: require('./resume.pdf')
-            }}
-        />
-    );
-};
 
 class Resume extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            numPages: null,
+    pageNumber: 1,
         }
     }
 
     render() {
         document.title = "Bharani | Resume";
+        const { pageNumber, numPages } = this.state;
         return (
             <div id="wrapper">
                 <section className="section lb">
@@ -36,7 +26,7 @@ class Resume extends React.Component {
                         </div>
                     </div>
                     <div className="">
-                        <ExamplePDFViewer />
+
                     </div>
                 </section>
             </div>
