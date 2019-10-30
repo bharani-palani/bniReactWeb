@@ -1,17 +1,11 @@
 import React from 'react';
+import { PDFReader } from 'reactjs-pdf-reader';
+import { Link } from "react-router-dom";
+
 
 class Resume extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            numPages: null,
-    pageNumber: 1,
-        }
-    }
-
     render() {
         document.title = "Bharani | Resume";
-        const { pageNumber, numPages } = this.state;
         return (
             <div id="wrapper">
                 <section className="section lb">
@@ -21,13 +15,18 @@ class Resume extends React.Component {
                                 <h2 style={{ color: "#aaa" }}>Resume</h2>
                                 <hr />
                                 <i className="fi-ecommerce-invoice"></i>
-                                <p>My skills, experience, projects and others</p>
+                                <p>My skills, experience, projects and more</p>
                             </div>
                         </div>
                     </div>
-                    <div className="">
-
+                    <div className="container-fluid text-center">
+                        <Link to={require("./resume.pdf")} target="_blank" download>
+                            <i className="fi-creative-download downloadIcon" />
+                        </Link>
                     </div>
+                        <PDFReader 
+                        showAllPage={true} 
+                        url={require("./resume.pdf")}/>
                 </section>
             </div>
         );

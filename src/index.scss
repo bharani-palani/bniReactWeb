@@ -20,6 +20,12 @@ code {
     color: #fff !important;
   }
 }
+.downloadIcon {
+  &:before {
+    color: #b9c134;
+    font-size: 30px !important;
+  }
+}
 @for $i from 0 through 100 {
   // margin
   .#{"m"}-#{$i} {
