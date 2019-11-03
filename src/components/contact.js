@@ -5,12 +5,12 @@ class Contact extends React.Component {
         super(props);
         this.state = {
             contacts: [
-                { label: "First Name", value: "Bharani" },
-                { label: "Last Name", value: "Palani" },
-                { label: "Email", value: "barani.potshot@gmail.com" },
-                { label: "Mobile", value: "+91-98848-56788" },
-                { label: "City", value: "Chennai" },
-                { label: "Country", value: "India" },
+                { label: "First Name", value: "Bharani", href: "" },
+                { label: "Last Name", value: "Palani", href: "" },
+                { label: "Email", value: "barani.potshot@gmail.com", href:"mailto:barani.potshot@gmail.com" },
+                { label: "Mobile", value: "+91-98848-56788", href: "tel:+91-9884856788" },
+                { label: "City", value: "Chennai", href: "" },
+                { label: "Country", value: "India", href: "" },
             ]
         }
     }
@@ -35,7 +35,11 @@ class Contact extends React.Component {
                             this.state.contacts.map((c,i) => 
                                 <div key={i}>
                                     <div style={{ height:"20px" }} className="col-lg-4 col-md-6"><span className="contactLabel">{c.label}</span></div>
-                                    <div className="col-lg-8 col-md-6">{c.value}</div>                            
+                                    <div className="col-lg-8 col-md-6">
+                                        {
+                                            c.href ? <a href={c.href}>{c.value}</a> : c.value
+                                        }
+                                    </div>                            
                                 </div>
                             )
                         }
