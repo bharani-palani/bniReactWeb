@@ -1,4 +1,5 @@
 import React from 'react';
+import dotenv from 'dotenv';
 
 class Contact extends React.Component {
     constructor(props) {
@@ -15,9 +16,9 @@ class Contact extends React.Component {
         }
     }
     componentDidMount() {
-        fetch('/services/')
-          .then(response => response.json())
-          .then(data => console.log( data ));
+        // fetch('/bniReactWeb/services/')
+        //   .then(response => response.json())
+        //   .then(data => console.log( data ));
       }
     render() {
         document.title = "Bharani | Contact";
@@ -30,7 +31,7 @@ class Contact extends React.Component {
                                 <h2 style={{ color: "#aaa" }}>Contact</h2>
                                 <hr />
                                 <i className="fi-creative-telephone"></i>
-                                <p>Reach me on the below {process.env}</p>
+                                <p>Reach me on the below</p>
                             </div>
                         </div>
                     </div>
