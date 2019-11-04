@@ -32,7 +32,7 @@ if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') { // if ssl connect
 
 switch($host) {
     case 'localhost':
-        $config['base_url']	= 'http'.$ssl_set.'://localhost/';
+        $config['base_url']	= 'http'.$ssl_set.'://localhost/bniReactWeb/services/';
     break;
     case 'bharani.tech':
         $config['base_url']	= 'http'.$ssl_set.'://bharani.tech/services/';
