@@ -15,7 +15,7 @@ class Contact extends React.Component {
         }
     }
     componentDidMount() {
-        fetch('http://localhost/bniReactWeb/services/')
+        fetch('/services/')
           .then(response => response.json())
           .then(data => console.log( data ));
       }
@@ -30,7 +30,7 @@ class Contact extends React.Component {
                                 <h2 style={{ color: "#aaa" }}>Contact</h2>
                                 <hr />
                                 <i className="fi-creative-telephone"></i>
-                                <p>Reach me on the below</p>
+                                <p>Reach me on the below {process.env}</p>
                             </div>
                         </div>
                     </div>
