@@ -4,7 +4,7 @@ class Technologies extends CI_Controller {
 	public function index()
 	{
 		$this->load->model('technologies_model');
-		$data['server'] = $_SERVER['HTTP_HOST'];
+		$data['server'] = $_SERVER['SERVER_NAME'];
 		$data["response"] = $this->technologies_model->get_all_techs();
 		echo json($data);
 	}
