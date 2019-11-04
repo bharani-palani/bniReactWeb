@@ -6,4 +6,4 @@ deployment:
     - /bin/mkdir $DEPLOYPATH
     - /bin/cp build/* -r $DEPLOYPATH
     - /bin/cp ./.htaccess $DEPLOYPATH
-    - /bin/cp services/* $DEPLOYPATH
+    - /bin/cp ./services -r $DEPLOYPATH
