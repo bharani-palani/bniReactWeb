@@ -14,7 +14,11 @@ class Contact extends React.Component {
             ]
         }
     }
-
+    componentDidMount() {
+        fetch('http://localhost/bniReactWeb/services/')
+          .then(response => response.json())
+          .then(data => console.log( data ));
+      }
     render() {
         document.title = "Bharani | Contact";
         return (
@@ -34,8 +38,8 @@ class Contact extends React.Component {
                         {
                             this.state.contacts.map((c,i) => 
                                 <div key={i}>
-                                    <div style={{ height:"20px" }} className="col-lg-4 col-md-6"><span className="contactLabel">{c.label}</span></div>
-                                    <div className="col-lg-8 col-md-6">
+                                    <div style={{ height:"20px" }} className="col-lg-2 col-md-6"><span className="contactLabel">{c.label}</span></div>
+                                    <div className="col-lg-10 col-md-6">
                                         {
                                             c.href ? <a href={c.href}>{c.value}</a> : c.value
                                         }
