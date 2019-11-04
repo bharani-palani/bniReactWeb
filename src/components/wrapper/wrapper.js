@@ -28,5 +28,4 @@ class Wrapper extends React.Component {
     )
   }
 }
-
 export default Wrapper;
