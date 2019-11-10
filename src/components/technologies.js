@@ -127,6 +127,17 @@ class Technologies extends React.Component {
         };
         document.title = "Bharani | Technologies"
     }
+    getTechnologies = () => {
+        const url = "http://localhost/bniReactWeb/services/"
+        fetch(url)
+        .then((resp) => resp.json())
+        .then((data) => {
+            console.log(data)
+        })
+    }
+    componentDidMount() {
+        this.getTechnologies();
+    }
     render() {
         return (
             <div id="wrapper">
