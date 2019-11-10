@@ -1,5 +1,4 @@
 import React from 'react';
-import dotenv from 'dotenv';
 
 class Contact extends React.Component {
     constructor(props) {
@@ -16,9 +15,27 @@ class Contact extends React.Component {
         }
     }
     componentDidMount() {
-        // fetch('/bniReactWeb/services/')
+        const apiUrl = window.location.hostname === "localhost" ?
+        "http://localhost/bniReactWeb/services/technologies" : 
+        "http://bharani.tech/services/technologies";
+        
+        // fetch(apiUrl)
         //   .then(response => response.json())
         //   .then(data => console.log( data ));
+
+        const axios = require('axios');
+        axios.get(apiUrl)
+        .then(function (response) {
+            // handle success
+            console.log(response);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .finally(function () {
+            // always executed
+        });
       }
     render() {
         document.title = "Bharani | Contact";

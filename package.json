@@ -5,6 +5,7 @@
   "homepage": "http://bharani.tech",
   "main": "./src/index.js",
   "dependencies": {
+    "axios": "^0.19.0",
     "bootstrap": "^3.4.1",
     "flat-icons": "^1.0.0",
     "font-awesome": "^4.7.0",
