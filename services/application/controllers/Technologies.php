@@ -11,9 +11,12 @@ class technologies extends CI_Controller {
 	}
 	public function get_all()
 	{
+		$this->benchmark->mark('code_start');
 		$this->load->model('technologies_model');
-		$data['request'] = $this->input->post('dev');
 		$data["response"] = $this->technologies_model->get_all_techs();
-		echo json($data);
+		$es = $this->benchmark->elapsed_time('code_start', 'code_end');
+		$pass = ["elapsedTime" => $es];
+		$this->benchmark->mark('code_end');
+		echo json($data, $pass);
 	}
 }

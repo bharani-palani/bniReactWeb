@@ -53,22 +53,26 @@ if (!function_exists('response_code')) {
 }
 
 if(!function_exists("info")){
-    function info() {
+    function info($passed) {
+		$ci =& get_instance();
         $data['server'] = $_SERVER['SERVER_NAME'];
-		$data['siteUrl'] = site_url();
 		$data['baseUrl'] = base_url();
         $data['requestMethod'] = $_SERVER['REQUEST_METHOD'];
         $data['httpResponseCodes'] = response_code(200);
+        $data['elapsedTime'] = $passed["elapsedTime"];
+        $data["codeigniter_version"] = CI_VERSION;
+        $data["memory_usage"] = $ci->benchmark->memory_usage();
+        $data["phpVersion"] = phpversion();
         return $data;
     }
 }
 
 if(!function_exists("json")){
-    function json($response) {
+    function json($response, $passed) {
 		$ci =& get_instance();
 		$ci->output->set_content_type('application/json');
         $ci->output->set_status_header(200);
-        $info = info();
+        $info = info($passed);
         $op = array_merge($info, $response);
 		$ci->output->set_output(json_encode($op, JSON_PRETTY_PRINT));
     }
