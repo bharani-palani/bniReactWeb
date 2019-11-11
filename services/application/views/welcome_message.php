@@ -80,11 +80,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<h1>Welcome to CodeIgniter!</h1>
 
 		<div id="body">
-			<h1>Customer Details Card</h1>
-			<p>Customer ID : <strong><?= $customer['id'] ?></strong></p>
-			<p>First Name : <strong><?= $customer['first_name'] ?></strong></p>
-			<p>Last Name : <strong><?= $customer['last_name'] ?></strong></p>
-			<p>Address : <strong><?= $customer['address'] ?></strong></p>
+			Welcome to www.bharani.tech backend services!!
 		</div>
 
 		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>

@@ -7,7 +7,8 @@ class home extends CI_Controller {
     }
 	public function index()
 	{
-		$data["response"] = array("heading" => "Bharani Palani", "subHeading" => "Full Stack Devops");
-		echo json($data);
+		$this->load->view('welcome_message');
+		// $data["response"] = array("heading" => "Bharani Palani", "subHeading" => "Full Stack Devops");
+		// echo json($data);
 	}
 }

@@ -105,7 +105,7 @@ switch($host) {
 			'username' => 'bharatvz',
 			'password' => 'Bnisuccess@!123',
 			'database' => 'bharatvz_BniReactWeb',
-			'dbdriver' => 'mysql',
+			'dbdriver' => 'mysqli',
 			'dbprefix' => '',
 			'pconnect' => FALSE,
 			'db_debug' => (ENVIRONMENT !== 'production'),
