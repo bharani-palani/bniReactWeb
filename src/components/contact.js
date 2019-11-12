@@ -48,7 +48,7 @@ class Contact extends React.Component {
                                 <h2 style={{ color: "#aaa" }}>Contact</h2>
                                 <hr />
                                 <i className="fi-creative-telephone"></i>
-                                <p>Reach me on the below</p>
+                                <p>Reach me on the below {process.env.NODE_ENV}</p>
                             </div>
                         </div>
                     </div>
