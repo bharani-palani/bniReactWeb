@@ -76,6 +76,7 @@ if(!function_exists("json")){
 		$ci =& get_instance();
 		$ci->output->set_content_type('application/json');
         $ci->output->set_status_header($statusCode);
+        $ci->output->set_header("Access-Control-Allow-Origin: *");
         $output = array_merge(info($passed, $statusCode), $response);
 		$ci->output->set_output(json_encode($output, JSON_PRETTY_PRINT));
     }

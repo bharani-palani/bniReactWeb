@@ -26,6 +26,14 @@ code {
     font-size: 30px !important;
   }
 }
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
 @for $i from 0 through 100 {
   // margin
   .#{"m"}-#{$i} {
