@@ -9,7 +9,7 @@ class contacts extends CI_Controller {
 	{
 
 	}
-	public function get_all()
+	public function get_all_contacts()
 	{
 		$this->benchmark->mark('code_start');
 		$this->load->model('contact_model');

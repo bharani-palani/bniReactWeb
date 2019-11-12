@@ -9,7 +9,7 @@ class technologies extends CI_Controller {
 	{
 
 	}
-	public function get_all()
+	public function get_all_techs()
 	{
 		$this->benchmark->mark('code_start');
 		$this->load->model('technologies_model');
