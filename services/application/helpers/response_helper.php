@@ -57,6 +57,7 @@ if(!function_exists("info")){
 		$ci =& get_instance();
         $data['server'] = $_SERVER['SERVER_NAME'];
 		$data['baseUrl'] = base_url();
+		$data['requestUrl'] = current_url();
         $data['requestMethod'] = $_SERVER['REQUEST_METHOD'];
         $data['httpResponseCodes'] = response_code($statusCode);
         $data["codeigniter_version"] = CI_VERSION;

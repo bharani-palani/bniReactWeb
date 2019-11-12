@@ -16,8 +16,8 @@ class Contact extends React.Component {
     }
     componentDidMount() {
         const apiUrl = window.location.hostname === "localhost" ?
-        "http://localhost/bniReactWeb/services/technologies" : 
-        "http://bharani.tech/services/technologies";
+        "http://localhost/bniReactWeb/services/contacts" : 
+        "http://bharani.tech/services/contacts";
         
         // fetch(apiUrl)
         //   .then(response => response.json())
