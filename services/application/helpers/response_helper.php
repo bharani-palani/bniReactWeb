@@ -53,28 +53,30 @@ if (!function_exists('response_code')) {
 }
 
 if(!function_exists("info")){
-    function info($passed) {
+    function info($passed, $statusCode) {
 		$ci =& get_instance();
         $data['server'] = $_SERVER['SERVER_NAME'];
 		$data['baseUrl'] = base_url();
         $data['requestMethod'] = $_SERVER['REQUEST_METHOD'];
-        $data['httpResponseCodes'] = response_code(200);
-        $data['elapsedTime'] = $passed["elapsedTime"];
+        $data['httpResponseCodes'] = response_code($statusCode);
         $data["codeigniter_version"] = CI_VERSION;
-        $data["memory_usage"] = $ci->benchmark->memory_usage();
         $data["phpVersion"] = phpversion();
+        $data["memory_usage"] = $ci->benchmark->memory_usage();
+        $data["elapsedTime"] = $ci->benchmark->elapsed_time();
+        foreach ($passed as $key => $val) {
+            $data[$key] = $val;
+        }
         return $data;
     }
 }
 
 if(!function_exists("json")){
-    function json($response, $passed) {
+    function json($response, $passed = [], $statusCode) {
 		$ci =& get_instance();
 		$ci->output->set_content_type('application/json');
-        $ci->output->set_status_header(200);
-        $info = info($passed);
-        $op = array_merge($info, $response);
-		$ci->output->set_output(json_encode($op, JSON_PRETTY_PRINT));
+        $ci->output->set_status_header($statusCode);
+        $output = array_merge(info($passed, $statusCode), $response);
+		$ci->output->set_output(json_encode($output, JSON_PRETTY_PRINT));
     }
 }
 ?>
