@@ -22,7 +22,21 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$host = $_SERVER['HTTP_HOST'];
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') { // if ssl connection
+    $ssl_set = "s";
+} else {
+    $ssl_set = "";
+}
+
+switch($host) {
+    case 'localhost':
+        $config['base_url']	= 'http'.$ssl_set.'://localhost/bniReactWeb/services/';
+    break;
+    case 'bharani.tech':
+        $config['base_url']	= 'http'.$ssl_set.'://bharani.tech/services/';
+    break;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +48,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +66,7 @@ $config['index_page'] = 'index.php';
 | 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
 |
 */
-$config['uri_protocol']	= 'AUTO';
+$config['uri_protocol']	= 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
