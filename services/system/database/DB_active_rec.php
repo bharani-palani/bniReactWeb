@@ -1703,7 +1703,7 @@ class CI_DB_active_record extends CI_DB_driver {
 					$this->ar_select[$key] = $this->_protect_identifiers($val, FALSE, $no_escape);
 				}
 
-				$sql .= implode(',', $this->ar_select);
+				$sql .= implode(', ', $this->ar_select);
 			}
 		}
 
