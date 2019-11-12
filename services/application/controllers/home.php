@@ -7,8 +7,11 @@ class home extends CI_Controller {
     }
 	public function index()
 	{
-		$this->load->view('welcome_message');
-		// $data["response"] = array("heading" => "Bharani Palani", "subHeading" => "Full Stack Devops");
-		// echo json($data);
+		$this->benchmark->mark('code_start');
+		$data["response"] = array("heading" => "Bharani Palani", "subHeading" => "Full Stack Devops");
+		$es = $this->benchmark->elapsed_time('code_start', 'code_end');
+		$pass = ["elapsedTime" => $es];
+		$this->benchmark->mark('code_end');
+		echo json($data, $pass);
 	}
 }
