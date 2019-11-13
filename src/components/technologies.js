@@ -1,88 +1,91 @@
 import React from 'react';
+import baseUrl from "../environment";
+import Loader from 'react-loader-spinner'
+import helpers from "../helpers";
 
 class Technologies extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             techs: [
-                {
-                    name: "HTML5",
-                    sort: 1,
-                    imageRoot: "html5.jpg",
-                    description: "Solution stack that defines the structure and presentation of Web contents with HTML5 API's and features"
-                },
-                {
-                    name: "CSS3",
-                    sort: 2,
-                    imageRoot: "css3.jpg",
-                    description: "Style Sheets language used for describing the look and formatting of a document / Progressive Web App using SCSS & SASS features"
-                },
-                {
-                    name: "Bootstrap 3 & 4",
-                    sort: 3,
-                    imageRoot: "bootstrap.png",
-                    description: "Responsive, mobile-first front-end web development. CSS / JS design templates for typography, forms and other UI components"
-                },
-                {
-                    name: "Angular",
-                    sort: 4,
-                    imageRoot: "angular.png",
-                    description: "Angular framework for building client applications (SPA) in HTML and TypeScript. Angular versioning 1.x, 2, 4, 5, 6, 7"
-                },
-                {
-                    name: "React",
-                    sort: 5,
-                    imageRoot: "react.png",
-                    description: "React is a JavaScript library for building UI Component Functional / static based. Props, Redux, Router, state management etc..."
-                },
-                {
-                    name: "Jquery",
-                    sort: 6,
-                    imageRoot: "jquery.png",
-                    description: "A JavaScript library designed to simplify HTML DOM tree traversal and manipulation, featuring event handling, CSS animation and Ajax"
-                },
-                {
-                    name: "Node.JS",
-                    sort: 7,
-                    imageRoot: "nodejs.png",
-                    description: "JavaScript code server-side scripting to ensure connect, packing, building applications using NPM CLI and establishing DB connectivity."
-                },
-                {
-                    name: "PhP",
-                    sort: 8,
-                    imageRoot: "php.png",
-                    description: "Build dynamic, interactive Web pages and service API's. MVC architecture. Core PhP, FPDF, CodeIgniter 3 and Zend are additional addons."
-                },
-                {
-                    name: "Mysql",
-                    sort: 9,
-                    imageRoot: "mysql.png",
-                    description: "An RDBMS architechture involving query building, table design / structuring, cursors and procedures. Tool: phpMyAdmin, Mysql Workbench, Mysql Yog etc.."
-                },
-                {
-                    name: "Spring Boot",
-                    sort: 10,
-                    imageRoot: "spring-boot-logo.png",
-                    description: "Annotaions, Java collections, REST service, configuring pom.xml for dependency injection, connecting MySql with varied Microservices"
-                },
-                {
-                    name: "GIT",
-                    sort: 10.1,
-                    imageRoot: "git.png",
-                    description: "A distributed version-control system. Actions like Cloning, Merging, branching, pull request, approve and merge activities handled."
-                },
-                {
-                    name: "Google Cloud",
-                    sort: 11,
-                    imageRoot: "google-cloud-logo.png",
-                    description: "Deploy application on clients instance. Cloud engine, network services, disable/shutdown instances etc.."
-                },
-                {
-                    name: "AWS",
-                    sort: 12,
-                    imageRoot: "aws.png",
-                    description: "Infrastructure as a service (IaaS), platform as a service (PaaS) and packaged software as a service (SaaS). Cloud instance and D3 bucket."
-                },
+                // {
+                //     name: "HTML5",
+                //     sort: 1,
+                //     imageRoot: "html5.jpg",
+                //     description: "Solution stack that defines the structure and presentation of Web contents with HTML5 API's and features"
+                // },
+                // {
+                //     name: "CSS3",
+                //     sort: 2,
+                //     imageRoot: "css3.jpg",
+                //     description: "Style Sheets language used for describing the look and formatting of a document / Progressive Web App using SCSS & SASS features"
+                // },
+                // {
+                //     name: "Bootstrap 3 & 4",
+                //     sort: 3,
+                //     imageRoot: "bootstrap.png",
+                //     description: "Responsive, mobile-first front-end web development. CSS / JS design templates for typography, forms and other UI components"
+                // },
+                // {
+                //     name: "Angular",
+                //     sort: 4,
+                //     imageRoot: "angular.png",
+                //     description: "Angular framework for building client applications (SPA) in HTML and TypeScript. Angular versioning 1.x, 2, 4, 5, 6, 7"
+                // },
+                // {
+                //     name: "React",
+                //     sort: 5,
+                //     imageRoot: "react.png",
+                //     description: "React is a JavaScript library for building UI Component Functional / static based. Props, Redux, Router, state management etc..."
+                // },
+                // {
+                //     name: "Jquery",
+                //     sort: 6,
+                //     imageRoot: "jquery.png",
+                //     description: "A JavaScript library designed to simplify HTML DOM tree traversal and manipulation, featuring event handling, CSS animation and Ajax"
+                // },
+                // {
+                //     name: "Node.JS",
+                //     sort: 7,
+                //     imageRoot: "nodejs.png",
+                //     description: "JavaScript code server-side scripting to ensure connect, packing, building applications using NPM CLI and establishing DB connectivity."
+                // },
+                // {
+                //     name: "PhP",
+                //     sort: 8,
+                //     imageRoot: "php.png",
+                //     description: "Build dynamic, interactive Web pages and service API's. MVC architecture. Core PhP, FPDF, CodeIgniter 3 and Zend are additional addons."
+                // },
+                // {
+                //     name: "Mysql",
+                //     sort: 9,
+                //     imageRoot: "mysql.png",
+                //     description: "An RDBMS architechture involving query building, table design / structuring, cursors and procedures. Tool: phpMyAdmin, Mysql Workbench, Mysql Yog etc.."
+                // },
+                // {
+                //     name: "Spring Boot",
+                //     sort: 10,
+                //     imageRoot: "spring-boot-logo.png",
+                //     description: "Annotaions, Java collections, REST service, configuring pom.xml for dependency injection, connecting MySql with varied Microservices"
+                // },
+                // {
+                //     name: "GIT",
+                //     sort: 10.1,
+                //     imageRoot: "git.png",
+                //     description: "A distributed version-control system. Actions like Cloning, Merging, branching, pull request, approve and merge activities handled."
+                // },
+                // {
+                //     name: "Google Cloud",
+                //     sort: 11,
+                //     imageRoot: "google-cloud-logo.png",
+                //     description: "Deploy application on clients instance. Cloud engine, network services, disable/shutdown instances etc.."
+                // },
+                // {
+                //     name: "AWS",
+                //     sort: 12,
+                //     imageRoot: "aws.png",
+                //     description: "Infrastructure as a service (IaaS), platform as a service (PaaS) and packaged software as a service (SaaS). Cloud instance and D3 bucket."
+                // },
             ],
             ideTechs: [
                 {
@@ -127,16 +130,19 @@ class Technologies extends React.Component {
         };
         document.title = "Bharani | Technologies"
     }
-    getTechnologies = () => {
-        const url = "http://localhost/bniReactWeb/services/"
-        fetch(url)
-        .then((resp) => resp.json())
-        .then((data) => {
-            console.log(data)
-        })
-    }
     componentDidMount() {
-        this.getTechnologies();
+        const that = this;
+        const apiUrl = `${baseUrl()}/technologies`;
+        const axios = require('axios');
+        axios.get(apiUrl)
+        .then(response => {
+            const [techHeading, techs] = helpers.sageHeaderAndList(response.data.response, "tech_sort");
+            that.setState({techs, techHeading},() => {
+                console.log(that.state)
+            });
+        })
+        .catch(error => console.log(error))
+        .finally(() => 1);    
     }
     render() {
         return (
@@ -148,38 +154,42 @@ class Technologies extends React.Component {
                                 <h2 style={{ color: "#aaa" }}>Technologies</h2>
                                 <hr />
                                 <i className="fi-creative-computer"></i>
-                                <p>Not the actual coding and implementation, but the types of technology and their tradeoffs like</p>
+                                <p>{this.state.techHeading ? this.state.techHeading.tech_value : null}</p>
                             </div>
                         </div>
                     </div>
                     {
-                        this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
+                        this.state.techs ? this.state.techs.map((t, i) => (
                             <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%3 === 0 ? "row form-group ml-0 mr-0" : null}`}>
                                 <div className="col-lg-4 hidden-md">
                                     <div className="blog-box">
                                         <div className="post-media">
-                                            <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
+                                        {
+                                            t.tech_image_url ? <img src={require(`../images/technology/${t.tech_image_url}.png`)} alt="" className="img-responsive" /> : null
+                                        }
                                         </div>
                                         <div className="blog-desc">
-                                            <h4>{tech.name}</h4>
-                                            <p>{tech.description}</p>
+                                            <h4>{t.tech_label}</h4>
+                                            <p>{t.tech_value}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        ))
+                        )) : null
                     }
                     {
-                        this.state.techs.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((tech, i) => (
+                        this.state.techs.map((t, i) => (
                             <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
                                 <div className="col-md-6 visible-md-block">
                                     <div className="blog-box">
                                         <div className="post-media">
-                                            <img src={require(`../images/technology/${tech.imageRoot}`)} alt="" className="img-responsive" />
+                                        {
+                                            t.tech_image_url ? <img src={require(`../images/technology/${t.tech_image_url}.png`)} alt="" className="img-responsive" /> : null
+                                        }
                                         </div>
                                         <div className="blog-desc">
-                                            <h4>{tech.name}</h4>
-                                            <p>{tech.description}</p>
+                                            <h4>{t.tech_label}</h4>
+                                            <p>{t.tech_value}</p>
                                         </div>
                                     </div>
                                 </div>
