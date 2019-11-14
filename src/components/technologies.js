@@ -88,30 +88,30 @@ class Technologies extends React.Component {
                 // },
             ],
             ideTechs: [
-                {
-                    name: "Visual Studio Code",
-                    sort: 1,
-                    imageRoot: "vscode.png",
-                    description: "Code editor redefined and optimized for building and debugging modern web and cloud applications."
-                },
-                {
-                    name: "Mysql Workbench",
-                    sort: 2,
-                    imageRoot: "mysqlWb.jpg",
-                    description: "Database design for SQL development, administration, database design, creation and maintenance for MySQL database system."
-                },
-                {
-                    name: "Spring Tool Suite",
-                    sort: 3,
-                    imageRoot: "STS.png",
-                    description: "Code backend sprint boot files, which has an embeded Tomcat server"
-                },
-                {
-                    name: "IntelliJ Idea CE",
-                    sort: 4,
-                    imageRoot: "IntelliJ.png",
-                    description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
-                },
+                // {
+                //     name: "Visual Studio Code",
+                //     sort: 1,
+                //     imageRoot: "vscode.png",
+                //     description: "Code editor redefined and optimized for building and debugging modern web and cloud applications."
+                // },
+                // {
+                //     name: "Mysql Workbench",
+                //     sort: 2,
+                //     imageRoot: "mysqlWb.jpg",
+                //     description: "Database design for SQL development, administration, database design, creation and maintenance for MySQL database system."
+                // },
+                // {
+                //     name: "Spring Tool Suite",
+                //     sort: 3,
+                //     imageRoot: "STS.png",
+                //     description: "Code backend sprint boot files, which has an embeded Tomcat server"
+                // },
+                // {
+                //     name: "IntelliJ Idea CE",
+                //     sort: 4,
+                //     imageRoot: "IntelliJ.png",
+                //     description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
+                // },
             ],
             osTechs: [
                 {
@@ -133,6 +133,7 @@ class Technologies extends React.Component {
     componentDidMount() {
         this.getTechnologies();
         this.getIdes();
+        this.getOss();
     }
     getTechnologies = () => {
         const that = this;
@@ -152,8 +153,20 @@ class Technologies extends React.Component {
         const axios = require('axios');
         axios.get(apiUrl)
         .then(response => {
-            const [ideHeading, ides] = helpers.sageHeaderAndList(response.data.response, "tech_sort");
-            that.setState({ides, ideHeading},() => {
+            const ideTechs = response.data.response;
+            that.setState({ideTechs});
+        })
+        .catch(error => console.log(error))
+        .finally(() => 1);    
+    }
+    getOss = () => {
+        const that = this;
+        const apiUrl = `${baseUrl()}/ides`;
+        const axios = require('axios');
+        axios.get(apiUrl)
+        .then(response => {
+            const osTechs = response.data.response;
+            that.setState({ osTechs },() => {
                 console.log(that.state)
             });
         })
@@ -226,13 +239,18 @@ class Technologies extends React.Component {
                                     <div className="process-box">
                                         <div className="process-front text-center">
                                             {/* <i class="flaticon-lightbulb-idea"></i> */}
-                                            <img style={{ width: "150px", height: "100px", margin: "0 auto" }} src={require(`../images/ide/${ide.imageRoot}`)} alt="" className="img-responsive" />
-                                            <h3>{ide.name}</h3>
+                                            {
+                                                ide.ide_image_url ? 
+                                                    <img style={{ width: "150px", height: "100px", margin: "0 auto" }} src={require(`../images/ide/${ide.ide_image_url}`)} alt="" className="img-responsive" />
+                                                :
+                                                null
+                                            }
+                                            <h3>{ide.ide_label}</h3>
                                         </div>
 
                                         <div className="process-end text-center">
                                             {/* <h3>Typo's</h3> */}
-                                            <p>{ide.description}</p>
+                                            <p>{ide.ide_value}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -254,13 +272,18 @@ class Technologies extends React.Component {
                                     <div className="process-box">
                                         <div className="process-front text-center">
                                             {/* <i class="flaticon-lightbulb-idea"></i> */}
-                                            <img style={{ width: "100px", height: "100px", margin: "0 auto" }} src={require(`../images/technology/${os.imageRoot}`)} alt="" className="img-responsive" />
-                                            <h3>{os.name}</h3>
+                                            {
+                                                os.os_image_url ?
+                                                <img style={{ width: "100px", height: "100px", margin: "0 auto" }} src={require(`../images/technology/${os.os_image_url}`)} alt="" className="img-responsive" />
+                                                :
+                                                null
+                                            }
+                                            <h3>{os.os_label}</h3>
                                         </div>
 
                                         <div className="process-end text-center">
                                             <h3>Typo's</h3>
-                                            <p>{os.description}</p>
+                                            <p>{os.os_value}</p>
                                         </div>
                                     </div>
                                 </div>
