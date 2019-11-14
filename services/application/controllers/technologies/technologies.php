@@ -15,4 +15,10 @@ class technologies extends CI_Controller {
 		$data["response"] = $this->technologies_model->get_all_techs();
 		json($data,[],200);
 	}
+	public function get_all_ides()
+	{
+		$this->load->model('technologies_model');
+		$data["response"] = $this->technologies_model->get_all_ides();
+		json($data,[],200);
+	}
 }

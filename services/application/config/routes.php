@@ -42,6 +42,7 @@ $route['default_controller'] = "home";
 $route['404_override'] = '';
 
 $route['technologies'] = 'technologies/technologies/get_all_techs';
+$route['ides'] = 'technologies/technologies/get_all_ides';
 $route['contacts'] = 'contacts/contacts/get_all_contacts';
 
 

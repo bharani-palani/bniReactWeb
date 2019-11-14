@@ -131,13 +131,29 @@ class Technologies extends React.Component {
         document.title = "Bharani | Technologies"
     }
     componentDidMount() {
+        this.getTechnologies();
+        this.getIdes();
+    }
+    getTechnologies = () => {
         const that = this;
         const apiUrl = `${baseUrl()}/technologies`;
         const axios = require('axios');
         axios.get(apiUrl)
         .then(response => {
             const [techHeading, techs] = helpers.sageHeaderAndList(response.data.response, "tech_sort");
-            that.setState({techs, techHeading},() => {
+            that.setState({techs, techHeading});
+        })
+        .catch(error => console.log(error))
+        .finally(() => 1);    
+    }
+    getIdes = () => {
+        const that = this;
+        const apiUrl = `${baseUrl()}/ides`;
+        const axios = require('axios');
+        axios.get(apiUrl)
+        .then(response => {
+            const [ideHeading, ides] = helpers.sageHeaderAndList(response.data.response, "tech_sort");
+            that.setState({ides, ideHeading},() => {
                 console.log(that.state)
             });
         })
