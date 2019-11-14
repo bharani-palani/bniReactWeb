@@ -114,183 +114,189 @@ class Technologies extends React.Component {
                 // },
             ],
             osTechs: [
-                {
-                    name: "Windows",
-                    sort: 4,
-                    imageRoot: "windows.png",
-                    description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
-                },
-                {
-                    name: "MAC OS",
-                    sort: 4,
-                    imageRoot: "macos.png",
-                    description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
-                },
+                // {
+                //     name: "Windows",
+                //     sort: 4,
+                //     imageRoot: "windows.png",
+                //     description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
+                // },
+                // {
+                //     name: "MAC OS",
+                //     sort: 4,
+                //     imageRoot: "macos.png",
+                //     description: "Java integrated development environment, similar to Eclipse IDE lookup and features."
+                // },
             ]
         };
         document.title = "Bharani | Technologies"
     }
     componentDidMount() {
-        this.getTechnologies();
-        this.getIdes();
-        this.getOss();
+        const one = this.getTechnologies();
+        const two = this.getIdes();
+        const three = this.getOss();
+    
+        Promise.all([one, two, three]).then(r => {
+            const [techHeading, techs] = r[0];
+            const ideTechs = r[1];
+            const osTechs = r[2];
+            this.setState({ techHeading, techs, ideTechs, osTechs });
+        });
     }
-    getTechnologies = () => {
-        const that = this;
+    getTechnologies = async() => {
         const apiUrl = `${baseUrl()}/technologies`;
         const axios = require('axios');
-        axios.get(apiUrl)
-        .then(response => {
-            const [techHeading, techs] = helpers.sageHeaderAndList(response.data.response, "tech_sort");
-            that.setState({techs, techHeading});
-        })
-        .catch(error => console.log(error))
-        .finally(() => 1);    
+        const tech = axios.get(apiUrl).then(response => helpers.sageHeaderAndList(response.data.response, "tech_sort"));
+        const json = await tech.then(r => r);
+        return json;
     }
-    getIdes = () => {
-        const that = this;
+    getIdes = async() => {
         const apiUrl = `${baseUrl()}/ides`;
         const axios = require('axios');
-        axios.get(apiUrl)
-        .then(response => {
-            const ideTechs = response.data.response;
-            that.setState({ideTechs});
-        })
-        .catch(error => console.log(error))
-        .finally(() => 1);    
+        const ide = axios.get(apiUrl).then(response => response.data.response);
+        const json = await ide.then(r => r);
+        return json;
     }
-    getOss = () => {
-        const that = this;
+    getOss = async() => {
         const apiUrl = `${baseUrl()}/operating-system`;
         const axios = require('axios');
-        axios.get(apiUrl)
-        .then(response => {
-            const osTechs = response.data.response;
-            that.setState({ osTechs },() => {
-                console.log(that.state)
-            });
-        })
-        .catch(error => console.log(error))
-        .finally(() => 1);    
+        const os = axios.get(apiUrl).then(response => response.data.response);
+        const json = await os.then(r => r);
+        return json;
     }
     render() {
         return (
             <div id="wrapper">
-                <section className="section lb">
-                    <div className="section-title text-center">
-                        <div style={{ backgroundColor: "transparent" }} className="process-box">
-                            <div className="process-front text-center">
-                                <h2 style={{ color: "#aaa" }}>Technologies</h2>
-                                <hr />
-                                <i className="fi-creative-computer"></i>
-                                <p>{this.state.techHeading ? this.state.techHeading.tech_value : null}</p>
-                            </div>
-                        </div>
-                    </div>
+                <section className="section lb" style={{ minHeight: window.screen.height - 150 }}>
                     {
-                        this.state.techs ? this.state.techs.map((t, i) => (
-                            <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%3 === 0 ? "row form-group ml-0 mr-0" : null}`}>
-                                <div className="col-lg-4 hidden-md">
-                                    <div className="blog-box">
-                                        <div className="post-media">
-                                        {
-                                            t.tech_image_url ? <img src={require(`../images/technology/${t.tech_image_url}.png`)} alt="" className="img-responsive" /> : null
-                                        }
-                                        </div>
-                                        <div className="blog-desc">
-                                            <h4>{t.tech_label}</h4>
-                                            <p>{t.tech_value}</p>
-                                        </div>
+                        this.state.techHeading &&
+                        this.state.techs &&
+                        this.state.ideTechs &&
+                        this.state.osTechs  ?
+                        <>
+                            <div className="section-title text-center">
+                                <div style={{ backgroundColor: "transparent" }} className="process-box">
+                                    <div className="process-front text-center">
+                                        <h2 style={{ color: "#aaa" }}>Technologies</h2>
+                                        <hr />
+                                        <i className="fi-creative-computer"></i>
+                                        <p>{this.state.techHeading ? this.state.techHeading.tech_value : null}</p>
                                     </div>
                                 </div>
                             </div>
-                        )) : null
-                    }
-                    {
-                        this.state.techs.map((t, i) => (
-                            <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
-                                <div className="col-md-6 visible-md-block">
-                                    <div className="blog-box">
-                                        <div className="post-media">
-                                        {
-                                            t.tech_image_url ? <img src={require(`../images/technology/${t.tech_image_url}.png`)} alt="" className="img-responsive" /> : null
-                                        }
-                                        </div>
-                                        <div className="blog-desc">
-                                            <h4>{t.tech_label}</h4>
-                                            <p>{t.tech_value}</p>
+                            {
+                                this.state.techs ? this.state.techs.map((t, i) => (
+                                    <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%3 === 0 ? "row form-group ml-0 mr-0" : null}`}>
+                                        <div className="col-lg-4 hidden-md">
+                                            <div className="blog-box">
+                                                <div className="post-media">
+                                                {
+                                                    t.tech_image_url ? <img src={require(`../images/technology/${t.tech_image_url}.png`)} alt="" className="img-responsive" /> : null
+                                                }
+                                                </div>
+                                                <div className="blog-desc">
+                                                    <h4>{t.tech_label}</h4>
+                                                    <p>{t.tech_value}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                )) : null
+                            }
+                            {
+                                this.state.techs.map((t, i) => (
+                                    <div style={{ color: "#333" }} key={i} className={`text-center ${(i+1)%2 === 0 ? "row form-group" : null}`}>
+                                        <div className="col-md-6 visible-md-block">
+                                            <div className="blog-box">
+                                                <div className="post-media">
+                                                {
+                                                    t.tech_image_url ? <img src={require(`../images/technology/${t.tech_image_url}.png`)} alt="" className="img-responsive" /> : null
+                                                }
+                                                </div>
+                                                <div className="blog-desc">
+                                                    <h4>{t.tech_label}</h4>
+                                                    <p>{t.tech_value}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            <div style={{ backgroundColor: "transparent" }} className="process-box">
+                                <div className="process-front text-center">
+                                    <h2 style={{ color: "#aaa" }}>IDE</h2>
+                                    <i className="flaticon-monitor"></i>
                                 </div>
                             </div>
-                        ))
+
+                            <div className="row">
+                                {
+                                    this.state.ideTechs.map((ide, i) => (
+                                        <div key={i} className="col-lg-3 col-md-6">
+                                            <div className="process-box">
+                                                <div className="process-front text-center">
+                                                    {/* <i class="flaticon-lightbulb-idea"></i> */}
+                                                    {
+                                                        ide.ide_image_url ? 
+                                                            <img style={{ width: "150px", height: "100px", margin: "0 auto" }} src={require(`../images/ide/${ide.ide_image_url}`)} alt="" className="img-responsive" />
+                                                        :
+                                                        null
+                                                    }
+                                                    <h3>{ide.ide_label}</h3>
+                                                </div>
+
+                                                <div className="process-end text-center">
+                                                    {/* <h3>Typo's</h3> */}
+                                                    <p>{ide.ide_value}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+
+                            <div style={{ backgroundColor: "transparent" }} className="process-box">
+                                <div className="process-front text-center">
+                                    <h2 style={{ color: "#aaa" }}>OS</h2>
+                                    <i className="flaticon-point-mark-on-a-circle"></i>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                {
+                                    this.state.osTechs.map((os, i) => (
+                                        <div key={i} className="col-lg-3 col-md-6">
+                                            <div className="process-box">
+                                                <div className="process-front text-center">
+                                                    {/* <i class="flaticon-lightbulb-idea"></i> */}
+                                                    {
+                                                        os.os_image_url ?
+                                                        <img style={{ width: "100px", height: "100px", margin: "0 auto" }} src={require(`../images/technology/${os.os_image_url}`)} alt="" className="img-responsive" />
+                                                        :
+                                                        null
+                                                    }
+                                                    <h3>{os.os_label}</h3>
+                                                </div>
+
+                                                <div className="process-end text-center">
+                                                    <h3>Typo's</h3>
+                                                    <p>{os.os_value}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </>
+                        :
+                        <div className="spinner">
+                            <Loader
+                                type={helpers.LoadRandomSpinnerIcon()}
+                                color="#c2d82e"
+                                height={100}
+                                width={100}    
+                            />
+                        </div>
                     }
-                    <div style={{ backgroundColor: "transparent" }} className="process-box">
-                        <div className="process-front text-center">
-                            <h2 style={{ color: "#aaa" }}>IDE</h2>
-                            <i className="flaticon-monitor"></i>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        {
-                            this.state.ideTechs.map((ide, i) => (
-                                <div key={i} className="col-lg-3 col-md-6">
-                                    <div className="process-box">
-                                        <div className="process-front text-center">
-                                            {/* <i class="flaticon-lightbulb-idea"></i> */}
-                                            {
-                                                ide.ide_image_url ? 
-                                                    <img style={{ width: "150px", height: "100px", margin: "0 auto" }} src={require(`../images/ide/${ide.ide_image_url}`)} alt="" className="img-responsive" />
-                                                :
-                                                null
-                                            }
-                                            <h3>{ide.ide_label}</h3>
-                                        </div>
-
-                                        <div className="process-end text-center">
-                                            {/* <h3>Typo's</h3> */}
-                                            <p>{ide.ide_value}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-
-                    <div style={{ backgroundColor: "transparent" }} className="process-box">
-                        <div className="process-front text-center">
-                            <h2 style={{ color: "#aaa" }}>OS</h2>
-                            <i className="flaticon-point-mark-on-a-circle"></i>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        {
-                            this.state.osTechs.map((os, i) => (
-                                <div key={i} className="col-lg-3 col-md-6">
-                                    <div className="process-box">
-                                        <div className="process-front text-center">
-                                            {/* <i class="flaticon-lightbulb-idea"></i> */}
-                                            {
-                                                os.os_image_url ?
-                                                <img style={{ width: "100px", height: "100px", margin: "0 auto" }} src={require(`../images/technology/${os.os_image_url}`)} alt="" className="img-responsive" />
-                                                :
-                                                null
-                                            }
-                                            <h3>{os.os_label}</h3>
-                                        </div>
-
-                                        <div className="process-end text-center">
-                                            <h3>Typo's</h3>
-                                            <p>{os.os_value}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-
                 </section>
             </div>
         );

@@ -57,13 +57,13 @@ class DateTime extends React.Component {
                                             &nbsp;<label style={{ fontWeight: 100, cursor: "pointer" }} htmlFor="nType">{this.state.isInc ? "Increment" : "Decrement"}</label>
                                         </div>
                                     </div>
-                                    <select ref={this.hh} className="form-control b-1 z-0">
+                                    <select ref={this.hh} className="form-control contact-ip b-1 z-0">
                                         <option value="0">HH</option>
                                         {
                                             Array.from({length: 12}, (v, k) => k+1).map((hh,i) => <option key={i} value={hh}>{hh}</option>)
                                         }
                                     </select>
-                                    <select ref={this.mm} className="form-control br-0 b-1 z-0">
+                                    <select ref={this.mm} className="form-control contact-ip br-0 b-1 z-0">
                                         <option value="0">MM</option>
                                         {
                                             Array.from({length: 59}, (v, k) => k+1).map((mm,i) => <option key={i} value={mm}>{mm}</option>)

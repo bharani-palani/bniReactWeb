@@ -31,12 +31,12 @@ class Contact extends React.Component {
         document.title = "Bharani | Contact";
         return (
             <div id="wrapper">
-                <section className="section lb" style={{ minHeight: window.screen.height }}>
+                <section className="section lb" style={{ minHeight: window.screen.height - 150 }}>
                     {
                         this.state.contacts.length < 1 ?
                         <div className="spinner">
                             <Loader
-                                type={this.LoadRandomSpinnerIcon()}
+                                type={helpers.LoadRandomSpinnerIcon()}
                                 color="#c2d82e"
                                 height={100}
                                 width={100}    
