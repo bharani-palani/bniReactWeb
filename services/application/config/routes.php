@@ -43,7 +43,7 @@ $route['404_override'] = '';
 
 $route['technologies'] = 'technologies/technologies/get_all_techs';
 $route['ides'] = 'technologies/technologies/get_all_ides';
-$route['oss'] = 'technologies/technologies/get_all_oss';
+$route['operating-system'] = 'technologies/technologies/get_all_oss';
 $route['contacts'] = 'contacts/contacts/get_all_contacts';
 
 

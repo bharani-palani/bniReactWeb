@@ -161,7 +161,7 @@ class Technologies extends React.Component {
     }
     getOss = () => {
         const that = this;
-        const apiUrl = `${baseUrl()}/ides`;
+        const apiUrl = `${baseUrl()}/operating-system`;
         const axios = require('axios');
         axios.get(apiUrl)
         .then(response => {
