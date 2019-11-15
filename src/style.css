@@ -1574,9 +1574,9 @@ MODULES
     vertical-align: middle;
 }
 .home-message .cImage{
-    width: 250px;
-    height: 250px;
-    border-radius: 100%;
+    /* width: 400px !important; */
+    height: 400px;
+    border-radius: 10px;
 }
 
 mark.rotate {
@@ -1587,7 +1587,7 @@ mark.rotate {
 }
 
 .home-message p {
-    font-size: 68px;
+    font-size: 60px;
     color: #ffffff;
     padding: 10px 0 20px;
     margin: 0;
