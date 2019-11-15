@@ -707,7 +707,7 @@ SECTIONS
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 1;
+    /* z-index: 1; */
     background: url(images/pattern.png) repeat center center rgba(0, 0, 0, 0.7);
 }
 
@@ -1574,8 +1574,8 @@ MODULES
     vertical-align: middle;
 }
 .home-message .cImage{
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 100%;
 }
 
