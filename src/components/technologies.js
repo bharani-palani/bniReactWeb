@@ -166,7 +166,7 @@ class Technologies extends React.Component {
     render() {
         return (
             <div id="wrapper">
-                <section className="section lb" style={{ minHeight: window.screen.height - 150 }}>
+                <section className="section lb" style={{ minHeight: window.screen.height }}>
                     {
                         this.state.techHeading &&
                         this.state.techs &&

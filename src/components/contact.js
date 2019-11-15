@@ -31,7 +31,7 @@ class Contact extends React.Component {
         document.title = "Bharani | Contact";
         return (
             <div id="wrapper">
-                <section className="section lb" style={{ minHeight: window.screen.height - 150 }}>
+                <section className="section lb" style={{ minHeight: window.screen.height }}>
                     {
                         this.state.contacts.length < 1 ?
                         <div className="spinner">
