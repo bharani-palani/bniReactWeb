@@ -1587,13 +1587,15 @@ mark.rotate {
 }
 
 .home-message p {
-    font-size: 55px;
+    font-size: 40px;
     color: #ffffff;
     padding: 10px 0 20px;
     margin: 0;
     font-weight: bold;
 }
-
+.carousel .slider-wrapper.axis-horizontal .slider .slide {
+    opacity: 0.7;
+}
 .home-message .skillset {
     padding: 0;
     font-size: 20px;

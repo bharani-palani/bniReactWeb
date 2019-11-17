@@ -82,7 +82,7 @@ class Contact extends React.Component {
               </div>
               <div className="row container-fluid">
                 <div className="col-lg-5">
-                    <p className="contactLabel"><big>Ping me <i className="fa fa-phone" /></big></p>
+                    <p className="contactLabel m-0"><big>Ping me <i className="fa fa-phone" /></big></p>
                   {this.state.contacts.length > 0
                     ? this.state.contacts.map((c, i) => (
                         <div key={i}>
@@ -106,7 +106,7 @@ class Contact extends React.Component {
                     : null}
                 </div>
                 <div className="col-lg-7">
-                  <p className="contactLabel"><big>Reach me <i className="fa fa-motorcycle" /></big></p>
+                  <p className="contactLabel"><big>Reach me <i className="fa fa-car" /></big></p>
                   <MapWithAMarker
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHINg0FZK_OCJVCdxQJ1kQwcVUUUBNQ2k&v=3.exp&libraries=geometry,drawing,places"
                     loadingElement={<div style={{ height: `100%` }} />}
