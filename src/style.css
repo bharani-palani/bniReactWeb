@@ -1575,10 +1575,22 @@ MODULES
 }
 .home-message .cImage{
     /* width: 400px !important; */
-    height: 400px;
-    border-radius: 10px;
+    /* height: 400px; */
+    /* border-radius: 10px; */
 }
+.nameHeading {
+    position: fixed;
+    top: 80%;
+    text-align: center;
+    display: block;
+    width: 80%;
 
+}
+@media(max-width:768px) {
+    .nameHeading {
+        width: 100%;
+    }
+}
 mark.rotate {
     background-color: transparent;
     color: #ffffff;

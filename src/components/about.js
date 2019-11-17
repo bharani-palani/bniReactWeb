@@ -11,9 +11,8 @@ class About extends React.Component {
         this.state = {
             about: {},
             images: [
-                "bniBlack.png",
-                "bniBlackFull.jpeg",
                 "bniGreyCoat.jpg",
+                "bniBlackFull.jpeg",
                 "20190907_194906.jpg",
                 "20190128_200541.jpg",
                 "20190309_165844.jpg",
@@ -21,7 +20,6 @@ class About extends React.Component {
                 "20190706_164557.jpg",
                 "20190714_164140.jpg",
                 "20190817_160034.jpg",
-                "20190907_194906.jpg",
                 "20191005_140735.jpg",
                 "20191005_191358.jpg",
                 "20191006_161009.jpg",
@@ -30,10 +28,8 @@ class About extends React.Component {
                 "20191106_161047.jpg",
                 "coll3.jpeg",
                 "IMAG0274.jpg",
-                "IMAG0559.jpg",
                 "IMAG0571.jpg",
                 "IMAG0615.jpg",
-                "IMAG0666-COLLAGE.jpg",
                 "IMAG0668.jpg",
                 "IMAG0716.jpg",
                 "IMAG0736.jpg",
@@ -43,9 +39,7 @@ class About extends React.Component {
                 "IMAG1281.jpg",
                 "IMAG1352.jpg",
                 "IMAG1424.jpg",
-                "greenTees.jpg",
                 "20160709_145507.jpg",
-                "passport.JPG"                
             ]
         }
     }
@@ -64,11 +58,12 @@ class About extends React.Component {
         return (
             <div id="wrapper"> 
                 <div className="video-section">
-                    <div className="overlay" style={{ minHeight: window.screen.height }} />
+                    <div className="overlay" />
                     {
                         this.state.about.heading && this.state.about.subHeading ?
                         <div className="home-text-wrapper">
-                            <div className="home-message col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4 pt-50">
+                            {/* <div className="home-message col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4 pt-50"> */}
+                            <div className="home-message">
                                 <Carousel 
                                     autoPlay={true}
                                     showArrows={false}
@@ -86,8 +81,10 @@ class About extends React.Component {
                                     )
                                 }
                                 </Carousel>
-                                <p>{this.state.about.heading}</p>
-                                <div className="skillset">{this.state.about.subHeading}</div>
+                                <div className="nameHeading">
+                                    <p>{this.state.about.heading}</p>
+                                    <div className="skillset">{this.state.about.subHeading}</div>
+                                </div>
                             </div>
                         </div>
                         :
