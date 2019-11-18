@@ -63,36 +63,33 @@ class Skills extends React.Component {
     }
     render() {
         return (
-            <div id="wrapper">
-                <section className="section lb">
-                    <div className="section-title">
-                        <div style={{ backgroundColor: "transparent" }} className="process-box">
-                            <div className="process-front text-center">
-                                <h2 style={{ color: "#aaa" }}>Skills</h2>
-                                <hr />
-                                <i className="fi-tech-gamepad-1"></i>
-                                <p>Some acquired skills during development and bottle necks</p>
-                            </div>
+            <section className="section lb">
+                <div className="section-title">
+                    <div style={{ backgroundColor: "transparent" }} className="process-box">
+                        <div className="process-front text-center">
+                            <h2 style={{ color: "#aaa" }}>Skills</h2>
+                            <hr />
+                            <i className="fi-tech-gamepad-1"></i>
+                            <p>Some acquired skills during development and bottle necks</p>
                         </div>
                     </div>
-                    <div style={{ color: "#333" }} className="row container">
-                    {
-                        this.state.skills.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((skills, i) => (
-                            <div key={i} className="blog-box col-lg-12 col-md-12 form-group">
-                                <div className="post-media col-lg-4 col-md-6">
-                                    <img src={require(`../images/skills/${skills.imageRoot}`)} alt="" className="img-responsive lefty" />
-                                </div>
-                                <div className="blog-desc col-lg-8 col-md-6">
-                                    <h4 className="text-center">{skills.name}</h4>
-                                    <p>{skills.description}</p>
-                                </div>                                    
+                </div>
+                <div style={{ color: "#333" }} className="row container">
+                {
+                    this.state.skills.sort((a, b) => (a.sort > b.sort) ? 1 : (a.sort < b.sort) ? -1 : 0).map((skills, i) => (
+                        <div key={i} className="blog-box col-lg-12 col-md-12 form-group">
+                            <div className="post-media col-lg-4 col-md-6">
+                                <img src={require(`../images/skills/${skills.imageRoot}`)} alt="" className="img-responsive lefty" />
                             </div>
-                        ))
-                    }
-                    </div>
-                </section>
-
-            </div>
+                            <div className="blog-desc col-lg-8 col-md-6">
+                                <h4 className="text-center">{skills.name}</h4>
+                                <p>{skills.description}</p>
+                            </div>                                    
+                        </div>
+                    ))
+                }
+                </div>
+            </section>
         );
     }
 }

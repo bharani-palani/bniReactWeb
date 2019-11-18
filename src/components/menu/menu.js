@@ -9,6 +9,7 @@ class Menu extends React.Component {
         super(props);
         this.state = {
             navBarExpanded: false,
+            toggleSideBar: false,
             menus: [
                 {
                     href:"/about",
@@ -77,13 +78,33 @@ class Menu extends React.Component {
         var win = window.open(url, '_blank');
         win.focus();
     }
+    toggleSideBar = () => {
+        this.setState({ toggleSideBar: !this.state.toggleSideBar })
+    }
+    toggleStyle = () => {
+        return this.state.toggleSideBar ?
+        { position: "absolute", right : "calc(100% - 0px)" }
+        :
+        { position: "absolute", right : "calc(100% - 260px)" }
+    }
+    hamburgerStyle = () => {
+        return this.state.toggleSideBar ?
+        { right : "calc(100% - 38px)" }
+        :
+        { right : "calc(100% - 260px)" }
+    }
     render() {
         return (
             <Router>
                 <div className="menu-wrapper">
-                    <video className="videoTag" autoPlay loop muted>
-                        <source src={require("../../videos/video.mp4")} type='video/mp4' />
-                    </video>
+                    {
+                        !this.state.toggleSideBar ?
+                        <video className="videoTag" autoPlay loop muted>
+                            <source src={require("../../videos/video.mp4")} type='video/mp4' />
+                        </video>
+                        :
+                        null
+                    }
 
                     <div className="mobile-menu">
                         <Navbar fixed={"top"} bg="dark" onToggle={this.onNavBarToggle} expanded={this.state.navBarExpanded} expand="lg">
@@ -117,7 +138,8 @@ class Menu extends React.Component {
                         </Navbar>
                     </div>
                     <header className="vertical-header">
-                        <div className="vertical-header-wrapper">
+                        <i style={this.hamburgerStyle()} onClick={() => this.toggleSideBar()} className={`fa hamburger ${this.state.toggleSideBar ? "fa-times higlight" : "fa-bars"}`} />
+                        <div style={this.toggleStyle()} className="vertical-header-wrapper slideRight">
                             <nav className="nav-menu">
                                 <div className="logo">
                                     <Link to={"/"}>
@@ -156,7 +178,9 @@ class Menu extends React.Component {
                         </div>
                     </header>
                 </div>  
-                <Wrapper />
+                <div className={`wrapper ${this.state.toggleSideBar ? "toggleOn" : "toggleOff"}`}> 
+                    <Wrapper />
+                </div>
             </Router>
         );
     };

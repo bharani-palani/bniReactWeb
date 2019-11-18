@@ -6,7 +6,7 @@ const helpers = {
     },
     LoadRandomSpinnerIcon: () => {
         const icons = ["Audio","BallTriangle","Bars","Circles","Grid","Hearts","Oval","Puff","Rings","TailSpin","ThreeDots"]
-        const rIndex = Math.floor(Math.random() * icons.length) + 1;
+        const rIndex = Math.floor(Math.random() * icons.length);
         return icons[rIndex - 1];
     }
 }

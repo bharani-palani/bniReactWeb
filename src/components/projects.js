@@ -60,42 +60,40 @@ class Projects extends React.Component {
     }
     render() {
         return (
-            <div id="wrapper">
-                <section className="section lb">
-                    <div className="section-title">
-                        <div style={{ backgroundColor: "transparent" }} className="process-box">
-                            <div className="process-front text-center">
-                                <h2 style={{ color: "#aaa" }}>Projects</h2>
-                                <hr />
-                                <i className="fi-creative-cloud-computing-3"></i>
-                                <p>
-                                    While designing and developing products, I use UX methods and principles to deliver a positive experience.
-                                    Design principles are the guiding light for any software application.
-                                    There are many ways to create a less ambiguous product. Countably, some of my them are ...
-                                </p>
-                            </div>
+            <section className="section lb">
+                <div className="section-title">
+                    <div style={{ backgroundColor: "transparent" }} className="process-box">
+                        <div className="process-front text-center">
+                            <h2 style={{ color: "#aaa" }}>Projects</h2>
+                            <hr />
+                            <i className="fi-creative-cloud-computing-3"></i>
+                            <p>
+                                While designing and developing products, I use UX methods and principles to deliver a positive experience.
+                                Design principles are the guiding light for any software application.
+                                There are many ways to create a less ambiguous product. Countably, some of my them are ...
+                            </p>
                         </div>
-                        {
-                        this.state.projects.sort((a, b) => (a.sort < b.sort) ? 1 : (a.sort > b.sort) ? -1 : 0).map((project, i) => (
-                            <div style={{ color: "#333" }} key={i} className={`${(i+1)%2 === 0 ? "row form-group" : null}`}>
-                                <div className="col-md-6">
-                                    <div className="blog-box">
-                                        <div className="post-media">
-                                            <div className="title text-center">
-                                                <h4>{project.name}</h4>
-                                            </div>
+                    </div>
+                    {
+                    this.state.projects.sort((a, b) => (a.sort < b.sort) ? 1 : (a.sort > b.sort) ? -1 : 0).map((project, i) => (
+                        <div style={{ color: "#333" }} key={i} className={`${(i+1)%2 === 0 ? "row form-group" : null}`}>
+                            <div className="col-md-6">
+                                <div className="blog-box">
+                                    <div className="post-media">
+                                        <div className="title text-center">
+                                            <h4>{project.name}</h4>
                                         </div>
-                                        <div className="blog-desc">
-                                            <p>{project.description}</p>
-                                        </div>
+                                    </div>
+                                    <div className="blog-desc">
+                                        <p>{project.description}</p>
                                     </div>
                                 </div>
                             </div>
-                        ))
-                    }
-                    </div>
-                </section>
-            </div>
+                        </div>
+                    ))
+                }
+                </div>
+            </section>
         )
     }
 }

@@ -13,8 +13,8 @@ class About extends React.Component {
             images: [
                 "bniGreyCoat.jpg",
                 "bniBlackFull.jpeg",
-                "20190907_194906.jpg",
                 "20190128_200541.jpg",
+                "20190907_210031.jpg",
                 "20190309_165844.jpg",
                 "20190408_213558.jpg",
                 "20190706_164557.jpg",
@@ -56,49 +56,47 @@ class About extends React.Component {
     render() {
         document.title = "Bharani | About";
         return (
-            <div id="wrapper"> 
-                <div className="video-section">
-                    <div className="overlay" />
-                    {
-                        this.state.about.heading && this.state.about.subHeading ?
-                        <div className="home-text-wrapper">
-                            {/* <div className="home-message col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4 pt-50"> */}
-                            <div className="home-message">
-                                <Carousel 
-                                    autoPlay={true}
-                                    showArrows={false}
-                                    useKeyboardArrows={true}
-                                    showStatus={false}
-                                    showIndicators={false}
-                                    showThumbs={false}
-                                    infiniteLoop={true}
-                                    stopOnHover={false}
-                                    dynamicHeight={true}
-                                >
-                                {
-                                    this.state.images.map((img,i) =>
-                                        (img ? <img key={i} className="cImage" src={require(`../images/avatar/${img}`)} alt="" /> : null)
-                                    )
-                                }
-                                </Carousel>
-                                <div className="nameHeading">
-                                    <p>{this.state.about.heading}</p>
-                                    <div className="skillset">{this.state.about.subHeading}</div>
-                                </div>
+            <div className="video-section">
+                <div className="overlay" />
+                {
+                    this.state.about.heading && this.state.about.subHeading ?
+                    <div className="home-text-wrapper">
+                        {/* <div className="home-message col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4 pt-50"> */}
+                        <div className="home-message">
+                            <Carousel 
+                                autoPlay={true}
+                                showArrows={false}
+                                useKeyboardArrows={true}
+                                showStatus={false}
+                                showIndicators={false}
+                                showThumbs={false}
+                                infiniteLoop={true}
+                                stopOnHover={false}
+                                dynamicHeight={true}
+                            >
+                            {
+                                this.state.images.map((img,i) =>
+                                    (img ? <img key={i} className="cImage" src={require(`../images/avatar/${img}`)} alt="" /> : null)
+                                )
+                            }
+                            </Carousel>
+                            <div className="nameHeading">
+                                <p>{this.state.about.heading}</p>
+                                <div className="skillset">{this.state.about.subHeading}</div>
                             </div>
                         </div>
-                        :
-                        <div className="spinner">
-                            <Loader
-                                type={helpers.LoadRandomSpinnerIcon()}
-                                color="#c2d82e"
-                                height={100}
-                                width={100}    
-                            />
-                        </div>
+                    </div>
+                    :
+                    <div className="spinner">
+                        <Loader
+                            type={helpers.LoadRandomSpinnerIcon()}
+                            color="#c2d82e"
+                            height={100}
+                            width={100}    
+                        />
+                    </div>
                     }
                 </div>
-            </div>
         );
     }
 }

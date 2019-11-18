@@ -1,49 +1,110 @@
 .navbar-toggle {
-    position: relative;
-    float: right;
-    padding: 0;
-    background-color: transparent;
-    border-radius: 4px;
-    width: 50px;
-    border: solid 1px #c2d82e;
-    font-size: 25px;
+  position: relative;
+  float: right;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 4px;
+  width: 50px;
+  border: solid 1px #c2d82e;
+  font-size: 25px;
 }
 
-.navbar-toggle i{
-    color: #c2d82e;
+.navbar-toggle i {
+  color: #c2d82e;
 }
 
 .mobLogoImg {
-    width: 50px;
-    border-radius: 100%;
-    margin-top: -5px;
+  width: 50px;
+  border-radius: 100%;
+  margin-top: -5px;
 }
 .mobLogoCaption {
-    font-size: 12px;
-    color: #c2d82e;
-    font-weight: bold;
-    transform: rotate(270deg);
-    transition: transform 2s;
-    position: absolute;
-    left: -15px;
-    top: 20px;
+  font-size: 12px;
+  color: #c2d82e;
+  font-weight: bold;
+  transform: rotate(270deg);
+  transition: transform 2s;
+  position: absolute;
+  left: -15px;
+  top: 20px;
 }
 
-.slideup, .slidedown {
-    max-height: 0;            
-    overflow-y: hidden;
-    -webkit-transition: max-height 0.2s ease-in-out;
-    -moz-transition: max-height 0.2s ease-in-out;
-    -o-transition: max-height 0.2s ease-in-out;
-    transition: max-height 0.2s ease-in-out;
+.slideup,
+.slidedown {
+  max-height: 0;
+  overflow-y: hidden;
+  -webkit-transition: max-height 0.2s ease-in-out;
+  -moz-transition: max-height 0.2s ease-in-out;
+  -o-transition: max-height 0.2s ease-in-out;
+  transition: max-height 0.2s ease-in-out;
 }
-.slidedown {            
-    max-height: 250px;         
+.slidedown {
+  max-height: 250px;
 }
 .pt-2 {
-    line-height: 3;
+  line-height: 3;
 }
 .contactLabel {
-    color: #b5c740;
-    font-size: 16px;
+  color: #b5c740;
+  font-size: 16px;
+}
+@mixin slide {
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+}
+.hamburger {
+  position: absolute;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 23px;
+  opacity: 0.8;
+  @include slide;
+  z-index: 11;
+  &:before {
+    color: #c2d82e;
+  }
+  &.higlight {
+    background: #000;
+  }
+}
+.slideRight {
+  @include slide;
+}
+.wrapper {
+  @include slide;
+  &.toggleOn {
+    padding-left: 0;
+  }
+  &.toggleOff {
+    padding-left: 260px;
+  }
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .wrapper {
+    @include slide;
+    &.toggleOn {
+      padding-left: 0;
+    }
+    &.toggleOff {
+      padding-left: 260px;
+    }
+  }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+  .wrapper {
+    &.toggleOff {
+      padding-left: 0;
+    }
+  }
 }

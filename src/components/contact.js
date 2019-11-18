@@ -47,7 +47,6 @@ class Contact extends React.Component {
   render() {
     document.title = "Bharani | Contact";
     return (
-      <div id="wrapper">
         <section
           className="section lb"
           style={{ minHeight: window.screen.height }}
@@ -118,7 +117,6 @@ class Contact extends React.Component {
             </>
           )}
         </section>
-      </div>
     );
   }
 }
