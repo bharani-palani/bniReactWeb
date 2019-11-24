@@ -14,7 +14,6 @@ class About extends React.Component {
                 "bniGreyCoat.jpg",
                 "bniBlackFull.jpeg",
                 "20190128_200541.jpg",
-                "20190907_210031.jpg",
                 "20190309_165844.jpg",
                 "20190408_213558.jpg",
                 "20190706_164557.jpg",
