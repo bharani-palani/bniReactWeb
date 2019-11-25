@@ -45,6 +45,7 @@ $route['technologies'] = 'technologies/technologies/get_all_techs';
 $route['ides'] = 'technologies/technologies/get_all_ides';
 $route['operating-system'] = 'technologies/technologies/get_all_oss';
 $route['contacts'] = 'contacts/contacts/get_all_contacts';
+$route['projects'] = 'projects/projects/get_all_projects';
 
 
 /* End of file routes.php */
