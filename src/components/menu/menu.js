@@ -156,14 +156,14 @@ class Menu extends React.Component {
                                     }
                                 </ul>
 
-                                <div className="menu-search">
+                                {/* <div className="menu-search">
                                     <form className="form-group">
                                         <div>
                                             <input type="text" className="form-control" placeholder="What you are looking?" />
                                             <button className="btn btn-primary"><i className="fa fa-search"></i></button>
                                         </div>
                                     </form>
-                                </div>
+                                </div> */}
 
                                 <div className="menu-social">
                                     <ul className="list-inline text-center">
