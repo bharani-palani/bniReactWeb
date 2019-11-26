@@ -2,6 +2,7 @@ import React from 'react';
 import baseUrl from "../environment";
 import Loader from 'react-loader-spinner'
 import helpers from "../helpers";
+import Breadcrumbs from "./breadcrumb";
 
 class Technologies extends React.Component {
     constructor(props) {
@@ -172,6 +173,9 @@ class Technologies extends React.Component {
                     this.state.ideTechs &&
                     this.state.osTechs  ?
                     <>
+                        <div className="breadcrumbs">
+                            <Breadcrumbs />
+                        </div>
                         <div className="section-title text-center">
                             <div style={{ backgroundColor: "transparent" }} className="process-box">
                                 <div className="process-front text-center">

@@ -3,6 +3,7 @@ import {Button, Accordion, Card } from 'react-bootstrap';
 import DateTime from "./dateTime";
 import RandomNumber from "./randomNumber";
 import "./utilities.scss";
+import Breadcrumbs from "../breadcrumb";
 
 class Utilities extends React.Component {
     constructor(props) {
@@ -23,6 +24,9 @@ class Utilities extends React.Component {
     render() {
         return (
             <section className="section lb" style={{ minHeight: window.screen.height }}>
+                <div className="breadcrumbs">
+                    <Breadcrumbs />
+                </div>
                 <div className="section-title text-center">
                     <div style={{ backgroundColor: "transparent" }} className="process-box">
                         <div className="process-front text-center">

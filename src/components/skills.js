@@ -3,6 +3,7 @@ import "../../node_modules/flat-icons/ecommerce.css";
 import "../../node_modules/flat-icons/interface.css";
 import "../../node_modules/flat-icons/technology.css";
 import "../../node_modules/flat-icons/creative.css";
+import Breadcrumbs from "./breadcrumb";
 
 class Skills extends React.Component {
     constructor(props) {
@@ -64,6 +65,9 @@ class Skills extends React.Component {
     render() {
         return (
             <section className="section lb">
+                <div className="breadcrumbs">
+                <Breadcrumbs />
+                </div>
                 <div className="section-title">
                     <div style={{ backgroundColor: "transparent" }} className="process-box">
                         <div className="process-front text-center">

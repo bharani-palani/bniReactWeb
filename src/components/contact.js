@@ -2,13 +2,13 @@ import React from "react";
 import baseUrl from "../environment";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
-
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker
 } from "react-google-maps";
+import Breadcrumbs from "./breadcrumb";
 
 const MapWithAMarker = withScriptjs(
   withGoogleMap(props => (
@@ -62,6 +62,7 @@ class Contact extends React.Component {
             </div>
           ) : (
             <>
+              <div className="breadcrumbs"><Breadcrumbs /></div>
               <div className="section-title">
                 <div
                   style={{ backgroundColor: "transparent" }}

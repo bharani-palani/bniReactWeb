@@ -89,7 +89,7 @@ class Menu extends React.Component {
     }
     hamburgerStyle = () => {
         return this.state.toggleSideBar ?
-        { right : "calc(100% - 38px)" }
+        { right : "calc(100% - 46px)" }
         :
         { right : "calc(100% - 260px)" }
     }

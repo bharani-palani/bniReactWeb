@@ -1,6 +1,7 @@
 import React from 'react';
 import { PDFReader } from 'reactjs-pdf-reader';
 import { Link } from "react-router-dom";
+import Breadcrumbs from "./breadcrumb";
 
 
 class Resume extends React.Component {
@@ -18,6 +19,7 @@ class Resume extends React.Component {
         document.title = "Bharani | Resume";
         return (
             <section className="section lb">
+                <div className="breadcrumbs"><Breadcrumbs /></div>
                 <div className="section-title">
                     <div style={{ backgroundColor: "transparent" }} className="process-box">
                         <div className="process-front text-center">
