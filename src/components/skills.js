@@ -18,16 +18,18 @@ class Skills extends React.Component {
   }
   componentDidMount() {
     const that = this;
-    const apiUrl = `${baseUrl()}/skills/`;
+    const apiUrl = `${baseUrl()}/skills`;
     const axios = require("axios");
     axios
       .get(apiUrl)
       .then(response => {
         const [skillsHeading, skillsList] = helpers.sageHeaderAndList(
             response.data.response,
-            "contact_sort"
+            "skill_sort"
           );
-          that.setState({ skills: skillsList, skillsHeading });
+          that.setState({ skills: skillsList, skillsHeading },() => {
+              console.log(this.state)
+          });
         })
       .catch(error => console.log(error))
       .finally(() => 1);
@@ -63,7 +65,7 @@ class Skills extends React.Component {
                   <hr />
                   <i className="fi-tech-gamepad-1"></i>
                   <p>
-                    {this.state.skillsHeading}
+                    {this.state.skillsHeading ? this.state.skillsHeading.skill_value : null}
                   </p>
                 </div>
               </div>
