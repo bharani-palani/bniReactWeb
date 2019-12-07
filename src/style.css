@@ -294,7 +294,7 @@ MENU
 
 .primary-menu li {
     text-transform: capitalize;
-    padding: 15px 30px;
+    padding: 12px 30px;
     /* border-bottom: 1px dotted rgba(255, 255, 255, 0.15); */
     font-size: 14px;
     line-height: 1 !important;
@@ -1656,7 +1656,7 @@ mark.rotate {
 
 .process-box {
     background-color: #fff;
-    padding: 50px 20px;
+    padding: 50px 0px;
     position: relative;
     overflow: hidden;
 }

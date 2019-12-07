@@ -43,6 +43,10 @@ class Menu extends React.Component {
                     href:"/utilities",
                     label: "JS Utilities"
                 },
+                {
+                    href:"/write",
+                    label: "Write"
+                },
             ],
             socialMedias: [
                 {

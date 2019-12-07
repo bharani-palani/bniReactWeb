@@ -48,6 +48,7 @@ $route['contacts'] = 'contacts/contacts/get_all_contacts';
 $route['projects'] = 'projects/projects/get_all_projects';
 $route['skills'] = 'skills/skills/get_all_skills';
 $route['awards'] = 'awards/awards/get_all_awards';
+$route['write'] = 'write/write/post_write';
 
 
 /* End of file routes.php */
