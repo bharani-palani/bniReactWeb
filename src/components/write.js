@@ -3,41 +3,58 @@ import Breadcrumbs from "./breadcrumb";
 import baseUrl from "../environment";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
+import {Alert } from 'react-bootstrap';
 
 class Write extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.name = React.createRef();
-    this.mobile = React.createRef();
-    this.email = React.createRef();
-    this.comments = React.createRef();
+    this.state = {
+      showAlert: false,
+      name: React.createRef(),
+      mobile: React.createRef(),
+      email: React.createRef(),
+      comments: React.createRef(),
+      submitBtn: true
+    }
   }
   saveComments = () => {
-    const [name, mobile, email, comments] = [
-      this.name.current.value,
-      this.mobile.current.value,
-      this.email.current.value,
-      this.comments.current.value
-    ];
-
     const that = this;
     const apiUrl = `${baseUrl()}/write`;
     const axios = require("axios");
     var formdata = new FormData();
-    formdata.append("name",name);
-    formdata.append("mobile",mobile);
-    formdata.append("email",email);
-    formdata.append("comments",comments);
+    const {name, mobile, email, comments} = this.state
+    formdata.append("name",name.current.value);
+    formdata.append("mobile",mobile.current.value);
+    formdata.append("email",email.current.value);
+    formdata.append("comments",comments.current.value);
     axios
       .post(apiUrl, formdata)
       .then(response => {
+        that.setState({ showAlert: true },() => {
+          this.formValidation();
+        })
         console.log(response);
       })
       .catch(error => {
         console.log(error);
       });
   };
+  formValidation = () => {
+    const {name, mobile, email, comments} = this.state
+    console.log(name.current.value);
+    //   name.current.value.length && 
+    //   mobile.current.value.length && 
+    //   email.current.value.length && 
+    //   comments.current.value.length
+    // ) {
+    //   this.setState({submitBtn: false})
+    // } else {
+    //   this.setState({submitBtn: true})
+    // }
+    // debugger; 
+    // console.log(this.state.name.current.value,this.state.mobile.current.value,this.state.email.current.value,this.state.comments.current.value,)
+
+  }
   render() {
     return (
       <section
@@ -64,48 +81,54 @@ class Write extends React.Component {
             </div>
           </div>
           <div className="container-fluid">
-            <div class="alert alert-success">
-              <strong>Success!</strong> Indicates a successful or positive action.
-            </div>
+          <Alert show={this.state.showAlert} variant="success" onClose={() => this.setState({ showAlert: false})} dismissible>
+            <p>
+            <i className="fa fa-thumbs-up" /> Your comments are recieved. Will get in touch with you shortly..
+            </p>
+          </Alert>
             <div className="row mb-5">
               <div className="col-md-3">
                 <input
-                  ref={this.name}
+                  ref={this.state.name}
                   type="text"
                   placeholder="Name"
                   className="form-control"
+                  onKeyPress={this.formValidation}
                 />
               </div>
             </div>
             <div className="row mb-5">
               <div className="col-md-3">
                 <input
-                  ref={this.mobile}
+                  ref={this.state.mobile}
                   type="number"
                   placeholder="Mobile"
                   className="form-control"
+                  onKeyPress={this.formValidation}
                 />
               </div>
             </div>
             <div className="row mb-5">
               <div className="col-md-3">
               <input
-                  ref={this.email}
+                  ref={this.state.email}
                   type="email"
                   placeholder="email"
                   className="form-control"
+                  onKeyPress={this.formValidation}
                 />
               </div>
             </div>
             <div className="row mb-5">
               <div className="col-md-6">
                 <textarea
-                  ref={this.comments}
+                  ref={this.state.comments}
                   style={{ resize: "none" }}
                   rows="5"
                   cols="10"
                   className="form-control"
                   placeholder="Your comments ..."
+                  onKeyPress={this.formValidation}
                 />
               </div>
             </div>
@@ -114,6 +137,7 @@ class Write extends React.Component {
                 <button
                   onClick={() => this.saveComments()}
                   className="btn btn-bni"
+                  disabled={this.state.submitBtn}
                 >
                   Submit
                 </button>
