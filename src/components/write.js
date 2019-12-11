@@ -14,8 +14,13 @@ class Write extends React.Component {
       mobile: React.createRef(),
       email: React.createRef(),
       comments: React.createRef(),
+      lat: null,
+      long: null,
       submitBtn: true
     }
+  }
+  componentDidMount() {
+    this.getGeoLocation();
   }
   saveComments = () => {
     const that = this;
@@ -27,6 +32,8 @@ class Write extends React.Component {
     formdata.append("mobile",mobile.current.value);
     formdata.append("email",email.current.value);
     formdata.append("comments",comments.current.value);
+    formdata.append("latitude",this.state.lat);
+    formdata.append("tongitude",this.state.long);
     axios
       .post(apiUrl, formdata)
       .then(response => {
@@ -39,9 +46,15 @@ class Write extends React.Component {
         console.log(error);
       });
   };
+  getGeoLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      let lat = position.coords.latitude;
+      let long = position.coords.longitude;
+      this.setState({ lat, long });
+    });
+  }
   formValidation = () => {
-    const {name, mobile, email, comments} = this.state
-    console.log(name.current.value);
+    const {name, mobile, email, comments, lat, long} = this.state
     //   name.current.value.length && 
     //   mobile.current.value.length && 
     //   email.current.value.length && 
@@ -137,7 +150,7 @@ class Write extends React.Component {
                 <button
                   onClick={() => this.saveComments()}
                   className="btn btn-bni"
-                  disabled={this.state.submitBtn}
+                  // disabled={this.state.submitBtn}
                 >
                   Submit
                 </button>
