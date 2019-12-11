@@ -18,7 +18,7 @@ class write extends CI_Controller {
 			'comment_description'=>$this->input->post('comments'),
 			'comment_email'=>$this->input->post('email'),
 			'latitude'=>$this->input->post('latitude'),
-			'longitude'=>$this->input->post('latitude'),
+			'longitude'=>$this->input->post('longitude'),
 			'comment_ip'=>$_SERVER['REMOTE_ADDR']
 		);
 		$data["response"] = $this->write_model->post_write($post);

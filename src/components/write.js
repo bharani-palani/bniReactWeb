@@ -45,6 +45,7 @@ class Write extends React.Component {
       .catch(error => {
         console.log(error);
       });
+      debugger;
   };
   getGeoLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
