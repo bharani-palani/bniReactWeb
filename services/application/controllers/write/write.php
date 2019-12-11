@@ -17,9 +17,9 @@ class write extends CI_Controller {
 			'comment_mobile'=>$this->input->post('mobile'),
 			'comment_description'=>$this->input->post('comments'),
 			'comment_email'=>$this->input->post('email'),
+			'comment_ip'=>$_SERVER['REMOTE_ADDR'],
 			'latitude'=>$this->input->post('latitude'),
-			'longitude'=>$this->input->post('longitude'),
-			'comment_ip'=>$_SERVER['REMOTE_ADDR']
+			'longitude'=>$this->input->post('longitude')
 		);
 		$data["response"] = $this->write_model->post_write($post);
 		json($data,[],200);
