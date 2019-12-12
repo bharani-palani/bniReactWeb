@@ -33,7 +33,7 @@ class Write extends React.Component {
     formdata.append("email",email.current.value);
     formdata.append("comments",comments.current.value);
     formdata.append("latitude",this.state.lat);
-    formdata.append("tongitude",this.state.long);
+    formdata.append("longitude",this.state.long);
     axios
       .post(apiUrl, formdata)
       .then(response => {
@@ -45,29 +45,38 @@ class Write extends React.Component {
       .catch(error => {
         console.log(error);
       });
-      debugger;
   };
-  getGeoLocation = () => {
+  getGeoLocation = (callback) => {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let long = position.coords.longitude;
-      this.setState({ lat, long });
+      this.setState({ lat, long },() => {
+        if (callback && typeof(callback) === "function") {
+          callback();
+        }
+      });
     });
   }
-  formValidation = () => {
-    const {name, mobile, email, comments, lat, long} = this.state
-    //   name.current.value.length && 
-    //   mobile.current.value.length && 
-    //   email.current.value.length && 
-    //   comments.current.value.length
-    // ) {
-    //   this.setState({submitBtn: false})
-    // } else {
-    //   this.setState({submitBtn: true})
-    // }
-    // debugger; 
-    // console.log(this.state.name.current.value,this.state.mobile.current.value,this.state.email.current.value,this.state.comments.current.value,)
+  validateName = (name) => {
+    return name.current.value.length > 3 ? true : false;
+  }
+  validateMobile = (mobile) => {
+    return typeof(Number(mobile.current.value)) === "number" && mobile.current.value.length === 10 ? true : false;
+  }
+  validateEmail = (email) => { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.current.value);
+  } 
+  validateComments = (comments) => {
+    return comments.current.value.length > 10 ? true : false;
+  }
 
+  formValidation = () => {
+    this.getGeoLocation(() => {
+      const {name, mobile, email, comments} = this.state;
+      const totState = (this.validateName(name) && this.validateMobile(mobile) && this.validateEmail(email) && this.validateComments(comments));
+      this.setState({ submitBtn: !totState })
+    });
   }
   render() {
     return (
@@ -89,7 +98,7 @@ class Write extends React.Component {
                 <hr />
                 <i className="fi-creative-edit"></i>
                 <p>
-                  Write me your software related requirements or development
+                  Write me your software related solutions, requirements or development
                 </p>
               </div>
             </div>
@@ -107,7 +116,7 @@ class Write extends React.Component {
                   type="text"
                   placeholder="Name"
                   className="form-control"
-                  onKeyPress={this.formValidation}
+                  onKeyUp={this.formValidation}
                 />
               </div>
             </div>
@@ -118,7 +127,7 @@ class Write extends React.Component {
                   type="number"
                   placeholder="Mobile"
                   className="form-control"
-                  onKeyPress={this.formValidation}
+                  onKeyUp={this.formValidation}
                 />
               </div>
             </div>
@@ -129,7 +138,7 @@ class Write extends React.Component {
                   type="email"
                   placeholder="email"
                   className="form-control"
-                  onKeyPress={this.formValidation}
+                  onKeyUp={this.formValidation}
                 />
               </div>
             </div>
@@ -141,8 +150,8 @@ class Write extends React.Component {
                   rows="5"
                   cols="10"
                   className="form-control"
-                  placeholder="Your comments ..."
-                  onKeyPress={this.formValidation}
+                  placeholder="Your comments ... Min 10 characters ..."
+                  onKeyUp={this.formValidation}
                 />
               </div>
             </div>
@@ -151,7 +160,7 @@ class Write extends React.Component {
                 <button
                   onClick={() => this.saveComments()}
                   className="btn btn-bni"
-                  // disabled={this.state.submitBtn}
+                  disabled={this.state.submitBtn}
                 >
                   Submit
                 </button>
