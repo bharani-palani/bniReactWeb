@@ -38,6 +38,10 @@ class Write extends React.Component {
       .post(apiUrl, formdata)
       .then(response => {
         that.setState({ showAlert: true },() => {
+          name.current.value = "";
+          mobile.current.value = "";
+          email.current.value = "";
+          comments.current.value = "";
           this.formValidation();
         })
         console.log(response);
