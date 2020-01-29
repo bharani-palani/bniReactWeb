@@ -120,7 +120,7 @@ class Write extends React.Component {
                 Will get in touch with you shortly..
               </p>
             </Alert>
-            <form id="writeForm">
+            <form id="writeForm" onSubmit={(e) => e.preventDefault()}>
               <div className="row mb-5">
                 <div className="col-md-3">
                   <input
@@ -176,7 +176,6 @@ class Write extends React.Component {
                 </div>
               </div>
             </form>
-            <div>{JSON.stringify([name, mobile, email, comments])}</div>
           </div>
         </>
       </section>
