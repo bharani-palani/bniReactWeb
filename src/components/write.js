@@ -55,23 +55,16 @@ class Write extends React.Component {
         console.log(error);
       });
   };
-  dummy = () => {
-    
-  }
   getGeoLocation = () => {
     const that = this;
     if (navigator.geolocation) {
-      const location_timeout = setTimeout(this.dummy(), 10000);
       navigator.geolocation.getCurrentPosition(
         position => {
           let lat = position.coords.latitude;
           let long = position.coords.longitude;
-          that.setState({ lat, long },() => {
-            console.log(that.state);
-          });
+          that.setState({ lat, long });
         },
         e => {
-          clearTimeout(location_timeout);
           that.setState({ geoErrorHandle: e });
         });
     } else {
@@ -123,14 +116,12 @@ class Write extends React.Component {
                 <hr />
                 <i className="fi-creative-edit"></i>
                 <p>
-                  Write me your software related solutions, requirements or
-                  development
+                  Write me your software related solutions, requirements or development
                 </p>
-                {Object.keys(geoErrorHandle).length === 0 &&
-                geoErrorHandle.constructor === Object ? (
-                  <div>{JSON.stringify([lat, long])}</div>
+                {lat !== 0 && long !== 0 && Object.keys(geoErrorHandle).length === 0 ? (
+                  null
                 ) : (
-                  <div>{JSON.stringify(geoErrorHandle)}</div>
+                  <div>Browser location not supported or please establish a safe https:// connection</div>
                 )}
               </div>
             </div>
