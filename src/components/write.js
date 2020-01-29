@@ -55,27 +55,18 @@ class Write extends React.Component {
         console.log(error);
       });
   };
-  getGeoLocation = callback => {
+  getGeoLocation = () => {
     const that = this;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         position => {
           let lat = position.coords.latitude;
           let long = position.coords.longitude;
-          that.setState({ lat, long }, () => {
-            if (callback && typeof callback === "function") {
-              callback();
-            }
-          });
+          that.setState({ lat, long });
         },
         e => {
           that.setState({ geoErrorHandle: e });
-        },
-        {
-          maximumAge: Infinity,
-          timeout: 5000
-        }
-      );
+        });
     } else {
       that.setState({ geoErrorHandle: {message: "Geolocation not supported!"} });
     }
