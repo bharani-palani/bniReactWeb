@@ -66,7 +66,9 @@ class Write extends React.Component {
         position => {
           let lat = position.coords.latitude;
           let long = position.coords.longitude;
-          that.setState({ lat, long });
+          that.setState({ lat, long },() => {
+            console.log(that.state);
+          });
         },
         e => {
           clearTimeout(location_timeout);
