@@ -56,24 +56,29 @@ class Write extends React.Component {
       });
   };
   getGeoLocation = callback => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        let lat = position.coords.latitude;
-        let long = position.coords.longitude;
-        this.setState({ lat, long }, () => {
-          if (callback && typeof callback === "function") {
-            callback();
-          }
-        });
-      },
-      e => {
-        this.setState({ geoErrorHandle: e });
-      },
-      {
-        maximumAge: Infinity,
-        timeout: 5000
-      }
-    );
+    const that = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          let lat = position.coords.latitude;
+          let long = position.coords.longitude;
+          that.setState({ lat, long }, () => {
+            if (callback && typeof callback === "function") {
+              callback();
+            }
+          });
+        },
+        e => {
+          that.setState({ geoErrorHandle: e });
+        },
+        {
+          maximumAge: Infinity,
+          timeout: 5000
+        }
+      );
+    } else {
+      that.setState({ geoErrorHandle: {message: "Geolocation not supported!"} });
+    }
   };
   validateName = name => {
     name.length > 3 ? this.setState({ name }) : this.setState({ name: "" });
