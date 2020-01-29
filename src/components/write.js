@@ -55,9 +55,13 @@ class Write extends React.Component {
         console.log(error);
       });
   };
+  dummy = () => {
+    
+  }
   getGeoLocation = () => {
     const that = this;
     if (navigator.geolocation) {
+      const location_timeout = setTimeout(this.dummy(), 10000);
       navigator.geolocation.getCurrentPosition(
         position => {
           let lat = position.coords.latitude;
@@ -65,6 +69,7 @@ class Write extends React.Component {
           that.setState({ lat, long });
         },
         e => {
+          clearTimeout(location_timeout);
           that.setState({ geoErrorHandle: e });
         });
     } else {
