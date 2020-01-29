@@ -14,8 +14,8 @@ class Write extends React.Component {
       mobile: React.createRef(),
       email: React.createRef(),
       comments: React.createRef(),
-      lat: null,
-      long: null,
+      lat: 0,
+      long: 0,
       submitBtn: true
     }
   }
@@ -78,16 +78,17 @@ class Write extends React.Component {
   formValidation = () => {
     this.getGeoLocation(() => {
       const {name, mobile, email, comments} = this.state;
-      const totState = (
+      const totState = 
         this.validateName(name) && 
         this.validateMobile(mobile) && 
         this.validateEmail(email) && 
-        this.validateComments(comments)
-      );
+        this.validateComments(comments);
+      
       this.setState({ submitBtn: !totState })
     });
   }
   render() {
+    const {submitBtn, lat, long} = this.state;
     return (
       <section
         className="section lb"
@@ -160,7 +161,7 @@ class Write extends React.Component {
                   cols="10"
                   className="form-control"
                   placeholder="Your comments ... Min 10 characters ..."
-                  onKeyUp={this.formValidation}
+                  onChange={(e) => this.formValidation(e.target.value)}
                 />
               </div>
             </div>
@@ -175,6 +176,7 @@ class Write extends React.Component {
                 </button>
               </div>
             </div>
+            <div>{JSON.stringify([submitBtn,lat, long])}</div>
           </div>
         </>
       </section>
