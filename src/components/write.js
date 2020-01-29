@@ -62,23 +62,28 @@ class Write extends React.Component {
     });
   }
   validateName = (name) => {
-    return name.current.value.length > 3 ? true : false;
+    return name.current.value.length > 3;
   }
   validateMobile = (mobile) => {
-    return typeof(Number(mobile.current.value)) === "number" && mobile.current.value.length === 10 ? true : false;
+    return typeof(Number(mobile.current.value)) === "number" && mobile.current.value.length === 10;
   }
   validateEmail = (email) => { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email.current.value);
   } 
   validateComments = (comments) => {
-    return comments.current.value.length > 10 ? true : false;
+    return comments.current.value.length > 10;
   }
 
   formValidation = () => {
     this.getGeoLocation(() => {
       const {name, mobile, email, comments} = this.state;
-      const totState = (this.validateName(name) && this.validateMobile(mobile) && this.validateEmail(email) && this.validateComments(comments));
+      const totState = (
+        this.validateName(name) && 
+        this.validateMobile(mobile) && 
+        this.validateEmail(email) && 
+        this.validateComments(comments)
+      );
       this.setState({ submitBtn: !totState })
     });
   }
