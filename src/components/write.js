@@ -15,7 +15,8 @@ class Write extends React.Component {
       email: "",
       comments: "",
       lat: 0,
-      long: 0
+      long: 0,
+      geoErrorHandle: {}
     };
   }
   componentDidMount() {
@@ -56,14 +57,21 @@ class Write extends React.Component {
   };
   getGeoLocation = callback => {
     navigator.geolocation.getCurrentPosition(position => {
-      let lat = position.coords.latitude;
-      let long = position.coords.longitude;
-      this.setState({ lat, long }, () => {
-        if (callback && typeof callback === "function") {
-          callback();
-        }
-      });
-    });
+        let lat = position.coords.latitude;
+        let long = position.coords.longitude;
+        this.setState({ lat, long }, () => {
+          if (callback && typeof callback === "function") {
+            callback();
+          }
+        });
+      },
+      e => {
+        this.setState({geoErrorHandle: e});
+      },
+      {
+        enableHighAccuracy: true
+      }
+    );
   };
   validateName = name => {
     name.length > 3 ? this.setState({ name }) : this.setState({ name: "" });
@@ -82,7 +90,7 @@ class Write extends React.Component {
   };
 
   render() {
-    const { name, mobile, email, comments } = this.state;
+    const { name, mobile, email, comments, lat, long, geoErrorHandle } = this.state;
     return (
       <section
         className="section lb"
@@ -105,6 +113,10 @@ class Write extends React.Component {
                   Write me your software related solutions, requirements or
                   development
                 </p>
+                {
+                  Object.keys(geoErrorHandle).length === 0 && geoErrorHandle.constructor === Object ? 
+                  <div>{JSON.stringify([lat, long])}</div> : <div>{JSON.stringify(geoErrorHandle)}</div>
+                }
               </div>
             </div>
           </div>
@@ -120,9 +132,9 @@ class Write extends React.Component {
                 Will get in touch with you shortly..
               </p>
             </Alert>
-            <form id="writeForm" onSubmit={(e) => e.preventDefault()}>
+            <form id="writeForm" onSubmit={e => e.preventDefault()}>
               <div className="row mb-5">
-                <div className="col-md-3">
+                <div className="col-md-3 pl-0">
                   <input
                     type="text"
                     placeholder="Name"
@@ -132,7 +144,7 @@ class Write extends React.Component {
                 </div>
               </div>
               <div className="row mb-5">
-                <div className="col-md-3">
+                <div className="col-md-3 pl-0">
                   <input
                     type="number"
                     placeholder="Mobile"
@@ -142,7 +154,7 @@ class Write extends React.Component {
                 </div>
               </div>
               <div className="row mb-5">
-                <div className="col-md-3">
+                <div className="col-md-3 pl-0">
                   <input
                     type="email"
                     placeholder="email"
@@ -152,7 +164,7 @@ class Write extends React.Component {
                 </div>
               </div>
               <div className="row mb-5">
-                <div className="col-md-6">
+                <div className="col-md-6 pl-0">
                   <textarea
                     ref={this.state.comments}
                     style={{ resize: "none" }}
@@ -165,7 +177,7 @@ class Write extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-6 pl-0">
                   <button
                     onClick={() => this.saveComments()}
                     className="btn btn-bni"
