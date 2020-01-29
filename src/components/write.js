@@ -121,7 +121,7 @@ class Write extends React.Component {
                 {lat !== 0 && long !== 0 && Object.keys(geoErrorHandle).length === 0 ? (
                   null
                 ) : (
-                  <div>Browser location not supported or please establish a safe https:// connection</div>
+                  <div>Please enable browser location or establish a safe https:// connection</div>
                 )}
               </div>
             </div>
