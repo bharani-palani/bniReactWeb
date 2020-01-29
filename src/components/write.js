@@ -56,7 +56,8 @@ class Write extends React.Component {
       });
   };
   getGeoLocation = callback => {
-    navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
         let lat = position.coords.latitude;
         let long = position.coords.longitude;
         this.setState({ lat, long }, () => {
@@ -66,10 +67,11 @@ class Write extends React.Component {
         });
       },
       e => {
-        this.setState({geoErrorHandle: e});
+        this.setState({ geoErrorHandle: e });
       },
       {
-        enableHighAccuracy: true
+        maximumAge: Infinity,
+        timeout: 5000
       }
     );
   };
@@ -90,7 +92,15 @@ class Write extends React.Component {
   };
 
   render() {
-    const { name, mobile, email, comments, lat, long, geoErrorHandle } = this.state;
+    const {
+      name,
+      mobile,
+      email,
+      comments,
+      lat,
+      long,
+      geoErrorHandle
+    } = this.state;
     return (
       <section
         className="section lb"
@@ -113,10 +123,12 @@ class Write extends React.Component {
                   Write me your software related solutions, requirements or
                   development
                 </p>
-                {
-                  Object.keys(geoErrorHandle).length === 0 && geoErrorHandle.constructor === Object ? 
-                  <div>{JSON.stringify([lat, long])}</div> : <div>{JSON.stringify(geoErrorHandle)}</div>
-                }
+                {Object.keys(geoErrorHandle).length === 0 &&
+                geoErrorHandle.constructor === Object ? (
+                  <div>{JSON.stringify([lat, long])}</div>
+                ) : (
+                  <div>{JSON.stringify(geoErrorHandle)}</div>
+                )}
               </div>
             </div>
           </div>
