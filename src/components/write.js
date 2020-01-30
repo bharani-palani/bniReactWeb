@@ -3,20 +3,22 @@ import Breadcrumbs from "./breadcrumb";
 import baseUrl from "../environment";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
-import { Alert } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Write extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAlert: false,
       name: "",
       mobile: "",
       email: "",
       comments: "",
       lat: 0,
       long: 0,
-      geoErrorHandle: {}
+      geoErrorHandle: {},
+      showLocationError: false,
+      showToaster: false
     };
   }
   componentDidMount() {
@@ -39,16 +41,16 @@ class Write extends React.Component {
       .then(response => {
         that.setState(
           {
-            showAlert: true,
             name: "",
             mobile: "",
             email: "",
-            comments: ""
+            comments: "",
           },
           () => {
             document.getElementById("writeForm").reset();
           }
         );
+        this.notify()
         // console.log(response);
       })
       .catch(error => {
@@ -62,13 +64,16 @@ class Write extends React.Component {
         position => {
           let lat = position.coords.latitude;
           let long = position.coords.longitude;
-          that.setState({ lat, long });
+          that.setState({ lat, long, showLocationError: false });
         },
         e => {
-          that.setState({ geoErrorHandle: e });
-        });
+          that.setState({ showLocationError: true });
+        }
+      );
     } else {
-      that.setState({ geoErrorHandle: {message: "Geolocation not supported!"} });
+      that.setState({
+        geoErrorHandle: { message: "Geolocation not supported!" }
+      });
     }
   };
   validateName = name => {
@@ -86,22 +91,27 @@ class Write extends React.Component {
     const bool = comments.length > 9;
     bool ? this.setState({ comments }) : this.setState({ comments: "" });
   };
-
+  notify = () =>
+    toast.success(
+    "👍 Your comments are recieved. Will get in touch with you shortly..",{
+      onOpen: () => this.setState({showToaster: true}),
+      onClose: () => this.setState({showToaster: false}),
+  });
   render() {
     const {
       name,
       mobile,
       email,
       comments,
-      lat,
-      long,
-      geoErrorHandle
+      showLocationError,
+      showToaster
     } = this.state;
     return (
       <section
         className="section lb"
-        style={{ minHeight: window.screen.height }}
+        style={{ minHeight: window.screen.height, opacity: showToaster ? 1 : 0.8 }}
       >
+        <ToastContainer className="bniToaster" /> 
         <>
           <div className="breadcrumbs">
             <Breadcrumbs />
@@ -116,28 +126,20 @@ class Write extends React.Component {
                 <hr />
                 <i className="fi-creative-edit"></i>
                 <p>
-                  Write me your software related solutions, requirements or development
+                  Write me your software related solutions, requirements or
+                  development
                 </p>
-                {lat !== 0 && long !== 0 && Object.keys(geoErrorHandle).length === 0 ? (
-                  null
-                ) : (
-                  <div>Please enable browser location or establish a safe https:// connection</div>
-                )}
+                {showLocationError ? (
+                  <div>
+                    Please enable browser location or establish a safe{" "}
+                    <a href="https://bharani.tech">https://bharani.tech</a>{" "}
+                    connection
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
           <div className="container-fluid">
-            <Alert
-              show={this.state.showAlert}
-              variant="success"
-              onClose={() => this.setState({ showAlert: false })}
-              dismissible
-            >
-              <p>
-                <i className="fa fa-thumbs-up" /> Your comments are recieved.
-                Will get in touch with you shortly..
-              </p>
-            </Alert>
             <form id="writeForm" onSubmit={e => e.preventDefault()}>
               <div className="row mb-5">
                 <div className="col-md-3 pl-0">

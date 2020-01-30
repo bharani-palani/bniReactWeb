@@ -82,13 +82,13 @@ class Contact extends React.Component {
               </div>
               <div className="row container-fluid">
                 <div className="col-lg-5">
-                    <p className="contactLabel m-0"><big>Ping me <i className="fa fa-phone" /></big></p>
+                  <p className="contactLabel m-0"><big>Ping me <i className="fa fa-phone" /></big></p>
                   {this.state.contacts.length > 0
                     ? this.state.contacts.map((c, i) => (
                         <div key={i}>
                           <div
                             style={{ height: "20px" }}
-                            className="col-lg-4 col-md-6"
+                            className="col-lg-4 col-md-6 pl-0"
                           >
                             <span className="contactLabel">
                               {c.contact_label}

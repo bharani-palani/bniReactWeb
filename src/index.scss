@@ -85,12 +85,8 @@ code {
   }
 
  }
- .alert.alert-success {
-  color: #fff;
-  background-color: #c2d82e;
-  border-color: #252625;
-  opacity: 1;
-  .h4 {
-    color: #fff;
-  }
-}
+ .bniToaster {
+   .Toastify__toast--success {
+    background: #a9c106;
+   }
+ }
