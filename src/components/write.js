@@ -1,8 +1,6 @@
 import React from "react";
 import Breadcrumbs from "./breadcrumb";
 import baseUrl from "../environment";
-import Loader from "react-loader-spinner";
-import helpers from "../helpers";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
