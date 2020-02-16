@@ -1,6 +1,8 @@
 import React from "react";
 import DateTimePicker from "react-datetime-picker";
 import PrettyCode from "./prettyCode";
+import { onDateConvert } from "./stringFunction";
+
 import "code-prettify/styles/sunburst.css";
 
 class DateTime extends React.Component {
@@ -153,7 +155,7 @@ class DateTime extends React.Component {
           </div>
         </div>
         <div className="col-lg-12 section-title">
-          <PrettyCode code={this.onDateConvert} />
+          <PrettyCode code={onDateConvert} />
         </div>
       </div>
     );

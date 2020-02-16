@@ -1,5 +1,6 @@
 import React from 'react';
 import PrettyCode from "./prettyCode";
+import { getRandomNumber, getUUID } from "./stringFunction";
 
 class RandomNumber extends React.Component {
     constructor(props) {
@@ -49,8 +50,8 @@ class RandomNumber extends React.Component {
                     <textarea placeholder="Random number" value={this.state.randomNumber} readOnly style={{ resize: "none" }} rows="6" className="form-control" />
                 </div>
                 <div className="col-lg-12 section-title">
-                    <PrettyCode code={this.getRandomNumber} />
-                    <PrettyCode code={this.getUUID} />
+                    <PrettyCode code={getRandomNumber} />
+                    <PrettyCode code={getUUID} />
                 </div>
             </div>
         );
