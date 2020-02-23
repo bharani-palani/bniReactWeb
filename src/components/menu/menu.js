@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
+import BackendUpdate from "./backendUpdate";
 import "./menu.scss";
 
 class Menu extends React.Component {
@@ -10,6 +11,7 @@ class Menu extends React.Component {
         this.state = {
             navBarExpanded: false,
             toggleSideBar: false,
+            openModal: true,
             menus: [
                 {
                     href:"/about",
@@ -72,6 +74,13 @@ class Menu extends React.Component {
             ]
         }
     }
+    componentDidMount() {
+        window.addEventListener("keydown", event => {
+            if(event.ctrlKey && event.keyCode === 66) {
+                this.setState({ openModal: true })
+            }
+        });
+    }
     onNavBarToggle = () => {
         this.setState({ navBarExpanded: !this.state.navBarExpanded });
     }
@@ -101,6 +110,14 @@ class Menu extends React.Component {
         return (
             <Router>
                 <div className="menu-wrapper">
+                    {this.state.openModal && (<BackendUpdate 
+                        show={this.state.openModal} 
+                        onHide={(bool) => this.setState({ openModal: bool })} 
+                        size="sm"
+                        animation={false}
+                        style={{ zIndex: 9999 }}
+                        />
+                    )}
                     {
                         !this.state.toggleSideBar ?
                         <video className="videoTag" autoPlay loop muted>

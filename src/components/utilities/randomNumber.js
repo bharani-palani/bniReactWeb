@@ -50,8 +50,8 @@ class RandomNumber extends React.Component {
                     <textarea placeholder="Random number" value={this.state.randomNumber} readOnly style={{ resize: "none" }} rows="6" className="form-control" />
                 </div>
                 <div className="col-lg-12 section-title">
-                    <PrettyCode code={getRandomNumber} />
-                    <PrettyCode code={getUUID} />
+                    {this.state.choice === "range" && <PrettyCode code={getRandomNumber} />}
+                    {this.state.choice === "uuid" && <PrettyCode code={getUUID} /> }
                 </div>
             </div>
         );
