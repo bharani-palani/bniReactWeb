@@ -11,7 +11,7 @@ class Menu extends React.Component {
         this.state = {
             navBarExpanded: false,
             toggleSideBar: false,
-            openModal: true,
+            openModal: false,
             menus: [
                 {
                     href:"/about",
