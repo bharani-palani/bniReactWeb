@@ -82,7 +82,8 @@ class Menu extends React.Component {
         });
         const nav = document.getElementsByTagName("nav")[0];
         nav.addEventListener("touchmove", event => {
-            if(event.touches[0].clientX > 200 && event.touches[0].clientX < 210) {
+            const halfWidth = event.path[0].clientWidth / 2;
+            if(event.touches[0].clientX > halfWidth && event.touches[0].clientX < halfWidth + 10) {
                 this.setState({ openModal: true })
             }
         })
