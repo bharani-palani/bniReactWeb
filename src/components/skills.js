@@ -27,9 +27,7 @@ class Skills extends React.Component {
             response.data.response,
             "skill_sort"
           );
-          that.setState({ skills: skillsList, skillsHeading },() => {
-              console.log(this.state)
-          });
+          that.setState({ skills: skillsList, skillsHeading });
         })
       .catch(error => console.log(error))
       .finally(() => 1);

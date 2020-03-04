@@ -80,6 +80,12 @@ class Menu extends React.Component {
                 this.setState({ openModal: true })
             }
         });
+        const nav = document.getElementsByTagName("nav")[0];
+        nav.addEventListener("touchmove", event => {
+            if(event.touches[0].clientX > 200 && event.touches[0].clientX < 210) {
+                this.setState({ openModal: true })
+            }
+        })
     }
     onNavBarToggle = () => {
         this.setState({ navBarExpanded: !this.state.navBarExpanded });

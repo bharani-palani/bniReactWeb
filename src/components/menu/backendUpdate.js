@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Modal, Accordion, Card, Button } from "react-bootstrap";
 import LoginForm from "./loginForm";
+import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
   const [auth, setAuth] = useState(false);
@@ -31,16 +32,21 @@ function BackendUpdate(props) {
     },
   ]);
 
+  const onValidate = (bool) => {
+    setAuth(bool);
+  }
   return (
     <Modal
       {...props}
+      className="backendUpdate"
+      size={auth ? "xl" : "sm"}
     >
       <Modal.Header closeButton>
         <Modal.Title>Backend Configure</Modal.Title>
       </Modal.Header>
       <Modal.Body>
           {
-            !auth ? <LoginForm /> : (
+            !auth ? <LoginForm validate={bool => onValidate(bool)} /> : (
             <Accordion bsPrefix="util" defaultActiveKey="0">
                 {tabs.map((t,i) => 
                     <Card key={i}>

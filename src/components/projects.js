@@ -23,9 +23,7 @@ class Projects extends React.Component {
           response.data.response,
           "project_sort"
         );
-        that.setState({ projects: projectsList, projectsHeading }, () => {
-          console.log(this.state);
-        });
+        that.setState({ projects: projectsList, projectsHeading });
       })
       .catch(error => console.log(error))
       .finally(() => 1);

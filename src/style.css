@@ -385,6 +385,7 @@ MENU
 .menu-social ul {
     margin: 0;
     padding: 0;
+    background: #000;
 }
 
 .menu-social ul li {

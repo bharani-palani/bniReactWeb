@@ -1,0 +1,29 @@
+.backendUpdate {
+  .modal-title {
+    color: #fff;
+    font-size: 1.5rem !important;
+  }
+  .modal-xl {
+    width: 95%;
+    margin: 10px auto;
+  }
+  .modal-body {
+    padding: 0;
+    .head {
+        font-weight: 600;
+        color: #c2da06 !important;
+        padding-left: 20px;
+        font-size: 2rem;
+    }
+    i {
+      &:before {
+        font-size: 5rem;
+        color: #c2da06;
+      }
+    }
+    .btn {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+  }
+}
