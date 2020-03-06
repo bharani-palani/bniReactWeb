@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Accordion, Card } from 'react-bootstrap';
 import DateTime from "./dateTime";
 import RandomNumber from "./randomNumber";
+import ArrayDiff from "./arrayDiff";
 import "./utilities.scss";
 import Breadcrumbs from "../breadcrumb";
 
@@ -17,6 +18,10 @@ class Utilities extends React.Component {
                 {
                     heading: "Random Number",
                     component: <RandomNumber />
+                },
+                {
+                    heading: "Array Difference",
+                    component: <ArrayDiff />
                 },
             ]
         }
