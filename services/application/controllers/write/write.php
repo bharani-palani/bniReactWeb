@@ -22,6 +22,6 @@ class write extends CI_Controller {
 			'longitude'=>$this->input->post('longitude')
 		);
 		$data["response"] = $this->write_model->post_write($post);
-		json($data,[],200);
+		json($data,array(),200);
 	}
 }

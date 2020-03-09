@@ -13,6 +13,6 @@ class skills extends CI_Controller {
 	{
 		$this->load->model('skills_model');
 		$data["response"] = $this->skills_model->get_all_skills();
-		json($data,[],200);
+		json($data,array(),200);
 	}
 }

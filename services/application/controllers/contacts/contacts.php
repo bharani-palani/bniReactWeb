@@ -13,6 +13,6 @@ class contacts extends CI_Controller {
 	{
 		$this->load->model('contact_model');
 		$data["response"] = $this->contact_model->get_all_contacts();
-		json($data,[],200);
+		json($data,array(),200);
 	}
 }

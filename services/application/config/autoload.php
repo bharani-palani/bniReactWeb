@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('response','url','html','form','file');
+$autoload['helper'] = array('response','url','html','form','file','jwt', "authorization", "date");
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('response','url','html','form','file');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('jwt');
 
 
 /*

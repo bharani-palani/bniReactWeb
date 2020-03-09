@@ -13,6 +13,6 @@ class projects extends CI_Controller {
 	{
 		$this->load->model('projects_model');
 		$data["response"] = $this->projects_model->get_all_projects();
-		json($data,[],200);
+		json($data,array(),200);
 	}
 }

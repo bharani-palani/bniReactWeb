@@ -47,7 +47,7 @@ if (!function_exists('response_code')) {
                     $text = 'Unknown http status code '.$code;
                 break;
             }
-            return ["code" => $code, "text" => $text];
+            return array("code" => $code, "text" => $text);
         }
     }
 }
@@ -72,13 +72,14 @@ if(!function_exists("info")){
 }
 
 if(!function_exists("json")){
-    function json($response, $passed = [], $statusCode) {
+    function json($response, $passed = array(), $statusCode) {
 		$ci =& get_instance();
 		$ci->output->set_content_type('application/json');
         $ci->output->set_status_header($statusCode);
         $ci->output->set_header("Access-Control-Allow-Origin: *");
+        $ci->output->set_header("Access-Control-Allow-Headers: Authorization");
         $output = array_merge(info($passed, $statusCode), $response);
-		$ci->output->set_output(json_encode($output, JSON_PRETTY_PRINT));
+		$ci->output->set_output(json_encode($output));
     }
 }
-?>
+

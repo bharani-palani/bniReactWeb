@@ -13,18 +13,18 @@ class technologies extends CI_Controller {
 	{
 		$this->load->model('technologies_model');
 		$data["response"] = $this->technologies_model->get_all_techs();
-		json($data,[],200);
+		json($data,array(),200);
 	}
 	public function get_all_ides()
 	{
 		$this->load->model('technologies_model');
 		$data["response"] = $this->technologies_model->get_all_ides();
-		json($data,[],200);
+		json($data,array(),200);
 	}
 	public function get_all_oss()
 	{
 		$this->load->model('technologies_model');
 		$data["response"] = $this->technologies_model->get_all_oss();
-		json($data,[],200);
+		json($data,array(),200);
 	}
 }
