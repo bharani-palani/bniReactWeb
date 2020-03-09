@@ -5,7 +5,7 @@ import "../../node_modules/flat-icons/technology.css";
 import "../../node_modules/flat-icons/creative.css";
 import Breadcrumbs from "./breadcrumb";
 import Loader from "react-loader-spinner";
-import baseUrl from "../environment";
+import apiInstance from "../apiServices";
 import helpers from "../helpers";
 
 class Skills extends React.Component {
@@ -18,10 +18,8 @@ class Skills extends React.Component {
   }
   componentDidMount() {
     const that = this;
-    const apiUrl = `${baseUrl()}/skills`;
-    const axios = require("axios");
-    axios
-      .get(apiUrl)
+    apiInstance
+      .get("/skills")
       .then(response => {
         const [skillsHeading, skillsList] = helpers.sageHeaderAndList(
             response.data.response,

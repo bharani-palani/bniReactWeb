@@ -1,6 +1,6 @@
 import React from "react";
 import Breadcrumbs from "./breadcrumb";
-import baseUrl from "../environment";
+import apiInstance from "../apiServices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,8 +25,6 @@ class Write extends React.Component {
   saveComments = () => {
     const { name, mobile, email, comments, lat, long } = this.state;
     const that = this;
-    const apiUrl = `${baseUrl()}/write`;
-    const axios = require("axios");
     var formdata = new FormData();
     formdata.append("name", name);
     formdata.append("mobile", mobile);
@@ -34,8 +32,8 @@ class Write extends React.Component {
     formdata.append("comments", comments);
     formdata.append("latitude", lat);
     formdata.append("longitude", long);
-    axios
-      .post(apiUrl, formdata)
+    apiInstance
+      .post("/write", formdata)
       .then(response => {
         that.setState(
           {

@@ -1,5 +1,5 @@
 import React from 'react';
-import baseUrl from "../environment";
+import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
 import Breadcrumbs from "./breadcrumb";
@@ -29,10 +29,8 @@ class Awards extends React.Component {
     }
     componentDidMount() {
         const that = this;
-        const apiUrl = `${baseUrl()}/awards`;
-        const axios = require("axios");
-        axios
-          .get(apiUrl)
+        apiInstance
+          .get("/awards")
           .then(response => {
             const [awardsHeading, awardsList] = helpers.sageHeaderAndList(
               response.data.response,

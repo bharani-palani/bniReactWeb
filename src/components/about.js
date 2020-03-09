@@ -1,5 +1,5 @@
 import React from 'react';
-import baseUrl from "../environment";
+import apiInstance from "../apiServices";
 import Loader from 'react-loader-spinner'
 import helpers from "../helpers";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -44,9 +44,7 @@ class About extends React.Component {
     }
     componentDidMount() {
         const that = this;
-        const apiUrl = `${baseUrl()}/`;
-        const axios = require('axios');
-        axios.get(apiUrl).then(response => {
+        apiInstance.get("/").then(response => {
             that.setState({about: response.data.response});
         })
         .catch(error => console.log(error))

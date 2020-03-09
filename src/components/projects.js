@@ -1,5 +1,5 @@
 import React from "react";
-import baseUrl from "../environment";
+import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
 import Breadcrumbs from "./breadcrumb";
@@ -14,10 +14,7 @@ class Projects extends React.Component {
   }
   componentDidMount() {
     const that = this;
-    const apiUrl = `${baseUrl()}/projects`;
-    const axios = require("axios");
-    axios
-      .get(apiUrl)
+    apiInstance.get("/projects")
       .then(response => {
         const [projectsHeading, projectsList] = helpers.sageHeaderAndList(
           response.data.response,

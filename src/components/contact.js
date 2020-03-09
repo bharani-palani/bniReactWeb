@@ -1,5 +1,5 @@
 import React from "react";
-import baseUrl from "../environment";
+import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
 import {
@@ -30,10 +30,8 @@ class Contact extends React.Component {
   }
   componentDidMount() {
     const that = this;
-    const apiUrl = `${baseUrl()}/contacts`;
-    const axios = require("axios");
-    axios
-      .get(apiUrl)
+    apiInstance
+      .get("/contacts")
       .then(response => {
         const [contactHeading, contactList] = helpers.sageHeaderAndList(
           response.data.response,
