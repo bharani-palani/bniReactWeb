@@ -107,11 +107,11 @@ if(!function_exists("json")){
                 $ci->output->set_output(json_encode($output));
             } else {
                 $ci->output->set_status_header(401);
-                $ci->output->set_output(json_encode(array("error" => "Illegal token.", "h" => $headers, "req" => $_SERVER)));
+                $ci->output->set_output(json_encode(array("error" => "Illegal token.")));
             }
         } else {
             $ci->output->set_status_header(400);
-            $ci->output->set_output(json_encode(array("error" => "Illegal domain request.", "h" => $headers, "req" => $_SERVER)));
+            $ci->output->set_output(json_encode(array("error" => "Illegal domain request.")));
         }
     }
 }
