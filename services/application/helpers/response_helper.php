@@ -79,7 +79,7 @@ if(!function_exists("json")){
 		$tokenData['id'] = 1;
 		$authHash = AUTHORIZATION::generateToken($tokenData);
 
-        $authKey = "BNI-Authorization";
+        $authKey = "Authorization";
         $ci =& get_instance();
         $ci->output->set_content_type('application/json');
         $ci->output->set_header("Access-Control-Allow-Headers: ".$authKey);
