@@ -97,8 +97,7 @@ class auth extends CI_Controller {
         }
         return false;
     }
-    public function validateReferer() {
-        $headers = apache_request_headers();
+    public function validateReferer($headers) {
         if(array_key_exists('Origin', $headers) || array_key_exists('Referer', $headers)) {
             return true;
         }
@@ -111,8 +110,10 @@ class auth extends CI_Controller {
         $ci =& get_instance();
         $ci->output->set_content_type('application/json');
         $ci->output->set_header("Access-Control-Allow-Headers: ".$authKey);
+        $ci->output->set_header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
         $headers = apache_request_headers();
-        if($this->validateReferer()) {
+
+        if($this->validateReferer($headers)) {
             $ci->output->set_header("Access-Control-Allow-Origin: ".$this->allowed_http_origins($headers));
             if($this->validateHeaderToken($headers, $authKey, $authHash)) {
                 $ci->output->set_status_header($statusCode);
