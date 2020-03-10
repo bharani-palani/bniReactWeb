@@ -84,8 +84,8 @@ if(!function_exists("json")){
         $ci->output->set_content_type('application/json');
         $ci->output->set_header("Access-Control-Allow-Headers: ".$authKey);
         $headers = apache_request_headers();
-        if(array_key_exists('Origin', $headers)) {
-            $http_origin = $headers['Origin'];
+        if(array_key_exists('Origin', $headers) || array_key_exists('Referer', $headers)) {
+            $http_origin = array_key_exists('Origin', $headers) ? $headers['Origin'] : $headers['Referer'];
             $allowed_http_origins   = array(
                 "http://localhost:3000"   ,
                 "https://bharani.tech"  ,
@@ -107,11 +107,11 @@ if(!function_exists("json")){
                 $ci->output->set_output(json_encode($output));
             } else {
                 $ci->output->set_status_header(401);
-                $ci->output->set_output(json_encode(array("error" => "Illegal token.", "exists" => $headers)));
+                $ci->output->set_output(json_encode(array("error" => "Illegal token.", "h" => $headers, "req" => $_SERVER)));
             }
         } else {
             $ci->output->set_status_header(400);
-            $ci->output->set_output(json_encode(array("error" => "Illegal domain request.")));
+            $ci->output->set_output(json_encode(array("error" => "Illegal domain request.", "h" => $headers, "req" => $_SERVER)));
         }
     }
 }
