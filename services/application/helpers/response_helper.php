@@ -72,14 +72,47 @@ if(!function_exists("info")){
 }
 
 if(!function_exists("json")){
+    // change this to seperate class
     function json($response, $passed = array(), $statusCode) {
-		$ci =& get_instance();
-		$ci->output->set_content_type('application/json');
-        $ci->output->set_status_header($statusCode);
-        $ci->output->set_header("Access-Control-Allow-Origin: *");
-        $ci->output->set_header("Access-Control-Allow-Headers: Authorization");
-        $output = array_merge(info($passed, $statusCode), $response);
-		$ci->output->set_output(json_encode($output));
+        ob_start();
+        $tokenData = array();
+		$tokenData['id'] = 1;
+		$authHash = AUTHORIZATION::generateToken($tokenData);
+
+        $authKey = "BNI-Authorization";
+        $ci =& get_instance();
+        $ci->output->set_content_type('application/json');
+        $ci->output->set_header("Access-Control-Allow-Headers: ".$authKey);
+        $headers = apache_request_headers();
+        if(array_key_exists('Origin', $headers)) {
+            $http_origin = $headers['Origin'];
+            $allowed_http_origins   = array(
+                "http://localhost:3000"   ,
+                "https://bharani.tech"  ,
+                "http://bharani.tech"  ,
+            );
+
+            // Set authorized origins
+            if (in_array($http_origin, $allowed_http_origins)){  
+                $ci->output->set_header("Access-Control-Allow-Origin: ".$http_origin);
+            }
+            if(
+                (array_key_exists("Access-Control-Request-Headers", $headers) &&
+                $headers['Access-Control-Request-Headers'] === strtolower($authKey)) ||
+                (array_key_exists($authKey, $headers) &&
+                $authHash === $headers[$authKey])
+            ) {
+                $ci->output->set_status_header($statusCode);
+                $output = array_merge(info($passed, $statusCode), $response);
+                $ci->output->set_output(json_encode($output));
+            } else {
+                $ci->output->set_status_header(401);
+                $ci->output->set_output(json_encode(array("error" => "Illegal token.", "exists" => $headers)));
+            }
+        } else {
+            $ci->output->set_status_header(400);
+            $ci->output->set_output(json_encode(array("error" => "Illegal domain request.")));
+        }
     }
 }
 

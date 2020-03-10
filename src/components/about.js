@@ -44,7 +44,10 @@ class About extends React.Component {
     }
     componentDidMount() {
         const that = this;
-        apiInstance.get("/").then(response => {
+        const params = new URLSearchParams();
+        params.append('param1', 'value1');
+        params.append('param2', 'value2');
+        apiInstance.get("/", params).then(response => {
             that.setState({about: response.data.response});
         })
         .catch(error => console.log(error))
@@ -56,7 +59,7 @@ class About extends React.Component {
             <div className="video-section">
                 <div className="overlay" />
                 {
-                    this.state.about.heading && this.state.about.subHeading ?
+                    this.state.about && this.state.about.heading && this.state.about.subHeading ?
                     <div className="home-text-wrapper">
                         {/* <div className="home-message col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4 pt-50"> */}
                         <div className="home-message">
