@@ -4,14 +4,11 @@ class write extends CI_Controller {
 	public function __construct()
     {
 		parent::__construct();
+		$this->load->model('write_model');
+		$this->load->library("../controllers/auth");
     }
-	public function index()
-	{
-
-	}
 	public function post_write()
 	{
-		$this->load->model('write_model');
 		$post = array(
 			'comment_name'=>$this->input->post('name'),
 			'comment_mobile'=>$this->input->post('mobile'),
@@ -22,6 +19,6 @@ class write extends CI_Controller {
 			'longitude'=>$this->input->post('longitude')
 		);
 		$data["response"] = $this->write_model->post_write($post);
-		json($data,array(),200);
+		$this->auth->response($data,array(),200);
 	}
 }

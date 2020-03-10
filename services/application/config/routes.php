@@ -41,6 +41,7 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+$route['lala'] = 'awards/awards/get_all_awards';
 $route['technologies'] = 'technologies/technologies/get_all_techs';
 $route['ides'] = 'technologies/technologies/get_all_ides';
 $route['operating-system'] = 'technologies/technologies/get_all_oss';
