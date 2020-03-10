@@ -80,7 +80,9 @@ class auth extends CI_Controller {
         $allowed_http_origins   = array(
             "http://localhost:3000",
             "https://bharani.tech",
+            "https://www.bharani.tech",
             "http://bharani.tech",
+            "http://www.bharani.tech",
         );
         return in_array($http_origin, $allowed_http_origins) ? $http_origin : "";
     }
