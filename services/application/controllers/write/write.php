@@ -9,16 +9,25 @@ class write extends CI_Controller {
     }
 	public function post_write()
 	{
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
 		$post = array(
-			'comment_name'=>$this->input->post('name'),
-			'comment_mobile'=>$this->input->post('mobile'),
-			'comment_description'=>$this->input->post('comments'),
-			'comment_email'=>$this->input->post('email'),
-			'comment_ip'=>$_SERVER['REMOTE_ADDR'],
-			'latitude'=>$this->input->post('latitude'),
-			'longitude'=>$this->input->post('longitude')
-		);
-		$data["response"] = $this->write_model->post_write($post);
-		$this->auth->response($data,array(),200);
+				'comment_name'=>$this->input->post('name'),
+				'comment_mobile'=>$this->input->post('mobile'),
+				'comment_description'=>$this->input->post('comments'),
+				'comment_email'=>$this->input->post('email'),
+				'comment_ip'=>$_SERVER['REMOTE_ADDR'],
+				'latitude'=>$this->input->post('latitude'),
+				'longitude'=>$this->input->post('longitude')
+			);
+			$data["response"] = $this->write_model->post_write($post);
+			$this->auth->response($data,array(),200);
+		}
 	}
 }

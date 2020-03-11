@@ -9,17 +9,44 @@ class technologies extends CI_Controller {
     }
 	public function get_all_techs()
 	{
-		$data["response"] = $this->technologies_model->get_all_techs();
-		$this->auth->response($data,array(),200);
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = $this->technologies_model->get_all_techs();
+			$this->auth->response($data,array(),200);
+		}
 	}
 	public function get_all_ides()
 	{
-		$data["response"] = $this->technologies_model->get_all_ides();
-		$this->auth->response($data,array(),200);
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = $this->technologies_model->get_all_ides();
+			$this->auth->response($data,array(),200);
+		}
 	}
 	public function get_all_oss()
 	{
-		$data["response"] = $this->technologies_model->get_all_oss();
-		$this->auth->response($data,array(),200);
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = $this->technologies_model->get_all_oss();
+			$this->auth->response($data,array(),200);
+		}
 	}
 }

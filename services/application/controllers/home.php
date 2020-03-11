@@ -8,7 +8,16 @@ class home extends CI_Controller {
 	}
 	public function index()
 	{
-		$data["response"] = array("heading" => "Bharani Palani", "subHeading" => "Full Stack Devops");
-		$this->auth->response($data,array(),200);
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = array("heading" => "Bharani Palani", "subHeading" => "Full Stack Devops");
+			$this->auth->response($data,array(),200);
+		}
 	}
 }

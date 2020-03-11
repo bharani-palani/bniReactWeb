@@ -103,12 +103,23 @@ class auth extends CI_Controller {
         }
         return false;
     }
-	public function response($response, $passed = array(), $statusCode) {
+    public function invalidTokenResponse() {
+        $ci =& get_instance();
+        $ci->output->set_content_type('application/json');
+        $ci->output->set_status_header(401);
+        $ci->output->set_output(json_encode(array("error" => "Illegal token.")));
+    }
+    public function invalidDomainResponse() {
+        $ci =& get_instance();
+        $ci->output->set_content_type('application/json');
+        $ci->output->set_status_header(400);
+        $ci->output->set_output(json_encode(array("error" => "Illegal domain request.")));
+    }
+	public function validateAll() {
         ob_start();
 		$authHash = $this->generateAuthToken(1);
         $authKey = "Authorization";
         $ci =& get_instance();
-        $ci->output->set_content_type('application/json');
         $ci->output->set_header("Access-Control-Allow-Headers: ".$authKey);
         $ci->output->set_header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
         $headers = apache_request_headers();
@@ -116,16 +127,20 @@ class auth extends CI_Controller {
         if($this->validateReferer($headers)) {
             $ci->output->set_header("Access-Control-Allow-Origin: ".$this->allowed_http_origins($headers));
             if($this->validateHeaderToken($headers, $authKey, $authHash)) {
-                $ci->output->set_status_header($statusCode);
-                $output = array_merge($this->info($passed, $statusCode), $response);
-                $ci->output->set_output(json_encode($output));
+                return 1;
             } else {
-                $ci->output->set_status_header(401);
-                $ci->output->set_output(json_encode(array("error" => "Illegal token.")));
+                return 2;
             }
         } else {
-            $ci->output->set_status_header(400);
-            $ci->output->set_output(json_encode(array("error" => "Illegal domain request.")));
+            return 3;
         }
+    }
+    public function response($response, $passed = array(), $statusCode) {
+        $ci =& get_instance();
+        $ci->output->set_content_type('application/json');
+        $ci->output->set_status_header($statusCode);
+        $output = array_merge($this->info($passed, $statusCode), $response);
+        $ci->output->set_output(json_encode($output));
+
     }
 }
