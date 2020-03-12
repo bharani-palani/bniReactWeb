@@ -2,7 +2,7 @@ import React from "react";
 import DateTimePicker from "react-datetime-picker";
 import PrettyCode from "./prettyCode";
 import { onDateConvert } from "./stringFunction";
-
+import Switch from "react-switch";
 import "code-prettify/styles/sunburst.css";
 
 class DateTime extends React.Component {
@@ -78,23 +78,27 @@ class DateTime extends React.Component {
               <div className="col-lg-6 p-0">
                 <div className="input-group mb-10">
                   <div className="input-group-addon ">
-                    <div className="input-group-text">
-                      <input
-                        type="checkbox"
-                        onChange={() =>
-                          this.setState({ isInc: !this.state.isInc })
-                        }
-                        value="inc"
-                        defaultChecked
-                        id="nType"
-                      />
-                      &nbsp;
-                      <label
-                        style={{ fontWeight: 100, cursor: "pointer" }}
-                        htmlFor="nType"
-                      >
-                        {this.state.isInc ? "Increment" : "Decrement"}
-                      </label>
+                    <div className="input-group-text grid-pretty">
+                      <div>
+                        <Switch
+                          onColor="#c2d82e"
+                          offColor="#333"
+                          checkedIcon={false}
+                          uncheckedIcon={false}
+                          height={15}
+                          width={30}
+                          onChange={() => this.setState({ isInc: !this.state.isInc })}
+                          checked={this.state.isInc}
+                        />
+                      </div>
+                      <div>
+                        <label
+                          onClick={() => this.setState({ isInc: !this.state.isInc })}
+                          htmlFor="nType"
+                        >
+                          {this.state.isInc ? "Increment" : "Decrement"}
+                        </label>
+                      </div>
                     </div>
                   </div>
                   <select

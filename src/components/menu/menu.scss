@@ -74,6 +74,7 @@
   @include slide;
 }
 .wrapper {
+  position: relative;
   @include slide;
   &.toggleOn {
     padding-left: 0;
@@ -81,6 +82,7 @@
   &.toggleOff {
     padding-left: 260px;
   }
+  .audiBtn { display: none; }
 }
 
 /* Landscape tablets and medium desktops */
@@ -93,6 +95,7 @@
     &.toggleOff {
       padding-left: 260px;
     }
+    .audiBtn { display: none; }
   }
 }
 
@@ -106,6 +109,7 @@
     &.toggleOff {
       padding-left: 0;
     }
+    .audiBtn { display: block; }
   }
 }
 .menu-social {
@@ -139,3 +143,4 @@
     }
   }
 }
+.audio {display: none;}

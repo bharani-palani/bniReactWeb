@@ -1,44 +1,61 @@
 .util {
-    .card-header {
-        background: #111;
-        border-bottom: solid 1px #000;
-        .btn-link {
-            color: rgba(255, 255, 255, 0.7);
-            outline:0;
-            display: block;
-            width: 100%;
-            text-align: left;
-            &:hover, &:active, &:focus {
-                color: rgba(255, 255, 255, 0.7);
-                text-decoration: none;
-            }
-        }
+  .card-header {
+    background: #111;
+    border-bottom: solid 1px #000;
+    .btn-link {
+      color: rgba(255, 255, 255, 0.7);
+      outline: 0;
+      display: block;
+      width: 100%;
+      text-align: left;
+      &:hover,
+      &:active,
+      &:focus {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+      }
     }
-    svg {
-        stroke: rgba(255, 255, 255, 0.7);
+  }
+  svg {
+    stroke: rgba(255, 255, 255, 0.7);
+  }
+  .closeWrapper {
+    position: relative;
+    .closeIcon {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
     }
-    .closeWrapper {
-        position: relative;
-        .closeIcon {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            cursor: pointer;
-        }
+  }
+  .contact-ip {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFW…zTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
+    padding: 0.5em;
+    padding-right: 1.5em;
+    &:nth-child(2) {
+      border-top-right-radius: 5px !important;
     }
-    .contact-ip {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-position: right 50%;
-        background-repeat: no-repeat;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFW…zTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
-        padding: .5em;
-        padding-right: 1.5em;
-        &:nth-child(2) {
-            border-top-right-radius: 5px !important;
-        }
-        &:nth-child(3) {
-            border-bottom-right-radius: 5px !important;
-        }
+    &:nth-child(3) {
+      border-bottom-right-radius: 5px !important;
     }
+  }
+}
+.grid-pretty {
+  display: grid;
+  grid-gap: 1rem;
+  margin: 0;
+  &.eightyPixColumn {
+    grid-template-columns: 80px auto;
+  }
+  &.fourColumn {
+    grid-template-columns: 5rem 5rem 5rem 5rem;
+  }
+  label {
+    font-weight: 100;
+    cursor: pointer;
+  }
 }

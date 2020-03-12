@@ -26,7 +26,7 @@ class ArrayDiff extends React.Component {
       <div className="row">
         <div className="col-lg-6">
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-6 pl-0 pr-1">
               <label htmlFor="arr1" className="mt-10">
                 Array 1:
               </label>
@@ -39,7 +39,7 @@ class ArrayDiff extends React.Component {
                 placeholder="Comma seperated"
               ></textarea>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-6 pl-1 pr-0">
               <label htmlFor="arr2" className="mt-10">
                 Array 2:
               </label>

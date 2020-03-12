@@ -1,5 +1,6 @@
 import React from "react";
 import "code-prettify/styles/sunburst.css";
+import Switch from "react-switch";
 
 class PrettyCode extends React.Component {
   constructor(props) {
@@ -19,15 +20,25 @@ class PrettyCode extends React.Component {
     return (
       <>
         <p className="ml-0 pt-10 pb-10">
-          <input
-            type="checkbox"
-            id={`mycheckbox-${random}`}
-            onChange={this.handleCheck}
-            defaultChecked={this.state.checked}
-          />{" "}
-          <label htmlFor={`mycheckbox-${random}`}>
-            <em>Javascript :</em>
-          </label>
+          <div className="grid-pretty eightyPixColumn">
+            <div>
+              <label onClick={this.handleCheck} htmlFor={`mycheckbox-${random}`}>
+                Javascript
+              </label>
+            </div>
+            <div>
+              <Switch
+                onColor="#c2d82e"
+                offColor="#333"
+                checkedIcon={false}
+                uncheckedIcon={false}
+                height={21}
+                width={42}
+                onChange={this.handleCheck}
+                checked={this.state.checked}
+              />
+            </div>
+          </div>
         </p>
         {this.state.checked && (
           <pre className="prettyprint lang-html linenums prettyprinted">
