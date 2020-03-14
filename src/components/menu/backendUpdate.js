@@ -32,9 +32,6 @@ function BackendUpdate(props) {
     },
   ]);
 
-  const onValidate = (bool) => {
-    setAuth(bool);
-  }
   return (
     <Modal
       {...props}
@@ -46,13 +43,13 @@ function BackendUpdate(props) {
       </Modal.Header>
       <Modal.Body>
           {
-            !auth ? <LoginForm validate={bool => onValidate(bool)} /> : (
+            !auth ? <LoginForm validate={bool => setAuth(bool)} /> : (
             <Accordion bsPrefix="util" defaultActiveKey="0">
                 {tabs.map((t,i) => 
                     <Card key={i}>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey={i}>
-                                {t.label}
+                                {t.label} {auth}
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey={i}>

@@ -48,7 +48,7 @@ class About extends React.Component {
         params.append('param1', 'value1');
         params.append('param2', 'value2');
         apiInstance.get("/", params).then(response => {
-            that.setState({about: response.data.response});
+            that.setState({about: response.data.response[0]});
         })
         .catch(error => console.log(error))
         .finally(() => 1);
@@ -59,7 +59,7 @@ class About extends React.Component {
             <div className="video-section">
                 <div className="overlay" />
                 {
-                    this.state.about && this.state.about.heading && this.state.about.subHeading ?
+                    this.state.about && this.state.about.display_name && this.state.about.profile_name ?
                     <div className="home-text-wrapper">
                         {/* <div className="home-message col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4 pt-50"> */}
                         <div className="home-message">
@@ -81,8 +81,8 @@ class About extends React.Component {
                             }
                             </Carousel>
                             <div className="nameHeading">
-                                <p>{this.state.about.heading}</p>
-                                <div className="skillset">{this.state.about.subHeading}</div>
+                                <p>{this.state.about.display_name}</p>
+                                <div className="skillset">{this.state.about.profile_name}</div>
                             </div>
                         </div>
                     </div>

@@ -82,7 +82,9 @@
   &.toggleOff {
     padding-left: 260px;
   }
-  .audiBtn { display: none; }
+  .audiBtn {
+    display: none;
+  }
 }
 
 /* Landscape tablets and medium desktops */
@@ -95,7 +97,9 @@
     &.toggleOff {
       padding-left: 260px;
     }
-    .audiBtn { display: none; }
+    .audiBtn {
+      display: none;
+    }
   }
 }
 
@@ -109,7 +113,9 @@
     &.toggleOff {
       padding-left: 0;
     }
-    .audiBtn { display: block; }
+    .audiBtn {
+      display: block;
+    }
   }
 }
 .menu-social {
@@ -118,7 +124,7 @@
   bottom: 2%;
 }
 .modal-backdrop {
-  opacity:0.8;
+  opacity: 0.8;
 }
 .modal-content {
   .modal-header {
@@ -126,7 +132,7 @@
     background: #c2d82e;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    .modal-title{
+    .modal-title {
       width: 95%;
       font-size: 12px;
     }
@@ -143,4 +149,12 @@
     }
   }
 }
-.audio {display: none;}
+.audio {
+  display: none;
+}
+.error {
+  font-size: 1rem;
+  color: #fa3b3b;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
