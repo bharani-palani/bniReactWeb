@@ -132,8 +132,9 @@
     background: #c2d82e;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    border-bottom: none;
     .modal-title {
-      width: 95%;
+      width: 99%;
       font-size: 12px;
     }
   }
@@ -155,6 +156,12 @@
 .error {
   font-size: 1rem;
   color: #fa3b3b;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.success {
+  font-size: 1rem;
+  color: green;
   font-weight: 500;
   letter-spacing: 1px;
 }

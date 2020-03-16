@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Modal, Accordion, Card, Button } from "react-bootstrap";
 import LoginForm from "./loginForm";
 import "./backendUpdate.scss";
@@ -31,6 +31,7 @@ function BackendUpdate(props) {
         label: "Contact"
     },
   ]);
+  const [showForgot, setShowForgot] = useState(false);
 
   return (
     <Modal
@@ -39,11 +40,14 @@ function BackendUpdate(props) {
       size={auth ? "xl" : "sm"}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Backend Configure</Modal.Title>
+        <Modal.Title>
+            {showForgot ? <i onClick={() => setShowForgot(false)} className="fa fa-chevron-circle-left" /> : ""} 
+            &nbsp;Backend Configure
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
           {
-            !auth ? <LoginForm validate={bool => setAuth(bool)} /> : (
+            !auth ? <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={bool => setAuth(bool)} /> : (
             <Accordion bsPrefix="util" defaultActiveKey="0">
                 {tabs.map((t,i) => 
                     <Card key={i}>

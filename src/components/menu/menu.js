@@ -13,6 +13,7 @@ class Menu extends React.Component {
       navBarExpanded: false,
       toggleSideBar: false,
       openModal: false,
+      audioState: "play",
       menus: [
         {
           href: "/about",
@@ -91,9 +92,6 @@ class Menu extends React.Component {
         this.setState({ openModal: true });
       }
     });
-    setTimeout(() => {
-        this.myAudio.current.play();
-    }, 1000);
   }
   onNavBarToggle = () => {
     this.setState({ navBarExpanded: !this.state.navBarExpanded });

@@ -39,4 +39,23 @@ class home extends CI_Controller {
 		}
 
 	}
+	public function changePassword() {
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$post = array(
+				'currentPass'=>$this->input->post('currentPass'),
+				'newPass'=>$this->input->post('newPass'),
+				'repeatPass'=>$this->input->post('repeatPass'),
+			);
+			$data["response"] = $this->home_model->changePassword($post);
+			$this->auth->response($data,array(),200);
+		}
+
+	}
 }

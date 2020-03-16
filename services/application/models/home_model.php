@@ -23,6 +23,25 @@ class home_model extends CI_Model
     public function validateUser($post)
     {
         $query = $this->db->get_where('login', array("user_name" => $post['username'], 'password' => md5($post['password'])));
-        return array("isValidUser" => $query->num_rows > 0);
+        if($query->num_rows > 0) {
+            return array("status" => "Valid user");
+        } else {
+            return array("status" => "Invalid user or password");
+        }
+    }
+    public function changePassword($post)
+    {
+        $query = $this->db->get_where('login', array("user_name" => "bharani", 'password' => md5($post['currentPass'])));
+        if($query->num_rows > 0) {
+            $this->db->where('user_name', 'bharani');
+            $this->db->update("login", array("password" => md5($post['newPass'])));
+            if($this->db->affected_rows() > 0) {
+                return array("status" => "Password successfully changed");
+            } else {
+                return array("status" => "Password change failed");
+            }
+        } else {
+            return array("status" => "User not found");
+        }
     }
 }
