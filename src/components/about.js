@@ -10,36 +10,7 @@ class About extends React.Component {
         super(props);
         this.state = {
             about: {},
-            images: [
-                "bniGreyCoat.jpg",
-                "bniBlackFull.jpeg",
-                "20190128_200541.jpg",
-                "20190309_165844.jpg",
-                "20190408_213558.jpg",
-                "20190706_164557.jpg",
-                "20190714_164140.jpg",
-                "20190817_160034.jpg",
-                "20191005_140735.jpg",
-                "20191005_191358.jpg",
-                "20191006_161009.jpg",
-                "20191025_152431.jpg",
-                "20191026_155625.jpg",
-                "20191106_161047.jpg",
-                "coll3.jpeg",
-                "IMAG0274.jpg",
-                "IMAG0571.jpg",
-                "IMAG0615.jpg",
-                "IMAG0668.jpg",
-                "IMAG0716.jpg",
-                "IMAG0736.jpg",
-                "IMAG0923.jpg",
-                "IMAG0950.jpg",
-                "IMAG0969.jpg",
-                "IMAG1281.jpg",
-                "IMAG1352.jpg",
-                "IMAG1424.jpg",
-                "20160709_145507.jpg",
-            ]
+            images: []
         }
     }
     componentDidMount() {
@@ -48,7 +19,10 @@ class About extends React.Component {
         params.append('param1', 'value1');
         params.append('param2', 'value2');
         apiInstance.get("/", params).then(response => {
-            that.setState({about: response.data.response[0]});
+            that.setState({
+                about: response.data.response[0],
+                images: response.data.images
+            });
         })
         .catch(error => console.log(error))
         .finally(() => 1);
@@ -61,25 +35,28 @@ class About extends React.Component {
                 {
                     this.state.about && this.state.about.display_name && this.state.about.profile_name ?
                     <div className="home-text-wrapper">
-                        {/* <div className="home-message col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4 pt-50"> */}
                         <div className="home-message">
-                            <Carousel 
-                                autoPlay={true}
-                                showArrows={false}
-                                useKeyboardArrows={true}
-                                showStatus={false}
-                                showIndicators={false}
-                                showThumbs={false}
-                                infiniteLoop={true}
-                                stopOnHover={false}
-                                dynamicHeight={true}
-                            >
                             {
-                                this.state.images.map((img,i) =>
-                                    (img ? <img key={i} className="cImage" src={require(`../images/avatar/${img}`)} alt="" /> : null)
-                                )
+                                this.state.images && this.state.images.length > 0 &&
+                                <Carousel 
+                                    autoPlay={true}
+                                    showArrows={false}
+                                    useKeyboardArrows={true}
+                                    showStatus={false}
+                                    showIndicators={false}
+                                    showThumbs={false}
+                                    infiniteLoop={true}
+                                    stopOnHover={false}
+                                    dynamicHeight={true}
+                                >
+                                {
+                                    this.state.images.map((img,i) => {
+                                        const image = require("../images/avatar/"+img.image_url);
+                                        return img ? <img key={img.image_id} className="cImage" src={image} alt={`Avatar ordered ${img.image_order}`} /> : null;
+                                    })                                        
+                                }
+                                </Carousel>
                             }
-                            </Carousel>
                             <div className="nameHeading">
                                 <p>{this.state.about.display_name}</p>
                                 <div className="skillset">{this.state.about.profile_name}</div>

@@ -18,7 +18,8 @@ class home extends CI_Controller {
 		}
 		if($validate === 1) {
 			$data["response"] = $this->home_model->get_home();
-			$this->auth->response($data,array(),200);
+			$array = $this->home_model->get_images();
+			$this->auth->response($data,array("images" => $array),200);
 		}
 	}
 	public function validateUser() {

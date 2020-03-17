@@ -20,6 +20,13 @@ class home_model extends CI_Model
         )->from("login")->get();
         return get_all_rows($query);
     }
+    public function get_images(){
+        $this->db->from('about_images');
+        $this->db->order_by("image_order", "asc");
+        $query = $this->db->get(); 
+        return get_all_rows($query);
+    }
+
     public function validateUser($post)
     {
         $query = $this->db->get_where('login', array("user_name" => $post['username'], 'password' => md5($post['password'])));
