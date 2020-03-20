@@ -2,6 +2,11 @@
   .modal-title {
     color: #fff;
     font-size: 1.5rem !important;
+    .fa{
+      color: #000;
+      font-size: 2rem;
+      cursor: pointer;
+    }
   }
   .modal-xl {
     width: 95%;
@@ -32,6 +37,7 @@
         position: absolute;
         right: 9px;
         top: 10px;
+        color: #000;
         cursor: pointer;
         &.good {
           color: #c2da06;

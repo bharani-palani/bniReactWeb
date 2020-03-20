@@ -127,6 +127,8 @@
   opacity: 0.8;
 }
 .modal-content {
+  background: transparent;
+  box-shadow: 0 0 20px 0 #c2d82e;
   .modal-header {
     display: flex;
     background: #c2d82e;
@@ -140,13 +142,17 @@
   }
   .modal-body {
     position: relative;
+    border-left: solid 1px #bad900;
+    border-right: solid 1px #bad900;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     .head {
       color: #888;
     }
     label {
       font-weight: 300;
       font-size: 12px;
-      color: #333;
+      color: #c2d82e;
     }
   }
 }

@@ -65,7 +65,7 @@ function LoginForm(props) {
       </div>
       <div className="text-center head">
         {!fpass ? "Sign In" : "Forgot Password"}
-        <div className={`${status === "Password successfully changed" ? "success" : "error"}`}>{status}</div>
+        <div><span className={`label label-${status === "Password successfully changed" ? "success" : "danger"}`}>{status}</span></div>
       </div>
       {!loader ? (
         !fpass ? (

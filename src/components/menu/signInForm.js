@@ -34,7 +34,7 @@ function SignInForm(props) {
           </div>
         </div>
         <div className="form-group">
-          <button onClick={() => props.showForgot(true)} className="btn-bni-sm">Forgot Password</button>
+          <button onClick={() => props.showForgot(true)} className="btn-bni-sm">Change Password</button>
         </div>
       </div>
     </div>
