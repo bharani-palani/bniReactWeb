@@ -13,8 +13,9 @@ code {
 .btn-bni {
   background: #c2d82e;
   color: #fff;
-  &:focus, &:hover {
-    border:0;
+  &:focus,
+  &:hover {
+    border: 0;
     outline: 0 !important;
     color: #fff !important;
   }
@@ -38,8 +39,8 @@ code {
   top: 50%;
   left: 50%;
   -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 @for $i from 0 through 100 {
@@ -90,13 +91,20 @@ code {
   .#{"z"}-#{$i} {
     z-index: $i#{"!important"};
   }
-
- }
- .bniToaster {
-   .Toastify__toast--success {
+}
+.bniToaster {
+  .Toastify__toast--success {
     background: #a9c106;
-   }
- }
- .vcard {
-   cursor: pointer;
- }
+  }
+}
+.vcard {
+  cursor: pointer;
+}
+@for $i from 1 through 12 {
+  .#{"grid"}-#{$i} {
+    display: grid;
+    word-wrap: break-word;
+    word-break: break-all;
+    grid-template-columns: repeat(auto-fit, minmax(#{100 / $i}#{"%"}, 1fr));
+  }
+}

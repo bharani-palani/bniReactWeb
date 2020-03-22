@@ -129,6 +129,7 @@
 .modal-content {
   background: transparent;
   box-shadow: 0 0 20px 0 #c2d82e;
+  border: 0;
   .modal-header {
     display: flex;
     background: #c2d82e;
@@ -144,8 +145,10 @@
     position: relative;
     border-left: solid 1px #bad900;
     border-right: solid 1px #bad900;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom: solid 1px #c2d82e;
+    background: #000;
     .head {
       color: #888;
     }
@@ -153,6 +156,23 @@
       font-weight: 300;
       font-size: 12px;
       color: #c2d82e;
+    }
+    .card {
+      .card-header {
+        .btn {
+          padding: 13px 15px;
+        }
+      }
+      &:last-child {
+        .card-header {
+          border-bottom-left-radius: 6px; 
+          border-bottom-right-radius: 6px; 
+        }
+      }
+    }
+    .backendConfigureSection {
+      color: #fff;
+      .heading{color: #c2d82e;}
     }
   }
 }
