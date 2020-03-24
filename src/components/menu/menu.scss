@@ -170,9 +170,11 @@
         }
       }
     }
-    .backendConfigureSection {
-      color: #fff;
-      .heading{color: #c2d82e;}
+    textarea.form-control {
+      resize: none;
+    }
+    .renderElementSection {
+      margin: 0 auto;
     }
   }
 }

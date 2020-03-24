@@ -2,7 +2,7 @@
   .modal-title {
     color: #fff;
     font-size: 1.5rem !important;
-    .fa{
+    .fa {
       color: #000;
       font-size: 2rem;
       cursor: pointer;
@@ -27,7 +27,7 @@
         color: #c2da06;
       }
     }
-    .btn {
+    .submit {
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
     }
@@ -44,6 +44,36 @@
         }
         &.bad {
           color: #ec7070;
+        }
+      }
+    }
+    .backendConfigureSection {
+      .heading {
+        color: #c2d82e;
+        font-weight: 600;
+      }
+      .header {
+        color: #c2d82e;
+      }
+      .fa {
+        font-size: 2.2rem;
+        padding-left: 1rem;
+        cursor: pointer;
+        &.danger {
+          color: #f33333;
+        }
+        &.success {
+          color: #40bd40;
+        }
+      }
+      @media (max-width: 767px) {
+        .header {
+          display: none;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .header {
+          display: none;
         }
       }
     }

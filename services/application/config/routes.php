@@ -43,6 +43,7 @@ $route['404_override'] = '';
 
 $route['validateUser'] = 'home/validateUser';
 $route['changePassword'] = 'home/changePassword';
+$route['getBackend'] = 'home/getBackend';
 $route['technologies'] = 'technologies/technologies/get_all_techs';
 $route['ides'] = 'technologies/technologies/get_all_ides';
 $route['operating-system'] = 'technologies/technologies/get_all_oss';

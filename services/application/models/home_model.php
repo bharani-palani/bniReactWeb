@@ -31,6 +31,7 @@ class home_model extends CI_Model
     {
         $query = $this->db->get_where('login', array("user_name" => $post['username'], 'password' => md5($post['password'])));
         if($query->num_rows > 0) {
+            // update login time
             return array("status" => "Valid user");
         } else {
             return array("status" => "Invalid user or password");
@@ -50,5 +51,44 @@ class home_model extends CI_Model
         } else {
             return array("status" => "User not found");
         }
+    }
+    function getBackend($post) {
+        $Table = $post["Table"];
+        $this->db->select($post["TableRows"]);
+        switch ($Table) {
+            case "about_images":
+                $query = $this->db->get('about_images');
+            break;
+            case "awards":
+                $query = $this->db->get('awards');
+            break;
+            case "contacts":
+                $query = $this->db->get('contacts');
+            break;
+            case "ide":
+                $query = $this->db->get('ide');
+            break;
+            case "login":
+                $query = $this->db->get('login');
+            break;
+            case "operating_system":
+                $query = $this->db->get('operating_system');
+            break;
+            case "projects":
+                $query = $this->db->get('projects');
+            break;
+            case "public_comments":
+                $query = $this->db->get('public_comments');
+            break;
+            case "skills":
+                $query = $this->db->get('skills');
+            break;
+            case "technologies":
+                $query = $this->db->get('technologies');
+            break;
+            default:
+                return false;
+        }
+        return get_all_rows($query);
     }
 }

@@ -92,6 +92,7 @@ class Menu extends React.Component {
         this.setState({ openModal: true });
       }
     });
+    // this.setState({ openModal: true }); //  remove this later
   }
   onNavBarToggle = () => {
     this.setState({ navBarExpanded: !this.state.navBarExpanded });

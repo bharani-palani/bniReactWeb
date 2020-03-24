@@ -105,6 +105,40 @@ code {
     display: grid;
     word-wrap: break-word;
     word-break: break-all;
-    grid-template-columns: repeat(auto-fit, minmax(#{100 / $i}#{"%"}, 1fr));
+    grid-template-columns: 120px repeat(#{($i)-1}, auto);
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+    align-items: center;
+  }
+}
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+  @for $i from 1 through 12 {
+    .#{"grid"}-#{$i} {
+      grid-template-columns: 120px repeat(#{($i)-1}, auto);
+    }
+  }
+}
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+  @for $i from 1 through 12 {
+    .#{"grid"}-#{$i} {
+      grid-template-columns: auto;
+    }
+  }
+}
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+  @for $i from 1 through 12 {
+    .#{"grid"}-#{$i} {
+      grid-template-columns: auto;
+    }
+  }
+}
+.tooltip { 
+  z-index: 11072 !important;
+  opacity: 1 !important;
+  * {
+    background: #222 !important;
   }
 }

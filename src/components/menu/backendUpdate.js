@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Modal, Accordion, Card, Button } from "react-bootstrap";
 import LoginForm from "./loginForm";
-import AboutBackend from "./backend/aboutBackend";
+import BackendCore from "./backend/BackendCore";
 import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
@@ -10,33 +10,33 @@ function BackendUpdate(props) {
     {
         id:1,
         label: "About",
-        component: <AboutBackend />
+        component: <BackendCore />
     },
-    {
-        id:2,
-        label: "Technolgies",
-        component: <AboutBackend />
-    },
-    {
-        id:3,
-        label: "Projects",
-        component: <AboutBackend />
-    },
-    {
-        id:4,
-        label: "Skills",
-        component: <AboutBackend />
-    },
-    {
-        id:5,
-        label: "Awards",
-        component: <AboutBackend />
-    },
-    {
-        id:6,
-        label: "Contact",
-        component: <AboutBackend />
-    },
+    // {
+    //     id:2,
+    //     label: "Technolgies",
+    //     component: <AboutBackend />
+    // },
+    // {
+    //     id:3,
+    //     label: "Projects",
+    //     component: <AboutBackend />
+    // },
+    // {
+    //     id:4,
+    //     label: "Skills",
+    //     component: <AboutBackend />
+    // },
+    // {
+    //     id:5,
+    //     label: "Awards",
+    //     component: <AboutBackend />
+    // },
+    // {
+    //     id:6,
+    //     label: "Contact",
+    //     component: <AboutBackend />
+    // },
   ]);
   const [showForgot, setShowForgot] = useState(false);
 

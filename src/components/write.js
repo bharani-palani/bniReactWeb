@@ -35,7 +35,6 @@ class Write extends React.Component {
     apiInstance
       .post("/write", formdata)
       .then(response => {
-        console.log(response);
         that.setState(
           {
             name: "",
