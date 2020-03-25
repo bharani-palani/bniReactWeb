@@ -36,9 +36,7 @@ class Awards extends React.Component {
               response.data.response,
               "award_sort"
             );
-            that.setState({ awards: awardsList, awardsHeading }, () => {
-              console.log(this.state);
-            });
+            that.setState({ awards: awardsList, awardsHeading });
           })
           .catch(error => console.log(error))
           .finally(() => 1);

@@ -1,30 +1,16 @@
 import React, { useState, useEffect } from "react";
 import apiInstance from "../../../apiServices";
 import FormElement from "./FormElement";
+import { ToastContainer, toast } from "react-toastify";
 
 function BackendCore(props) {
-  // const Table = "login";
-  // const TableRows = [
-  //   "user_id",
-  //   "display_name",
-  //   "profile_name",
-  //   "user_mail",
-  //   "user_mobile"
-  // ];
-  // const rowElements = [
-  //     "checkbox",
-  //     "textbox",
-  //     "textbox",
-  //     "textbox",
-  //     "number"
-  // ];
-
-  const Table = "awards";
-  const TableRows = ["award_id", "award_label", "award_value", "award_sort"];
-  const rowElements = ["checkbox", "textbox", "textarea", "number"];
+  const Table = props.Table;
+  const TableRows = props.TableRows;
+  const rowElements = props.rowElements;
 
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
+
   useEffect(() => {
     const formdata = new FormData();
     formdata.append("TableRows", TableRows);
@@ -51,15 +37,15 @@ function BackendCore(props) {
     backup = backup.filter((d, di) => di !== i);
 
     const isDataExist = dbData[i] && dbData[i][TableRows[0]];
-    if(isDataExist && isDataExist !== undefined && isDataExist > 0) {
-      deleteData.push(Number(isDataExist))
+    if (isDataExist && isDataExist !== undefined && isDataExist > 0) {
+      deleteData.push(Number(isDataExist));
       setDeleteData(deleteData);
     }
     setDbData(backup);
   };
 
   const onAddRow = bool => {
-    if(bool) {
+    if (bool) {
       const obj = {};
       for (var i = 0; i < TableRows.length; ++i) {
         obj[TableRows[i]] = "";
@@ -68,27 +54,43 @@ function BackendCore(props) {
       backup.push(obj);
       setDbData(backup);
     }
-  }
+  };
+
   const submitData = () => {
     const insertData = dbData.filter(d => d[TableRows[0]] === "");
-    const updatedData = dbData.filter(d => d[TableRows[0]] !== "");
+    const updateData = dbData.filter(d => d[TableRows[0]] !== "");
     const postData = {
       Table,
       insertData,
       deleteData,
-      updatedData
+      updateData
     };
-    console.log(postData);
-  }
+    const formdata = new FormData();
+    formdata.append("postData", JSON.stringify(postData));
+    apiInstance
+      .post("/postBackend", formdata)
+      .then(response => {
+        response.data.response ? success() : fail();
+      })
+      .catch(error => console.error(error));
+  };
+
+  const sMessage = () => ({ __html: `&#128512;${Table} saved successfully` });
+  const fMessage = () => ({ __html: `&#128546;Oops.. Some error..` });
+
+  const success = () => toast.success(<div className="capitalize" dangerouslySetInnerHTML={sMessage()} />);
+  const fail = () => toast.error(<div className="capitalize" dangerouslySetInnerHTML={fMessage()} />);
+
   return (
     <div className="container-fluid backendConfigureSection">
-      <h5 className="heading">Table: {Table}</h5>
+      <ToastContainer className="bniToaster" />
+      <h5 className="heading">Table: {Table} ({dbData.length} record{dbData.length > 1 ? "s" : ""})</h5>
       <div className="">
         <div className={`mt-10 form-group grid-${TableRows.length}`}>
           {dbData.length > 0 ? (
             TableRows.map((heading, i) => (
               <div key={`key-${i}`} className="header">
-                {i !== 0 ? heading : "Action" }
+                {i !== 0 ? heading : "Action"}
               </div>
             ))
           ) : (
@@ -104,7 +106,8 @@ function BackendCore(props) {
                 placeholder={[r]}
                 value={d[r]}
                 element={rowElements[j]}
-                showIncrementer={(dbData.length-1) === i}
+                showIncrementer={dbData.length - 1 === i}
+                showDecrement={i !== 0}
                 onAddRow={bool => onAddRow(bool)}
               />
             ))

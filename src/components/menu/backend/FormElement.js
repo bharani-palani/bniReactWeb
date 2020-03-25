@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Switch from "react-switch";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import React, { useEffect } from "react";
 
 function FormElement(props) {
-  const [checked, setChecked] = useState(true);
   useEffect(() => {}, []);
 
   const renderElement = (index, element, value) => {
@@ -42,30 +39,20 @@ function FormElement(props) {
         return (
           <>
             {/* {JSON.stringify(value)} */}
-            <OverlayTrigger
-              placement="top"
-              delay={{ show: 250, hide: 400 }}
-              overlay={<Tooltip>Delete!</Tooltip>}
-            >
+            {props.showDecrement && (
               <i
                 onClick={() => props.onDelete(index)}
                 className="fa fa-minus-circle danger"
               />
-            </OverlayTrigger>
-            <div className="pull-right">
-              {props.showIncrementer && (
-                <OverlayTrigger
-                  placement="top"
-                  delay={{ show: 250, hide: 400 }}
-                  overlay={<Tooltip>Add new row</Tooltip>}
-                >
-                  <i
-                    onClick={() => props.onAddRow(true)}
-                    className="fa fa-plus-circle success"
-                  />
-                </OverlayTrigger>
-              )}
-            </div>
+            )}
+            {props.showIncrementer && (
+              <div className="pull-right">
+                <i
+                  onClick={() => props.onAddRow(true)}
+                  className="fa fa-plus-circle success"
+                />
+              </div>
+            )}
           </>
         );
       default:

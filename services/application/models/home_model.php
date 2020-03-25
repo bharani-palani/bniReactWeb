@@ -57,38 +57,95 @@ class home_model extends CI_Model
         $this->db->select($post["TableRows"]);
         switch ($Table) {
             case "about_images":
-                $query = $this->db->get('about_images');
+                $query = $this->db->order_by("image_order","asc")->get('about_images');
             break;
             case "awards":
                 $query = $this->db->order_by("award_sort","asc")->get('awards');
             break;
             case "contacts":
-                $query = $this->db->get('contacts');
+                $query = $this->db->order_by("contact_sort","asc")->get('contacts');
             break;
             case "ide":
-                $query = $this->db->get('ide');
+                $query = $this->db->order_by("ide_sort","asc")->get('ide');
             break;
             case "login":
                 $query = $this->db->get('login');
             break;
             case "operating_system":
-                $query = $this->db->get('operating_system');
+                $query = $this->db->order_by("os_sort","asc")->get('operating_system');
             break;
             case "projects":
-                $query = $this->db->get('projects');
+                $query = $this->db->order_by("project_sort","asc")->get('projects');
             break;
             case "public_comments":
                 $query = $this->db->get('public_comments');
             break;
             case "skills":
-                $query = $this->db->get('skills');
+                $query = $this->db->order_by("skill_sort","asc")->get('skills');
             break;
             case "technologies":
-                $query = $this->db->get('technologies');
+                $query = $this->db->order_by("tech_sort","asc")->get('technologies');
             break;
             default:
                 return false;
         }
         return get_all_rows($query);
     }
+    public function postBackend($post) {
+        $postData = json_decode($post['postData']);
+        $Table = $postData->Table;
+        switch ($Table) {
+            case "login":
+                return $this->onTransaction($postData, 'login', 'user_id');
+            break;
+            case "awards":
+                return $this->onTransaction($postData, 'awards', 'award_id');
+            break;
+            case "technologies":
+                return $this->onTransaction($postData, 'technologies', 'tech_id');
+            break;
+            case "projects":
+                return $this->onTransaction($postData, 'projects', 'project_id');
+            break;
+            case "skills":
+                return $this->onTransaction($postData, 'skills', 'skill_id');
+            break;
+            case "contacts":
+                return $this->onTransaction($postData, 'contacts', 'contact_id');
+            break;
+            case "about_images":
+                return $this->onTransaction($postData, 'about_images', 'image_id');
+            break;
+            case "ide":
+                return $this->onTransaction($postData, 'ide', 'ide_id');
+            break;
+            case "operating_system":
+                return $this->onTransaction($postData, 'operating_system', 'os_id');
+            break;
+            case "public_comments":
+                return $this->onTransaction($postData, 'public_comments', 'comment_id');
+            break;
+            default:
+                return false;
+        }
+    }
+    public function onTransaction($postData, $table, $primary_field) {
+        $this->db->trans_start();
+        if(count($postData->updateData) > 0) {
+            $array = json_decode(json_encode($postData->updateData), true);
+            $this->db->update_batch($table, $array, $primary_field); 
+        }
+        if(count($postData->insertData) > 0) {
+            $array = json_decode(json_encode($postData->insertData), true);
+            $this->db->insert_batch($table, $array); 
+        }
+        if(count($postData->deleteData) > 0) {
+            $array = json_decode(json_encode($postData->deleteData), true);
+            $this->db->where_in($primary_field, $array);
+            $this->db->delete($table);
+        }
+        $this->db->trans_complete();
+        return ($this->db->trans_status() === FALSE) ? FALSE : TRUE;
+}
+
 }

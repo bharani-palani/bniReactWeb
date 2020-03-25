@@ -41,6 +41,7 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+$route['postBackend'] = 'home/postBackend';
 $route['validateUser'] = 'home/validateUser';
 $route['changePassword'] = 'home/changePassword';
 $route['getBackend'] = 'home/getBackend';
