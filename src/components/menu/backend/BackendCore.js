@@ -16,24 +16,15 @@ function BackendCore(props) {
   //     "textbox",
   //     "textbox",
   //     "textbox",
-  //     "textbox"
+  //     "number"
   // ];
 
   const Table = "awards";
-  const TableRows = [
-    "award_id",
-    "award_label",
-    "award_value",
-    "award_sort",
-  ];
-  const rowElements = [
-      "checkbox",
-      "textbox",
-      "textarea",
-      "textbox",
-  ];
+  const TableRows = ["award_id", "award_label", "award_value", "award_sort"];
+  const rowElements = ["checkbox", "textbox", "textarea", "number"];
 
   const [dbData, setDbData] = useState([]);
+  const [deleteData, setDeleteData] = useState([]);
   useEffect(() => {
     const formdata = new FormData();
     formdata.append("TableRows", TableRows);
@@ -48,22 +39,81 @@ function BackendCore(props) {
       });
   }, []);
 
+  const updateDbData = (index, data) => {
+    const { i, j } = index;
+    dbData[i][j] = data;
+    setDbData(dbData);
+  };
+
+  const onDelete = index => {
+    const { i } = index;
+    let backup = [...dbData];
+    backup = backup.filter((d, di) => di !== i);
+
+    const isDataExist = dbData[i] && dbData[i][TableRows[0]];
+    if(isDataExist && isDataExist !== undefined && isDataExist > 0) {
+      deleteData.push(Number(isDataExist))
+      setDeleteData(deleteData);
+    }
+    setDbData(backup);
+  };
+
+  const onAddRow = bool => {
+    if(bool) {
+      const obj = {};
+      for (var i = 0; i < TableRows.length; ++i) {
+        obj[TableRows[i]] = "";
+      }
+      let backup = [...dbData];
+      backup.push(obj);
+      setDbData(backup);
+    }
+  }
+  const submitData = () => {
+    const insertData = dbData.filter(d => d[TableRows[0]] === "");
+    const updatedData = dbData.filter(d => d[TableRows[0]] !== "");
+    const postData = {
+      Table,
+      insertData,
+      deleteData,
+      updatedData
+    };
+    console.log(postData);
+  }
   return (
     <div className="container-fluid backendConfigureSection">
       <h5 className="heading">Table: {Table}</h5>
       <div className="">
         <div className={`mt-10 form-group grid-${TableRows.length}`}>
-          {TableRows.map((heading, i) => (
-            <div className="header" key={i}>
-              {heading}
-            </div>
-          ))}
-          {dbData.map((d, j) => TableRows.map((r, i) => 
-            <div><FormElement key={i+j} placeholder={[r]} value={d[r]} element={rowElements[i]} /></div>
-          ))}
+          {dbData.length > 0 ? (
+            TableRows.map((heading, i) => (
+              <div key={`key-${i}`} className="header">
+                {i !== 0 ? heading : "Action" }
+              </div>
+            ))
+          ) : (
+            <div>No records</div>
+          )}
+          {dbData.map((d, i) =>
+            TableRows.map((r, j) => (
+              <FormElement
+                key={`${d[r]}-${j}`}
+                onDelete={index => onDelete(index)}
+                onChange={(index, data) => updateDbData(index, data)}
+                index={{ i, j: r }}
+                placeholder={[r]}
+                value={d[r]}
+                element={rowElements[j]}
+                showIncrementer={(dbData.length-1) === i}
+                onAddRow={bool => onAddRow(bool)}
+              />
+            ))
+          )}
         </div>
         <div className="form-group text-right">
-          <button className="btn btn-bni">Update</button>      
+          <button onClick={() => submitData()} className="btn btn-bni">
+            Update
+          </button>
         </div>
       </div>
     </div>

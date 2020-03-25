@@ -5,7 +5,7 @@ import BackendCore from "./backend/BackendCore";
 import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
-  const [auth, setAuth] = useState(false); // change to false
+  const [auth, setAuth] = useState(true); // change to false
   const [tabs, setTabs] = useState([
     {
         id:1,

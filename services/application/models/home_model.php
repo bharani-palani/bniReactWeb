@@ -60,7 +60,7 @@ class home_model extends CI_Model
                 $query = $this->db->get('about_images');
             break;
             case "awards":
-                $query = $this->db->get('awards');
+                $query = $this->db->order_by("award_sort","asc")->get('awards');
             break;
             case "contacts":
                 $query = $this->db->get('contacts');
