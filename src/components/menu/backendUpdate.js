@@ -6,17 +6,8 @@ import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
   const [auth, setAuth] = useState(false); // change this to false
+  const [collapse, setCollapse] = useState("");
   const tabs = [
-    {
-        id:5,
-        label: "About",
-        component: <BackendCore Table="login" TableRows={["user_id","display_name","profile_name","user_mail","user_mobile"]} rowElements={["checkbox", "textbox", "textbox", "textbox", "number"]} />
-    },
-    {
-        id:7,
-        label: "About Images",
-        component: <BackendCore Table="about_images" TableRows={["image_id","image_url","image_order"]} rowElements={["checkbox", "textbox", "number"]} />
-    },
     {
         id:1,
         label: "Awards",
@@ -26,16 +17,6 @@ function BackendUpdate(props) {
         id:2,
         label: "Technolgies",
         component: <BackendCore Table="technologies" TableRows={["tech_id", "tech_label", "tech_value", "tech_image_url", "tech_sort"]} rowElements={["checkbox", "textbox", "textarea", "textbox", "number"]} />
-    },
-    {
-        id:8,
-        label: "IDE",
-        component: <BackendCore Table="ide" TableRows={["ide_id", "ide_label", "ide_value", "ide_image_url", "ide_sort"]} rowElements={["checkbox", "textbox", "textarea", "textbox", "number"]} />
-    },
-    {
-        id:9,
-        label: "Operating System",
-        component: <BackendCore Table="operating_system" TableRows={["os_id", "os_label", "os_value", "os_image_url", "os_sort"]} rowElements={["checkbox", "textbox", "textarea", "textbox", "number"]} />
     },
     {
         id:3,
@@ -48,9 +29,29 @@ function BackendUpdate(props) {
         component: <BackendCore Table="skills" TableRows={["skill_id", "skill_label", "skill_value", "skill_image_url", "skill_sort"]} rowElements={["checkbox", "textbox", "textarea", "textbox", "number"]} />
     },
     {
+        id:5,
+        label: "About",
+        component: <BackendCore Table="login" TableRows={["user_id","display_name","profile_name","user_mail","user_mobile"]} rowElements={["checkbox", "textbox", "textbox", "textbox", "number"]} />
+    },
+    {
         id:6,
         label: "Contact",
         component: <BackendCore Table="contacts" TableRows={["contact_id","contact_label","contact_value","contact_href","contact_sort"]} rowElements={["checkbox", "textbox", "textbox", "textbox", "number"]} />
+    },
+    {
+        id:7,
+        label: "About Images",
+        component: <BackendCore Table="about_images" TableRows={["image_id","image_url","image_order"]} rowElements={["checkbox", "textbox", "number"]} />
+    },
+    {
+        id:8,
+        label: "IDE",
+        component: <BackendCore Table="ide" TableRows={["ide_id", "ide_label", "ide_value", "ide_image_url", "ide_sort"]} rowElements={["checkbox", "textbox", "textarea", "textbox", "number"]} />
+    },
+    {
+        id:9,
+        label: "Operating System",
+        component: <BackendCore Table="operating_system" TableRows={["os_id", "os_label", "os_value", "os_image_url", "os_sort"]} rowElements={["checkbox", "textbox", "textarea", "textbox", "number"]} />
     },
     {
         id:10,
@@ -74,18 +75,19 @@ function BackendUpdate(props) {
       </Modal.Header>
       <Modal.Body>
           {
-            !auth ? <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={bool => setAuth(bool)} /> : (
+            !auth ? 
+            <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={bool => setAuth(bool)} /> : (
             <Accordion bsPrefix="util" defaultActiveKey="0">
                 {tabs.map((t,i) => 
-                    <Card key={i}>
+                    <Card key={t.id}>
                         <Card.Header>
-                            <Accordion.Toggle as={Button} variant="link" eventKey={i}>
-                                {t.label} {auth}
+                            <Accordion.Toggle onClick={() => setCollapse(t.label)} as={Button} variant="link" eventKey={i}>
+                                {t.label}
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey={i}>
                             <Card.Body>
-                                {t.component}
+                                {collapse === t.label && t.component}
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>                                
@@ -93,7 +95,6 @@ function BackendUpdate(props) {
             </Accordion>                
             )
           }
-        
       </Modal.Body>
     </Modal>
   );

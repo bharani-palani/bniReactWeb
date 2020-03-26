@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import apiInstance from "../../../apiServices";
 import FormElement from "./FormElement";
 import { ToastContainer, toast } from "react-toastify";
+import Loader from "react-loader-spinner";
+import helpers from "../../../helpers";
 
 function BackendCore(props) {
   const Table = props.Table;
@@ -78,47 +80,58 @@ function BackendCore(props) {
   const sMessage = () => ({ __html: `&#128512;${Table} saved successfully` });
   const fMessage = () => ({ __html: `&#128546;Oops.. Some error..` });
 
-  const success = () => toast.success(<div className="capitalize" dangerouslySetInnerHTML={sMessage()} />);
-  const fail = () => toast.error(<div className="capitalize" dangerouslySetInnerHTML={fMessage()} />);
+  const success = () =>
+    toast.success(
+      <div className="capitalize" dangerouslySetInnerHTML={sMessage()} />
+    );
+  const fail = () =>
+    toast.error(
+      <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
+    );
 
-  return (
+  return dbData.length > 0 ? (
     <div className="container-fluid backendConfigureSection">
       <ToastContainer className="bniToaster" />
-      <h5 className="heading">Table: {Table} ({dbData.length} record{dbData.length > 1 ? "s" : ""})</h5>
-      <div className="">
-        <div className={`mt-10 form-group grid-${TableRows.length}`}>
-          {dbData.length > 0 ? (
-            TableRows.map((heading, i) => (
-              <div key={`key-${i}`} className="header">
-                {i !== 0 ? heading : "Action"}
-              </div>
-            ))
-          ) : (
-            <div>No records</div>
-          )}
-          {dbData.map((d, i) =>
-            TableRows.map((r, j) => (
-              <FormElement
-                key={`${d[r]}-${j}`}
-                onDelete={index => onDelete(index)}
-                onChange={(index, data) => updateDbData(index, data)}
-                index={{ i, j: r }}
-                placeholder={[r]}
-                value={d[r]}
-                element={rowElements[j]}
-                showIncrementer={dbData.length - 1 === i}
-                showDecrement={i !== 0}
-                onAddRow={bool => onAddRow(bool)}
-              />
-            ))
-          )}
-        </div>
-        <div className="form-group text-right">
-          <button onClick={() => submitData()} className="btn btn-bni">
-            Update
-          </button>
-        </div>
+      <h5 className="heading">
+        Table: {Table} ({dbData.length} record{dbData.length > 1 ? "s" : ""})
+      </h5>
+      <div className={`mt-10 form-group grid-${TableRows.length}`}>
+        {TableRows.map((heading, i) => (
+          <div key={`key-${i}`} className="header">
+            {i !== 0 ? heading : "Action"}
+          </div>
+        ))}
+        {dbData.map((d, i) =>
+          TableRows.map((r, j) => (
+            <FormElement
+              key={`${d[r]}-${j}`}
+              onDelete={index => onDelete(index)}
+              onChange={(index, data) => updateDbData(index, data)}
+              index={{ i, j: r }}
+              placeholder={[r]}
+              value={d[r]}
+              element={rowElements[j]}
+              showIncrementer={dbData.length - 1 === i}
+              showDecrement={i !== 0}
+              onAddRow={bool => onAddRow(bool)}
+            />
+          ))
+        )}
       </div>
+      <div className="form-group text-right">
+        <button onClick={() => submitData()} className="btn btn-bni">
+          Update
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div className="spinner">
+      <Loader
+        type={helpers.LoadRandomSpinnerIcon()}
+        color="#c2d82e"
+        height={100}
+        width={100}
+      />
     </div>
   );
 }
