@@ -60,7 +60,7 @@ function BackendUpdate(props) {
     },
   ];
   const [showForgot, setShowForgot] = useState(false);
-
+  const [lastLogin, setLastLogin] = useState("");
   return (
     <Modal
       {...props}
@@ -69,14 +69,14 @@ function BackendUpdate(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-            {showForgot ? <i onClick={() => setShowForgot(false)} className="fa fa-chevron-circle-left" /> : ""} 
-            &nbsp;Backend Configure
+            <span className="pull-left">{showForgot ? <i onClick={() => setShowForgot(false)} className="fa fa-chevron-circle-left" /> : ""}</span>
+            <span className="pull-left pl-5">Backend Configure</span>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
           {
             !auth ? 
-            <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={bool => setAuth(bool)} /> : (
+            <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={(bool, lastLogin) => {setAuth(bool); setLastLogin(lastLogin)}} /> : (
             <Accordion bsPrefix="util" defaultActiveKey="0">
                 {tabs.map((t,i) => 
                     <Card key={t.id}>
@@ -92,6 +92,9 @@ function BackendUpdate(props) {
                         </Accordion.Collapse>
                     </Card>                                
                 )}
+                <div className="footer">
+                Last login: {lastLogin}
+                </div>
             </Accordion>                
             )
           }

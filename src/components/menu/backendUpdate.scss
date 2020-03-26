@@ -1,10 +1,10 @@
 .backendUpdate {
   .modal-title {
-    color: #fff;
-    font-size: 1.5rem !important;
+    color: #000;
+    text-shadow: 1px 1px #f5f5f5;
     .fa {
       color: #000;
-      font-size: 2rem;
+      font-size: 1.4rem;
       cursor: pointer;
     }
   }
@@ -16,7 +16,7 @@
     padding: 0;
     .head {
       font-weight: 600;
-      color: #c2da06 !important;
+      color: #bad900 !important;
       font-size: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -24,7 +24,7 @@
       padding-right: 20px;
       &:before {
         font-size: 5rem;
-        color: #c2da06;
+        color: #bad900;
       }
     }
     .submit {
@@ -40,7 +40,7 @@
         color: #000;
         cursor: pointer;
         &.good {
-          color: #c2da06;
+          color: #bad900;
         }
         &.bad {
           color: #ec7070;
@@ -49,11 +49,11 @@
     }
     .backendConfigureSection {
       .heading {
-        color: #c2d82e;
+        color: #bad900;
         font-weight: 600;
       }
       .header {
-        color: #c2d82e;
+        color: #bad900;
       }
       .fa {
         font-size: 2.2rem;
@@ -75,6 +75,15 @@
           display: none;
         }
       }
+    }
+    .footer {
+      padding: 12px 5px;
+      text-align: right;
+      background: #bad900;
+      color: #000;
+      text-shadow: 1px 1px #f5f5f5;
+      font-size: 12px;
+      font-style: italic;
     }
   }
 }

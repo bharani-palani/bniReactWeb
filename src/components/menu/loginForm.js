@@ -27,7 +27,7 @@ function LoginForm(props) {
           setLoader(false);
           setStatus(response.data.response.status);
           setAuth(response.data.response.status === "Valid user");
-          props.validate(response.data.response.status === "Valid user");
+          props.validate(response.data.response.status === "Valid user", response.data.response.lastLogin);
         })
         .catch(error => console.error(error));
     } else {

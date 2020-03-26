@@ -22,6 +22,8 @@
 | a PHP script and you can easily do that on your own.
 |
 */
+date_default_timezone_set('Asia/Kolkata');
+
 $host = $_SERVER['HTTP_HOST'];
 if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') { // if ssl connection
     $ssl_set = "s";

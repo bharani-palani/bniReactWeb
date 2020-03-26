@@ -31,8 +31,19 @@ class home_model extends CI_Model
     {
         $query = $this->db->get_where('login', array("user_name" => $post['username'], 'password' => md5($post['password'])));
         if($query->num_rows > 0) {
-            // update login time
-            return array("status" => "Valid user");
+            foreach ($query->result() as $row)
+            {
+                $current_login = $row->current_login;
+            }
+            $data = array(
+                'last_login' => $current_login,
+                'current_login' => date('Y-m-d H:i:s')
+             );
+ 
+            $this->db->where('user_id', 1);
+            $this->db->update('login', $data); 
+            
+            return array("status" => "Valid user", "lastLogin" => $current_login);
         } else {
             return array("status" => "Invalid user or password");
         }
