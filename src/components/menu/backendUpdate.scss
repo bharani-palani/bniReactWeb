@@ -16,7 +16,7 @@
     padding: 0;
     .head {
       font-weight: 600;
-      color: #bad900 !important;
+      color: #c2d82e !important;
       font-size: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -40,7 +40,7 @@
         color: #000;
         cursor: pointer;
         &.good {
-          color: #bad900;
+          color: #c2d82e;
         }
         &.bad {
           color: #ec7070;
@@ -49,11 +49,11 @@
     }
     .backendConfigureSection {
       .heading {
-        color: #bad900;
+        color: #c2d82e;
         font-weight: 600;
       }
       .header {
-        color: #bad900;
+        color: #c2d82e;
       }
       .fa {
         font-size: 2.2rem;
@@ -79,7 +79,7 @@
     .footer {
       padding: 12px 5px;
       text-align: right;
-      background: #bad900;
+      background: #c2d82e;
       color: #000;
       text-shadow: 1px 1px #f5f5f5;
       font-size: 12px;
