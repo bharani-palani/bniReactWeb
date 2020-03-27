@@ -9,6 +9,12 @@ function SignInForm(props) {
     props.onCredentialUpdate({ username, password });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[password, username]);
+
+  const onEnter = (e) => {
+    if(e.which === 13 || e.keyCode === 13) {
+      props.onEnter(true);
+    }
+  }
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -18,7 +24,8 @@ function SignInForm(props) {
           type="text"
           id="username"
           className="form-control"
-        />
+          onKeyDown={(e) => onEnter(e)}
+          />
       </div>
       <div className="col-lg-12">
         <div className="form-group">
@@ -29,8 +36,9 @@ function SignInForm(props) {
               type={!type ? "password" : "text"}
               id="password"
               className="form-control"
+              onKeyDown={(e) => onEnter(e)}
             />
-            <i onClick={() => setType(!type)} className="fa fa-eye" />
+            <i onClick={() => setType(!type)} className={`fa fa-${!type ? "eye" : "eye-slash"}`} />
           </div>
         </div>
         <div className="form-group">

@@ -73,7 +73,7 @@ class Awards extends React.Component {
                       <i className="fi-tech-shield-6"></i>
                       <p>
                         {this.state.awardsHeading
-                          ? this.state.awardsHeading.awardValue
+                          ? this.state.awardsHeading.award_value
                           : null}
                       </p>
                     </div>

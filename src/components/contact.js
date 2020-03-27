@@ -10,13 +10,15 @@ import {
 } from "react-google-maps";
 import Breadcrumbs from "./breadcrumb";
 
+const [lat, lng, apiKey] = [13.057368, 80.239783, "AIzaSyAHINg0FZK_OCJVCdxQJ1kQwcVUUUBNQ2k"];
+
 const MapWithAMarker = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
       defaultZoom={16}
-      defaultCenter={{ lat: 13.057368, lng: 80.239783 }}
+      defaultCenter={{ lat, lng }}
     >
-      <Marker position={{ lat: 13.057368, lng: 80.239783 }} />
+      <Marker onClick={props.onMarkerClick} position={{ lat, lng }} />
     </GoogleMap>
   ))
 );
@@ -41,6 +43,36 @@ class Contact extends React.Component {
       })
       .catch(error => console.log(error))
       .finally(() => 1);
+  }
+  initMap = () => {
+    
+     const [address1, address2, city, state, postcode] = ["7/4, Corporation School Rd",
+      "Lake Area, Nungambakkam",
+      "Chennai",
+      "Tamil Nadu",
+      "600034"];
+    const str = `${address1} ${address2} ${city} ${state} ${postcode}`;
+    let directionsUrl = "";
+    switch(true) {
+            case (/ipad|iphone|ipod/i.test(navigator.userAgent.toLowerCase())):
+                directionsUrl = `maps:?saddr=Current Location&daddr=${str}`;
+                break;
+            case (/windows phone 7/i.test(navigator.userAgent.toLowerCase())):
+                directionsUrl = `maps:${str}`;
+                break;
+            case (/windows phone 8/i.test(navigator.userAgent.toLowerCase())):
+                directionsUrl = `bingmaps:?where=${str}`;
+                break;
+            case (/android/i.test(navigator.userAgent.toLowerCase())):
+                directionsUrl = `geo:${str}`;
+                break;
+            case (/blackberry/i.test(navigator.userAgent.toLowerCase())):
+                directionsUrl = `javascript:blackberry.launch.newMap({'address':{${str}}})`;
+                break;
+            default:
+                directionsUrl = `https://maps.google.com?q=${lat},${lng}`;
+        }
+    window.open(directionsUrl);
   }
   render() {
     document.title = "Bharani | Contact";
@@ -106,10 +138,11 @@ class Contact extends React.Component {
                 <div className="col-lg-7">
                   <p className="contactLabel"><big>Reach me <i className="fa fa-car" /></big></p>
                   <MapWithAMarker
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHINg0FZK_OCJVCdxQJ1kQwcVUUUBNQ2k&v=3.exp&libraries=geometry,drawing,places"
+                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `400px` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
+                    onMarkerClick={() => this.initMap()}
                   />
                 </div>
               </div>

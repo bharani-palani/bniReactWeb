@@ -76,6 +76,7 @@ function LoginForm(props) {
               setStatus("")
             }}
             onCredentialUpdate={obj => setCobj(obj)}
+            onEnter={bool => bool ? validateUser() : false}
           />
         ) : (
           <ForgotForm onCredentialUpdate={obj => setFobj(obj)} />
