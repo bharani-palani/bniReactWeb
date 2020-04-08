@@ -3,6 +3,7 @@ import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
 import Breadcrumbs from "./breadcrumb";
+import baseUrl from "../environment";
 
 class Technologies extends React.Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class Technologies extends React.Component {
                         <div className="post-media">
                           {t.tech_image_url ? (
                             <img
-                              src={require(`../images/technology/${t.tech_image_url}.png`)}
+                              src={`${baseUrl()}/image/actualAvatar/technology/${t.tech_image_url}`}
                               alt=""
                               className="img-responsive"
                             />
@@ -118,7 +119,7 @@ class Technologies extends React.Component {
                     <div className="post-media">
                       {t.tech_image_url ? (
                         <img
-                          src={require(`../images/technology/${t.tech_image_url}.png`)}
+                          src={`${baseUrl()}/image/actualAvatar/technology/${t.tech_image_url}`}
                           alt=""
                           className="img-responsive"
                         />
@@ -155,7 +156,7 @@ class Technologies extends React.Component {
                             height: "100px",
                             margin: "0 auto"
                           }}
-                          src={require(`../images/ide/${ide.ide_image_url}`)}
+                          src={`${baseUrl()}/image/actualAvatar/ide/${ide.ide_image_url}`}
                           alt=""
                           className="img-responsive"
                         />
@@ -195,7 +196,7 @@ class Technologies extends React.Component {
                             height: "100px",
                             margin: "0 auto"
                           }}
-                          src={require(`../images/technology/${os.os_image_url}`)}
+                          src={`${baseUrl()}/image/actualAvatar/technology/${os.os_image_url}`}
                           alt=""
                           className="img-responsive"
                         />

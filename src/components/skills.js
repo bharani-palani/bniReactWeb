@@ -7,6 +7,7 @@ import Breadcrumbs from "./breadcrumb";
 import Loader from "react-loader-spinner";
 import apiInstance from "../apiServices";
 import helpers from "../helpers";
+import baseUrl from "../environment";
 
 class Skills extends React.Component {
   constructor(props) {
@@ -22,11 +23,11 @@ class Skills extends React.Component {
       .get("/skills")
       .then(response => {
         const [skillsHeading, skillsList] = helpers.sageHeaderAndList(
-            response.data.response,
-            "skill_sort"
-          );
-          that.setState({ skills: skillsList, skillsHeading });
-        })
+          response.data.response,
+          "skill_sort"
+        );
+        that.setState({ skills: skillsList, skillsHeading });
+      })
       .catch(error => console.log(error))
       .finally(() => 1);
   }
@@ -61,7 +62,9 @@ class Skills extends React.Component {
                   <hr />
                   <i className="fi-tech-gamepad-1"></i>
                   <p>
-                    {this.state.skillsHeading ? this.state.skillsHeading.skill_value : null}
+                    {this.state.skillsHeading
+                      ? this.state.skillsHeading.skill_value
+                      : null}
                   </p>
                 </div>
               </div>
@@ -75,7 +78,7 @@ class Skills extends React.Component {
                   >
                     <div className="post-media col-lg-4 col-md-6">
                       <img
-                        src={require(`../images/skills/${skills.skill_image_url}`)}
+                        src={`${baseUrl()}/image/actualAvatar/skills/${skills.skill_image_url}`}
                         alt=""
                         className="img-responsive lefty"
                       />
