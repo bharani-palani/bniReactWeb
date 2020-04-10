@@ -42,26 +42,27 @@ class About extends React.Component {
         })
     }
     render() {
+        const {about, images} = this.state;
         document.title = "Bharani | About";
         return (
             <div className="video-section">
                 <div className="overlay" />
                 {
-                    this.state.about && this.state.about.display_name && this.state.about.profile_name ?
+                    about && about.display_name && about.profile_name && images.length > 0 ?
                     <div className="home-text-wrapper">
                         <div className="home-message">
                             {
-                                this.state.images && this.state.images.length > 0 &&
+                                images && images.length > 0 &&
                                 <Gallery 
-                                    images={this.state.images}
+                                    images={images}
                                     enableImageSelection={false}
                                     margin={0}
                                     rowHeight={250}
                                 />
                             }
                             <div className="nameHeading">
-                                <p>{this.state.about.display_name}</p>
-                                <div className="skillset">{this.state.about.profile_name}</div>
+                                <p>{about.display_name}</p>
+                                <div className="skillset">{about.profile_name}</div>
                             </div>
                         </div>
                     </div>
