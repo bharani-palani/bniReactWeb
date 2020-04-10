@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
 import BackendUpdate from "./backendUpdate";
+import baseUrl from "../../environment";
 import "./menu.scss";
 
 class Menu extends React.Component {
@@ -157,7 +158,7 @@ class Menu extends React.Component {
                 <Link onClick={this.onNavBarClose} to={"/"}>
                   <img
                     className="mobLogoImg "
-                    src={`http://localhost/bni-react-web/services/image/actualAvatar/avatar/bniBlack.png`}
+                    src={`${baseUrl()}/image/actualAvatar/avatar/bniBlack.png`}
                     alt=""
                   />
                   <div className="mobLogoCaption">Bharani</div>
@@ -214,7 +215,7 @@ class Menu extends React.Component {
                 <div className="logo">
                   <Link to={"/"}>
                     <img
-                      src={`http://localhost/bni-react-web/services/image/actualAvatar/avatar/bniBlack.png`}
+                      src={`${baseUrl()}/image/actualAvatar/avatar/bniBlack.png`}
                       alt=""
                     />
                   </Link>

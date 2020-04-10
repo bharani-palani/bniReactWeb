@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner'
 import helpers from "../helpers";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Gallery from 'react-grid-gallery'; 
+import baseUrl from "../environment";
 
 class About extends React.Component {
     constructor(props) {
@@ -30,8 +31,8 @@ class About extends React.Component {
         apiInstance.get("/getImages").then(response => {
             const images = response.data.response.map((r,i) => {
                 return {
-                    src: `http://localhost/bni-react-web/services/image/actualAvatar/avatar/${r.image_url}`,
-                    thumbnail: `http://localhost/bni-react-web/services/image/actualAvatar/avatar/${r.image_url}`,
+                    src: `${baseUrl()}/image/actualAvatar/avatar/${r.image_url}`,
+                    thumbnail: `${baseUrl()}/image/actualAvatar/avatar/${r.image_url}`,
                     thumbnailWidth: 250,
                     thumbnailHeight: 200,
                     isSelected: false,
