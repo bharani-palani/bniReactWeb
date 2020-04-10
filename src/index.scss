@@ -127,12 +127,15 @@ code {
     }
   }
 }
-/* Landscape phones and portrait tablets */
+/* Landscape phones and portrait phones */
 @media (max-width: 767px) {
   @for $i from 1 through 12 {
     .#{"grid"}-#{$i} {
       grid-template-columns: auto;
     }
+  }
+  .ReactGridGallery {
+    margin-top: 6rem;
   }
 }
 .capitalize {
