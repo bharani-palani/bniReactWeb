@@ -3,7 +3,7 @@ import apiInstance from "../apiServices";
 import Loader from 'react-loader-spinner'
 import helpers from "../helpers";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+import Gallery from 'react-grid-gallery'; 
 
 class About extends React.Component {
     constructor(props) {
@@ -15,17 +15,31 @@ class About extends React.Component {
     }
     componentDidMount() {
         const that = this;
-        const params = new URLSearchParams();
-        params.append('param1', 'value1');
-        params.append('param2', 'value2');
-        apiInstance.get("/", params).then(response => {
+        apiInstance.get("/").then(response => {
             that.setState({
-                about: response.data.response[0],
-                images: response.data.images
+                about: response.data.response[0]
+            },() => {
+                that.getAvatarImages()
             });
         })
         .catch(error => console.log(error))
         .finally(() => 1);
+    }
+    getAvatarImages = () => {
+        const that = this;
+        apiInstance.get("/getImages").then(response => {
+            const images = response.data.response.map((r,i) => {
+                return {
+                    src: `http://localhost/bni-react-web/services/image/actualAvatar/avatar/${r.image_url}`,
+                    thumbnail: `http://localhost/bni-react-web/services/image/actualAvatar/avatar/${r.image_url}`,
+                    thumbnailWidth: 250,
+                    thumbnailHeight: 200,
+                    isSelected: false,
+                    caption: r.image_url
+                }
+            });
+            that.setState({images});
+        })
     }
     render() {
         document.title = "Bharani | About";
@@ -38,24 +52,12 @@ class About extends React.Component {
                         <div className="home-message">
                             {
                                 this.state.images && this.state.images.length > 0 &&
-                                <Carousel 
-                                    autoPlay={true}
-                                    showArrows={false}
-                                    useKeyboardArrows={true}
-                                    showStatus={false}
-                                    showIndicators={false}
-                                    showThumbs={false}
-                                    infiniteLoop={true}
-                                    stopOnHover={false}
-                                    dynamicHeight={true}
-                                >
-                                {
-                                    this.state.images.map((img,i) => {
-                                        const image = require("../images/avatar/"+img.image_url);
-                                        return img ? <img key={img.image_id} className="cImage" src={image} alt={`Avatar ordered ${img.image_order}`} /> : null;
-                                    })                                        
-                                }
-                                </Carousel>
+                                <Gallery 
+                                    images={this.state.images}
+                                    enableImageSelection={false}
+                                    margin={0}
+                                    rowHeight={250}
+                                />
                             }
                             <div className="nameHeading">
                                 <p>{this.state.about.display_name}</p>

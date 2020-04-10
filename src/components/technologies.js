@@ -205,7 +205,6 @@ class Technologies extends React.Component {
                     </div>
 
                     <div className="process-end text-center">
-                      <h3>Typo's</h3>
                       <p>{os.os_value}</p>
                     </div>
                   </div>

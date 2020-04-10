@@ -18,8 +18,21 @@ class home extends CI_Controller {
 		}
 		if($validate === 1) {
 			$data["response"] = $this->home_model->get_home();
-			$array = $this->home_model->get_images();
-			$this->auth->response($data,array("images" => $array),200);
+			$this->auth->response($data,array(),200);
+		}
+	}
+	public function getImages()
+	{
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = $this->home_model->get_images();
+			$this->auth->response($data,array(),200);
 		}
 	}
 	public function getBackend() {

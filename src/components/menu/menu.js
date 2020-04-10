@@ -157,7 +157,7 @@ class Menu extends React.Component {
                 <Link onClick={this.onNavBarClose} to={"/"}>
                   <img
                     className="mobLogoImg "
-                    src={require("../../images/avatar/bniBlack.png")}
+                    src={`http://localhost/bni-react-web/services/image/actualAvatar/avatar/bniBlack.png`}
                     alt=""
                   />
                   <div className="mobLogoCaption">Bharani</div>
@@ -214,7 +214,7 @@ class Menu extends React.Component {
                 <div className="logo">
                   <Link to={"/"}>
                     <img
-                      src={require("../../images/avatar/bniBlack.png")}
+                      src={`http://localhost/bni-react-web/services/image/actualAvatar/avatar/bniBlack.png`}
                       alt=""
                     />
                   </Link>

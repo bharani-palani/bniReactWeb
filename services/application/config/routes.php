@@ -45,6 +45,7 @@ $route['postBackend'] = 'home/postBackend';
 $route['validateUser'] = 'home/validateUser';
 $route['changePassword'] = 'home/changePassword';
 $route['getBackend'] = 'home/getBackend';
+$route['getImages'] = 'home/getImages';
 $route['technologies'] = 'technologies/technologies/get_all_techs';
 $route['ides'] = 'technologies/technologies/get_all_ides';
 $route['operating-system'] = 'technologies/technologies/get_all_oss';
