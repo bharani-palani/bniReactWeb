@@ -5,6 +5,8 @@ import RandomNumber from "./randomNumber";
 import ArrayDiff from "./arrayDiff";
 import "./utilities.scss";
 import Breadcrumbs from "../breadcrumb";
+import SomeEvery from "./someEvery";
+import Destructure from "./destructure";
 
 class Utilities extends React.Component {
     constructor(props) {
@@ -22,6 +24,14 @@ class Utilities extends React.Component {
                 {
                     heading: "Array Difference",
                     component: <ArrayDiff />
+                },
+                {
+                    heading: "Array Some & Every",
+                    component: <SomeEvery />
+                },
+                {
+                    heading: "Array Of Objects, Map Destructure and Alias Property Name",
+                    component: <Destructure />
                 },
             ]
         }

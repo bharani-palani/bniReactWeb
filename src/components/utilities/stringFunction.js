@@ -4,13 +4,13 @@ const getRandomNumber =
   "\tconst [start, end] = [Number(this.start.current.value), Number(this.end.current.value)]\r\n" +
   "\tconst randomNumber = Math.floor(Math.random() * (end-start+1)) + start;\r\n" +
   "\tthis.setState({randomNumber});\r\n" +
-  "}\r\n";
+  "}";
 
 const getUUID =
   "getUUID = () => { \r\n" +
   "\tconst uuidv1 = require('uuid/v1');\r\n" +
   "\tthis.setState({randomNumber: uuidv1()});\r\n" +
-  "}\r\n";
+  "}";
 
 const onDateConvert =
   "onDateConvert = () => {\r\n" +
@@ -51,7 +51,7 @@ const onDateConvert =
   "\t      this.state.isInc ? 'Increment' : 'Decrement'\r\n" +
   "\t    } Time = ${resultDateformat} `;\r\n" +
   "\t    this.setState({ newDate });\r\n" +
-  "};\r\n";
+  "};";
 
 const onArrayDiff =
 
@@ -64,6 +64,21 @@ const onArrayDiff =
 "\t   const a2 = arr2.filter(a => !arr1.includes(a));\r\n" +
 "\t   const output = [...a1, ...a2];\r\n" +
 "\t   this.setState({ output });\r\n" +
-"};\r\n";
+"};";
 
-export { getRandomNumber, getUUID, onDateConvert, onArrayDiff };
+const onDestruct =   
+"const onDestructure = () => {\r\n" +
+  "\tarrayOfObjects = arrayOfObjects.map(\r\n" +
+  "\t({ name, ...balance }) => ({[propertyName]: name,...balance}));\r\n"+
+"}";
+
+const someEveryCode = 
+"const output = [array.every(a => a === string), array.some(a => a === string)];\r\n"+
+"return output";
+
+const someEveryAdvanced = 
+"const conditions = [];\r\n"+
+"conditions.push(item => criteria.indexOf(array) > -1);\r\n"+
+"const output = mainArray.filter(o => conditions.every(c => c(o)));"
+
+export { getRandomNumber, getUUID, onDateConvert, onArrayDiff, onDestruct, someEveryCode, someEveryAdvanced };

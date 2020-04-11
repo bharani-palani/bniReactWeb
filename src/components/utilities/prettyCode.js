@@ -19,7 +19,7 @@ class PrettyCode extends React.Component {
     str = str.split(/\r?\n/);
     return (
       <>
-        <p className="ml-0 pt-10 pb-10">
+        <div className="ml-0 pt-10 pb-10">
           <div className="grid-pretty eightyPixColumn">
             <div>
               <label onClick={this.handleCheck} htmlFor={`mycheckbox-${random}`}>
@@ -39,7 +39,7 @@ class PrettyCode extends React.Component {
               />
             </div>
           </div>
-        </p>
+        </div>
         {this.state.checked && (
           <pre className="prettyprint lang-html linenums prettyprinted">
             <ol className="linenums">

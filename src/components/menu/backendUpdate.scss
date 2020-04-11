@@ -1,3 +1,5 @@
+$primary-color: #b9c134;
+
 .backendUpdate {
   .modal-title {
     color: #000;
@@ -16,7 +18,7 @@
     padding: 0;
     .head {
       font-weight: 600;
-      color: #c2d82e !important;
+      color: $primary-color !important;
       font-size: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -24,7 +26,7 @@
       padding-right: 20px;
       &:before {
         font-size: 5rem;
-        color: #bad900;
+        color: $primary-color;
       }
     }
     .submit {
@@ -40,7 +42,7 @@
         color: #000;
         cursor: pointer;
         &.good {
-          color: #c2d82e;
+          color: $primary-color;
         }
         &.bad {
           color: #ec7070;
@@ -49,11 +51,11 @@
     }
     .backendConfigureSection {
       .heading {
-        color: #c2d82e;
+        color: $primary-color;
         font-weight: 600;
       }
       .header {
-        color: #c2d82e;
+        color: $primary-color;
       }
       .fa {
         font-size: 2.2rem;
@@ -79,7 +81,7 @@
     .footer {
       padding: 12px 5px;
       text-align: right;
-      background: #c2d82e;
+      background: $primary-color;
       color: #000;
       text-shadow: 1px 1px #f5f5f5;
       font-size: 12px;

@@ -30,7 +30,6 @@ function About() {
       setImages(images);
     });
   };
-
   return (
     <div className="video-section">
       <div className="overlay" />
