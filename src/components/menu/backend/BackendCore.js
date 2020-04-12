@@ -125,7 +125,7 @@ function BackendCore(props) {
       </div>
     </div>
   ) : (
-    <div className="spinner">
+    <div className="relativeSpinner">
       <Loader
         type={helpers.LoadRandomSpinnerIcon()}
         color="#c2d82e"

@@ -6,7 +6,7 @@ import ViewMessages from "./viewMessages";
 import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
-  const [auth, setAuth] = useState(false); // change this to false
+  const [auth, setAuth] = useState(true); // change this to false
   const [collapse, setCollapse] = useState("");
   const [cObj, setCobj] = useState({}); // remove this {msgStat: true} obj
   const tabs = [
@@ -82,7 +82,11 @@ function BackendUpdate(props) {
       <Modal.Body>
           {
             !auth ? 
-            <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={(bool, lastLogin, cObj) => {setAuth(bool); setLastLogin(lastLogin); setCobj(cObj);}} /> : (
+            <LoginForm 
+                ddForgot={b => setShowForgot(b)} 
+                dForgot={showForgot} showForgot={bool => setShowForgot(bool)} 
+                validate={(bool, lastLogin, cObj) => {setAuth(bool); setLastLogin(lastLogin); setCobj(cObj);}} 
+            /> : (
             !cObj.msgStat ? (<Accordion bsPrefix="util" defaultActiveKey="0">
                 {tabs.map((t,i) => 
                     <Card key={t.id}>

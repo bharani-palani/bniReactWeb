@@ -34,6 +34,10 @@ code {
     font-size: 30px !important;
   }
 }
+.relativeSpinner {
+  text-align: center;
+  padding: 1rem;
+}
 .spinner {
   position: fixed;
   top: 50%;
@@ -99,7 +103,7 @@ code {
     }
     color: #fff;
     i {
-      &:before{
+      &:before {
         margin-left: 0;
         font-size: 16px;
       }
@@ -156,5 +160,5 @@ code {
   }
 }
 .capitalize {
-  text-transform:capitalize;
+  text-transform: capitalize;
 }
