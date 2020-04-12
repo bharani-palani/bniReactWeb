@@ -8,13 +8,14 @@ import {
 } from "react-google-maps";
 import { ToastContainer, toast } from "react-toastify";
 
+
 const [lat, lng, apiKey] = [
   13.067439,
   80.237617,
   "AIzaSyAHINg0FZK_OCJVCdxQJ1kQwcVUUUBNQ2k"
 ];
 
-function ViewMessages() {
+function ViewMessages(props) {
   const [comments, setComments] = useState([]);
   useEffect(() => {
     const formdata = new FormData();
@@ -53,9 +54,17 @@ function ViewMessages() {
             <div><i className="fa fa-phone" />&nbsp;<small><a href={`tel:${c.comment_mobile}`}>{c.comment_mobile}</a></small></div>
             <div><i className="fa fa-envelope" />&nbsp;<small><a href={`mailto:${c.comment_email}`}>{c.comment_email}</a></small></div>
             <div><i className="fa fa-clock-o" />&nbsp;<small>{c.comment_time}</small></div>
-            <div><i className="fa fa-microchip" />&nbsp;<small>{c.comment_ip}</small></div>
+            <div>
+                <i className="fa fa-microchip" />&nbsp;<small>{c.comment_ip}</small>
+                <i className="fa fa-trash trash" onClick={() => deleteComment(c)} />
+            </div>
         </div>
     )
+  }
+
+  const deleteComment = c => {
+    let newComments = comments.filter(co => co.comment_id !== c.comment_id)
+    setComments(newComments);
   }
   const onMarkerClick = c => {
     toast.error(commentHtml(c));
