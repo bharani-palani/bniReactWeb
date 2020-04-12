@@ -48,7 +48,8 @@ function ViewMessages() {
   const commentHtml = (c) => {
     return (
         <div>
-            <div><i className="fa fa-comment-o" />&nbsp;{c.comment_description}</div>
+            <div><i className="fi-interface-user" />&nbsp;<small>{c.comment_name}</small></div>
+            <div><i className="fa fa-comment-o" />&nbsp;<small>{c.comment_description}</small></div>
             <div><i className="fa fa-phone" />&nbsp;<small><a href={`tel:${c.comment_mobile}`}>{c.comment_mobile}</a></small></div>
             <div><i className="fa fa-envelope" />&nbsp;<small><a href={`mailto:${c.comment_email}`}>{c.comment_email}</a></small></div>
             <div><i className="fa fa-clock-o" />&nbsp;<small>{c.comment_time}</small></div>

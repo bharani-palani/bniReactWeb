@@ -93,11 +93,17 @@ code {
   }
 }
 .bniToaster {
-  .Toastify__toast--success {
-    background: #a9c106;
-  }
-  .Toastify__toast--error {
+  .Toastify__toast {
+    &.Toastify__toast--success {
+      background: #c2d82e;
+    }
     color: #fff;
+    i {
+      &:before{
+        margin-left: 0;
+        font-size: 16px;
+      }
+    }
     a {
       color: #fff;
       text-decoration: underline !important;
