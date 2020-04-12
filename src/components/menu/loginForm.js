@@ -3,13 +3,13 @@ import apiInstance from "../../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
 import SignInForm from "./signInForm";
-import ForgotForm from "./forgotForm";
+import ChangePassword from "./changePassword";
 
 function LoginForm(props) {
   const [loader, setLoader] = useState(false);
   const [auth, setAuth] = useState(true);
   const [fpass, setFpass] = useState(props.dForgot);
-  const [cObj, setCobj] = useState({ username: "", password: "" });
+  const [cObj, setCobj] = useState({ username: "", password: "", msgStat: false });
   const [fObj, setFobj] = useState({ currentPass: "", newPass:"", repeatPass:"" });
   const [status, setStatus] = useState("");
 
@@ -27,7 +27,7 @@ function LoginForm(props) {
           setLoader(false);
           setStatus(response.data.response.status);
           setAuth(response.data.response.status === "Valid user");
-          props.validate(response.data.response.status === "Valid user", response.data.response.lastLogin);
+          props.validate(response.data.response.status === "Valid user", response.data.response.lastLogin, cObj);
         })
         .catch(error => console.error(error));
     } else {
@@ -79,7 +79,7 @@ function LoginForm(props) {
             onEnter={bool => bool ? validateUser() : false}
           />
         ) : (
-          <ForgotForm onCredentialUpdate={obj => setFobj(obj)} />
+          <ChangePassword onCredentialUpdate={obj => setFobj(obj)} />
         )
       ) : (
         <div className="login-loader">

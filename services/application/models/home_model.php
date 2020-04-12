@@ -89,7 +89,7 @@ class home_model extends CI_Model
                 $query = $this->db->order_by("project_sort","asc")->get('projects');
             break;
             case "public_comments":
-                $query = $this->db->get('public_comments');
+                $query = $this->db->limit(10)->order_by("comment_time","desc")->get('public_comments');
             break;
             case "skills":
                 $query = $this->db->order_by("skill_sort","asc")->get('skills');

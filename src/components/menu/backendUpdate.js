@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Modal, Accordion, Card, Button } from "react-bootstrap";
 import LoginForm from "./loginForm";
 import BackendCore from "./backend/BackendCore";
+import ViewMessages from "./viewMessages";
 import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
   const [auth, setAuth] = useState(false); // change this to false
   const [collapse, setCollapse] = useState("");
+  const [cObj, setCobj] = useState({}); // remove this {msgStat: true} obj
   const tabs = [
     {
         id:1,
@@ -70,14 +72,18 @@ function BackendUpdate(props) {
       <Modal.Header closeButton>
         <Modal.Title>
             <span className="pull-left">{showForgot ? <i onClick={() => setShowForgot(false)} className="fa fa-chevron-circle-left" /> : ""}</span>
-            <span className="pull-left pl-5">Backend Configure</span>
+            <span className="pull-left pl-5">
+            {
+                !cObj.msgStat ? "Backend Configure" : "View Messages"
+            }
+            </span>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
           {
             !auth ? 
-            <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={(bool, lastLogin) => {setAuth(bool); setLastLogin(lastLogin)}} /> : (
-            <Accordion bsPrefix="util" defaultActiveKey="0">
+            <LoginForm ddForgot={b => setShowForgot(b)} dForgot={showForgot} showForgot={bool => setShowForgot(bool)} validate={(bool, lastLogin, cObj) => {setAuth(bool); setLastLogin(lastLogin); setCobj(cObj);}} /> : (
+            !cObj.msgStat ? (<Accordion bsPrefix="util" defaultActiveKey="0">
                 {tabs.map((t,i) => 
                     <Card key={t.id}>
                         <Card.Header>
@@ -95,7 +101,9 @@ function BackendUpdate(props) {
                 <div className="footer">
                 Last login: {lastLogin}
                 </div>
-            </Accordion>                
+            </Accordion>)              
+            :
+            <ViewMessages />
             )
           }
       </Modal.Body>

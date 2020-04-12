@@ -96,6 +96,13 @@ code {
   .Toastify__toast--success {
     background: #a9c106;
   }
+  .Toastify__toast--error {
+    color: #fff;
+    a {
+      color: #fff;
+      text-decoration: underline !important;
+    }
+  }
 }
 .vcard {
   cursor: pointer;

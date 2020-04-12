@@ -4,7 +4,7 @@ import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
 import BackendUpdate from "./backendUpdate";
 import baseUrl from "../../environment";
-import "./menu.scss";
+import "./MainApp.scss";
 
 function MainApp() {
   let myAudio = React.createRef();

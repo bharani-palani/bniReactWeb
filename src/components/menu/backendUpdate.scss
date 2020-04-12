@@ -20,7 +20,7 @@ $primary-color: #b9c134;
       font-weight: 600;
       color: $primary-color !important;
       font-size: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
     i.user {
       padding-right: 20px;
@@ -46,6 +46,16 @@ $primary-color: #b9c134;
         }
         &.bad {
           color: #ec7070;
+        }
+      }
+    }
+    .viewMessages {
+      display: flex;
+      .title {
+        margin-top: -.4rem;
+        margin-left: 1rem;
+        label {
+          cursor: pointer;
         }
       }
     }
