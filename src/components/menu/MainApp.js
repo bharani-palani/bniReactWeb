@@ -97,7 +97,7 @@ function MainApp() {
       event.preventDefault();
       setOpenModal(true);
     });
-    setOpenModal(true); //  change this later
+    // setOpenModal(true); //  comment this later
   }, []);
 
   const onNavBarToggle = () => {

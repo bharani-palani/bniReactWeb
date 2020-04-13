@@ -6,7 +6,7 @@ import ViewMessages from "./viewMessages";
 import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
-  const [auth, setAuth] = useState(true); // change this to false
+  const [auth, setAuth] = useState(false); // change this to false
   const [collapse, setCollapse] = useState("");
   const [cObj, setCobj] = useState({}); // remove this {msgStat: true} obj
   const tabs = [
