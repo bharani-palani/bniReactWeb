@@ -6,13 +6,16 @@ import SignInForm from "./signInForm";
 import ChangePassword from "./changePassword";
 
 function LoginForm(props) {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(false); // change this to false
   const [fpass, setFpass] = useState(props.dForgot);
   const [cObj, setCobj] = useState({ username: "", password: "", msgStat: false });
   const [fObj, setFobj] = useState({ currentPass: "", newPass:"", repeatPass:"" });
   const [status, setStatus] = useState("");
+  const [loader, setLoader] = useState(false);
+
 
   const validateUser = () => {
+    setLoader(true);
     if(!fpass) {
       const formdata = new FormData();
       formdata.append("username", cObj.username);
@@ -62,7 +65,7 @@ function LoginForm(props) {
         {!fpass ? "Sign In" : "Change Password"}
         <div><span className={`label label-${status === "Password successfully changed" ? "success" : "danger"}`}>{status}</span></div>
       </div>
-      {!auth ? (
+      {!auth && !loader ? (
         !fpass ? (
           <SignInForm
             showForgot={bool => {
