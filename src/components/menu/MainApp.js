@@ -83,14 +83,15 @@ function MainApp() {
     const nav = document.getElementsByTagName("nav")[0];
     nav.addEventListener("touchmove", function(event) {
       event.preventDefault();
-      const halfWidth = event.path[0].clientWidth / 2;
-      if (
-        event.touches[0].clientX > halfWidth &&
-        event.touches[0].clientX < halfWidth + 10
-      ) {
-        setOpenModal(true);
-      }
-    }, { passive: false });
+      setOpenModal(true);
+      // const halfWidth = event.path[0].clientWidth / 2;
+      // if (
+      //   event.touches[0].clientX > halfWidth &&
+      //   event.touches[0].clientX < halfWidth + 10
+      // ) {
+      //   setOpenModal(true);
+      // }
+    });
 
     const div = document.getElementsByClassName("vertical-header-wrapper")[0];
     div.addEventListener("touchmove", function(event) {
