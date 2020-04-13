@@ -6,16 +6,13 @@ import SignInForm from "./signInForm";
 import ChangePassword from "./changePassword";
 
 function LoginForm(props) {
-  const [loader, setLoader] = useState(false);
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
   const [fpass, setFpass] = useState(props.dForgot);
   const [cObj, setCobj] = useState({ username: "", password: "", msgStat: false });
   const [fObj, setFobj] = useState({ currentPass: "", newPass:"", repeatPass:"" });
   const [status, setStatus] = useState("");
 
   const validateUser = () => {
-    setLoader(true);
-    setAuth(true);
     if(!fpass) {
       const formdata = new FormData();
       formdata.append("username", cObj.username);
@@ -24,7 +21,6 @@ function LoginForm(props) {
       apiInstance
         .post("/validateUser", formdata)
         .then(response => {
-          setLoader(false);
           setStatus(response.data.response.status);
           setAuth(response.data.response.status === "Valid user");
           props.validate(response.data.response.status === "Valid user", response.data.response.lastLogin, cObj);
@@ -39,7 +35,6 @@ function LoginForm(props) {
       apiInstance
         .post("/changePassword", formdata)
         .then(response => {
-          setLoader(false);
           setStatus(response.data.response.status);
           setAuth(response.data.response.status === "Password successfully changed");
           setFpass(false);
@@ -67,7 +62,7 @@ function LoginForm(props) {
         {!fpass ? "Sign In" : "Change Password"}
         <div><span className={`label label-${status === "Password successfully changed" ? "success" : "danger"}`}>{status}</span></div>
       </div>
-      {!loader ? (
+      {!auth ? (
         !fpass ? (
           <SignInForm
             showForgot={bool => {

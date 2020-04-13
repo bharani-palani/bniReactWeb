@@ -4,4 +4,6 @@ const baseUrl = () => {
     return process.env.NODE_ENV === "development" ? dev : prod;
 };
 
-export default baseUrl;
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.By2r2BwheJsbrEGrHOaMQwrrmlY7wHVFzWtuEmv39fM";
+
+export {baseUrl, token};

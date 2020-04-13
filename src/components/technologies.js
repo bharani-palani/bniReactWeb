@@ -3,7 +3,7 @@ import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
 import Breadcrumbs from "./breadcrumb";
-import baseUrl from "../environment";
+import {baseUrl} from "../environment";
 
 class Technologies extends React.Component {
   constructor(props) {

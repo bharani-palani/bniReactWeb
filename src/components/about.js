@@ -3,7 +3,7 @@ import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
 import Gallery from "react-grid-gallery";
-import baseUrl from "../environment";
+import {baseUrl} from "../environment";
 import AppContext from "../AppContext";
 
 function About() {
@@ -13,7 +13,8 @@ function About() {
   useEffect(() => {
     document.title = "Bharani | About";
     getAvatarImages();
-  }, [about]);
+    setAbout(about);
+  });
 
   const getAvatarImages = () => {
     apiInstance.get("/getImages").then(response => {

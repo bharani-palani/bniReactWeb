@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
 import BackendUpdate from "./backendUpdate";
-import baseUrl from "../../environment";
+import {baseUrl} from "../../environment";
 import "./MainApp.scss";
 
 function MainApp() {
@@ -84,13 +84,6 @@ function MainApp() {
     nav.addEventListener("touchmove", function(event) {
       event.preventDefault();
       setOpenModal(true);
-      // const halfWidth = event.path[0].clientWidth / 2;
-      // if (
-      //   event.touches[0].clientX > halfWidth &&
-      //   event.touches[0].clientX < halfWidth + 10
-      // ) {
-      //   setOpenModal(true);
-      // }
     });
 
     const div = document.getElementsByClassName("vertical-header-wrapper")[0];

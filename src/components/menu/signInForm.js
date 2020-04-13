@@ -5,12 +5,13 @@ function SignInForm(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState(false);
-  const [msgStat, setMsgStat] = useState(false);
+  const viewModes = ["Configure", "Messages", "Resume"];
+  const [viewMode, setViewMode] = useState("Configure");
 
   useEffect(() => {
-    props.onCredentialUpdate({ username, password, msgStat });
+    props.onCredentialUpdate({ username, password, viewMode });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [password, username, msgStat]);
+  }, [password, username, viewMode]);
 
   const onEnter = e => {
     if (e.which === 13 || e.keyCode === 13) {
@@ -47,22 +48,25 @@ function SignInForm(props) {
           </div>
         </div>
         <div className="viewMessages mb-5">
-          <div>
-            <Switch
-              onColor="#c2d82e"
-              offColor="#333"
-              checkedIcon={false}
-              uncheckedIcon={false}
-              height={15}
-              width={30}
-              onChange={() => setMsgStat(!msgStat)}
-              checked={msgStat}
-            />
-          </div>
-          <div className="title">
-            <label onClick={() => setMsgStat(!msgStat)}>View Messages</label>
-          </div>
+          {viewModes.map((view,i) => (
+              <div key={i} className="text-center">
+                <Switch
+                  onColor="#c2d82e"
+                  offColor="#333"
+                  checkedIcon={false}
+                  uncheckedIcon={false}
+                  height={15}
+                  width={35}
+                  onChange={() => setViewMode(view)}
+                  checked={viewMode === view}
+                />
+                <div className="title">
+                  <label onClick={() => setViewMode(view)}>{view}</label>
+                </div>
+              </div>
+          ))}
         </div>
+
         <div className="form-group">
           <button onClick={() => props.showForgot(true)} className="btn-bni-sm">
             Change Password

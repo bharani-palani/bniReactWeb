@@ -7,7 +7,7 @@ import Breadcrumbs from "./breadcrumb";
 import Loader from "react-loader-spinner";
 import apiInstance from "../apiServices";
 import helpers from "../helpers";
-import baseUrl from "../environment";
+import {baseUrl} from "../environment";
 
 class Skills extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-$primary-color: #b9c134;
+$primary-color: #c2d82e;
 
 .backendUpdate {
   .modal-title {
@@ -50,7 +50,10 @@ $primary-color: #b9c134;
       }
     }
     .viewMessages {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto auto auto;
+      height: 7.5rem;
+      align-items: center;
       .title {
         margin-top: -.4rem;
         margin-left: 1rem;

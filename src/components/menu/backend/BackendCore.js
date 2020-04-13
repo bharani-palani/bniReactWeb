@@ -25,7 +25,7 @@ function BackendCore(props) {
       .catch(error => {
         console.log(error);
       });
-  }, []);
+  }, [Table, TableRows]);
 
   const updateDbData = (index, data) => {
     const { i, j } = index;

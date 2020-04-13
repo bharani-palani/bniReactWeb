@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import apiInstance from "../../apiServices";
 import {
   withScriptjs,
