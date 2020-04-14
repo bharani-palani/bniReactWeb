@@ -91,7 +91,7 @@ function MainApp() {
       event.preventDefault();
       setOpenModal(true);
     });
-    setOpenModal(true); //  comment this later
+    // setOpenModal(true); //  comment this later
   }, []);
 
   const onNavBarToggle = () => {
@@ -160,7 +160,7 @@ function MainApp() {
               <Link onClick={onNavBarClose} to={"/"}>
                 <img
                   className="mobLogoImg "
-                  src={`${baseUrl()}/image/actualAvatar/avatar/bniBlack.png`}
+                  src={`${baseUrl()}/image/actualAvatar/avatar/bniBlack.jpg`}
                   alt=""
                 />
                 <div className="mobLogoCaption">Bharani</div>
@@ -217,7 +217,7 @@ function MainApp() {
               <div className="logo">
                 <Link to={"/"}>
                   <img
-                    src={`${baseUrl()}/image/actualAvatar/avatar/bniBlack.png`}
+                    src={`${baseUrl()}/image/actualAvatar/avatar/bniBlack.jpg`}
                     alt=""
                   />
                 </Link>

@@ -9,44 +9,38 @@ import AppContext from "../AppContext";
 function About() {
   const [about, setAbout] = useContext(AppContext);
   const [images, setImages] = useState([]);
+  const [height, setheight] = useState(window.innerHeight);
+  const [width, setWidth] = useState('100%');
 
   useEffect(() => {
     document.title = "Bharani | About";
-    getAvatarImages();
-    setAbout(about);
+    // setAbout(about);
   });
 
-  const getAvatarImages = () => {
-    apiInstance.get("/getImages").then(response => {
-      const images = response.data.response.map((r, i) => {
-        return {
-          src: `${baseUrl()}/image/actualAvatar/avatar/${r.image_url}`,
-          thumbnail: `${baseUrl()}/image/actualAvatar/avatar/thumb/${r.image_url}`,
-          thumbnailWidth: 250,
-          thumbnailHeight: 200,
-          isSelected: false,
-          caption: r.image_url
-        };
-      });
-      setImages(images);
-    });
-  };
+  window.addEventListener('resize', () => {
+    setheight(window.innerHeight);
+    setWidth('100%');
+  });
   return (
     <div className="video-section">
       <div className="overlay" />
       {about &&
       about.display_name &&
-      about.profile_name &&
-      images &&
-      images.length > 0 ? (
+      about.profile_name ? (
         <div className="home-text-wrapper">
           <div className="home-message">
-            <Gallery
-              images={images}
-              enableImageSelection={false}
-              margin={0}
-              rowHeight={250}
-            />
+            <div className="visible-lg">
+              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/desktop.png`} className="img-responsive" alt="desktop" />
+            </div>
+            <div className="visible-md">
+              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/tablet.png`} className="img-responsive" alt="tablet" />
+            </div>
+            <div className="visible-sm">
+              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/tablet.png`} className="img-responsive" alt="tablet" />
+            </div>
+            <div className="visible-xs mt-60">
+              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/avatar/bniGreyCoat.jpg`} className="img-responsive" alt="mobile" />
+            </div>
             <div className="nameHeading">
               <p>{about.display_name}</p>
               <div className="skillset">{about.profile_name}</div>
