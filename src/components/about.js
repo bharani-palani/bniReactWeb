@@ -30,13 +30,13 @@ function About() {
         <div className="home-text-wrapper">
           <div className="home-message">
             <div className="visible-lg">
-              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/desktop.png`} className="img-responsive" alt="desktop" />
+              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/desktop.jpg`} className="img-responsive" alt="desktop" />
             </div>
             <div className="visible-md">
-              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/tablet.png`} className="img-responsive" alt="tablet" />
+              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/tablet.jpg`} className="img-responsive" alt="tablet" />
             </div>
             <div className="visible-sm">
-              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/tablet.png`} className="img-responsive" alt="tablet" />
+              <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/collage/tablet.jpg`} className="img-responsive" alt="tablet" />
             </div>
             <div className="visible-xs mt-60">
               <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/avatar/bniGreyCoat.jpg`} className="img-responsive" alt="mobile" />
