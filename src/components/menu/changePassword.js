@@ -6,7 +6,7 @@ function ChangePassword(props) {
   const [repeatPass, setRepeatPass] = useState("");
 
   useEffect(() => {
-    props.onCredentialUpdate({ currentPass, newPass, repeatPass });
+    props.onCredentialUpdate({ currentPass, newPass, repeatPass, viewMode: "Configure"});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPass, newPass, repeatPass]);
 

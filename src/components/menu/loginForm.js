@@ -6,9 +6,9 @@ import SignInForm from "./signInForm";
 import ChangePassword from "./changePassword";
 
 function LoginForm(props) {
-  const [auth, setAuth] = useState(false); // change this to false
+  // const [auth, setAuth] = useState(false); // change this to false
   const [fpass, setFpass] = useState(props.dForgot);
-  const [cObj, setCobj] = useState({ username: "", password: "", msgStat: false });
+  const [cObj, setCobj] = useState({ username: "", password: "" });
   const [fObj, setFobj] = useState({ currentPass: "", newPass:"", repeatPass:"" });
   const [status, setStatus] = useState("");
   const [loader, setLoader] = useState(false);
@@ -24,8 +24,9 @@ function LoginForm(props) {
       apiInstance
         .post("/validateUser", formdata)
         .then(response => {
+          setLoader(false);
           setStatus(response.data.response.status);
-          setAuth(response.data.response.status === "Valid user");
+          // setAuth(response.data.response.status === "Valid user");
           props.validate(response.data.response.status === "Valid user", response.data.response.lastLogin, cObj);
         })
         .catch(error => console.error(error));
@@ -38,10 +39,11 @@ function LoginForm(props) {
       apiInstance
         .post("/changePassword", formdata)
         .then(response => {
+          setLoader(false);
           setStatus(response.data.response.status);
-          setAuth(response.data.response.status === "Password successfully changed");
+          // setAuth(response.data.response.status === "Password successfully changed");
           setFpass(false);
-          props.validate(false);
+          props.validate(false, "", fObj);
           props.ddForgot(false);
         })
         .catch(error => console.error(error));
@@ -65,7 +67,7 @@ function LoginForm(props) {
         {!fpass ? "Sign In" : "Change Password"}
         <div><span className={`label label-${status === "Password successfully changed" ? "success" : "danger"}`}>{status}</span></div>
       </div>
-      {!auth && !loader ? (
+      {!loader ? (
         !fpass ? (
           <SignInForm
             showForgot={bool => {
@@ -77,7 +79,7 @@ function LoginForm(props) {
             onEnter={bool => bool ? validateUser() : false}
           />
         ) : (
-          <ChangePassword onCredentialUpdate={obj => setFobj(obj)} />
+          <ChangePassword onCredentialUpdate={obj => {setFobj(obj)}} />
         )
       ) : (
         <div className="login-loader">

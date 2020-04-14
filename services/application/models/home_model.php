@@ -60,7 +60,7 @@ class home_model extends CI_Model
                 return array("status" => "Password change failed");
             }
         } else {
-            return array("status" => "User not found");
+            return array("status" => "Invalid User");
         }
     }
     function getBackend($post) {

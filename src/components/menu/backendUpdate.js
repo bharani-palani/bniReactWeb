@@ -10,7 +10,7 @@ import "./backendUpdate.scss";
 function BackendUpdate(props) {
   const [auth, setAuth] = useState(false); // change this to false
   const [collapse, setCollapse] = useState("");
-  const [cObj, setCobj] = useState({}); // remove this {viewMode: "Messages"} obj
+  const [cObj, setCobj] = useState({viewMode: "Configure"}); // remove this {viewMode: "Messages"} obj
   const [showForgot, setShowForgot] = useState(false);
   const [lastLogin, setLastLogin] = useState("");
   return (
@@ -33,7 +33,7 @@ function BackendUpdate(props) {
           {!auth && (<LoginForm 
             ddForgot={b => setShowForgot(b)} 
             dForgot={showForgot} showForgot={bool => setShowForgot(bool)} 
-            validate={(bool, lastLogin, cObj) => {setAuth(bool); setLastLogin(lastLogin); setCobj(cObj);}} 
+            validate={(bool, lastLogin, cObj) => { setAuth(bool); setLastLogin(lastLogin); setCobj(cObj);}} 
           />)}
           {auth && cObj.viewMode === "Configure" && (
             <Accordion bsPrefix="util" defaultActiveKey="0">
