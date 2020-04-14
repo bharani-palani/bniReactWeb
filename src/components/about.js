@@ -21,7 +21,7 @@ function About() {
       const images = response.data.response.map((r, i) => {
         return {
           src: `${baseUrl()}/image/actualAvatar/avatar/${r.image_url}`,
-          thumbnail: `${baseUrl()}/image/actualAvatar/avatar/${r.image_url}`,
+          thumbnail: `${baseUrl()}/image/actualAvatar/avatar/thumb/${r.image_url}`,
           thumbnailWidth: 250,
           thumbnailHeight: 200,
           isSelected: false,
