@@ -49,7 +49,7 @@ function SignInForm(props) {
         </div>
         <div className="viewMessages mb-5">
           {viewModes.map((view,i) => (
-              <div key={i} className="text-center">
+              <div key={i} className="text-center column">
                 <Switch
                   onColor="#c2d82e"
                   offColor="#333"

@@ -50,10 +50,14 @@ $primary-color: #c2d82e;
       }
     }
     .viewMessages {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      // display: grid;
+      // grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
       height: 7.5rem;
       align-items: center;
+      .column {
+        width: 33.33%;
+      }
       .title {
         margin-top: -.4rem;
         margin-left: 1rem;
