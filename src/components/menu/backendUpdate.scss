@@ -51,7 +51,7 @@ $primary-color: #c2d82e;
     }
     .viewMessages {
       display: grid;
-      grid-template-columns: auto auto auto;
+      grid-template-columns: 1fr 1fr 1fr;
       height: 7.5rem;
       align-items: center;
       .title {

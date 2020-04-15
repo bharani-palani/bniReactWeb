@@ -133,7 +133,7 @@ code {
   }
 }
 /* Landscape tablets and medium desktops */
-@media (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
   @for $i from 1 through 12 {
     .#{"grid"}-#{$i} {
       grid-template-columns: 50px repeat(#{($i)-1}, auto);
@@ -141,7 +141,7 @@ code {
   }
 }
 /* Portrait tablets and small desktops */
-@media (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   @for $i from 1 through 12 {
     .#{"grid"}-#{$i} {
       grid-template-columns: auto;
@@ -149,14 +149,11 @@ code {
   }
 }
 /* Landscape phones and portrait phones */
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   @for $i from 1 through 12 {
     .#{"grid"}-#{$i} {
       grid-template-columns: auto;
     }
-  }
-  .ReactGridGallery {
-    margin-top: 6rem;
   }
 }
 .capitalize {
