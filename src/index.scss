@@ -131,6 +131,12 @@ code {
     column-gap: 0.5rem;
     align-items: center;
   }
+  .#{"equal-grid"}-#{$i} {
+    display: grid;
+    word-wrap: break-word;
+    word-break: break-all;
+    grid-template-columns: repeat(#{($i)}, auto);
+  }
 }
 /* Landscape tablets and medium desktops */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -153,6 +159,9 @@ code {
   @for $i from 1 through 12 {
     .#{"grid"}-#{$i} {
       grid-template-columns: auto;
+    }
+    .#{"equal-grid"}-#{$i} {
+      grid-template-columns: repeat(#{($i)-1}, auto);
     }
   }
 }

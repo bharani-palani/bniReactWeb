@@ -1,20 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
-import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
-import Gallery from "react-grid-gallery";
 import {baseUrl} from "../environment";
 import AppContext from "../AppContext";
 
 function About() {
   const [about, setAbout] = useContext(AppContext);
-  const [images, setImages] = useState([]);
   const [height, setheight] = useState(window.innerHeight);
   const [width, setWidth] = useState('100%');
 
   useEffect(() => {
     document.title = "Bharani | About";
-    // setAbout(about);
   });
 
   window.addEventListener('resize', () => {

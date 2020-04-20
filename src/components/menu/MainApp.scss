@@ -165,8 +165,8 @@
       }
       &:last-child {
         .card-header {
-          border-bottom-left-radius: 6px; 
-          border-bottom-right-radius: 6px; 
+          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 6px;
         }
       }
     }
@@ -197,4 +197,24 @@
   margin: 0 auto;
   text-align: center;
   margin: 3rem 0;
+}
+$fontFamily: Verdana, Arial, Helvetica, sans-serif;
+.resumeContainer {
+  // font-family: $fontFamily;
+  color: #000;
+  background: #fff;
+  padding: 3rem;
+  .borderedDiv {
+    border-bottom: solid 1px #ddd;
+    &.thick {
+      border-bottom: solid 2px #000;
+    }
+    &.wallToWall {
+      margin-left: -3rem;
+      margin-right: -3rem;
+    }
+  }
+  .topicHeading {
+    font-weight: bold;
+  }
 }

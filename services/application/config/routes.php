@@ -57,5 +57,17 @@ $route['write'] = 'write/write/post_write';
 
 $route['image/actualAvatar/(:any)/(:any)'] = 'image/actualAvatar/$1/$2';
 
+$route['resume/getHeader'] = 'resume/resume/get_header';
+$route['resume/getCareerObjective'] = 'resume/resume/getCareerObjective';
+$route['resume/getCareerExpYears'] = 'resume/resume/getCareerExpYears';
+$route['resume/workSummary'] = 'resume/resume/workSummary';
+$route['resume/proHighLights'] = 'resume/resume/proHighLights';
+$route['resume/techSkills'] = 'resume/resume/techSkills';
+$route['resume/projectExperience'] = 'resume/resume/projectExperience';
+$route['resume/education'] = 'resume/resume/education';
+$route['resume/extraAct'] = 'resume/resume/extraAct';
+$route['resume/personalInfo'] = 'resume/resume/personalInfo';
+$route['resume/footer'] = 'resume/resume/footer';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
