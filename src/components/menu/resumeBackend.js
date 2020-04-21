@@ -3,7 +3,7 @@ import { Accordion, Card, Button } from "react-bootstrap";
 import {resumeArray} from './backendTableConfig';
 import BackendCore from "./backend/BackendCore";
 
-function Resume() {
+function ResumeBackend() {
     const [collapse, setCollapse] = useState("");
     return (
         <Accordion bsPrefix="util" defaultActiveKey="0">
@@ -28,4 +28,4 @@ function Resume() {
     )
 }
 
-export default Resume;
+export default ResumeBackend;

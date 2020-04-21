@@ -3,7 +3,7 @@ import { Modal, Accordion, Card, Button } from "react-bootstrap";
 import LoginForm from "./loginForm";
 import BackendCore from "./backend/BackendCore";
 import ViewMessages from "./viewMessages";
-import Resume from "./resume";
+import ResumeBackend from "./resumeBackend";
 import {configArray} from './backendTableConfig';
 import "./backendUpdate.scss";
 
@@ -60,7 +60,7 @@ function BackendUpdate(props) {
               <ViewMessages />
           )}
           {auth && cObj.viewMode === "Resume" && (
-              <Resume />
+              <ResumeBackend />
           )}
       </Modal.Body>
     </Modal>

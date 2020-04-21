@@ -91,7 +91,6 @@ function FormElement(props) {
       }
     } else if (typeof element === "object") {
       const firstKey = Object.keys(element)[0];
-      // console.log(element)
       switch (firstKey) {
         case "dropDownFetch":
           return (
