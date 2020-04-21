@@ -16,10 +16,10 @@ function Resume() {
   const [education, setEducation] = useState([]);
   const [extraAct, setExtraAct] = useState([]);
   const [personalInfo, setPersonalInfo] = useState([]);
-  const [footer, setFooter] = useState([]);
+  const [footer, setFooter] = useState({});
 
   const [allLoaded, setAllLoaded] = useState(false);
-  const now = new Date();
+  const [now, setNow] = useState([]);
 
   useEffect(() => {
     Promise.all([
@@ -164,22 +164,16 @@ function Resume() {
     return await apiInstance
       .get("/resume/footer")
       .then(response => {
-        return response.data.response;
+        setNow(response.data.now);
+        return response.data.response[0];
       })
       .catch(error => {
         console.log(error);
       });
   };
-  const getCurrentDate = (separator = "") => {
-    let newDate = new Date();
-    let date = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
 
-    return `${year}${separator}${
-      month < 10 ? `0${month}` : `${month}`
-    }${separator}${date}`;
-  };
+  const arrow = () => <i className="fa fa-hand-o-right" />;
+
   const renderDom = () => {
     let [$years, $months, expString] = [0, 0, ""];
     if (Number(careerExp) - Math.floor(careerExp) !== 0) {
@@ -205,7 +199,7 @@ function Resume() {
             <div className="mb-30">
               <div className="equal-grid-2">
                 <div className="text-left">
-                  <div className="name">{header["header_name"]}</div>
+                  <h3 className="name m-0"><b>{header["header_name"]}</b></h3>
                   <div>
                     <i className="fa fa-envelope" />
                     &nbsp;{header["header_email"]}
@@ -229,21 +223,18 @@ function Resume() {
             </div>
           )}
         {careerObjStr && (
-          <>
+          <div className="mb-30">
             <h4 className="topicHeading">Career Objective</h4>
             <div>{careerObjStr}</div>
-          </>
+          </div>
         )}
-        <div className="mb-30" />
         {workSummary && workSummary.length > 0 && (
-          <>
+          <div className="mb-30">
             <h4 className="topicHeading">Work summary</h4>
-            <div className="grid-3 mb-30">
+            <div className="grid-3">
               {workSummary.map((w, i) => (
                 <React.Fragment key={i}>
-                  <div>
-                    <i className="fa fa-hand-o-right" />
-                  </div>
+                  <div>{arrow()}</div>
                   <div>
                     <div>{w.work_company}</div>
                     <small>{w.work_country}</small>
@@ -255,37 +246,33 @@ function Resume() {
                 </React.Fragment>
               ))}
             </div>
-          </>
+          </div>
         )}
         {proHighlights && proHighlights.length > 0 && (
-          <>
+          <div className="mb-30">
             <h4 className="topicHeading">Profesional Highlights</h4>
             <div className="grid-2 mb-30">
               {proHighlights.map((p, i) => (
                 <React.Fragment key={i}>
-                  <div>
-                    <i className="fa fa-hand-o-right" />
-                  </div>
+                  <div>{arrow()}</div>
                   <div>{p.pro_text}</div>
                 </React.Fragment>
               ))}
             </div>
-          </>
+          </div>
         )}
         {techSkills && techSkills.length > 0 && (
-          <>
+          <div className="mb-30">
             <h4 className="topicHeading">Technical Skills</h4>
-            <div className="grid-2 mb-30">
+            <div className="grid-2">
               {techSkills.map((t, i) => (
                 <React.Fragment key={i}>
-                  <div>
-                    <i className="fa fa-hand-o-right" />
-                  </div>
+                  <div>{arrow()}</div>
                   <div>{t.tech_skill_label}</div>
                 </React.Fragment>
               ))}
             </div>
-          </>
+          </div>
         )}
         {projectExperience && projectExperience.length > 0 && (
           <div className="mb-30">
@@ -294,8 +281,7 @@ function Resume() {
               <React.Fragment key={i}>
                 <div className="equal-grid-3 borderedDiv pt-10 pb-10 mb-20">
                   <div>
-                    <i className="fa fa-building" />
-                    {' '}{p.work_company.split(" ").map(s => s[0].toUpperCase()+s.slice(1).toLowerCase()).join(" ")}
+                    <i className="fa fa-university" /> {p.work_company}
                   </div>
                   <div className="text-center">
                     <i className="fa fa-briefcase" />
@@ -318,9 +304,7 @@ function Resume() {
                     <div className="grid-2">
                       {p.role_label.map((r, i) => (
                         <React.Fragment key={i}>
-                          <div>
-                            <i className="fa fa-hand-o-right" />
-                          </div>
+                          <div>{arrow()}</div>
                           <div>{r}</div>
                         </React.Fragment>
                       ))}
@@ -337,9 +321,7 @@ function Resume() {
             <div className="grid-2">
               {education.map((e, i) => (
                 <React.Fragment key={i}>
-                  <div>
-                    <i className="fa fa-hand-o-right" />
-                  </div>
+                  <div>{arrow()}</div>
                   <div>
                     {e.edu_graduation_acronym} - {e.edu_graduation_abbreviation}{" "}
                     ({e.edu_graduation_percent}%)
@@ -355,9 +337,7 @@ function Resume() {
             <div className="grid-2">
               {extraAct.map((e, i) => (
                 <React.Fragment key={i}>
-                  <div>
-                    <i className="fa fa-hand-o-right" />
-                  </div>
+                  <div>{arrow()}</div>
                   <div>{e.activity_name}</div>
                 </React.Fragment>
               ))}
@@ -378,15 +358,21 @@ function Resume() {
             </div>
           </div>
         )}
-        {footer && footer.length > 0 && (
-          <div className="">
-            <p>{footer[0]["footer_text"]}</p>
+        {footer && (
+          <div className="mt-100">
+            <p>{footer["footer_text"]}</p>
             <div className="equal-grid-2">
-              <div><b>Place:</b>&nbsp;{footer[0]["footer_place"]}</div>
-              <div className="text-right"><b>SIGNATURE</b></div>
-              <div><b>Date:</b>&nbsp;{getCurrentDate("-")}</div>
+              <div>
+                <b>Place:</b>&nbsp;{footer["footer_place"]}
+              </div>
+              <div className="text-right pr-5">
+                <b>SIGNATURE</b>
+              </div>
+              <div>
+                <b>Date:</b>&nbsp;{now}
+              </div>
               <div className="text-right">
-                {footer[0]["footer_signature_name"]}
+                {footer["footer_signature_name"]}
               </div>
             </div>
           </div>
@@ -394,6 +380,7 @@ function Resume() {
       </div>
     );
   };
+
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       {!allLoaded ? (

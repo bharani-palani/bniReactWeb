@@ -103,6 +103,5 @@ class home extends CI_Controller {
 			$data["response"] = $this->home_model->changePassword($post);
 			$this->auth->response($data,array(),200);
 		}
-
 	}
 }

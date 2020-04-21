@@ -36,7 +36,7 @@ class resume_model extends CI_Model
         $this->db->select(
             'c.work_company, 
             if(
-                c.work_end_date <> "0000-00-00",
+                c.work_end_date <> "1970-01-01",
                 TIMESTAMPDIFF(MONTH, c.work_start_date ,c.work_end_date) / 12, 
                 concat("Since ",c.work_start_date,", till now")
             ) as working_duration, 
@@ -68,6 +68,10 @@ class resume_model extends CI_Model
     }
     public function footer() {
         $query = $this->db->get('resume_11_footer');
+        return get_all_rows($query);
+    }
+    public function getCompanyList() {
+        $query = $this->db->select(array('work_id as id', 'work_company as value'))->get('resume_03_work_summary');
         return get_all_rows($query);
     }
 }       

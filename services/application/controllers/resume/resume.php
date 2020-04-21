@@ -104,7 +104,7 @@ class resume extends CI_Controller {
             $rows = $this->resume_model->projectExperience();
             foreach($rows as $row) {
                 $array[] = array(
-                    'work_company' => $row['work_company'],
+                    'work_company' => ucwords(strtolower($row['work_company'])),
                     'working_duration' => $row['working_duration'],
                     'project_id' => $row['project_id'],
                     'project_role' => $row['project_role'],
@@ -169,7 +169,20 @@ class resume extends CI_Controller {
 		}
 		if($validate === 1) {
 			$data["response"] = $this->resume_model->footer();
-			$this->auth->response($data,array(),200);
+			$this->auth->response($data,array('now' => date('Y-M-d')),200);
         }
-    }
+	}
+	public function getCompanyList() {
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = $this->resume_model->getCompanyList();
+			$this->auth->response($data,array(),200);
+		}
+	}
 }

@@ -62,13 +62,59 @@ const configArray = [
         TableRows: ["os_id", "os_label", "os_value", "os_image_url", "os_sort"], 
         rowElements: ["checkbox", "textbox", "textarea", "textbox", "number"]
     },
-    // {
-    //     id:10,
-    //     label: "Public comments",
-    //     Table: "public_comments",
-    //     TableRows: ["comment_id","comment_name","comment_mobile","comment_description","comment_email", "comment_ip", "latitude", "longitude"], 
-    //     rowElements: ["checkbox", "textbox", "textbox", "textarea","textbox", "textbox", "number", "number"]
-    // },
+    {
+        id:10,
+        label: "Public comments",
+        Table: "public_comments",
+        TableRows: ["comment_id","comment_name","comment_mobile","comment_description","comment_email", "comment_ip", "latitude", "longitude"], 
+        rowElements: ["checkbox", "textbox", "textbox", "textarea","textbox", "textbox", "number", "number"]
+    },
 ];
 
-export default configArray;
+const resumeArray = [
+    {
+        id:11,
+        label: "Header",
+        Table: "resume_01_header",
+        TableRows: ["header_id","header_name","header_mobile","header_email","header_address"], 
+        rowElements: ["checkbox", "textbox", "textbox", "textbox","textarea"]
+    },
+    {
+        id:12,
+        label: "Career Objective",
+        Table: "resume_02_career_objective",
+        TableRows: ["career_id","career_title","career_description"], 
+        rowElements: ["checkbox", "textbox", "textarea"]
+    },
+    {
+        id:13,
+        label: "Work summary",
+        Table: "resume_03_work_summary",
+        TableRows: ["work_id","work_company","work_country","work_start_date","work_end_date", "work_sort"], 
+        rowElements: ["checkbox", "textbox", "textbox", "date", "date", "number"]
+    },
+    {
+        id:14,
+        label: "Profesional Highlights",
+        Table: "resume_04_pro_highlights",
+        TableRows: ["pro_id","pro_text","pro_sort"], 
+        rowElements: ["checkbox", "textbox", "number"]
+    },
+    {
+        id:15,
+        label: "Technical Skills",
+        Table: "resume_05_tech_skills",
+        TableRows: ["tech_skill_id","tech_skill_label","tech_sort"], 
+        rowElements: ["checkbox", "textbox", "number"]
+    },
+    {
+        id:16,
+        label: "Project Experience",
+        Table: "resume_06_project_experience",
+        TableRows: ["project_id","project_name","project_role","project_introduction","project_company_id","project_sort_order"], 
+        rowElements: ["checkbox", "textbox", "textbox", "textarea", {dropDownFetch: {apiUrl: "/resume/getCompanyList", table: "resume_03_work_summary", fetch:["work_id", "work_company"]}},"number"]
+    },
+
+];
+
+export {configArray, resumeArray};

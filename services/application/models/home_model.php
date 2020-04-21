@@ -97,13 +97,32 @@ class home_model extends CI_Model
             case "technologies":
                 $query = $this->db->order_by("tech_sort","asc")->get('technologies');
             break;
+            case "resume_01_header":
+                $query = $this->db->order_by("header_id","asc")->get('resume_01_header');
+            break;
+            case "resume_02_career_objective":
+                $query = $this->db->order_by("career_id","asc")->get('resume_02_career_objective');
+            break;
+            case "resume_03_work_summary":
+                $query = $this->db->order_by("work_id","asc")->get('resume_03_work_summary');
+            break;
+            case "resume_04_pro_highlights":
+                $query = $this->db->order_by("pro_id","asc")->get('resume_04_pro_highlights');
+            break;
+            case "resume_05_tech_skills":
+                $query = $this->db->order_by("tech_skill_id","asc")->get('resume_05_tech_skills');
+            break;
+            case "resume_06_project_experience":
+                $query = $this->db->order_by("project_id","asc")->get('resume_06_project_experience');
+            break;
             default:
                 return false;
         }
         return get_all_rows($query);
     }
     public function postBackend($post) {
-        // print_r($post['postData']);
+        // var_dump(CI_VERSION);
+        // print_r($post);
         $postData = json_decode($post['postData']);
         $Table = $postData->Table;
         switch ($Table) {
@@ -137,6 +156,24 @@ class home_model extends CI_Model
             case "public_comments":
                 return $this->onTransaction($postData, 'public_comments', 'comment_id');
             break;
+            case "resume_01_header":
+                return $this->onTransaction($postData, 'resume_01_header', 'header_id');
+            break;
+            case "resume_02_career_objective":
+                return $this->onTransaction($postData, 'resume_02_career_objective', 'career_id');
+            break;
+            case "resume_03_work_summary":
+                return $this->onTransaction($postData, 'resume_03_work_summary', 'work_id');
+            break;
+            case "resume_04_pro_highlights":
+                return $this->onTransaction($postData, 'resume_04_pro_highlights', 'pro_id');
+            break;
+            case "resume_05_tech_skills":
+                return $this->onTransaction($postData, 'resume_05_tech_skills', 'tech_skill_id');
+            break;
+            case "resume_06_project_experience":
+                return $this->onTransaction($postData, 'resume_06_project_experience', 'project_id');
+            break;
             default:
                 return false;
         }
@@ -158,6 +195,6 @@ class home_model extends CI_Model
         }
         $this->db->trans_complete();
         return ($this->db->trans_status() === FALSE) ? FALSE : TRUE;
-}
+    }
 
 }
