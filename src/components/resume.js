@@ -198,7 +198,7 @@ function Resume() {
           header["header_address"] && (
             <div className="mb-30">
               <div className="equal-grid-2">
-                <div className="text-left">
+                <div className="text-left pb-5">
                   <h3 className="name m-0"><b>{header["header_name"]}</b></h3>
                   <div>
                     <i className="fa fa-envelope" />
@@ -209,7 +209,7 @@ function Resume() {
                     &nbsp;{header["header_mobile"]}
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="text-right m-text-left t-text-left">
                   {String(header["header_address"])
                     .split(",")
                     .map((add, i) => (
@@ -234,7 +234,7 @@ function Resume() {
             <div className="grid-3">
               {workSummary.map((w, i) => (
                 <React.Fragment key={i}>
-                  <div>{arrow()}</div>
+                  <div className="hidden-sm hidden-xs">{arrow()}</div>
                   <div>
                     <div>{w.work_company}</div>
                     <small>{w.work_country}</small>
@@ -243,6 +243,7 @@ function Resume() {
                     {w.work_start_date} -{" "}
                     {i !== 0 ? w.work_end_date : "Till now"}
                   </div>
+                  <div className="visible-sm visible-xs borderedDiv" />
                 </React.Fragment>
               ))}
             </div>
@@ -254,8 +255,9 @@ function Resume() {
             <div className="grid-2 mb-30">
               {proHighlights.map((p, i) => (
                 <React.Fragment key={i}>
-                  <div>{arrow()}</div>
+                  <div className="hidden-sm hidden-xs">{arrow()}</div>
                   <div>{p.pro_text}</div>
+                  <div className="visible-sm visible-xs borderedDiv mt-5 mb-5" />
                 </React.Fragment>
               ))}
             </div>
@@ -267,8 +269,9 @@ function Resume() {
             <div className="grid-2">
               {techSkills.map((t, i) => (
                 <React.Fragment key={i}>
-                  <div>{arrow()}</div>
+                  <div className="hidden-sm hidden-xs">{arrow()}</div>
                   <div>{t.tech_skill_label}</div>
+                  <div className="visible-sm visible-xs borderedDiv mt-5 mb-5" />
                 </React.Fragment>
               ))}
             </div>
@@ -283,11 +286,11 @@ function Resume() {
                   <div>
                     <i className="fa fa-university" /> {p.work_company}
                   </div>
-                  <div className="text-center">
+                  <div className="text-center t-text-left m-text-left">
                     <i className="fa fa-briefcase" />
                     &nbsp;{p.project_name}
                   </div>
-                  <div className="text-right">
+                  <div className="text-right t-text-left m-text-left">
                     <i className="fa fa-calendar" />
                     &nbsp;{p.working_duration}
                   </div>
@@ -304,8 +307,9 @@ function Resume() {
                     <div className="grid-2">
                       {p.role_label.map((r, i) => (
                         <React.Fragment key={i}>
-                          <div>{arrow()}</div>
+                          <div className="hidden-sm hidden-xs">{arrow()}</div>
                           <div>{r}</div>
+                          <div className="visible-sm visible-xs borderedDiv mt-5 mb-5" />
                         </React.Fragment>
                       ))}
                     </div>
@@ -321,11 +325,12 @@ function Resume() {
             <div className="grid-2">
               {education.map((e, i) => (
                 <React.Fragment key={i}>
-                  <div>{arrow()}</div>
+                  <div className="hidden-sm hidden-xs">{arrow()}</div>
                   <div>
-                    {e.edu_graduation_acronym} - {e.edu_graduation_abbreviation}{" "}
+                  {e.edu_graduation_acronym} - {e.edu_graduation_abbreviation}{" "}
                     ({e.edu_graduation_percent}%)
                   </div>
+                  <div className="visible-sm visible-xs borderedDiv mt-5 mb-5" />
                 </React.Fragment>
               ))}
             </div>
@@ -337,8 +342,9 @@ function Resume() {
             <div className="grid-2">
               {extraAct.map((e, i) => (
                 <React.Fragment key={i}>
-                  <div>{arrow()}</div>
+                  <div className="hidden-sm hidden-xs">{arrow()}</div>
                   <div>{e.activity_name}</div>
+                  <div className="visible-sm visible-xs borderedDiv mt-5 mb-5" />
                 </React.Fragment>
               ))}
             </div>
@@ -353,15 +359,16 @@ function Resume() {
                   <div>{p.info_key}</div>
                   <div>{p.info_value}</div>
                   <div />
+                  <div className="visible-sm borderedDiv mt-5 mb-5" />
                 </React.Fragment>
               ))}
             </div>
           </div>
         )}
         {footer && (
-          <div className="mt-100">
+          <div className="">
             <p>{footer["footer_text"]}</p>
-            <div className="equal-grid-2">
+            <div className="equal-grid-2 footer-grid mt-50">
               <div>
                 <b>Place:</b>&nbsp;{footer["footer_place"]}
               </div>

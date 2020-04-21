@@ -152,6 +152,9 @@ code {
     .#{"grid"}-#{$i} {
       grid-template-columns: auto;
     }
+    .#{"equal-grid"}-#{$i} {
+      grid-template-columns: auto;
+    }
   }
 }
 /* Landscape phones and portrait phones */
