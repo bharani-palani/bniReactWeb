@@ -55,6 +55,10 @@ function FormElement(props) {
               defaultValue={value}
             />
           );
+        case "label":
+          return (
+            <div className="text-danger"><b>{value}</b></div>
+          );
         case "checkbox":
           return (
             <>

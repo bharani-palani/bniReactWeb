@@ -98,22 +98,37 @@ class home_model extends CI_Model
                 $query = $this->db->order_by("tech_sort","asc")->get('technologies');
             break;
             case "resume_01_header":
-                $query = $this->db->order_by("header_id","asc")->get('resume_01_header');
+                $query = $this->db->get('resume_01_header');
             break;
             case "resume_02_career_objective":
-                $query = $this->db->order_by("career_id","asc")->get('resume_02_career_objective');
+                $query = $this->db->get('resume_02_career_objective');
             break;
             case "resume_03_work_summary":
-                $query = $this->db->order_by("work_id","asc")->get('resume_03_work_summary');
+                $query = $this->db->order_by("work_sort","asc")->get('resume_03_work_summary');
             break;
             case "resume_04_pro_highlights":
-                $query = $this->db->order_by("pro_id","asc")->get('resume_04_pro_highlights');
+                $query = $this->db->order_by("pro_sort","asc")->get('resume_04_pro_highlights');
             break;
             case "resume_05_tech_skills":
-                $query = $this->db->order_by("tech_skill_id","asc")->get('resume_05_tech_skills');
+                $query = $this->db->order_by("tech_sort","asc")->get('resume_05_tech_skills');
             break;
             case "resume_06_project_experience":
-                $query = $this->db->order_by("project_id","asc")->get('resume_06_project_experience');
+                $query = $this->db->order_by("project_sort_order","asc")->get('resume_06_project_experience');
+            break;
+            case "resume_07_roles_and_responsibilities":
+                $query = $this->db->order_by("role_order","asc")->get('resume_07_roles_and_responsibilities');
+            break;
+            case "resume_08_education":
+                $query = $this->db->order_by("edu_graduation_sort","asc")->get('resume_08_education');
+            break;
+            case "resume_09_activities":
+                $query = $this->db->order_by("activity_order","asc")->get('resume_09_activities');
+            break;
+            case "resume_10_personal_info":
+                $query = $this->db->order_by("info_order","asc")->get('resume_10_personal_info');
+            break;
+            case "resume_11_footer":
+                $query = $this->db->order_by("footer_signature_name","asc")->get('resume_11_footer');
             break;
             default:
                 return false;
@@ -173,6 +188,21 @@ class home_model extends CI_Model
             break;
             case "resume_06_project_experience":
                 return $this->onTransaction($postData, 'resume_06_project_experience', 'project_id');
+            break;
+            case "resume_07_roles_and_responsibilities":
+                return $this->onTransaction($postData, 'resume_07_roles_and_responsibilities', 'role_id');
+            break;
+            case "resume_08_education":
+                return $this->onTransaction($postData, 'resume_08_education', 'edu_id');
+            break;
+            case "resume_09_activities":
+                return $this->onTransaction($postData, 'resume_09_activities', 'activity_id');
+            break;
+            case "resume_10_personal_info":
+                return $this->onTransaction($postData, 'resume_10_personal_info', 'info_id');
+            break;
+            case "resume_11_footer":
+                return $this->onTransaction($postData, 'resume_11_footer', 'footer_id');
             break;
             default:
                 return false;

@@ -8,9 +8,9 @@ import {configArray} from './backendTableConfig';
 import "./backendUpdate.scss";
 
 function BackendUpdate(props) {
-  const [auth, setAuth] = useState(true); // change this to false
+  const [auth, setAuth] = useState(false); // change this to false
   const [collapse, setCollapse] = useState("");
-  const [cObj, setCobj] = useState({viewMode: "Resume"}); // remove this {viewMode: "Messages"} obj
+  const [cObj, setCobj] = useState({viewMode: "Configure"}); // remove this {viewMode: "Messages"} obj
   const [showForgot, setShowForgot] = useState(false);
   const [lastLogin, setLastLogin] = useState("");
   return (
@@ -60,7 +60,7 @@ function BackendUpdate(props) {
               <ViewMessages />
           )}
           {auth && cObj.viewMode === "Resume" && (
-              <ResumeBackend />
+              <ResumeBackend lastLogin={lastLogin} />
           )}
       </Modal.Body>
     </Modal>

@@ -3,7 +3,7 @@ import { Accordion, Card, Button } from "react-bootstrap";
 import {resumeArray} from './backendTableConfig';
 import BackendCore from "./backend/BackendCore";
 
-function ResumeBackend() {
+function ResumeBackend(props) {
     const [collapse, setCollapse] = useState("");
     return (
         <Accordion bsPrefix="util" defaultActiveKey="0">
@@ -22,7 +22,7 @@ function ResumeBackend() {
             </Card>                                
         )}
         <div className="footer">
-            Last login
+            Last login: {props.lastLogin}
         </div>
         </Accordion>
     )

@@ -114,7 +114,41 @@ const resumeArray = [
         TableRows: ["project_id","project_name","project_role","project_introduction","project_company_id","project_sort_order"], 
         rowElements: ["checkbox", "textbox", "textbox", "textarea", {dropDownFetch: {apiUrl: "/resume/getCompanyList", table: "resume_03_work_summary", fetch:["work_id", "work_company"]}},"number"]
     },
-
+    {
+        id:17,
+        label: "Roles & responsibilities",
+        Table: "resume_07_roles_and_responsibilities",
+        TableRows: ["role_id","role_label","project_id","role_order"], 
+        rowElements: ["checkbox", "textbox", {dropDownFetch: {apiUrl: "/resume/getProjectList", table: "resume_06_project_experience", fetch:["work_id", "work_company"]}},"number"]
+    },
+    {
+        id:18,
+        label: "Education",
+        Table: "resume_08_education",
+        TableRows: ["edu_id","edu_graduation_acronym","edu_graduation_abbreviation","edu_graduation_percent","edu_graduation_sort"], 
+        rowElements: ["checkbox", "textbox","textbox","textbox","number"]
+    },
+    {
+        id:19,
+        label: "Extracurricular activities",
+        Table: "resume_09_activities",
+        TableRows: ["activity_id","activity_name","activity_order"], 
+        rowElements: ["checkbox", "textbox","number"]
+    },
+    {
+        id:20,
+        label: "Personal information",
+        Table: "resume_10_personal_info",
+        TableRows: ["info_id","info_key","info_value","info_order"], 
+        rowElements: ["checkbox", "textbox","textbox","number"]
+    },
+    {
+        id:21,
+        label: "Footer",
+        Table: "resume_11_footer",
+        TableRows: ["footer_id","footer_text","footer_place","footer_date","footer_signature_name"], 
+        rowElements: ["checkbox", "textbox","textbox","label","textbox"]
+    }
 ];
 
 export {configArray, resumeArray};

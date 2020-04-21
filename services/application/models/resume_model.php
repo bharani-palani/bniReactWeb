@@ -74,4 +74,9 @@ class resume_model extends CI_Model
         $query = $this->db->select(array('work_id as id', 'work_company as value'))->get('resume_03_work_summary');
         return get_all_rows($query);
     }
+    public function getProjectList() {
+        $query = $this->db->select(array('project_id as id', 'project_name as value'))->get('resume_06_project_experience');
+        return get_all_rows($query);
+    }
+    
 }       

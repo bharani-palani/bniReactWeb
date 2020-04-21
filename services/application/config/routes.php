@@ -69,6 +69,8 @@ $route['resume/extraAct'] = 'resume/resume/extraAct';
 $route['resume/personalInfo'] = 'resume/resume/personalInfo';
 $route['resume/footer'] = 'resume/resume/footer';
 $route['resume/getCompanyList'] = 'resume/resume/getCompanyList';
+$route['resume/getProjectList'] = 'resume/resume/getProjectList';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

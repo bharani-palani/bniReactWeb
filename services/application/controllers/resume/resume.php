@@ -185,4 +185,17 @@ class resume extends CI_Controller {
 			$this->auth->response($data,array(),200);
 		}
 	}
+	public function getProjectList() {
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = $this->resume_model->getProjectList();
+			$this->auth->response($data,array(),200);
+		}
+	}
 }
