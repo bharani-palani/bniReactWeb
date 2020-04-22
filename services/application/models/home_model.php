@@ -116,7 +116,7 @@ class home_model extends CI_Model
                 $query = $this->db->order_by("project_sort_order","asc")->get('resume_06_project_experience');
             break;
             case "resume_07_roles_and_responsibilities":
-                $query = $this->db->order_by("role_order","asc")->get('resume_07_roles_and_responsibilities');
+                $query = $this->db->order_by("project_id","asc")->get('resume_07_roles_and_responsibilities');
             break;
             case "resume_08_education":
                 $query = $this->db->order_by("edu_graduation_sort","asc")->get('resume_08_education');
