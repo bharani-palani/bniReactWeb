@@ -33,6 +33,7 @@ class resume_model extends CI_Model
         return get_all_rows($query);
     }
     public function projectExperience() {
+        $this->db->simple_query('SET SESSION group_concat_max_len=15000');
         $this->db->select(
             'c.work_company, 
             concat(a.project_duration_months, " months") as working_duration, 
