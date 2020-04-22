@@ -102,7 +102,11 @@
     }
   }
 }
-
+@media print{
+  .print-visible{
+       display: block !important;
+   }
+}
 /* Portrait tablets and small desktops */
 @media (min-width: 768px) and (max-width: 991px) {
 }
@@ -122,6 +126,11 @@
   position: absolute;
   width: 100%;
   bottom: 2%;
+  .designedBy {
+    color: #c2d82e;
+    font-size: 0.8rem;
+    padding-top: 1rem
+  }
 }
 .modal-backdrop {
   opacity: 0.8;

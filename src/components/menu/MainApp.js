@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
 import BackendUpdate from "./backendUpdate";
-import {baseUrl} from "../../environment";
+import { baseUrl } from "../../environment";
 import "./MainApp.scss";
 
 function MainApp() {
@@ -121,11 +121,11 @@ function MainApp() {
 
   const togglePlay = () => {
     myAudio = myAudio.current;
-    if(myAudio.paused) {
+    if (myAudio.paused) {
       setAudioState("pause");
       myAudio.play();
     } else {
-      setAudioState("play")
+      setAudioState("play");
       myAudio.pause();
     }
   };
@@ -143,7 +143,7 @@ function MainApp() {
           />
         )}
         {!toggleSideBar ? (
-          <video className="videoTag" autoPlay loop muted>
+          <video className="videoTag hidden-print" autoPlay loop muted>
             <source src={require("../../videos/video.mp4")} type="video/mp4" />
           </video>
         ) : null}
@@ -246,6 +246,7 @@ function MainApp() {
                     </li>
                   ))}
                 </ul>
+                <div className="text-center designedBy">Designed and developed by Bharani</div>
               </div>
             </nav>
           </div>
@@ -260,18 +261,10 @@ function MainApp() {
           preload="auto"
         ></audio>
       </div>
-      <div
-        className={`wrapper ${
-          toggleSideBar ? "toggleOn" : "toggleOff"
-        }`}
-      >
+      <div className={`wrapper ${toggleSideBar ? "toggleOn" : "toggleOff"}`}>
         <Wrapper />
-        <button className="audiBtn mobile" onClick={() => togglePlay()}>
-          <i
-            className={`fa fa-${
-              audioState === "play" ? "play" : "pause"
-            }`}
-          />
+        <button className="audiBtn mobile hidden-print" onClick={() => togglePlay()}>
+          <i className={`fa fa-${audioState === "play" ? "play" : "pause"}`} />
         </button>
       </div>
     </Router>
