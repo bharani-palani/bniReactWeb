@@ -35,11 +35,7 @@ class resume_model extends CI_Model
     public function projectExperience() {
         $this->db->select(
             'c.work_company, 
-            if(
-                c.work_end_date <> "1970-01-01",
-                TIMESTAMPDIFF(MONTH, c.work_start_date ,c.work_end_date) / 12, 
-                concat("Since ",c.work_start_date,", till now")
-            ) as working_duration, 
+            concat(a.project_duration_months, " months") as working_duration, 
             a.project_role,
             a.project_id, a.project_name, 
             a.project_role, a.project_introduction, 

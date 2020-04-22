@@ -201,9 +201,13 @@
 $fontFamily: Verdana, Arial, Helvetica, sans-serif;
 .resumeContainer {
   // font-family: $fontFamily;
+  .wrap{
+    display: inline-block;
+    word-break: break-word;  
+  }
   color: #000;
   background: #fff;
-  padding: 3rem;
+  padding: 3rem 2rem;
   .borderedDiv {
     border-bottom: solid 1px #ddd;
     &.thick {

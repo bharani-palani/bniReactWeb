@@ -76,8 +76,8 @@ const resumeArray = [
         id:11,
         label: "Header",
         Table: "resume_01_header",
-        TableRows: ["header_id","header_name","header_mobile","header_email","header_address"], 
-        rowElements: ["checkbox", "textbox", "textbox", "textbox","textarea"]
+        TableRows: ["header_id","header_name","header_mobile","header_email","header_address","header_web","config_arrow_font"], 
+        rowElements: ["checkbox", "textbox", "textbox", "textbox","textarea","textbox","textbox"]
     },
     {
         id:12,
@@ -111,8 +111,8 @@ const resumeArray = [
         id:16,
         label: "Project Experience",
         Table: "resume_06_project_experience",
-        TableRows: ["project_id","project_name","project_role","project_introduction","project_company_id","project_sort_order"], 
-        rowElements: ["checkbox", "textbox", "textbox", "textarea", {dropDownFetch: {apiUrl: "/resume/getCompanyList", table: "resume_03_work_summary", fetch:["work_id", "work_company"]}},"number"]
+        TableRows: ["project_id","project_name","project_role","project_introduction","project_company_id","project_duration_months","project_sort_order"], 
+        rowElements: ["checkbox", "textbox", "textbox", "textarea", {dropDownFetch: {apiUrl: "/resume/getCompanyList", table: "resume_03_work_summary", fetch:["work_id", "work_company"]}},"number","number"]
     },
     {
         id:17,
