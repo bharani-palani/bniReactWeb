@@ -116,6 +116,7 @@ class home_model extends CI_Model
                 $query = $this->db->order_by("project_sort_order","asc")->get('resume_06_project_experience');
             break;
             case "resume_07_roles_and_responsibilities":
+                $this->db->simple_query('SET SESSION group_concat_max_len=15000');
                 $query = $this->db->order_by("project_id","asc")->get('resume_07_roles_and_responsibilities');
             break;
             case "resume_08_education":
