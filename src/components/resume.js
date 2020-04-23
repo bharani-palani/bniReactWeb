@@ -177,9 +177,15 @@ function Resume() {
   );
 
   const renderDom = () => {
-    const careerObjStr = String(careerObj.career_description).replace("{n}",careerExp);
+    const careerObjStr = String(careerObj.career_description).replace(
+      "{n}",
+      careerExp
+    );
     return (
       <div className="resumeContainer">
+        <div className="printerIcon hidden-print">
+          <span onClick={() => window.print()}><i className="fa fa-print" /></span>
+        </div>
         {header &&
           header["header_name"] &&
           header["header_email"] &&
@@ -231,7 +237,7 @@ function Resume() {
               {workSummary.map((w, i) => (
                 <React.Fragment key={i}>
                   <div>
-                    <div className="hidden-xs hidden-sm print-visible">
+                    <div className="hidden-xs hidden-sm print-visible text-center">
                       {arrow()}
                     </div>
                   </div>
@@ -258,7 +264,7 @@ function Resume() {
               {proHighlights.map((p, i) => (
                 <React.Fragment key={i}>
                   <div>
-                    <div className="hidden-xs hidden-sm print-visible">
+                    <div className="hidden-xs hidden-sm print-visible text-center">
                       {arrow()}
                     </div>
                   </div>
@@ -278,7 +284,7 @@ function Resume() {
               {techSkills.map((t, i) => (
                 <React.Fragment key={i}>
                   <div>
-                    <div className="hidden-xs hidden-sm print-visible">
+                    <div className="hidden-xs hidden-sm print-visible text-center">
                       {arrow()}
                     </div>
                   </div>
@@ -314,7 +320,7 @@ function Resume() {
                 </div>
                 <p>{p.project_introduction}</p>
                 {p.role_label && p.role_label.length > 0 && (
-                  <>
+                  <div className="mb-20">
                     <div>
                       <b>Roles & Responsibilities</b>
                     </div>
@@ -322,7 +328,7 @@ function Resume() {
                       {p.role_label.map((r, i) => (
                         <React.Fragment key={i}>
                           <div>
-                            <div className="hidden-xs hidden-sm print-visible">
+                            <div className="hidden-xs hidden-sm print-visible text-center">
                               {arrow()}
                             </div>
                           </div>
@@ -333,7 +339,7 @@ function Resume() {
                         </React.Fragment>
                       ))}
                     </div>
-                  </>
+                  </div>
                 )}
               </React.Fragment>
             ))}
@@ -346,7 +352,7 @@ function Resume() {
               {education.map((e, i) => (
                 <React.Fragment key={i}>
                   <div>
-                    <div className="hidden-xs hidden-sm print-visible">
+                    <div className="hidden-xs hidden-sm print-visible text-center">
                       {arrow()}
                     </div>
                   </div>
@@ -369,7 +375,7 @@ function Resume() {
               {extraAct.map((e, i) => (
                 <React.Fragment key={i}>
                   <div>
-                    <div className="hidden-xs hidden-sm print-visible">
+                    <div className="hidden-xs hidden-sm print-visible text-center">
                       {arrow()}
                     </div>
                   </div>

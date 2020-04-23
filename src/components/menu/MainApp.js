@@ -201,7 +201,7 @@ function MainApp() {
             </Navbar.Collapse>
           </Navbar>
         </div>
-        <header className="vertical-header">
+        <header className="vertical-header hidden-print">
           <i
             style={hamburgerStyle()}
             onClick={() => setToggleSideBar(!toggleSideBar)}

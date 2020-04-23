@@ -102,10 +102,13 @@
     }
   }
 }
-@media print{
-  .print-visible{
-       display: block !important;
-   }
+@media print {
+  .print-visible {
+    display: block !important;
+  }
+  .wrapper.toggleOff {
+    padding-left: 0;
+  }
 }
 /* Portrait tablets and small desktops */
 @media (min-width: 768px) and (max-width: 991px) {
@@ -129,7 +132,7 @@
   .designedBy {
     color: #c2d82e;
     font-size: 0.8rem;
-    padding-top: 1rem
+    padding-top: 1rem;
   }
 }
 .modal-backdrop {
@@ -210,13 +213,24 @@
 $fontFamily: Verdana, Arial, Helvetica, sans-serif;
 .resumeContainer {
   // font-family: $fontFamily;
-  .wrap{
+  .printerIcon {
+    text-align: right;
+    span {
+      border-radius: 100%;
+      padding: 3px 6px;
+      background: #000;
+      cursor: pointer;
+      color: #b2c823;
+      opacity: 0.8;
+    }
+  }
+  .wrap {
     display: inline-block;
-    word-break: break-word;  
+    word-break: break-word;
   }
   color: #000;
   background: #fff;
-  padding: 3rem 2rem;
+  padding: 1rem 2rem;
   .borderedDiv {
     border-bottom: solid 1px #ddd;
     &.thick {
