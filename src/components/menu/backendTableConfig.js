@@ -125,8 +125,8 @@ const resumeArray = [
         id:18,
         label: "Education",
         Table: "resume_08_education",
-        TableRows: ["edu_id","edu_graduation_acronym","edu_graduation_abbreviation","edu_graduation_percent","edu_graduation_sort"], 
-        rowElements: ["checkbox", "textbox","textbox","textbox","number"]
+        TableRows: ["edu_id","edu_graduation_acronym","edu_graduation_abbreviation","edu_graduation_institution","edu_graduation_year","edu_graduation_percent","edu_graduation_sort"], 
+        rowElements: ["checkbox", "textbox","textbox","textbox","textbox","textbox","number"]
     },
     {
         id:19,
@@ -146,8 +146,8 @@ const resumeArray = [
         id:21,
         label: "Footer",
         Table: "resume_11_footer",
-        TableRows: ["footer_id","footer_text","footer_place","footer_date","footer_signature_name"], 
-        rowElements: ["checkbox", "textbox","textbox","label","textbox"]
+        TableRows: ["footer_id","footer_text","footer_place","footer_signature_name"], 
+        rowElements: ["checkbox", "textbox","textbox","textbox"]
     }
 ];
 

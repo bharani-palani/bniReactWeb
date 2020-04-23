@@ -348,7 +348,7 @@ function Resume() {
         {education && education.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Education</h4>
-            <div className="grid-3">
+            <div className="grid-6">
               {education.map((e, i) => (
                 <React.Fragment key={i}>
                   <div>
@@ -358,8 +358,10 @@ function Resume() {
                   </div>
                   <div>
                     {e.edu_graduation_acronym} - {e.edu_graduation_abbreviation}{" "}
-                    ({e.edu_graduation_percent}%)
                   </div>
+                  <div>{e.edu_graduation_institution}</div>
+                  <div>{e.edu_graduation_year}</div>
+                  <div>{e.edu_graduation_percent}%</div>
                   <div>
                     <div className="hidden-lg hidden-md hidden-print borderedDiv" />
                   </div>
