@@ -356,12 +356,12 @@ function Resume() {
                       {arrow()}
                     </div>
                   </div>
-                  <div>
+                  <div className="wrap pr-5">
                     {e.edu_graduation_acronym} - {e.edu_graduation_abbreviation}{" "}
                   </div>
-                  <div>{e.edu_graduation_institution}</div>
-                  <div>{e.edu_graduation_year}</div>
-                  <div>{e.edu_graduation_percent}%</div>
+                  <div className="wrap pr-10">{e.edu_graduation_institution}</div>
+                  <div className="wrap pr-10">{e.edu_graduation_year}</div>
+                  <div className="wrap pr-10">{e.edu_graduation_percent}%</div>
                   <div>
                     <div className="hidden-lg hidden-md hidden-print borderedDiv" />
                   </div>
