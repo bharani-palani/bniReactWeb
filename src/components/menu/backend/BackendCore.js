@@ -8,24 +8,57 @@ import helpers from "../../../helpers";
 function BackendCore(props) {
   const Table = props.Table;
   const TableRows = props.TableRows;
-  const rowElements = props.rowElements;
-
+  const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
 
-  useEffect(() => {
-    const formdata = new FormData();
-    formdata.append("TableRows", TableRows);
-    formdata.append("Table", Table);
-    apiInstance
-      .post("/getBackend", formdata)
-      .then(response => {
-        setDbData(response.data.response);
-      })
+  const getElementAjax = (row) => {
+    return apiInstance
+      .get(row.dropDownFetch.apiUrl)
+      .then(r => ({dropDownFetch: {dropDownList: [{id:null, value:"Select"},...r.data.response]}}))
       .catch(error => {
         console.log(error);
       });
-  }, [Table, TableRows]);
+  };
+
+  const createRowElementArray = () => {
+    const rows = props.rowElements.map(row => {
+      if(typeof row === "object") {
+        return getElementAjax(row);
+      }
+      return new Promise((resolve, reject) => {
+        resolve(row);
+      });
+    });
+    return rows;
+  }
+
+
+  const getBackendAjax = () => {
+    const formdata = new FormData();
+    formdata.append("TableRows", TableRows);
+    formdata.append("Table", Table);
+    return apiInstance
+      .post("/getBackend", formdata)
+      .then(r => r.data.response)
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    const a = createRowElementArray();
+    const b = getBackendAjax();
+
+    Promise.all([[...a],b]).then(async array => {
+      const temp = [];
+      await Promise.all(array[0]).then((a) => {
+        temp.push(a);
+      })
+      setDbData(array[1]);
+      setRowElements(temp[0]);
+    });
+  }, []);
 
   const updateDbData = (index, data) => {
     const { i, j } = index;
@@ -89,7 +122,8 @@ function BackendCore(props) {
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
 
-  return dbData.length > 0 ? (
+
+  return dbData.length > 0 && setRowElements.length > 0 ? (
     <div className="container-fluid backendConfigureSection">
       <ToastContainer className="bniToaster" />
       <h5 className="heading">

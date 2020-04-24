@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import DateTimePicker from "react-datetime-picker";
 import { DropdownButton, Dropdown, MenuItem } from "react-bootstrap";
-import apiInstance from "../../../apiServices";
+import SelectableContext from "react-bootstrap/SelectableContext";
 
 function FormElement(props) {
   const [date, setDate] = useState(new Date(props.value));
   const [dropDownList, setDropDownList] = useState([]);
-  const [dropDownOption, setDropDownOption] = useState(props.value);
+  const [dropDownSelected, setDropDownSelected] = useState(props.value);
+
   useEffect(() => {
     if (typeof props.element === "object") {
-      if (props.element.dropDownFetch && props.element.dropDownFetch.apiUrl) {
-        apiInstance
-          .get(props.element.dropDownFetch.apiUrl)
-          .then(response => {
-            setDropDownList(response.data.response);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
+      const dropDownList = props.element.dropDownFetch.dropDownList;
+      setDropDownList(dropDownList);
+      const dropDownSelected = dropDownList.filter(
+        d => Number(d.id) === Number(props.value)
+      )[0].value || null;
+      setDropDownSelected(dropDownSelected);
     }
   }, [props.element]);
+
+  const onDropDownSelect = (index, id) => {
+    const dropDownSelected = dropDownList.filter(
+      d => Number(d.id) === Number(id)
+    )[0].value;
+    setDropDownSelected(dropDownSelected);
+    props.onChange(index, id);
+  };
 
   const renderElement = (index, element, value) => {
     if (typeof element === "string") {
@@ -57,7 +62,9 @@ function FormElement(props) {
           );
         case "label":
           return (
-            <div className="text-danger"><b>{value}</b></div>
+            <div className="text-danger">
+              <b>{value}</b>
+            </div>
           );
         case "checkbox":
           return (
@@ -98,19 +105,25 @@ function FormElement(props) {
       switch (firstKey) {
         case "dropDownFetch":
           return (
-            <select 
-              onChange={e => {
-                props.onChange(index, e.target.value);
-                setDropDownOption(e.target.value)}
-              } 
-              className="dropdown" 
-              value={dropDownOption}
-            >
-              <option value={null}>Select</option>
-              {dropDownList.map((d,i) => (
-                <option key={i} value={d.id}>{d.value}</option>
-              ))}
-            </select>
+            <SelectableContext.Provider value={false}>
+              <Dropdown>
+                <Dropdown.Toggle>
+                  {dropDownSelected} <i className="fa fa-chevron-down" />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {dropDownList.map((d, i) => (
+                    <Dropdown.Item
+                      key={i}
+                      onClick={e => {
+                        onDropDownSelect(index, d.id);
+                      }}
+                    >
+                      {d.value}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            </SelectableContext.Provider>
           );
         default:
           return null;
