@@ -9,7 +9,14 @@ function Resume() {
   const [resume, setResume] = useState([]);
 
   const [allLoaded, setAllLoaded] = useState(false);
-  const [now, setNow] = useState([]);
+  let now = new Date();
+  const [YYYY,MMM,DD] = [
+    now.getFullYear(), 
+    now.getMonth()+1 < 10 ? `0${now.getMonth()+1}` : now.getMonth()+1,
+    now.getDate()+1 < 10 ? `0${now.getDate()}` : now.getDate()
+  ];
+
+  now = `${YYYY}-${MMM}-${DD}`
 
   useEffect(() => {
     Promise.all([

@@ -18,9 +18,9 @@ class resume_model extends CI_Model
     public function getCareerExpYears() {
         $query = $this->db->select("
         CONCAT( 
-            (TIMESTAMPDIFF( YEAR, MIN( work_start_date ) , NOW( ) )) ,  ' Years, ', 
-            (TIMESTAMPDIFF( MONTH , MIN( work_start_date ) , NOW( ) ) %12),  ' Months & ', 
-            (FLOOR( TIMESTAMPDIFF( DAY , MIN( work_start_date ) , NOW( ) ) % 30.4375 )),  ' Days'
+            (TIMESTAMPDIFF( YEAR, MIN( work_start_date ) , NOW( ) )) ,  ' years, ', 
+            (TIMESTAMPDIFF( MONTH , MIN( work_start_date ) , NOW( ) ) %12),  ' months & ', 
+            (FLOOR( TIMESTAMPDIFF( DAY , MIN( work_start_date ) , NOW( ) ) % 30.4375 )),  ' days'
         ) as totalMonths", FALSE
             )->from('resume_03_work_summary')->get();
         $result = get_all_rows($query);
