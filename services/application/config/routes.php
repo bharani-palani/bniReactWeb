@@ -70,6 +70,7 @@ $route['resume/personalInfo'] = 'resume/resume/personalInfo';
 $route['resume/footer'] = 'resume/resume/footer';
 $route['resume/getCompanyList'] = 'resume/resume/getCompanyList';
 $route['resume/getProjectList'] = 'resume/resume/getProjectList';
+$route['resume/getResume'] = 'resume/resume/getResume';
 
 
 /* End of file routes.php */

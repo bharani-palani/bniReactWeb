@@ -20,7 +20,7 @@ class resume_model extends CI_Model
         CONCAT( 
             (TIMESTAMPDIFF( YEAR, MIN( work_start_date ) , NOW( ) )) ,  ' Years, ', 
             (TIMESTAMPDIFF( MONTH , MIN( work_start_date ) , NOW( ) ) %12),  ' Months & ', 
-            (FLOOR( TIMESTAMPDIFF( DAY , MIN( work_start_date ) , NOW( ) ) % 30.4375 )),  ' Days '
+            (FLOOR( TIMESTAMPDIFF( DAY , MIN( work_start_date ) , NOW( ) ) % 30.4375 )),  ' Days'
         ) as totalMonths", FALSE
             )->from('resume_03_work_summary')->get();
         $result = get_all_rows($query);
@@ -81,5 +81,4 @@ class resume_model extends CI_Model
         $query = $this->db->select(array('project_id as id', 'project_name as value'))->get('resume_06_project_experience');
         return get_all_rows($query);
     }
-    
 }       

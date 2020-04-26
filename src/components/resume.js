@@ -6,166 +6,24 @@ import helpers from "../helpers";
 
 function Resume() {
   document.title = "Bharani | Resume";
-  const [header, setHeader] = useState([]);
-  const [careerObj, setCareerObj] = useState({});
-  let [careerExp, setCareerExp] = useState("");
-  const [workSummary, setWorkSummary] = useState([]);
-  const [proHighlights, setProHighLights] = useState([]);
-  const [techSkills, setTechSkills] = useState([]);
-  const [projectExperience, setProjectExperience] = useState([]);
-  const [education, setEducation] = useState([]);
-  const [extraAct, setExtraAct] = useState([]);
-  const [personalInfo, setPersonalInfo] = useState([]);
-  const [footer, setFooter] = useState({});
+  const [resume, setResume] = useState([]);
 
   const [allLoaded, setAllLoaded] = useState(false);
   const [now, setNow] = useState([]);
 
   useEffect(() => {
     Promise.all([
-      getHeader(),
-      getCareerObjective(),
-      getCareerExpYears(),
-      getWorkSummary(),
-      getProHighLights(),
-      getTechSkills(),
-      getProjectExperience(),
-      getEducation(),
-      getExtrAct(),
-      getPersonalInfo(),
-      getFooter()
+      getResume(),
     ]).then(a => {
-      setHeader(a[0]);
-      setCareerObj(a[1]);
-      setCareerExp(a[2]);
-      setWorkSummary(a[3]);
-      setProHighLights(a[4]);
-      setTechSkills(a[5]);
-      setProjectExperience(a[6]);
-      setEducation(a[7]);
-      setExtraAct(a[8]);
-      setPersonalInfo(a[9]);
-      setFooter(a[10]);
       setAllLoaded(true);
     });
   }, []);
 
-  const getHeader = async () => {
+  const getResume = async () => {
     return await apiInstance
-      .get("/resume/getHeader")
+      .get("/resume/getResume")
       .then(response => {
-        return response.data.response[0];
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getCareerObjective = async () => {
-    return await apiInstance
-      .get("/resume/getCareerObjective")
-      .then(response => {
-        return response.data.response[0];
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getCareerExpYears = async () => {
-    return await apiInstance
-      .get("/resume/getCareerExpYears")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getWorkSummary = async () => {
-    return await apiInstance
-      .get("/resume/workSummary")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getProHighLights = async () => {
-    return await apiInstance
-      .get("/resume/proHighLights")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getTechSkills = async () => {
-    return await apiInstance
-      .get("/resume/techSkills")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getProjectExperience = async () => {
-    return await apiInstance
-      .get("/resume/projectExperience")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getEducation = async () => {
-    return await apiInstance
-      .get("/resume/education")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getExtrAct = async () => {
-    return await apiInstance
-      .get("/resume/extraAct")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getPersonalInfo = async () => {
-    return await apiInstance
-      .get("/resume/personalInfo")
-      .then(response => {
-        return response.data.response;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const getFooter = async () => {
-    return await apiInstance
-      .get("/resume/footer")
-      .then(response => {
-        setNow(response.data.now);
-        return response.data.response[0];
+        setResume(response.data.response);
       })
       .catch(error => {
         console.log(error);
@@ -173,46 +31,46 @@ function Resume() {
   };
 
   const arrow = () => (
-    <i style={{ fontSize: "1rem" }} className={header["config_arrow_font"]} />
+    <i style={{ fontSize: "1rem" }} className={resume.header[0].config_arrow_font} />
   );
 
   const renderDom = () => {
-    const careerObjStr = String(careerObj.career_description).replace(
+    const careerObjStr = String(resume.careerObjective[0].career_description).replace(
       "{n}",
-      careerExp
+      resume.careerExpYears
     );
     return (
       <div className="resumeContainer">
         <div className="printerIcon hidden-print">
           <span onClick={() => window.print()}><i className="fa fa-print" /></span>
         </div>
-        {header &&
-          header["header_name"] &&
-          header["header_email"] &&
-          header["header_mobile"] &&
-          header["header_address"] && (
+        {resume.header &&
+          resume.header[0]["header_name"] &&
+          resume.header[0]["header_email"] &&
+          resume.header[0]["header_mobile"] &&
+          resume.header[0]["header_address"] && (
             <div className="mb-30">
               <div className="equal-grid-2">
                 <div className="text-left pb-5">
                   <h3 className="name m-0">
-                    <b>{header["header_name"]}</b>
+                    <b>{resume.header[0]["header_name"]}</b>
                   </h3>
                   <div>
                     <i className="fa fa-envelope" />
-                    &nbsp;{header["header_email"]}
+                    &nbsp;{resume.header[0]["header_email"]}
                   </div>
                   <div>
                     <i className="fa fa-phone" />
-                    &nbsp;{header["header_mobile"]}
+                    &nbsp;{resume.header[0]["header_mobile"]}
                   </div>
                   <div>
                     <i className="fa fa-globe" />
                     &nbsp;
-                    {header["header_web"]}
+                    {resume.header[0]["header_web"]}
                   </div>
                 </div>
                 <div className="text-right m-text-left t-text-left">
-                  {String(header["header_address"])
+                  {String(resume.header[0]["header_address"])
                     .split(",")
                     .map((add, i) => (
                       <div key={i}>
@@ -230,11 +88,11 @@ function Resume() {
             <div className="wrap">{careerObjStr}</div>
           </div>
         )}
-        {workSummary && workSummary.length > 0 && (
+        {resume.workSummary && resume.workSummary.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Work summary</h4>
             <div className="grid-4">
-              {workSummary.map((w, i) => (
+              {resume.workSummary.map((w, i) => (
                 <React.Fragment key={i}>
                   <div>
                     <div className="hidden-xs hidden-sm print-visible text-center">
@@ -257,11 +115,11 @@ function Resume() {
             </div>
           </div>
         )}
-        {proHighlights && proHighlights.length > 0 && (
+        {resume.proHighlights && resume.proHighlights.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Profesional Highlights</h4>
             <div className="grid-3 mb-30">
-              {proHighlights.map((p, i) => (
+              {resume.proHighlights.map((p, i) => (
                 <React.Fragment key={i}>
                   <div>
                     <div className="hidden-xs hidden-sm print-visible text-center">
@@ -277,11 +135,11 @@ function Resume() {
             </div>
           </div>
         )}
-        {techSkills && techSkills.length > 0 && (
+        {resume.techSkills && resume.techSkills.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Technical Skills</h4>
             <div className="grid-3">
-              {techSkills.map((t, i) => (
+              {resume.techSkills.map((t, i) => (
                 <React.Fragment key={i}>
                   <div>
                     <div className="hidden-xs hidden-sm print-visible text-center">
@@ -297,10 +155,10 @@ function Resume() {
             </div>
           </div>
         )}
-        {projectExperience && projectExperience.length > 0 && (
+        {resume.projectExperience && resume.projectExperience.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Project Experience</h4>
-            {projectExperience.map((p, i) => (
+            {resume.projectExperience.map((p, i) => (
               <React.Fragment key={i}>
                 <div className="equal-grid-3 borderedDiv pt-10 pb-10 mb-20">
                   <div>
@@ -345,11 +203,11 @@ function Resume() {
             ))}
           </div>
         )}
-        {education && education.length > 0 && (
+        {resume.education && resume.education.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Education</h4>
             <div className="grid-6">
-              {education.map((e, i) => (
+              {resume.education.map((e, i) => (
                 <React.Fragment key={i}>
                   <div>
                     <div className="hidden-xs hidden-sm print-visible text-center">
@@ -370,11 +228,11 @@ function Resume() {
             </div>
           </div>
         )}
-        {extraAct && extraAct.length > 0 && (
+        {resume.extraAct && resume.extraAct.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Extracurricular activities</h4>
             <div className="grid-3">
-              {extraAct.map((e, i) => (
+              {resume.extraAct.map((e, i) => (
                 <React.Fragment key={i}>
                   <div>
                     <div className="hidden-xs hidden-sm print-visible text-center">
@@ -390,11 +248,11 @@ function Resume() {
             </div>
           </div>
         )}
-        {personalInfo && personalInfo.length > 0 && (
+        {resume.personalInfo && resume.personalInfo.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Personal information:</h4>
             <div className="equal-grid-3">
-              {personalInfo.map((p, i) => (
+              {resume.personalInfo.map((p, i) => (
                 <React.Fragment key={i}>
                   <div>{p.info_key}</div>
                   <div className="wrap">{p.info_value}</div>
@@ -406,12 +264,12 @@ function Resume() {
             </div>
           </div>
         )}
-        {footer && (
+        {resume.footer && (
           <div className="mb-30">
-            <div className="mb-30">{footer["footer_text"]}</div>
+            <div className="mb-30">{resume.footer[0]["footer_text"]}</div>
             <div className="equal-grid-2 footer-grid">
               <div>
-                <b>Place:</b>&nbsp;{footer["footer_place"]}
+                <b>Place:</b>&nbsp;{resume.footer[0]["footer_place"]}
               </div>
               <div className="text-right pr-5">
                 <b>SIGNATURE</b>
@@ -421,7 +279,7 @@ function Resume() {
                 <span>{now}</span>
               </div>
               <div className="text-right">
-                {footer["footer_signature_name"]}
+                {resume.footer[0]["footer_signature_name"]}
               </div>
             </div>
           </div>
