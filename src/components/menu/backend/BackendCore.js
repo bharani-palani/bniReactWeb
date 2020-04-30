@@ -10,6 +10,7 @@ function BackendCore(props) {
   const TableRows = props.TableRows;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
+  const dbBackup = JSON.parse(JSON.stringify(dbData));
   const [deleteData, setDeleteData] = useState([]);
 
   const getElementAjax = (row) => {
@@ -93,13 +94,20 @@ function BackendCore(props) {
 
   const submitData = () => {
     const insertData = dbData.filter(d => d[TableRows[0]] === "");
-    const updateData = dbData.filter(d => d[TableRows[0]] !== "");
+    const updateAllData = dbData.filter(d => d[TableRows[0]] !== "");
+
+    const updateData = [];
+    updateAllData.forEach((b,i) => {
+      TableRows.map(t => (b[t] !== dbBackup[i][t]) ? true : false).some(u => u === true) && updateData.push(b);
+    })
+
     const postData = {
       Table,
       insertData,
       deleteData,
       updateData
     };
+
     const formdata = new FormData();
     formdata.append("postData", JSON.stringify(postData));
     apiInstance

@@ -105,21 +105,11 @@ $primary-color: #c2d82e;
       font-style: italic;
     }
     .dropdown {
-      a {
-        display: inline-block;
-        padding-left: 0.5rem;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: solid 1px #ddd;
-        color: #333;
-        font-size: 1.2rem;
-        word-break: break-word;
-        width: 100%;
-        &:hover {
-          background: #c2d82e;
-        }
-        &:last-child {
-          border-bottom: none;
+      &.show {
+        .btn {
+          i.fa {
+            transform: rotate(-90deg);
+          }
         }
       }
       .btn {
@@ -129,6 +119,7 @@ $primary-color: #c2d82e;
         color: #222 !important;
         font-weight: 500;
         width: 100%;
+        border-radius: 3px;
         i.fa {
           transition-property: transform;
           transition-duration: 0.5s;
@@ -138,10 +129,23 @@ $primary-color: #c2d82e;
           top: 1.25rem;
         }
       }
-      &.show {
-        .btn {
-          i.fa {
-            transform: rotate(-90deg);
+      .dropdown-menu {
+        padding: 0;
+        a {
+          display: inline-block;
+          padding-left: 0.5rem;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          border-bottom: solid 1px #ddd;
+          color: #333;
+          font-size: 1.2rem;
+          word-break: break-word;
+          width: 100%;
+          &:hover {
+            background: #c2d82e;
+          }
+          &:last-child {
+            border-bottom: none;
           }
         }
       }
