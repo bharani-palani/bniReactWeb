@@ -210,15 +210,15 @@ class home_model extends CI_Model
     }
     public function onTransaction($postData, $table, $primary_field) {
         $this->db->trans_start();
-        if(count($postData->updateData) > 0) {
+        if(isset($postData->updateData) && count($postData->updateData) > 0) {
             $array = json_decode(json_encode($postData->updateData), true);
             $this->db->update_batch($table, $array, $primary_field); 
         }
-        if(count($postData->insertData) > 0) {
+        if(isset($postData->insertData) && count($postData->insertData) > 0) {
             $array = json_decode(json_encode($postData->insertData), true);
             $this->db->insert_batch($table, $array); 
         }
-        if(count($postData->deleteData) > 0) {
+        if(isset($postData->deleteData) && count($postData->deleteData) > 0) {
             $array = json_decode(json_encode($postData->deleteData), true);
             $this->db->where_in($primary_field, $array);
             $this->db->delete($table);

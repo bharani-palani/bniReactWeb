@@ -12,12 +12,12 @@ code {
 }
 .btn-bni {
   background: #c2d82e;
-  color: #fff;
+  color: #000 !important;
+  text-shadow: 1px 1px 1px #fff;
   &:focus,
   &:hover {
     border: 0;
     outline: 0 !important;
-    color: #fff !important;
   }
 }
 .btn-bni-sm {
@@ -99,13 +99,14 @@ code {
 .bniToaster {
   .Toastify__toast {
     &.Toastify__toast--success {
+      font-size: 12px;
       background: #c2d82e;
     }
     color: #fff;
     i {
       &:before {
         margin-left: 0;
-        font-size: 16px;
+        font-size: 12px;
       }
       &.trash {
         position: absolute;

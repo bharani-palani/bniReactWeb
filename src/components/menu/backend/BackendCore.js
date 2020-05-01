@@ -12,6 +12,7 @@ function BackendCore(props) {
   const [dbData, setDbData] = useState([]);
   const dbBackup = JSON.parse(JSON.stringify(dbData));
   const [deleteData, setDeleteData] = useState([]);
+  const autoClose = 3000;
 
   const getElementAjax = (row) => {
     return apiInstance
@@ -96,16 +97,21 @@ function BackendCore(props) {
     const insertData = dbData.filter(d => d[TableRows[0]] === "");
     const updateAllData = dbData.filter(d => d[TableRows[0]] !== "");
 
-    const updateData = [];
-    updateAllData.forEach((b,i) => {
-      TableRows.map(t => (b[t] !== dbBackup[i][t]) ? true : false).some(u => u === true) && updateData.push(b);
-    })
+    // const updateData = [];
+    // updateAllData.forEach((b,i) => {
+    //   TableRows.map(t => (b[t] !== dbBackup[i][t]) ? true : false).some(u => u === true) && updateData.push(b);
+    // })
+
+
+    const updateData = updateAllData.filter((u,i) => {
+      return TableRows.map(t => (u[t] !== dbBackup[i][t])).some(u => u === true) && u
+    });
 
     const postData = {
-      Table,
-      insertData,
-      deleteData,
-      updateData
+      ...((insertData.length > 0 || deleteData.length > 0 || updateData.length > 0) && {Table}),
+      ...(insertData.length > 0 && {insertData}),
+      ...(deleteData.length > 0 && {deleteData}),
+      ...(updateData.length > 0 && {updateData}),
     };
 
     const formdata = new FormData();
@@ -114,12 +120,15 @@ function BackendCore(props) {
       .post("/postBackend", formdata)
       .then(response => {
         response.data.response ? success() : fail();
+        setTimeout(() => {
+          props.onSubmit(true);          
+        }, autoClose);
       })
       .catch(error => console.error(error));
   };
 
-  const sMessage = () => ({ __html: `&#128512;${Table} saved successfully` });
-  const fMessage = () => ({ __html: `&#128546;Oops.. Some error..` });
+  const sMessage = () => ({ __html: `<span><i class="fa fa-thumbs-up"></i> ${Table} saved successfully</span>` });
+  const fMessage = () => ({ __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes. Some error !!</span>` });
 
   const success = () =>
     toast.success(
@@ -133,7 +142,7 @@ function BackendCore(props) {
 
   return dbData.length > 0 && setRowElements.length > 0 ? (
     <div className="container-fluid backendConfigureSection">
-      <ToastContainer className="bniToaster" />
+      <ToastContainer autoClose={autoClose} className="bniToaster" />
       <h5 className="heading">
         Table: {Table} ({dbData.length} record{dbData.length > 1 ? "s" : ""})
       </h5>
