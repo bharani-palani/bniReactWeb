@@ -142,7 +142,7 @@ function MainApp() {
             style={{ zIndex: 9999 }}
           />
         )}
-        {!toggleSideBar ? (
+        {!toggleSideBar && audioState === "pause" ? (
           <video className="videoTag hidden-print" autoPlay loop muted>
             <source src={require("../../videos/video.mp4")} type="video/mp4" />
           </video>
