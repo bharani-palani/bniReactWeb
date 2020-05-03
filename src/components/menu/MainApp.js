@@ -13,6 +13,7 @@ function MainApp() {
   const [openModal, setOpenModal] = useState(false);
   const [audioState, setAudioState] = useState("play");
   const [audioVisible, setAudioVisible] = useState(false);
+  const [videoVisible, setVideoVisible] = useState(false);
   const menus = [
     {
       href: "/about",
@@ -92,6 +93,9 @@ function MainApp() {
       event.preventDefault();
       setOpenModal(true);
     });
+    setTimeout(() => {
+      setVideoVisible(true);      
+    }, 5000);
     // setOpenModal(true); //  comment this later
   }, []);
 
@@ -146,7 +150,7 @@ function MainApp() {
             style={{ zIndex: 9999 }}
           />
         )}
-        {!toggleSideBar && (
+        {!toggleSideBar && videoVisible && (
           <video className="videoTag hidden-print" autoPlay loop muted>
             <source src={require("../../videos/video.mp4")} type="video/mp4" />
           </video>
