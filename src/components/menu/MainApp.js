@@ -12,6 +12,7 @@ function MainApp() {
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [audioState, setAudioState] = useState("play");
+  const [audioVisible, setAudioVisible] = useState(false);
   const menus = [
     {
       href: "/about",
@@ -120,13 +121,16 @@ function MainApp() {
   };
 
   const togglePlay = () => {
-    myAudio = myAudio.current;
-    if (myAudio.paused) {
-      setAudioState("pause");
-      myAudio.play();
-    } else {
-      setAudioState("play");
-      myAudio.pause();
+    setAudioVisible(true);
+    if (audioVisible) {
+      myAudio = myAudio.current;
+      if (myAudio.paused) {
+        setAudioState("pause");
+        myAudio.play();
+      } else {
+        setAudioState("play");
+        myAudio.pause();
+      }
     }
   };
 
@@ -142,11 +146,11 @@ function MainApp() {
             style={{ zIndex: 9999 }}
           />
         )}
-        {!toggleSideBar && audioState === "pause" ? (
+        {!toggleSideBar && (
           <video className="videoTag hidden-print" autoPlay loop muted>
             <source src={require("../../videos/video.mp4")} type="video/mp4" />
           </video>
-        ) : null}
+        )}
 
         <div className="mobile-menu">
           <Navbar
@@ -222,11 +226,15 @@ function MainApp() {
                   />
                 </Link>
                 <button className="audiBtn" onClick={() => togglePlay()}>
-                  <i
-                    className={`fa fa-${
-                      audioState === "play" ? "play" : "pause"
-                    }`}
-                  />
+                  {!audioVisible ? (
+                    <i className="fa fa-music" />
+                  ) : (
+                    <i
+                      className={`fa fa-${
+                        audioState === "play" ? "play" : "pause"
+                      }`}
+                    />
+                  )}
                 </button>
               </div>
               <ul className="primary-menu">
@@ -246,25 +254,37 @@ function MainApp() {
                     </li>
                   ))}
                 </ul>
-                <div className="text-center designedBy">Designed and developed by Bharani</div>
+                <div className="text-center designedBy">
+                  Design and development by Bharani
+                </div>
               </div>
             </nav>
           </div>
         </header>
-        <audio
-          className="audio"
-          ref={myAudio}
-          controls
-          loop
-          id="myAudio"
-          src={require("../../videos/Heliolingus.mp3")}
-          preload="auto"
-        ></audio>
+        {audioVisible && (
+          <audio
+            className="audio"
+            ref={myAudio}
+            controls
+            loop
+            src={require("../../videos/Heliolingus.mp3")}
+            preload="auto"
+          />
+        )}
       </div>
       <div className={`wrapper ${toggleSideBar ? "toggleOn" : "toggleOff"}`}>
         <Wrapper />
-        <button className="audiBtn mobile hidden-print" onClick={() => togglePlay()}>
-          <i className={`fa fa-${audioState === "play" ? "play" : "pause"}`} />
+        <button
+          className="audiBtn mobile hidden-print"
+          onClick={() => togglePlay()}
+        >
+          {!audioVisible ? (
+            <i className="fa fa-music" />
+          ) : (
+            <i
+              className={`fa fa-${audioState === "play" ? "play" : "pause"}`}
+            />
+          )}
         </button>
       </div>
     </Router>
