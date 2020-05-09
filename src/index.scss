@@ -98,9 +98,11 @@ code {
 }
 .bniToaster {
   .Toastify__toast {
+    font-size: 14px;
     &.Toastify__toast--success {
-      font-size: 12px;
       background: #c2d82e;
+      color: #000;
+      text-shadow: 1px 1px 0px #fff;
     }
     color: #fff;
     i {

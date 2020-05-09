@@ -122,11 +122,11 @@ function Resume() {
             </div>
           </div>
         )}
-        {resume.proHighlights && resume.proHighlights.length > 0 && (
+        {resume.professionalHighlights && resume.professionalHighlights.length > 0 && (
           <div className="mb-30">
             <h4 className="topicHeading">Profesional Highlights</h4>
             <div className="grid-3 mb-30">
-              {resume.proHighlights.map((p, i) => (
+              {resume.professionalHighlights.map((p, i) => (
                 <React.Fragment key={i}>
                   <div>
                     <div className="hidden-xs hidden-sm print-visible text-center">

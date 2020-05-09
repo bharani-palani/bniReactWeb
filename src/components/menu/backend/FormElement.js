@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from "react";
 import DateTimePicker from "react-datetime-picker";
-import { DropdownButton, Dropdown, MenuItem } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
 function FormElement(props) {
-  const [date, setDate] = useState(new Date(props.value));
+  let [date, setDate] = useState(new Date(props.value));
   const [dropDownList, setDropDownList] = useState([]);
   const [dropDownSelected, setDropDownSelected] = useState(props.value);
+
+  const objectToDate = date => {
+    const [YYYY, MM, DD] = [
+      date.getFullYear(),
+      date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`,
+      date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`
+    ];
+    const dateString = `${YYYY}-${MM}-${DD}`;
+    return dateString;
+  };
+  if (props.element === "date") {
+    if (isNaN(Date.parse(date))) {
+      let today = new Date();
+      today = objectToDate(today);
+      date = new Date(today);
+      setDate(date);
+      setTimeout(() => {        
+        props.onChange(props.index, today);
+      }, 100);
+    }
+  }
 
   useEffect(() => {
     if (typeof props.element === "object") {
       const dropDownList = props.element.dropDownFetch.dropDownList;
       setDropDownList(dropDownList);
-      const dropDownSelected = dropDownList.filter(
-        d => Number(d.id) === Number(props.value)
-      )[0].value || null;
+      const dropDownSelected =
+        dropDownList.filter(d => Number(d.id) === Number(props.value))[0]
+          .value || null;
       setDropDownSelected(dropDownSelected);
     }
-  }, [props.element]);
+  }, [props]);
 
   const onDropDownSelect = (index, id) => {
     const dropDownSelected = dropDownList.filter(
@@ -87,15 +108,18 @@ function FormElement(props) {
           );
         case "date":
           return (
-            <DateTimePicker
-              onChange={value => {
-                setDate(value);
-                props.onChange(index, value);
-              }}
-              value={date}
-              format={`y-MM-dd`}
-              clearIcon={null}
-            />
+            <>
+              <DateTimePicker
+                onChange={value => {
+                  setDate(value);
+                  props.onChange(index, objectToDate(value));
+                }}
+                value={date}
+                format={`y-MM-dd`}
+                required
+                clearIcon={null}
+              />
+            </>
           );
         default:
           return null;

@@ -97,12 +97,6 @@ function BackendCore(props) {
     const insertData = dbData.filter(d => d[TableRows[0]] === "");
     const updateAllData = dbData.filter(d => d[TableRows[0]] !== "");
 
-    // const updateData = [];
-    // updateAllData.forEach((b,i) => {
-    //   TableRows.map(t => (b[t] !== dbBackup[i][t]) ? true : false).some(u => u === true) && updateData.push(b);
-    // })
-
-
     const updateData = updateAllData.filter((u,i) => {
       return TableRows.map(t => (u[t] !== dbBackup[i][t])).some(u => u === true) && u
     });
