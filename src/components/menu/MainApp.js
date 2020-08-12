@@ -4,6 +4,8 @@ import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
 import BackendUpdate from "./backendUpdate";
 import { baseUrl } from "../../environment";
+import GoogleLogin from "react-google-login";
+import { oAuthToken } from "../../environment";
 import "./MainApp.scss";
 
 function MainApp() {
@@ -94,7 +96,7 @@ function MainApp() {
       setOpenModal(true);
     });
     setTimeout(() => {
-      setVideoVisible(true);      
+      setVideoVisible(true);
     }, 5000);
     // setOpenModal(true); //  comment this later
   }, []);
@@ -138,6 +140,9 @@ function MainApp() {
     }
   };
 
+  const responseGoogle = response => {
+    console.log(response);
+  };
   return (
     <Router>
       <div className="menu-wrapper">
@@ -196,6 +201,15 @@ function MainApp() {
                     </Link>
                   </li>
                 ))}
+                <li className="google-mobile">
+                  <GoogleLogin
+                    clientId={oAuthToken}
+                    buttonText=""
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={"single_host_origin"}
+                  />
+                </li>
               </ul>
               <ul className="primary-menu">
                 {menus.map((menu, i) => (
@@ -257,6 +271,15 @@ function MainApp() {
                       </Link>
                     </li>
                   ))}
+                  <li className="google">
+                    <GoogleLogin
+                      clientId={oAuthToken}
+                      buttonText=""
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                      cookiePolicy={"single_host_origin"}
+                    />
+                  </li>
                 </ul>
                 <div className="text-center designedBy">
                   Design and development by Bharani

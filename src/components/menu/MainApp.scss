@@ -39,7 +39,7 @@
   transition: max-height 0.2s ease-in-out;
 }
 .slidedown {
-  max-height: 250px;
+  max-height: 300px;
 }
 .pt-2 {
   line-height: 3;
@@ -133,6 +133,24 @@
     color: #c2d82e;
     font-size: 0.8rem;
     padding-top: 1rem;
+  }
+  ul {
+    li {
+      padding-left: 0;
+      &.google {
+        background: transparent;
+        position: absolute;
+        button {
+          border-radius: 50% !important;
+          background: transparent;
+          width: 40px;
+          height: 40px;
+          div {
+            background: transparent !important;
+          }
+        }
+      }
+    }
   }
 }
 .modal-backdrop {
@@ -243,6 +261,16 @@ $fontFamily: Verdana, Arial, Helvetica, sans-serif;
   }
   .topicHeading {
     font-weight: bold;
+  }
+  .google-mobile {
+    button {
+      border-radius: 50% !important;
+      div {
+        border-radius: 50% !important;
+        width: 50px;
+        height: 50px;
+      }
+    }
   }
   /* Landscape tablets and medium desktops */
   @media only screen and (min-width: 992px) and (max-width: 1199px) {
