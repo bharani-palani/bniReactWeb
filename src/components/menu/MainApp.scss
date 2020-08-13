@@ -139,7 +139,8 @@
       padding-left: 0;
       &.google {
         background: transparent;
-        position: absolute;
+        position: relative;
+        top: 5px;
         button {
           border-radius: 50% !important;
           background: transparent;
