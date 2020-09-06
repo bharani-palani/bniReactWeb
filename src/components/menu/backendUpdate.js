@@ -41,7 +41,7 @@ function BackendUpdate(props) {
                 <Card key={t.id}>
                     <Card.Header>
                         <Accordion.Toggle onClick={() => setCollapse(t.label)} as={Button} variant="link" eventKey={t.id}>
-                            {t.label} {JSON.stringify(collapse === t.label)}
+                            {t.label}
                         </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey={t.id}>
