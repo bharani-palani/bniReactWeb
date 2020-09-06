@@ -10,11 +10,11 @@ function ResumeBackend(props) {
         {resumeArray.map((t,i) => {
             return <Card key={t.id}>
                 <Card.Header>
-                    <Accordion.Toggle onClick={() => setCollapse(t.label)} as={Button} variant="link" eventKey={i}>
+                    <Accordion.Toggle onClick={() => setCollapse(t.label)} as={Button} variant="link" eventKey={t.id}>
                         {t.label}
                     </Accordion.Toggle>
                 </Card.Header>
-                <Accordion.Collapse eventKey={i}>
+                <Accordion.Collapse eventKey={t.id}>
                     <Card.Body>
                         {
                             collapse === t.label && 

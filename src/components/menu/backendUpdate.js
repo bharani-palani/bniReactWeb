@@ -40,11 +40,11 @@ function BackendUpdate(props) {
             {configArray.map((t,i) => 
                 <Card key={t.id}>
                     <Card.Header>
-                        <Accordion.Toggle onClick={() => setCollapse(t.label)} as={Button} variant="link" eventKey={i}>
-                            {t.label}
+                        <Accordion.Toggle onClick={() => setCollapse(t.label)} as={Button} variant="link" eventKey={t.id}>
+                            {t.label} {JSON.stringify(collapse === t.label)}
                         </Accordion.Toggle>
                     </Card.Header>
-                    <Accordion.Collapse eventKey={i}>
+                    <Accordion.Collapse eventKey={t.id}>
                         <Card.Body>
                             {collapse === t.label && <BackendCore Table={t.Table} TableRows={t.TableRows} rowElements={t.rowElements} />}
                         </Card.Body>

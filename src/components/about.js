@@ -5,7 +5,7 @@ import {baseUrl} from "../environment";
 import AppContext from "../AppContext";
 
 function About() {
-  const [about, setAbout] = useContext(AppContext);
+  const [about] = useContext(AppContext);
   const [height, setheight] = useState(window.innerHeight);
   const [width, setWidth] = useState('100%');
 
