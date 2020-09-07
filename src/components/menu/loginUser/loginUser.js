@@ -11,7 +11,7 @@ class LoginUser extends Component {
     return (
       <div className={`userMenu`}>
         <div className="welcomeText"><i className="fa fa-user" /> Welcome {userData.profileObj.name}..</div>
-        <img className="userImage" alt="userImage" src={userData.profileObj.imageUrl} />
+        <div><img className="userImage" alt="userImage" src={userData.profileObj.imageUrl} /></div>
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React from "react";
 import Breadcrumbs from "./breadcrumb";
 import apiInstance from "../apiServices";
 import { ToastContainer, toast } from "react-toastify";
+// import { UserContext } from "../contexts/UserContext";
 import "react-toastify/dist/ReactToastify.css";
 
 class Write extends React.Component {
@@ -40,13 +41,13 @@ class Write extends React.Component {
             name: "",
             mobile: "",
             email: "",
-            comments: "",
+            comments: ""
           },
           () => {
             document.getElementById("writeForm").reset();
           }
         );
-        this.notify()
+        this.notify();
       })
       .catch(error => {
         console.log(error);
@@ -88,10 +89,12 @@ class Write extends React.Component {
   };
   notify = () =>
     toast.success(
-    "👍 Your comments are recieved. Will get in touch with you shortly..",{
-      onOpen: () => this.setState({showToaster: true}),
-      onClose: () => this.setState({showToaster: false}),
-  });
+      "👍 Your comments are recieved. Will get in touch with you shortly..",
+      {
+        onOpen: () => this.setState({ showToaster: true }),
+        onClose: () => this.setState({ showToaster: false })
+      }
+    );
   render() {
     const {
       name,
@@ -104,9 +107,12 @@ class Write extends React.Component {
     return (
       <section
         className="section lb"
-        style={{ minHeight: window.screen.height, opacity: showToaster ? 1 : 0.8 }}
+        style={{
+          minHeight: window.screen.height,
+          opacity: showToaster ? 1 : 0.8
+        }}
       >
-        <ToastContainer className="bniToaster" /> 
+        <ToastContainer className="bniToaster" />
         <>
           <div className="breadcrumbs">
             <Breadcrumbs />

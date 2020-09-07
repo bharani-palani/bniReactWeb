@@ -89,6 +89,7 @@ function MainApp() {
   const fMessage = () => ({ __html: `<span><i class="fa fa-thumbs-down"></i> Error: Unable to fetch from Google API..</span>` });
   const responseGoogle = response => {
     userContext.updateUserData(response);
+    console.log(response);
   };
   const errorGoogle = () => {
     toast.error(
@@ -97,8 +98,8 @@ function MainApp() {
   }
   return (
     <UserContext.Consumer>
-      {userContext => {
-        const { userData } = userContext;
+      {userContextCallBack => {
+        const { userData } = userContextCallBack;
         return (
           <Router>
             <ToastContainer autoClose={autoClose} className="bniToaster" />

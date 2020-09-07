@@ -20,5 +20,14 @@
     height: 45px;
     cursor: pointer;
   }
-
+}
+@media only screen and (max-width: 767px) {
+  .userMenu {
+    width: 100%;
+    margin-top: 60px;
+    padding: 2.5px 5px;
+    .welcomeText {
+      padding-left: 0;
+    }
+  }
 }
