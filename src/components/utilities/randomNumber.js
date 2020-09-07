@@ -2,6 +2,7 @@ import React from "react";
 import PrettyCode from "./prettyCode";
 import { getRandomNumber, getUUID } from "./stringFunction";
 import Switch from "react-switch";
+import helpers from "../../helpers";
 
 class RandomNumber extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class RandomNumber extends React.Component {
             </div>
             <div>
               <Switch
-                onColor="#c2d82e"
+                onColor={helpers.fluorescentColor}
                 offColor="#333"
                 checkedIcon={false}
                 uncheckedIcon={false}
@@ -52,7 +53,7 @@ class RandomNumber extends React.Component {
             </div>
             <div>
               <Switch
-                onColor="#c2d82e"
+                onColor={helpers.fluorescentColor}
                 offColor="#333"
                 checkedIcon={false}
                 uncheckedIcon={false}

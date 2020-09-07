@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
 import {baseUrl} from "../environment";
-import AppContext from "../AppContext";
+import AppContext from "../contexts/AppContext";
 
 function About() {
   const [about] = useContext(AppContext);
@@ -47,7 +47,7 @@ function About() {
         <div className="spinner">
           <Loader
             type={helpers.LoadRandomSpinnerIcon()}
-            color="#c2d82e"
+            color={helpers.fluorescentColor}
             height={100}
             width={100}
           />

@@ -85,7 +85,7 @@ function LoginForm(props) {
         <div className="login-loader">
           <Loader
             type={helpers.LoadRandomSpinnerIcon()}
-            color="#c2d82e"
+            color={helpers.fluorescentColor}
             height={100}
             width={100}
           />

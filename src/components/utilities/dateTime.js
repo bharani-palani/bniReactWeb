@@ -3,6 +3,7 @@ import DateTimePicker from "react-datetime-picker";
 import PrettyCode from "./prettyCode";
 import { onDateConvert } from "./stringFunction";
 import Switch from "react-switch";
+import helpers from "../../helpers";
 import "code-prettify/styles/sunburst.css";
 
 class DateTime extends React.Component {
@@ -81,7 +82,7 @@ class DateTime extends React.Component {
                     <div className="input-group-text grid-pretty">
                       <div>
                         <Switch
-                          onColor="#c2d82e"
+                          onColor={helpers.fluorescentColor}
                           offColor="#333"
                           checkedIcon={false}
                           uncheckedIcon={false}

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Switch from "react-switch";
+import helpers from "../../helpers";
+
 
 function SignInForm(props) {
   const [username, setUsername] = useState("");
@@ -51,7 +53,7 @@ function SignInForm(props) {
           {viewModes.map((view,i) => (
               <div key={i} className="text-center column">
                 <Switch
-                  onColor="#c2d82e"
+                  onColor={helpers.fluorescentColor}
                   offColor="#333"
                   checkedIcon={false}
                   uncheckedIcon={false}

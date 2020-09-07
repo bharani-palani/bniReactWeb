@@ -1,0 +1,24 @@
+@import "../../../variable";
+
+.userMenu {
+  position: absolute;
+  display: flex;
+  right: 0;
+  float: right;
+  text-align: right;
+  z-index: 1112;
+  height: 50px;
+  padding: 2.5px 10px;
+  background: #111;
+  .welcomeText {
+    padding: 10px;
+    color: $fluorescent-color;
+  }
+  .userImage {
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+  }
+
+}

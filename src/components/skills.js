@@ -42,7 +42,7 @@ class Skills extends React.Component {
           <div className="spinner">
             <Loader
               type={helpers.LoadRandomSpinnerIcon()}
-              color="#c2d82e"
+              color={helpers.fluorescentColor}
               height={100}
               width={100}
             />

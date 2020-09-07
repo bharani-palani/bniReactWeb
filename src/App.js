@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 import MainApp from "./components/menu/MainApp";
-import AppContext from "./AppContext";
+import AppContext from "./contexts/AppContext";
+import UserContextProvider from "./contexts/UserContext";
 import apiInstance from "./apiServices";
 
 import "./style.css";
@@ -23,7 +24,9 @@ function App() {
   
   return (
     <AppContext.Provider value={[value, setValue]}>
-      <MainApp />
+      <UserContextProvider>
+        <MainApp />
+      </UserContextProvider>
     </AppContext.Provider>
   );
 }

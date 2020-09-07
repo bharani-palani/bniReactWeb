@@ -1,6 +1,7 @@
 import React from "react";
 import "code-prettify/styles/sunburst.css";
 import Switch from "react-switch";
+import helpers from "../../helpers";
 
 class PrettyCode extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class PrettyCode extends React.Component {
             </div>
             <div>
               <Switch
-                onColor="#c2d82e"
+                onColor={helpers.fluorescentColor}
                 offColor="#333"
                 checkedIcon={false}
                 uncheckedIcon={false}

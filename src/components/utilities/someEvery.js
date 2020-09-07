@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PrettyCode from "./prettyCode";
 import Switch from "react-switch";
 import { someEveryCode, someEveryAdvanced } from "./stringFunction";
+import helpers from "../../helpers";
 
 function SomeEvery() {
   const [choice, setChoice] = useState("some");
@@ -28,7 +29,7 @@ function SomeEvery() {
               </div>
               <div>
                 <Switch
-                  onColor="#c2d82e"
+                  onColor={helpers.fluorescentColor}
                   offColor="#333"
                   checkedIcon={false}
                   uncheckedIcon={false}
@@ -45,7 +46,7 @@ function SomeEvery() {
               </div>
               <div>
                 <Switch
-                  onColor="#c2d82e"
+                  onColor={helpers.fluorescentColor}
                   offColor="#333"
                   checkedIcon={false}
                   uncheckedIcon={false}
