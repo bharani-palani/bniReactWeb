@@ -1,15 +1,16 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import About from "../about";
-import Technologies from "../technologies";
-import ErrorPage from "../errorpage";
-import Projects from "../projects";
-import Skills from "../skills";
-import Awards from "../awards";
+import About from "./about";
+import Technologies from "./technologies";
+import ErrorPage from "./errorpage";
+import Projects from "./projects";
+import Skills from "./skills";
+import Awards from "./awards";
 import Utilities from "../utilities/utilities";
-import Contact from "../contact";
-import Resume from "../resume";
-import Write from "../write";
+import Contact from "./contact";
+import Resume from "./resume";
+import Write from "./write";
+import AccountPlanner from "../../components/accountPlanner/AccountPlanner";
 
 class Wrapper extends React.Component {
   render() {
@@ -25,7 +26,8 @@ class Wrapper extends React.Component {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/resume" component={Resume} />
             <Route exact path="/write" component={Write} />
-            <Route component={ErrorPage} />
+            <Route exact path="/accountPlanner" component={AccountPlanner} />
+            <Route path="*" component={ErrorPage} />
         </Switch>
     )
   }

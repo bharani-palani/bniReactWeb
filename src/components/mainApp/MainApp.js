@@ -2,14 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Wrapper from "../wrapper/wrapper";
 import { Navbar } from "react-bootstrap";
-import BackendUpdate from "./backendUpdate";
+import BackendUpdate from "../configuration/backendUpdate";
 import { baseUrl } from "../../environment";
 import GoogleLogin from "react-google-login";
 import { oAuthToken } from "../../environment";
-import LoginUser from "./loginUser/loginUser";
+import LoginUser from "../configuration/loginUser/loginUser";
 import { UserContext } from "../../contexts/UserContext";
 import { ToastContainer, toast } from "react-toastify";
-import { menus, socialMedias } from "../mockData/menuData";
+import { menus, socialMedias } from "../../mockData/menuData";
 import "./MainApp.scss";
 
 const autoClose = 3000;
@@ -175,13 +175,21 @@ function MainApp() {
                       </li>
                     </ul>
                     <ul className="primary-menu">
-                      {menus.map((menu, i) => (
+                    {menus.filter(menu => menu.loggedId === null).map((menu, i) => (
                         <li key={i} className="child-menu">
-                          <Link onClick={onNavBarToggle} to={menu.href}>
-                            {menu.label}
-                          </Link>
+                          <Link to={menu.href}>{menu.label}</Link>
                         </li>
                       ))}
+                      {
+                        userData &&
+                        userData.profileObj &&
+                        userData.profileObj.googleId && 
+                        menus.filter(menu => menu.loggedId === userData.profileObj.googleId)
+                        .map((menu, i) => (
+                          <li key={i} className="child-menu">
+                            <Link to={menu.href}>{menu.label}</Link>
+                          </li>
+                        ))}
                     </ul>
                   </Navbar.Collapse>
                 </Navbar>
@@ -219,11 +227,21 @@ function MainApp() {
                       </button>
                     </div>
                     <ul className="primary-menu">
-                      {menus.map((menu, i) => (
+                      {menus.filter(menu => menu.loggedId === null).map((menu, i) => (
                         <li key={i} className="child-menu">
                           <Link to={menu.href}>{menu.label}</Link>
                         </li>
                       ))}
+                      {
+                        userData &&
+                        userData.profileObj &&
+                        userData.profileObj.googleId && 
+                        menus.filter(menu => menu.loggedId === userData.profileObj.googleId)
+                        .map((menu, i) => (
+                          <li key={i} className="child-menu">
+                            <Link to={menu.href}>{menu.label}</Link>
+                          </li>
+                        ))}
                     </ul>
                     <div className="menu-social">
                       <ul className="list-inline text-center">
@@ -265,14 +283,18 @@ function MainApp() {
             <div
               className={`wrapper ${toggleSideBar ? "toggleOn" : "toggleOff"}`}
             >
-              <div className={`userContainer hidden-print ${toggleSideBar ? "toggleOn" : "toggleOff"}`}>
                 {userData &&
                   userData.profileObj &&
                   userData.profileObj.name &&
                   userData.profileObj.imageUrl && (
-                    <LoginUser userData={userData} />
+                  <div
+                    className={`userContainer hidden-print ${
+                      toggleSideBar ? "toggleOn" : "toggleOff"
+                    }`}
+                  >
+                      <LoginUser userData={userData} />
+                  </div>
                   )}
-              </div>
               <Wrapper />
               <button
                 className="audiBtn mobile hidden-print"

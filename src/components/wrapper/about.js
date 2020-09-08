@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import Loader from "react-loader-spinner";
-import helpers from "../helpers";
-import {baseUrl} from "../environment";
-import AppContext from "../contexts/AppContext";
+import helpers from "../../helpers";
+import {baseUrl} from "../../environment";
+import AppContext from "../../contexts/AppContext";
 
 function About() {
   const [about] = useContext(AppContext);

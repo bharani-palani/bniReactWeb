@@ -1,8 +1,8 @@
 import React from "react";
-import apiInstance from "../apiServices";
+import apiInstance from "../../services/apiServices";
 import Loader from "react-loader-spinner";
-import helpers from "../helpers";
-import {baseUrl} from "../environment";
+import helpers from "../../helpers";
+import {baseUrl} from "../../environment";
 
 class Technologies extends React.Component {
   constructor(props) {

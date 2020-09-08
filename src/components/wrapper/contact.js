@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import apiInstance from "../apiServices";
+import React, { useState, useEffect } from "react";
+import apiInstance from "../../services/apiServices";
 import Loader from "react-loader-spinner";
-import helpers from "../helpers";
+import helpers from "../../helpers";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker
 } from "react-google-maps";
-import { UserContext } from "../contexts/UserContext";
 
 const [lat, lng, apiKey] = [
   13.057368,
@@ -27,7 +26,6 @@ const MapWithAMarker = withScriptjs(
 function Contact() {
   const [contacts, setContacts] = useState([]);
   const [contactHeading, setContactHeading] = useState([]);
-  const userContext = useContext(UserContext);
   document.title = "Bharani | Contact";
 
   useEffect(() => {
@@ -109,9 +107,7 @@ function Contact() {
           <div className="row container-fluid">
             <div className="col-lg-12">
               <p className="contactLabel m-0">
-                <big>
                   Ping me <i className="fa fa-phone" />
-                </big>
               </p>
               {contacts.length > 0
                 ? contacts.map((c, i) => (
@@ -134,12 +130,12 @@ function Contact() {
                 : null}
             </div>
             <div className="col-lg-12 mt-20">
-              <p className="contactLabel">
-                <big>
+              <div className="contactLabel">
+                <div>
                   Reach me <i className="fa fa-car" />
-                </big>
+                </div>
                 <div><small><i className="fa fa-map-marker" /> Click marker to open in Goolgle Maps</small></div>
-              </p>
+              </div>
               <MapWithAMarker
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: `100%` }} />}

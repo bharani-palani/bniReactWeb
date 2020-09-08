@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import apiInstance from "../apiServices";
+import apiInstance from "../../services/apiServices";
 import { ToastContainer, toast } from "react-toastify";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import "react-toastify/dist/ReactToastify.css";
 
-function Write(props) {
+function Write() {
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [comments, setComments] = useState("");
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [geoErrorHandle, setGeoErrorHandle] = useState({});
   const [showLocationError, setShowLocationError] = useState(false);
   const [showToaster, setShowToaster] = useState(false);

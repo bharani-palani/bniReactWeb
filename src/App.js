@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
-import MainApp from "./components/menu/MainApp";
+import MainApp from "./components/mainApp/MainApp";
 import AppContext from "./contexts/AppContext";
 import UserContextProvider from "./contexts/UserContext";
-import apiInstance from "./apiServices";
+import apiInstance from "./services/apiServices";
 
-import "./style.css";
+import "./css/style.css";
 
 function App() {
   const [value, setValue] = useState({});

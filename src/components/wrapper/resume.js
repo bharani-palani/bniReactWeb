@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import apiInstance from "../apiServices";
+import apiInstance from "../../services/apiServices";
 import Loader from "react-loader-spinner";
-import helpers from "../helpers";
+import helpers from "../../helpers";
 
 function Resume() {
   document.title = "Bharani | Resume";

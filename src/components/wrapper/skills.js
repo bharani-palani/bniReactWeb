@@ -1,12 +1,12 @@
 import React from "react";
-import "../../node_modules/flat-icons/ecommerce.css";
-import "../../node_modules/flat-icons/interface.css";
-import "../../node_modules/flat-icons/technology.css";
-import "../../node_modules/flat-icons/creative.css";
+import "../../../node_modules/flat-icons/ecommerce.css";
+import "../../../node_modules/flat-icons/interface.css";
+import "../../../node_modules/flat-icons/technology.css";
+import "../../../node_modules/flat-icons/creative.css";
 import Loader from "react-loader-spinner";
-import apiInstance from "../apiServices";
-import helpers from "../helpers";
-import {baseUrl} from "../environment";
+import apiInstance from "../../services/apiServices";
+import helpers from "../../helpers";
+import {baseUrl} from "../../environment";
 
 class Skills extends React.Component {
   constructor(props) {
