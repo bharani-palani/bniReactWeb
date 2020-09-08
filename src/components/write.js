@@ -1,5 +1,4 @@
 import React from "react";
-import Breadcrumbs from "./breadcrumb";
 import apiInstance from "../apiServices";
 import { ToastContainer, toast } from "react-toastify";
 // import { UserContext } from "../contexts/UserContext";
@@ -114,9 +113,6 @@ class Write extends React.Component {
       >
         <ToastContainer className="bniToaster" />
         <>
-          <div className="breadcrumbs">
-            <Breadcrumbs />
-          </div>
           <div className="section-title">
             <div
               style={{ backgroundColor: "transparent" }}

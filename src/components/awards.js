@@ -2,7 +2,6 @@ import React from 'react';
 import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
-import Breadcrumbs from "./breadcrumb";
 
 class Awards extends React.Component {
     constructor(props) {
@@ -59,9 +58,6 @@ class Awards extends React.Component {
               </div>
             ) : (
               <>
-                <div className="breadcrumbs">
-                  <Breadcrumbs />
-                </div>
                 <div className="section-title">
                   <div
                     style={{ backgroundColor: "transparent" }}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Breadcrumbs from "./breadcrumb";
 import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
@@ -308,9 +307,6 @@ function Resume() {
         </div>
       ) : (
         <>
-          <div className="breadcrumbs hidden-print">
-            <Breadcrumbs />
-          </div>
           <div className="section-title">
             <div
               style={{ backgroundColor: "transparent" }}

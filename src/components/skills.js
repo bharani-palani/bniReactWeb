@@ -3,7 +3,6 @@ import "../../node_modules/flat-icons/ecommerce.css";
 import "../../node_modules/flat-icons/interface.css";
 import "../../node_modules/flat-icons/technology.css";
 import "../../node_modules/flat-icons/creative.css";
-import Breadcrumbs from "./breadcrumb";
 import Loader from "react-loader-spinner";
 import apiInstance from "../apiServices";
 import helpers from "../helpers";
@@ -49,9 +48,6 @@ class Skills extends React.Component {
           </div>
         ) : (
           <>
-            <div className="breadcrumbs">
-              <Breadcrumbs />
-            </div>
             <div className="section-title">
               <div
                 style={{ backgroundColor: "transparent" }}
