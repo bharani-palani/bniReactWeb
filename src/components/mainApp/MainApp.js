@@ -91,9 +91,11 @@ function MainApp() {
   });
   const responseGoogle = response => {
     userContext.updateUserData(response);
+    onNavBarToggle(false);
     console.log(response);
   };
   const errorGoogle = () => {
+    onNavBarToggle(false);
     toast.error(
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
