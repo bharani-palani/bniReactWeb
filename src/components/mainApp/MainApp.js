@@ -177,7 +177,7 @@ function MainApp() {
                     <ul className="primary-menu">
                     {menus.filter(menu => menu.loggedId === null).map((menu, i) => (
                         <li key={i} className="child-menu">
-                          <Link to={menu.href}>{menu.label}</Link>
+                          <Link onClick={onNavBarToggle} to={menu.href}>{menu.label}</Link>
                         </li>
                       ))}
                       {
@@ -187,7 +187,7 @@ function MainApp() {
                         menus.filter(menu => menu.loggedId === userData.profileObj.googleId)
                         .map((menu, i) => (
                           <li key={i} className="child-menu">
-                            <Link to={menu.href}>{menu.label}</Link>
+                            <Link onClick={onNavBarToggle} to={menu.href}>{menu.label}</Link>
                           </li>
                         ))}
                     </ul>
