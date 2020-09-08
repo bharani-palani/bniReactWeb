@@ -49,6 +49,9 @@
 .contactLabel {
   color: #b5c740;
   font-size: 16px;
+  small {
+    font-size: 10px;
+  }
 }
 @mixin slide {
   transition: all 0.2s ease-in-out;

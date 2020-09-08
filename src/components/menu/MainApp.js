@@ -86,7 +86,9 @@ function MainApp() {
       }
     }
   };
-  const fMessage = () => ({ __html: `<span><i class="fa fa-thumbs-down"></i> Error: Unable to fetch from Google API..</span>` });
+  const fMessage = () => ({
+    __html: `<span><i class="fa fa-thumbs-down"></i> Error: Unable to fetch from Google API..</span>`
+  });
   const responseGoogle = response => {
     userContext.updateUserData(response);
     console.log(response);
@@ -95,7 +97,7 @@ function MainApp() {
     toast.error(
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
-  }
+  };
   return (
     <UserContext.Consumer>
       {userContextCallBack => {
@@ -104,15 +106,6 @@ function MainApp() {
           <Router>
             <ToastContainer autoClose={autoClose} className="bniToaster" />
             <div className="menu-wrapper">
-              {
-                userData &&
-                userData.profileObj && 
-                userData.profileObj.name && 
-                  userData.profileObj.imageUrl && (
-                <LoginUser
-                  userData={userData}
-                />
-              )}
               {openModal && (
                 <BackendUpdate
                   show={openModal}
@@ -272,6 +265,14 @@ function MainApp() {
             <div
               className={`wrapper ${toggleSideBar ? "toggleOn" : "toggleOff"}`}
             >
+              <div className={`userContainer hidden-print ${toggleSideBar ? "toggleOn" : "toggleOff"}`}>
+                {userData &&
+                  userData.profileObj &&
+                  userData.profileObj.name &&
+                  userData.profileObj.imageUrl && (
+                    <LoginUser userData={userData} />
+                  )}
+              </div>
               <Wrapper />
               <button
                 className="audiBtn mobile hidden-print"

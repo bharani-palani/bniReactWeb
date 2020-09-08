@@ -13,22 +13,27 @@ class Utilities extends React.Component {
         this.state = {
             utils: [
                 {
+                    id: 1,
                     heading: "Date / Time",
                     component: <DateTime />
                 },
                 {
+                    id: 2,
                     heading: "Random Number",
                     component: <RandomNumber />
                 },
                 {
+                    id: 3,
                     heading: "Array Difference",
                     component: <ArrayDiff />
                 },
                 {
+                    id: 4,
                     heading: "Array Some & Every",
                     component: <SomeEvery />
                 },
                 {
+                    id: 5,
                     heading: "Array Of Objects, Map Destructure and Alias Property Name",
                     component: <Destructure />
                 },
@@ -54,11 +59,11 @@ class Utilities extends React.Component {
                         this.state.utils.map((u,i) => 
                             <Card key={i}>
                                 <Card.Header>
-                                    <Accordion.Toggle as={Button} variant="link" eventKey={i}>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey={u.id}>
                                         {u.heading}
                                     </Accordion.Toggle>
                                 </Card.Header>
-                                <Accordion.Collapse eventKey={i}>
+                                <Accordion.Collapse eventKey={u.id}>
                                     <Card.Body>{u.component}</Card.Body>
                                 </Accordion.Collapse>
                             </Card>                                

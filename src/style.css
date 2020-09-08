@@ -88,10 +88,12 @@ body {
 }
 
 a {
-    /* color: #aeaeae; */
+    color: #aeaeae;
     text-decoration: none;
 }
-
+a.normalLink {
+    color: #337ab7;
+}
 blockquote,
 a h1,
 a h2,
@@ -778,7 +780,8 @@ SECTIONS
 }
 
 .section-title {
-    /* margin-bottom: 45px; */
+    margin-top: 45px;
+    margin-bottom: 45px;
 }
 
 .text-widget h3,

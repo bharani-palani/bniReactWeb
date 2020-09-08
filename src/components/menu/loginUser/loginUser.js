@@ -10,8 +10,8 @@ class LoginUser extends Component {
     const { userData } = this.props;
     return (
       <div className={`userMenu`}>
-        <div className="welcomeText"><i className="fa fa-user" /> Welcome {userData.profileObj.name}..</div>
-        <div><img className="userImage" alt="userImage" src={userData.profileObj.imageUrl} /></div>
+        <span className="welcomeText"><i className="fa fa-user-o" /> Welcome {userData.profileObj.name}..</span>
+        <img className="userImage" alt="userImage" src={userData.profileObj.imageUrl} />
       </div>
     );
   }

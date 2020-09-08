@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import apiInstance from "../apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../helpers";
@@ -27,6 +27,7 @@ const MapWithAMarker = withScriptjs(
 function Contact() {
   const [contacts, setContacts] = useState([]);
   const [contactHeading, setContactHeading] = useState([]);
+  const userContext = useContext(UserContext);
   document.title = "Bharani | Contact";
 
   useEffect(() => {
@@ -123,7 +124,7 @@ function Contact() {
                       </div>
                       <div className="col-lg-9 col-md-6 pl-0">
                         {c.contact_href ? (
-                          <a href={c.contact_href}>{c.contact_value}</a>
+                          <a className="normalLink" href={c.contact_href}>{c.contact_value}</a>
                         ) : (
                           c.contact_value
                         )}
@@ -137,7 +138,7 @@ function Contact() {
                 <big>
                   Reach me <i className="fa fa-car" />
                 </big>
-                <small className="pull-right">Click marker to open in Goolgle Maps</small>
+                <div><small><i className="fa fa-map-marker" /> Click marker to open in Goolgle Maps</small></div>
               </p>
               <MapWithAMarker
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`}

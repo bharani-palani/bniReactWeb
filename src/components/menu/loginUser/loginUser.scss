@@ -1,32 +1,43 @@
 @import "../../../variable";
-
-.userMenu {
-  display: flex;
-  right: 0;
-  float: right;
-  text-align: right;
-  z-index: 1112;
-  height: 50px;
-  padding: 2.5px 10px;
-  background: #111;
-  .welcomeText {
-    padding: 10px;
-    color: $fluorescent-color;
+.userContainer {
+  position: fixed;
+  display: grid;
+  z-index: 1;
+  &.toggleOff {
+    width: calc(100% - 260px);
   }
-  .userImage {
-    border-radius: 100%;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
+  &.toggleOn {
+    width: 100%;
+  }
+  .userMenu {
+    text-align: right;
+    height: 50px;
+    padding: 2.5px 10px;
+    background: #111;
+    .welcomeText {
+      padding: 10px;
+      color: $fluorescent-color;
+    }
+    .userImage {
+      border-radius: 100%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+    }
   }
 }
 @media only screen and (max-width: 767px) {
-  .userMenu {
-    width: 100%;
-    margin-top: 60px;
+  .userContainer {
+    width: 100% !important;
+    margin-top: 57px;
     padding: 2.5px 5px;
-    .welcomeText {
-      padding-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    .userMenu {
+      text-align: center;
+      .welcomeText {
+        padding-left: 0;
+      }
     }
   }
 }
