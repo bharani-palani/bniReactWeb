@@ -88,6 +88,12 @@ function Write() {
     <UserContext.Consumer>
       {userContextCallBack => {
         const {userData} = userContextCallBack;
+        if(userData &&
+          userData.profileObj &&
+          userData.profileObj) {
+            validateName(userData.profileObj.name);
+            validateEmail(userData.profileObj.email);
+          }
         return <section
           className="section lb"
           style={{
