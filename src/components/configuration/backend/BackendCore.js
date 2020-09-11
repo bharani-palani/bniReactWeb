@@ -14,53 +14,56 @@ function BackendCore(props) {
   const [deleteData, setDeleteData] = useState([]);
   const autoClose = 3000;
 
-  const getElementAjax = (row) => {
+  const getElementAjax = row => {
     return apiInstance
       .get(row.dropDownFetch.apiUrl)
-      .then(r => ({dropDownFetch: {dropDownList: [{id:null, value:"Select"},...r.data.response]}}))
+      .then(r => ({
+        dropDownFetch: {
+          dropDownList: [{ id: null, value: "Select" }, ...r.data.response]
+        }
+      }))
       .catch(error => {
         console.log(error);
       });
   };
 
-  const createRowElementArray = () => {
-    const rows = props.rowElements.map(row => {
-      if(typeof row === "object") {
-        return getElementAjax(row);
-      }
-      return new Promise((resolve, reject) => {
-        resolve(row);
-      });
-    });
-    return rows;
-  }
-
-
-  const getBackendAjax = () => {
-    const formdata = new FormData();
-    formdata.append("TableRows", TableRows);
-    formdata.append("Table", Table);
-    return apiInstance
-      .post("/getBackend", formdata)
-      .then(r => r.data.response)
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   useEffect(() => {
+    const createRowElementArray = () => {
+      const rows = props.rowElements.map(row => {
+        if (typeof row === "object") {
+          return getElementAjax(row);
+        }
+        return new Promise((resolve, reject) => {
+          resolve(row);
+        });
+      });
+      return rows;
+    };
+
+    const getBackendAjax = () => {
+      const formdata = new FormData();
+      formdata.append("TableRows", TableRows);
+      formdata.append("Table", Table);
+      return apiInstance
+        .post("/getBackend", formdata)
+        .then(r => r.data.response)
+        .catch(error => {
+          console.log(error);
+        });
+    };
+
     const a = createRowElementArray();
     const b = getBackendAjax();
 
-    Promise.all([[...a],b]).then(async array => {
+    Promise.all([[...a], b]).then(async array => {
       const temp = [];
-      await Promise.all(array[0]).then((a) => {
+      await Promise.all(array[0]).then(a => {
         temp.push(a);
-      })
+      });
       setDbData(array[1]);
       setRowElements(temp[0]);
     });
-  }, []);
+  }, [TableRows, Table, props.rowElements]);
 
   const updateDbData = (index, data) => {
     const { i, j } = index;
@@ -97,15 +100,19 @@ function BackendCore(props) {
     const insertData = dbData.filter(d => d[TableRows[0]] === "");
     const updateAllData = dbData.filter(d => d[TableRows[0]] !== "");
 
-    const updateData = updateAllData.filter((u,i) => {
-      return TableRows.map(t => (u[t] !== dbBackup[i][t])).some(u => u === true) && u
+    const updateData = updateAllData.filter((u, i) => {
+      return (
+        TableRows.map(t => u[t] !== dbBackup[i][t]).some(u => u === true) && u
+      );
     });
 
     const postData = {
-      ...((insertData.length > 0 || deleteData.length > 0 || updateData.length > 0) && {Table}),
-      ...(insertData.length > 0 && {insertData}),
-      ...(deleteData.length > 0 && {deleteData}),
-      ...(updateData.length > 0 && {updateData}),
+      ...((insertData.length > 0 ||
+        deleteData.length > 0 ||
+        updateData.length > 0) && { Table }),
+      ...(insertData.length > 0 && { insertData }),
+      ...(deleteData.length > 0 && { deleteData }),
+      ...(updateData.length > 0 && { updateData })
     };
 
     const formdata = new FormData();
@@ -115,14 +122,18 @@ function BackendCore(props) {
       .then(response => {
         response.data.response ? success() : fail();
         setTimeout(() => {
-          props.onSubmit(true);          
+          props.onSubmit(true);
         }, autoClose);
       })
       .catch(error => console.error(error));
   };
 
-  const sMessage = () => ({ __html: `<span><i class="fa fa-thumbs-up"></i> ${Table} saved successfully</span>` });
-  const fMessage = () => ({ __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes. Some error !!</span>` });
+  const sMessage = () => ({
+    __html: `<span><i class="fa fa-thumbs-up"></i> ${Table} saved successfully</span>`
+  });
+  const fMessage = () => ({
+    __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes. Some error !!</span>`
+  });
 
   const success = () =>
     toast.success(
@@ -132,7 +143,6 @@ function BackendCore(props) {
     toast.error(
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
-
 
   return dbData.length > 0 && setRowElements.length > 0 ? (
     <div className="container-fluid backendConfigureSection">
