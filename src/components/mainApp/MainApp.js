@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from 'react-router';
 import Wrapper from "../wrapper/wrapper";
 import BackendUpdate from "../configuration/backendUpdate";
 import { oAuthToken } from "../../environment";
@@ -11,11 +11,12 @@ import MobileApp from "./MobileApp";
 import DesktopApp from "./DesktopApp";
 import Video from "./Video";
 import Audio from "./Audio";
+import history from '../../history';
 import "./MainApp.scss";
 
 const autoClose = 3000;
 
-function MainApp(props) {
+function MainApp() {
   let myAudio = React.createRef();
   const [navBarExpanded, setNavBarExpanded] = useState(false);
   const [toggleSideBar, setToggleSideBar] = useState(false);
@@ -81,7 +82,7 @@ function MainApp(props) {
   const responseGoogle = response => {
     userContext.updateUserData(response);
     onNavBarToggle(false);
-    // history.push('/write');
+    history.push('/write');
     console.log(response);
   };
   const errorGoogle = () => {
@@ -96,7 +97,7 @@ function MainApp(props) {
       {userContextCallBack => {
         const { userData } = userContextCallBack;
         return (
-          <Router>
+          <Router history={history}>
             <ToastContainer autoClose={autoClose} className="bniToaster" />
             <div className="menu-wrapper">
               {openModal && (

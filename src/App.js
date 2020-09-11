@@ -5,7 +5,6 @@ import MainApp from "./components/mainApp/MainApp";
 import AppContext from "./contexts/AppContext";
 import UserContextProvider from "./contexts/UserContext";
 import apiInstance from "./services/apiServices";
-
 import "./css/style.css";
 
 function App() {

@@ -11,6 +11,7 @@ import Contact from "./contact";
 import Resume from "./resume";
 import Write from "./write";
 import AccountPlanner from "../../components/accountPlanner/AccountPlanner";
+import { withRouter } from "react-router-dom";
 
 class Wrapper extends React.Component {
   render() {
@@ -33,4 +34,4 @@ class Wrapper extends React.Component {
   }
 }
 
-export default Wrapper;
+export default withRouter(Wrapper);
