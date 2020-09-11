@@ -112,7 +112,7 @@ function Write() {
                   <h2 style={{ color: "#aaa" }}>Write to me</h2>
                   <hr />
                   <i className="fi-creative-edit"></i>
-                  <p>
+                  <p className="pl-5 pr-5">
                     Write me your software related solutions, requirements or
                     development
                   </p>
@@ -129,7 +129,7 @@ function Write() {
             <div className="container-fluid">
               <form id="writeForm" onSubmit={e => e.preventDefault()}>
                 <div className="row mb-5">
-                  <div className="col-md-3 pl-0">
+                  <div className="col-md-3 pl-0 pr-0">
                     <input
                       type="text"
                       placeholder="Name"
@@ -144,7 +144,7 @@ function Write() {
                   </div>
                 </div>
                 <div className="row mb-5">
-                  <div className="col-md-3 pl-0">
+                  <div className="col-md-3 pl-0 pr-0">
                     <input
                       type="number"
                       placeholder="Mobile"
@@ -154,7 +154,7 @@ function Write() {
                   </div>
                 </div>
                 <div className="row mb-5">
-                  <div className="col-md-3 pl-0">
+                  <div className="col-md-3 pl-0 pr-0">
                     <input
                       type="email"
                       placeholder="email"
@@ -169,7 +169,7 @@ function Write() {
                   </div>
                 </div>
                 <div className="row mb-5">
-                  <div className="col-md-6 pl-0">
+                  <div className="col-md-6 pl-0 pr-0">
                     <textarea
                       style={{ resize: "none" }}
                       rows="5"
@@ -181,7 +181,7 @@ function Write() {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-md-6 pl-0">
+                  <div className="col-md-6 pl-0 pr-0">
                     <button
                       onClick={() => saveComments()}
                       className="btn btn-bni"

@@ -87,9 +87,6 @@
   &.toggleOff {
     padding-left: 260px;
   }
-  .audiBtn {
-    display: none;
-  }
 }
 
 /* Landscape tablets and medium desktops */
@@ -101,9 +98,6 @@
     }
     &.toggleOff {
       padding-left: 260px;
-    }
-    .audiBtn {
-      display: none;
     }
   }
 }
@@ -124,9 +118,6 @@
   .wrapper {
     &.toggleOff {
       padding-left: 0;
-    }
-    .audiBtn {
-      display: block;
     }
   }
 }
