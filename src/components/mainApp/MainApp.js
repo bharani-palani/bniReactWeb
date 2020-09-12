@@ -126,6 +126,7 @@ function MainApp(props) {
                   errorGoogle={errorGoogle}
                   userData={userData}
                   openBlank={openBlank}
+                  appData={appData}
                 />
                 <DesktopApp
                   togglePlay={togglePlay}
@@ -140,6 +141,7 @@ function MainApp(props) {
                   openBlank={openBlank}
                   setToggleSideBar={setToggleSideBar}
                   toggleSideBar={toggleSideBar}
+                  appData={appData}
                 />
                 <Audio
                   myAudio={myAudio}

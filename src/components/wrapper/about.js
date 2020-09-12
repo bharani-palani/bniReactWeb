@@ -1,17 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
 import {baseUrl} from "../../environment";
 import AppContext from "../../contexts/AppContext";
 
 function About() {
-  const [about] = useContext(AppContext);
+  const [appData] = useContext(AppContext);
+  document.title = `${appData.display_name} | About`;
   const [height, setheight] = useState(window.innerHeight);
   const [width, setWidth] = useState('100%');
-
-  useEffect(() => {
-    document.title = "Bharani | About";
-  });
 
   window.addEventListener('resize', () => {
     setheight(window.innerHeight);
@@ -20,9 +17,9 @@ function About() {
   return (
     <div className="video-section">
       <div className="overlay" />
-      {about &&
-      about.display_name &&
-      about.profile_name ? (
+      {appData &&
+      appData.display_name &&
+      appData.profile_name ? (
         <div className="home-text-wrapper">
           <div className="home-message">
             <div className="visible-lg">
@@ -38,8 +35,8 @@ function About() {
               <img style={{height, width}} src={`${baseUrl()}/image/actualAvatar/avatar/bniGreyCoat.jpg`} className="img-responsive" alt="mobile" />
             </div>
             <div className="nameHeading">
-              <p>{about.display_name}</p>
-              <div className="skillset">{about.profile_name}</div>
+              <p>{appData.display_name}</p>
+              <div className="skillset">{appData.profile_name}</div>
             </div>
           </div>
         </div>

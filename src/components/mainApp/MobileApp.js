@@ -16,7 +16,8 @@ const MobileApp = props => {
     oAuthToken,
     responseGoogle,
     errorGoogle,
-    userData
+    userData,
+    appData
   } = props;
   return (
     <div className="mobile-menu">
@@ -34,7 +35,6 @@ const MobileApp = props => {
               src={`${baseUrl()}/image/actualAvatar/avatar/bniBlack.jpg`}
               alt=""
             />
-            <div className="mobLogoCaption">Bharani</div>
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -68,7 +68,7 @@ const MobileApp = props => {
           </ul>
           <ul className="primary-menu">
             {menus
-              .filter(menu => menu.loggedId === null)
+              .filter(menu => !menu.showOnlyIfSuperUser)
               .map((menu, i) => (
                 <li key={i} className="child-menu">
                   <Link onClick={onNavBarToggle} to={menu.href}>
@@ -80,8 +80,8 @@ const MobileApp = props => {
               userData.profileObj &&
               userData.profileObj.googleId &&
               menus
-                .filter(menu => menu.loggedId === userData.profileObj.googleId)
-                .map((menu, i) => (
+              .filter(menu => menu.showOnlyIfSuperUser && userData.profileObj.googleId === appData.google_id)
+              .map((menu, i) => (
                   <li key={i} className="child-menu">
                     <Link onClick={onNavBarToggle} to={menu.href}>
                       {menu.label}

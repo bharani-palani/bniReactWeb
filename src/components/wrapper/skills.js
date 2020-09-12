@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../../node_modules/flat-icons/ecommerce.css";
 import "../../../node_modules/flat-icons/interface.css";
 import "../../../node_modules/flat-icons/technology.css";
@@ -6,18 +6,16 @@ import "../../../node_modules/flat-icons/creative.css";
 import Loader from "react-loader-spinner";
 import apiInstance from "../../services/apiServices";
 import helpers from "../../helpers";
-import {baseUrl} from "../../environment";
+import { baseUrl } from "../../environment";
+import AppContext from "../../contexts/AppContext";
 
-class Skills extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      skills: []
-    };
-    document.title = "Bharani | Skills";
-  }
-  componentDidMount() {
-    const that = this;
+function Skills() {
+  const [appData] = useContext(AppContext);
+  document.title = `${appData.display_name} | Skills`;
+  const [skills, setSkills] = useState([]);
+  const [skillsHeading, setSkillsHeading] = useState("");
+
+  useEffect(() => {
     apiInstance
       .get("/skills")
       .then(response => {
@@ -25,73 +23,69 @@ class Skills extends React.Component {
           response.data.response,
           "skill_sort"
         );
-        that.setState({ skills: skillsList, skillsHeading });
+        setSkills(skillsList);
+        setSkillsHeading(skillsHeading);
       })
       .catch(error => console.log(error))
       .finally(() => 1);
-  }
+  }, []);
 
-  render() {
-    return (
-      <section
-        className="section lb"
-        style={{ minHeight: window.screen.height }}
-      >
-        {this.state.skills.length < 1 ? (
-          <div className="spinner">
-            <Loader
-              type={helpers.LoadRandomSpinnerIcon()}
-              color={helpers.fluorescentColor}
-              height={100}
-              width={100}
-            />
+  return (
+    <section className="section lb" style={{ minHeight: window.screen.height }}>
+      {skills.length < 1 ? (
+        <div className="spinner">
+          <Loader
+            type={helpers.LoadRandomSpinnerIcon()}
+            color={helpers.fluorescentColor}
+            height={100}
+            width={100}
+          />
+        </div>
+      ) : (
+        <>
+          <div className="section-title">
+            <div
+              style={{ backgroundColor: "transparent" }}
+              className="process-box"
+            >
+              <div className="process-front text-center">
+                <h2 style={{ color: "#aaa" }}>Skills</h2>
+                <hr />
+                <i className="fi-tech-gamepad-1"></i>
+                <p>
+                  {skillsHeading ? skillsHeading.skill_value : null}
+                </p>
+              </div>
+            </div>
           </div>
-        ) : (
-          <>
-            <div className="section-title">
-              <div
-                style={{ backgroundColor: "transparent" }}
-                className="process-box"
-              >
-                <div className="process-front text-center">
-                  <h2 style={{ color: "#aaa" }}>Skills</h2>
-                  <hr />
-                  <i className="fi-tech-gamepad-1"></i>
-                  <p>
-                    {this.state.skillsHeading
-                      ? this.state.skillsHeading.skill_value
-                      : null}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="container-fluid">
-              <div style={{ color: "#333" }} className="row">
-                {this.state.skills.map((skills, i) => (
-                  <div
-                    key={i}
-                    className="blog-box col-lg-12 col-md-12 form-group"
-                  >
-                    <div className="post-media col-lg-4 col-md-6">
-                      <img
-                        src={`${baseUrl()}/image/actualAvatar/skills/${skills.skill_image_url}`}
-                        alt=""
-                        className="img-responsive lefty"
-                      />
-                    </div>
-                    <div className="blog-desc col-lg-8 col-md-6">
-                      <h4 className="text-center">{skills.skill_label}</h4>
-                      <p>{skills.skill_value}</p>
-                    </div>
+          <div className="container-fluid">
+            <div style={{ color: "#333" }} className="row">
+              {skills.map((skills, i) => (
+                <div
+                  key={i}
+                  className="blog-box col-lg-12 col-md-12 form-group"
+                >
+                  <div className="post-media col-lg-4 col-md-6">
+                    <img
+                      src={`${baseUrl()}/image/actualAvatar/skills/${
+                        skills.skill_image_url
+                      }`}
+                      alt=""
+                      className="img-responsive lefty"
+                    />
                   </div>
-                ))}
-              </div>
+                  <div className="blog-desc col-lg-8 col-md-6">
+                    <h4 className="text-center">{skills.skill_label}</h4>
+                    <p>{skills.skill_value}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          </>
-        )}
-      </section>
-    );
-  }
+          </div>
+        </>
+      )}
+    </section>
+  );
 }
 
 export default Skills;

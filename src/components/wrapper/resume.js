@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import apiInstance from "../../services/apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
+import AppContext from "../../contexts/AppContext";
 
 function Resume() {
-  document.title = "Bharani | Resume";
+  const [appData] = useContext(AppContext);
+  document.title = `${appData.display_name} | Resume`;
   const [resume, setResume] = useState([]);
 
   const [allLoaded, setAllLoaded] = useState(false);

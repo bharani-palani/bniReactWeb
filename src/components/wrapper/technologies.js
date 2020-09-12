@@ -1,28 +1,36 @@
-import React from "react";
+import React, {useEffect, useState, useContext} from "react";
 import apiInstance from "../../services/apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
 import {baseUrl} from "../../environment";
+import AppContext from "../../contexts/AppContext";
 
-class Technologies extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    document.title = "Bharani | Technologies";
-  }
-  componentDidMount() {
-    const one = this.getTechnologies();
-    const two = this.getIdes();
-    const three = this.getOss();
+function Technologies() {
+  const [appData] = useContext(AppContext);
+  document.title = `${appData.display_name} | Technologies`;
+  const [techHeading, setTechHeading] = useState("");
+  const [techs, setTechs] = useState("");
+  const [ideTechs, setIdeTechs] = useState("");
+  const [osTechs, setOsTechs] = useState("");
+
+  useEffect(() => {
+    const one = getTechnologies();
+    const two = getIdes();
+    const three = getOss();
 
     Promise.all([one, two, three]).then(r => {
       const [techHeading, techs] = r[0];
       const ideTechs = r[1];
       const osTechs = r[2];
-      this.setState({ techHeading, techs, ideTechs, osTechs });
+      setTechHeading(techHeading)
+      setTechs(techs);
+      setIdeTechs(ideTechs);
+      setOsTechs(osTechs);
     });
-  }
-  getTechnologies = async () => {
+
+  },[])
+
+  const getTechnologies = async () => {
     const tech = apiInstance
       .get("/technologies")
       .then(response =>
@@ -31,30 +39,29 @@ class Technologies extends React.Component {
     const json = await tech.then(r => r);
     return json;
   };
-  getIdes = async () => {
+  const getIdes = async () => {
     const ide = apiInstance
       .get("/ides")
       .then(response => response.data.response);
     const json = await ide.then(r => r);
     return json;
   };
-  getOss = async () => {
+  const getOss = async () => {
     const os = apiInstance
       .get("operating-system")
       .then(response => response.data.response);
     const json = await os.then(r => r);
     return json;
   };
-  render() {
     return (
       <section
         className="section lb"
         style={{ minHeight: window.screen.height }}
       >
-        {this.state.techHeading &&
-        this.state.techs &&
-        this.state.ideTechs &&
-        this.state.osTechs ? (
+        {techHeading &&
+        techs &&
+        ideTechs &&
+        osTechs ? (
           <>
             <div className="section-title text-center">
               <div
@@ -66,15 +73,12 @@ class Technologies extends React.Component {
                   <hr />
                   <i className="fi-creative-computer"></i>
                   <p>
-                    {this.state.techHeading
-                      ? this.state.techHeading.tech_value
-                      : null}
+                    {techHeading ? techHeading.tech_value : null}
                   </p>
                 </div>
               </div>
             </div>
-            {this.state.techs
-              ? this.state.techs.map((t, i) => (
+            {techs ? techs.map((t, i) => (
                   <div
                     style={{ color: "#333" }}
                     key={i}
@@ -102,7 +106,7 @@ class Technologies extends React.Component {
                   </div>
                 ))
               : null}
-            {this.state.techs.map((t, i) => (
+            {techs.map((t, i) => (
               <div
                 style={{ color: "#333" }}
                 key={i}
@@ -140,7 +144,7 @@ class Technologies extends React.Component {
             </div>
 
             <div className="row">
-              {this.state.ideTechs.map((ide, i) => (
+              {ideTechs.map((ide, i) => (
                 <div key={i} className="col-lg-3 col-md-6">
                   <div className="process-box">
                     <div className="process-front text-center">
@@ -180,7 +184,7 @@ class Technologies extends React.Component {
             </div>
 
             <div className="row">
-              {this.state.osTechs.map((os, i) => (
+              {osTechs.map((os, i) => (
                 <div key={i} className="col-lg-3 col-md-6">
                   <div className="process-box">
                     <div className="process-front text-center">
@@ -220,7 +224,6 @@ class Technologies extends React.Component {
         )}
       </section>
     );
-  }
 }
 
 export default Technologies;

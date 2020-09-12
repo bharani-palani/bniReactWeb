@@ -1,53 +1,53 @@
 const menus = [
     {
       href: "/about",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "About"
     },
     {
       href: "/technologies",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "Technolgies"
     },
     {
       href: "/projects",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "Projects"
     },
     {
       href: "/skills",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "Skills"
     },
     {
       href: "/awards",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "Awards"
     },
     {
       href: "/contact",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "Contact"
     },
     {
       href: "/resume",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "Resume"
     },
     {
       href: "/utilities",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
       label: "JS Utilities"
     },
     {
       href: "/write",
       label: "Write",
-      loggedId: null,
+      showOnlyIfSuperUser: false,
     },
     {
       href: "/accountPlanner",
       label: "Account Planner",
-      loggedId: "112768662644835662520"
+      showOnlyIfSuperUser: true
     }
   ];
 
@@ -58,7 +58,7 @@ const menus = [
       icon: "fa fa-facebook"
     },
     {
-      name: "KinkedIn",
+      name: "LinkedIn",
       href: "https://www.linkedin.com/in/bharani-palani-4860b2b3/",
       icon: "fa fa-linkedin"
     },

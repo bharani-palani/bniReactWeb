@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import apiInstance from "../../services/apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
@@ -19,9 +19,10 @@ const MapWithAMarker = withScriptjs(
 );
 
 function Contact() {
+  const [appData] = useContext(AppContext);
+  document.title = `${appData.display_name} | Contact`;
   const [contacts, setContacts] = useState([]);
   const [contactHeading, setContactHeading] = useState([]);
-  document.title = "Bharani | Contact";
 
   useEffect(() => {
     apiInstance
@@ -67,7 +68,6 @@ function Contact() {
     <AppContext.Consumer>
       {appcontext => {
         const [userData] = appcontext;
-        console.log(userData);
         return (
           <section
             className="section lb"

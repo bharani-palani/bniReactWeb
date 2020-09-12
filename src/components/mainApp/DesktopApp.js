@@ -17,7 +17,8 @@ const DesktopApp = props => {
     errorGoogle,
     openBlank,
     setToggleSideBar,
-    toggleSideBar
+    toggleSideBar,
+    appData
   } = props;
 
   const hamburgerStyle = () => {
@@ -64,7 +65,7 @@ const DesktopApp = props => {
           </div>
           <ul className="primary-menu">
             {menus
-              .filter(menu => menu.loggedId === null)
+              .filter(menu => !menu.showOnlyIfSuperUser)
               .map((menu, i) => (
                 <li key={i} className="child-menu">
                   <Link to={menu.href}>{menu.label}</Link>
@@ -74,7 +75,7 @@ const DesktopApp = props => {
               userData.profileObj &&
               userData.profileObj.googleId &&
               menus
-                .filter(menu => menu.loggedId === userData.profileObj.googleId)
+                .filter(menu => menu.showOnlyIfSuperUser && userData.profileObj.googleId === appData.google_id)
                 .map((menu, i) => (
                   <li key={i} className="child-menu">
                     <Link to={menu.href}>{menu.label}</Link>
@@ -101,7 +102,8 @@ const DesktopApp = props => {
               </li>
             </ul>
             <div className="text-center designedBy">
-              Design and development by Bharani
+            Design and development by <a className="normalLink" href={"mailto:barani.potshot@gmail.com"}>Bharani</a>
+               
             </div>
           </div>
         </nav>

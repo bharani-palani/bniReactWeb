@@ -4,9 +4,9 @@ import { onDestruct } from "./stringFunction";
 
 function Destructure() {
   let arrayOfObjects = [
-    { name: "Bharani", age: 40, gender: "Male" },
-    { name: "Palani", age: 65, gender: "Male" },
-    { name: "Suganthi", age: 60, gender: "Female" }
+    { name: "Mahendra Singh", age: 60, gender: "Male" },
+    { name: "Dhoni", age: 40, gender: "Male" },
+    { name: "Sakshi", age: 31, gender: "Female" }
   ];
   const [propertyName, setProperty] = useState("firstName");
   const [output, setOutput] = useState("");

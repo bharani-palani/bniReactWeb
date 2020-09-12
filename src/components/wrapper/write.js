@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import apiInstance from "../../services/apiServices";
 import { ToastContainer, toast } from "react-toastify";
 import { UserContext } from "../../contexts/UserContext";
+import AppContext from "../../contexts/AppContext";
 import "react-toastify/dist/ReactToastify.css";
 
-function Write() {
+function Write(props) {
+  const [appData] = useContext(AppContext);
+  document.title = `${appData.display_name} | Write`;
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
@@ -84,6 +87,9 @@ function Write() {
         onClose: () => setShowToaster(false)
       }
     );
+  const getDomainUrl = () => {
+    return window.location.host;
+  }  
   return (
     <UserContext.Consumer>
       {userContextCallBack => {
@@ -115,13 +121,13 @@ function Write() {
                   <p className="pl-5 pr-5">
                     Write me your software related solutions, requirements or development
                   </p>
-                  {showLocationError ? (
+                  {showLocationError && (
                     <div>
                       Please enable browser location or establish a safe{" "}
-                      <a href="https://bharani.tech">https://bharani.tech</a>{" "}
+                      <a href={`https://${getDomainUrl()}`}>{`https://${getDomainUrl()}`}</a>{" "}
                       connection
                     </div>
-                  ) : null}
+                  )}
                 </div>
               </div>
             </div>
