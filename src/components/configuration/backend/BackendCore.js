@@ -121,9 +121,9 @@ function BackendCore(props) {
       .post("/postBackend", formdata)
       .then(response => {
         response.data.response ? success() : fail();
-        setTimeout(() => {
-          props.onSubmit(true);
-        }, autoClose);
+        // setTimeout(() => {
+        //   props.onSubmit(true);
+        // }, autoClose);
       })
       .catch(error => console.error(error));
   };
@@ -132,7 +132,7 @@ function BackendCore(props) {
     __html: `<span><i class="fa fa-thumbs-up"></i> ${Table} saved successfully</span>`
   });
   const fMessage = () => ({
-    __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes. Some error !!</span>`
+    __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes or some error !!</span>`
   });
 
   const success = () =>

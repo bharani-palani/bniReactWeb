@@ -7,13 +7,7 @@ import {
   Marker
 } from "react-google-maps";
 import { ToastContainer, toast } from "react-toastify";
-
-
-const [lat, lng, apiKey] = [
-  13.067439,
-  80.237617,
-  "AIzaSyAHINg0FZK_OCJVCdxQJ1kQwcVUUUBNQ2k"
-];
+import AppContext from "../../contexts/AppContext";
 
 function ViewMessages(props) {
   const [comments, setComments] = useState([]);
@@ -38,7 +32,7 @@ function ViewMessages(props) {
         setComments(response.data.response);
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 
@@ -46,32 +40,55 @@ function ViewMessages(props) {
     return false;
   };
 
-  const commentHtml = (c) => {
+  const commentHtml = c => {
     return (
+      <div>
         <div>
-            <div><i className="fi-interface-user" />&nbsp;<small>{c.comment_name}</small></div>
-            <div><i className="fa fa-comment-o" />&nbsp;<small>{c.comment_description}</small></div>
-            <div><i className="fa fa-phone" />&nbsp;<small><a href={`tel:${c.comment_mobile}`}>{c.comment_mobile}</a></small></div>
-            <div><i className="fa fa-envelope" />&nbsp;<small><a href={`mailto:${c.comment_email}`}>{c.comment_email}</a></small></div>
-            <div><i className="fa fa-clock-o" />&nbsp;<small>{c.comment_time}</small></div>
-            <div>
-                <i className="fa fa-microchip" />&nbsp;<small>{c.comment_ip}</small>
-                <i className="fa fa-trash trash" onClick={() => deleteComment(c)} />
-            </div>
+          <i className="fi-interface-user" />
+          &nbsp;<small>{c.comment_name}</small>
         </div>
-    )
-  }
+        <div>
+          <i className="fa fa-comment-o" />
+          &nbsp;<small>{c.comment_description}</small>
+        </div>
+        <div>
+          <i className="fa fa-phone" />
+          &nbsp;
+          <small>
+            <a href={`tel:${c.comment_mobile}`}>{c.comment_mobile}</a>
+          </small>
+        </div>
+        <div>
+          <i className="fa fa-envelope" />
+          &nbsp;
+          <small>
+            <a href={`mailto:${c.comment_email}`}>{c.comment_email}</a>
+          </small>
+        </div>
+        <div>
+          <i className="fa fa-clock-o" />
+          &nbsp;<small>{c.comment_time}</small>
+        </div>
+        <div>
+          <i className="fa fa-microchip" />
+          &nbsp;<small>{c.comment_ip}</small>
+          <i className="fa fa-trash trash" onClick={() => deleteComment(c)} />
+        </div>
+      </div>
+    );
+  };
 
   const deleteComment = c => {
-    let newComments = comments.filter(co => co.comment_id !== c.comment_id)
+    let newComments = comments.filter(co => co.comment_id !== c.comment_id);
     setComments(newComments);
-  }
+  };
   const onMarkerClick = c => {
     toast.error(commentHtml(c));
   };
   const MapWithAMarker = withScriptjs(
-    withGoogleMap(props => (
-      <GoogleMap defaultZoom={12} defaultCenter={{ lat, lng }}>
+    withGoogleMap(props => {
+      const {userData} = props;
+      return <GoogleMap defaultZoom={12} defaultCenter={{ lat: Number(userData.latitude), lng: Number(userData.longitude) }}>
         {comments.map((comment, i) => {
           const index = i + 1;
           return (
@@ -87,24 +104,30 @@ function ViewMessages(props) {
           );
         })}
       </GoogleMap>
-    ))
+    })
   );
 
   return (
-    <>
-      <ToastContainer className="bniToaster" /> 
-      {comments.length > 0 && (
-        <MapWithAMarker
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`}
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={
-            <div style={{ height: `${window.innerHeight - 75}px` }} />
-          }
-          mapElement={<div style={{ height: `100%` }} />}
-          onMarkerClick={() => initMap()}
-        />
-      )}
-    </>
+    <AppContext.Consumer>
+      {appcontext => {
+        const [userData] = appcontext;
+        return <>
+          <ToastContainer className="bniToaster" />
+          {comments.length > 0 && userData && userData.google_map_api_key && (
+            <MapWithAMarker
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${userData.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={
+                <div style={{ height: `${window.innerHeight - 75}px` }} />
+              }
+              mapElement={<div style={{ height: `100%` }} />}
+              onMarkerClick={() => initMap()}
+              userData={userData}
+            />
+          )}
+        </>
+      }}
+    </AppContext.Consumer>
   );
 }
 

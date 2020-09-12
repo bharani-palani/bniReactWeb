@@ -24,7 +24,7 @@ function App() {
   return (
     <AppContext.Provider value={[value, setValue]}>
       <UserContextProvider>
-        <MainApp />
+        <MainApp appData={value} />
       </UserContextProvider>
     </AppContext.Provider>
   );
