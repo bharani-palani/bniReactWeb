@@ -38,15 +38,16 @@ function Contact() {
       .finally(() => 1);
   }, []);
 
-  const initMap = () => {
-    const [address1, address2, city, state, postcode] = [
+  const initMap = (userData) => {
+    const [address1, address2, city, state, country, postcode] = [
       "7/4, Corporation School Rd",
       "Lake Area, Nungambakkam",
       "Chennai",
       "Tamil Nadu",
+      "India",
       "600034"
     ];
-    const str = `${address1} ${address2} ${city} ${state} ${postcode}`;
+    const str = `${address1} ${address2} ${city} ${state} ${country} ${postcode}`;
     let directionsUrl = "";
     switch (true) {
       case /ipad|iphone|ipod/i.test(navigator.userAgent.toLowerCase()):
@@ -65,7 +66,7 @@ function Contact() {
         directionsUrl = `javascript:blackberry.launch.newMap({'address':{${str}}})`;
         break;
       default:
-        directionsUrl = `https://maps.google.com?q=${Number(this.props.userData.latitude)},${Number(this.props.userData.longitude)}`;
+        directionsUrl = `https://maps.google.com?q=${Number(userData.latitude)},${Number(userData.longitude)}`;
     }
     window.open(directionsUrl);
   };
@@ -152,7 +153,7 @@ function Contact() {
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `400px` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
-                        onMarkerClick={() => initMap()}
+                        onMarkerClick={() => initMap(userData)}
                         userData={userData}
                       />
                     )}
