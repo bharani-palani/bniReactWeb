@@ -18,8 +18,8 @@ class home_model extends CI_Model
                 "last_login",
                 "latitude",
                 "longitude",
-                "google_api_key",
-                "google_auth_token",
+                "google_map_api_key",
+                "google_login_auth_token",
                 "google_id"
             )
         )->from("login")->get();

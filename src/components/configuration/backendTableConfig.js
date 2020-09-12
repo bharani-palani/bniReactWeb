@@ -51,8 +51,8 @@ const configArray = [
       "user_mobile",
       "latitude",
       "longitude",
-      "google_api_key",
-      "google_auth_token",
+      "google_map_api_key",
+      "google_login_auth_token",
       "google_id"
     ],
     rowElements: [
