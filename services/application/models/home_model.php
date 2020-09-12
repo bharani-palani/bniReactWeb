@@ -18,7 +18,8 @@ class home_model extends CI_Model
                 "last_login",
                 "latitude",
                 "longitude",
-                "google_api_key"
+                "google_api_key",
+                "google_auth_token"
             )
         )->from("login")->get();
         return get_all_rows($query);

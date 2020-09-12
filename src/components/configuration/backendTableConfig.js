@@ -31,8 +31,8 @@ const configArray = [
         id:5,
         label: "About",
         Table: "login",
-        TableRows: ["user_id","display_name","profile_name","user_mail","user_mobile"], 
-        rowElements: ["checkbox", "textbox", "textbox", "textbox", "number"]
+        TableRows: ["user_id","display_name","profile_name","user_mail","user_mobile","latitude","longitude","google_api_key"], 
+        rowElements: ["checkbox", "textbox", "textbox", "textbox", "number", "number", "number", "textarea"]
     },
     {
         id:6,
