@@ -18,7 +18,7 @@ function Write() {
 
   useEffect(() => {
     getGeoLocation();
-  }, []);
+  });
 
   const saveComments = () => {
     var formdata = new FormData();
@@ -113,8 +113,7 @@ function Write() {
                   <hr />
                   <i className="fi-creative-edit"></i>
                   <p className="pl-5 pr-5">
-                    Write me your software related solutions, requirements or
-                    development
+                    Write me your software related solutions, requirements or development
                   </p>
                   {showLocationError ? (
                     <div>

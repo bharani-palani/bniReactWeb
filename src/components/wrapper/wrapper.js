@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import About from "./about";
 import Technologies from "./technologies";
 import ErrorPage from "./errorpage";
+import UnAuthPage from "./UnAuthPage";
 import Projects from "./projects";
 import Skills from "./skills";
 import Awards from "./awards";
@@ -12,6 +13,7 @@ import Resume from "./resume";
 import Write from "./write";
 import AccountPlanner from "../../components/accountPlanner/AccountPlanner";
 import { withRouter } from "react-router-dom";
+import { ProtectedRoute } from "../../security/protectedRoute";
 
 class Wrapper extends React.Component {
   render() {
@@ -27,7 +29,10 @@ class Wrapper extends React.Component {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/resume" component={Resume} />
             <Route exact path="/write" component={Write} />
-            <Route exact path="/accountPlanner" component={AccountPlanner} />
+            <ProtectedRoute exact path="/accountPlanner" component={AccountPlanner} />
+            {/* <Route exact path="/accountPlanner" component={AccountPlanner} />  */}
+            {/* change this above or remove */}
+            <Route exact path="/unAuth" component={UnAuthPage} />
             <Route path="*" component={ErrorPage} />
         </Switch>
     )
