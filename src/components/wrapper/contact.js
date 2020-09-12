@@ -39,14 +39,7 @@ function Contact() {
   }, []);
 
   const initMap = (userData) => {
-    const [address1, address2, city, state, country, postcode] = [
-      "7/4, Corporation School Rd",
-      "Lake Area, Nungambakkam",
-      "Chennai",
-      "Tamil Nadu",
-      "India",
-      "600034"
-    ];
+    const {address1, address2, city, state, country, postcode} = userData;
     const str = `${address1} ${address2} ${city} ${state} ${country} ${postcode}`;
     let directionsUrl = "";
     switch (true) {
