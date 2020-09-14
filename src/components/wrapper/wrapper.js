@@ -25,10 +25,10 @@ class Wrapper extends React.Component {
             <Route exact path="/projects" component={Projects} />
             <Route exact path="/skills" component={Skills} />
             <Route exact path="/awards" component={Awards} />
-            <Route exact path="/utilities" component={Utilities} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/resume" component={Resume} />
             <Route exact path="/write" component={Write} />
+            <ProtectedRoute exact path="/utilities" component={Utilities} />
             <ProtectedRoute exact path="/accountPlanner" component={AccountPlanner} />
             {/* <Route exact path="/accountPlanner" component={AccountPlanner} />  */}
             {/* change this above or remove */}

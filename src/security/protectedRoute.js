@@ -13,7 +13,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
             {(userData) => {
               return (
                 <Route {...rest} render={props => {
-                    if (auth.isAuthenticated(appData, userData)) {
+                    if (auth.isAuthenticated(appData, JSON.parse(localStorage.getItem("googleData")))) {
                       return <Component {...props} />;
                     } else {
                       return (

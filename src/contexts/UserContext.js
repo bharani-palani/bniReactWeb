@@ -6,9 +6,12 @@ function UserContextProvider(props) {
   const updateUserData = (response) => {
     setUserData({ ...response });
   };
+  const removeUserData = () => {
+    setUserData({});
+  };
 
   return (
-    <UserContext.Provider value={{ userData, updateUserData: updateUserData }}>
+    <UserContext.Provider value={{ userData, updateUserData: updateUserData, removeUserData: removeUserData }}>
       {props.children}
     </UserContext.Provider>
   );

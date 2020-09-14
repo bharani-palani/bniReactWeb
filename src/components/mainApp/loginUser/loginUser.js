@@ -3,22 +3,25 @@ import PropTypes from "prop-types";
 import "./loginUser.scss";
 
 const LoginUser = (props) => {
-  const { userData, toggleSideBar } = props;
+  const { userData, toggleSideBar, onLogout } = props;
   return (
     <div
       className={`userContainer hidden-print ${
         toggleSideBar ? "toggleOn" : "toggleOff"
       }`}
     >
-      <div className={`userMenu`}>
-        <span className="welcomeText">
-          <i className="fa fa-user-o" /> Welcome {userData.profileObj.name}..
-        </span>
+      <div className={`leftMenu`}>
         <img
           className="userImage"
           alt="userImage"
           src={userData.profileObj.imageUrl}
         />
+        <span className="welcomeText pl-5">
+          Welcome {userData.profileObj.name}..
+        </span>
+      </div>
+      <div className="rightMenu text-right">
+        <i onClick={onLogout} className="fa fa-sign-out signOut" title="Logout" />
       </div>
     </div>
   );

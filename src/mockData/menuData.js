@@ -36,7 +36,7 @@ const menus = [
     },
     {
       href: "/utilities",
-      showOnlyIfSuperUser: false,
+      showOnlyIfSuperUser: true,
       label: "JS Utilities"
     },
     {
@@ -49,7 +49,7 @@ const menus = [
       label: "Account Planner",
       showOnlyIfSuperUser: true
     }
-  ];
+  ].sort((a,b) => a.label > b.label);
 
   const socialMedias = [
     {

@@ -2,18 +2,18 @@
 .userContainer {
   position: fixed;
   display: grid;
+  grid-template-columns: auto auto !important;
   z-index: 1;
+  background: #111;
+  opacity: 0.8;
   &.toggleOff {
     width: calc(100% - 260px);
   }
   &.toggleOn {
     width: 100%;
   }
-  .userMenu {
-    text-align: right;
-    height: 50px;
-    padding: 2.5px 10px;
-    background: #111;
+  .leftMenu {
+    padding: 0.3rem 4rem;
     .welcomeText {
       padding: 10px;
       color: $fluorescent-color;
@@ -25,6 +25,18 @@
       cursor: pointer;
     }
   }
+  .rightMenu {
+    padding: 10px;
+    color: $fluorescent-color;
+    .signOut {
+      font-size: 2rem;
+      cursor: pointer;
+      border: solid 1px $fluorescent-color;
+      padding: 5px 15px;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+  }
 }
 @media only screen and (max-width: 767px) {
   .userContainer {
@@ -33,8 +45,12 @@
     padding: 2.5px 5px;
     padding-left: 0;
     padding-right: 0;
-    .userMenu {
-      text-align: center;
+    .rightMenu {
+      .signOut {
+      }  
+    }
+    .leftMenu {
+      padding: 0.3rem 1rem;
       .welcomeText {
         padding-left: 0;
       }

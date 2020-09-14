@@ -3,9 +3,13 @@ class Auth {
     this.authenticated = false;
   }
 
-  isAuthenticated(appResponse, userResponse) {
+  isAuthenticated(appResponse, ls) {
     const [appStoreData] = appResponse;
-    this.authenticated = appStoreData.google_id === userResponse.userData.googleId;
+    if(ls && ls.googleId) {
+      this.authenticated = appStoreData.google_id === ls.googleId;
+    } else {
+      this.authenticated = false;
+    }
     return this.authenticated
     // return true; // change this to vaid above condition
   }

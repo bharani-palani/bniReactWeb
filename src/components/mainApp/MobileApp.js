@@ -16,7 +16,7 @@ const MobileApp = props => {
     oAuthToken,
     responseGoogle,
     errorGoogle,
-    userData,
+    ls,
     appData
   } = props;
   return (
@@ -76,11 +76,11 @@ const MobileApp = props => {
                   </Link>
                 </li>
               ))}
-            {userData &&
-              userData.profileObj &&
-              userData.profileObj.googleId &&
+            {ls &&
+              ls.profileObj &&
+              ls.profileObj.googleId &&
               menus
-              .filter(menu => menu.showOnlyIfSuperUser && userData.profileObj.googleId === appData.google_id)
+              .filter(menu => menu.showOnlyIfSuperUser && ls.profileObj.googleId === appData.google_id)
               .map((menu, i) => (
                   <li key={i} className="child-menu">
                     <Link onClick={onNavBarToggle} to={menu.href}>

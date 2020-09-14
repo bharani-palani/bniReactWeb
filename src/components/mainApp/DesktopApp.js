@@ -9,7 +9,7 @@ const DesktopApp = props => {
     menus,
     oAuthToken,
     socialMedias,
-    userData,
+    ls,
     audioVisible,
     audioState,
     togglePlay,
@@ -71,11 +71,11 @@ const DesktopApp = props => {
                   <Link to={menu.href}>{menu.label}</Link>
                 </li>
               ))}
-            {userData &&
-              userData.profileObj &&
-              userData.profileObj.googleId &&
+            {ls &&
+              ls.profileObj &&
+              ls.profileObj.googleId &&
               menus
-                .filter(menu => menu.showOnlyIfSuperUser && userData.profileObj.googleId === appData.google_id)
+                .filter(menu => menu.showOnlyIfSuperUser && ls.profileObj.googleId === appData.google_id)
                 .map((menu, i) => (
                   <li key={i} className="child-menu">
                     <Link to={menu.href}>{menu.label}</Link>

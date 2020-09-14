@@ -18,6 +18,7 @@ function Write(props) {
   const [geoErrorHandle, setGeoErrorHandle] = useState({});
   const [showLocationError, setShowLocationError] = useState(false);
   const [showToaster, setShowToaster] = useState(false);
+  const ls = JSON.parse(localStorage.getItem("googleData")) || {};
 
   useEffect(() => {
     getGeoLocation();
@@ -93,12 +94,11 @@ function Write(props) {
   return (
     <UserContext.Consumer>
       {userContextCallBack => {
-        const {userData} = userContextCallBack;
-        if(userData &&
-          userData.profileObj &&
-          userData.profileObj) {
-            validateName(userData.profileObj.name);
-            validateEmail(userData.profileObj.email);
+        if(ls &&
+          ls.profileObj &&
+          ls.profileObj) {
+            validateName(ls.profileObj.name);
+            validateEmail(ls.profileObj.email);
           }
         return <section
           className="section lb"
@@ -141,9 +141,9 @@ function Write(props) {
                       className="form-control"
                       onChange={e => validateName(e.target.value)}
                       defaultValue={
-                        (userData &&
-                        userData.profileObj &&
-                        userData.profileObj.name) || ""
+                        (ls &&
+                        ls.profileObj &&
+                        ls.profileObj.name) || ""
                       }
                     />
                   </div>
@@ -166,9 +166,9 @@ function Write(props) {
                       className="form-control"
                       onChange={e => validateEmail(e.target.value)}
                       defaultValue={
-                        (userData &&
-                        userData.profileObj &&
-                        userData.profileObj.email) || ""
+                        (ls &&
+                        ls.profileObj &&
+                        ls.profileObj.email) || ""
                       }
                     />
                   </div>

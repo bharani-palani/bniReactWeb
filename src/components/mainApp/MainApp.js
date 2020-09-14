@@ -25,6 +25,9 @@ function MainApp(props) {
   const [audioVisible, setAudioVisible] = useState(false);
   const [videoVisible, setVideoVisible] = useState(false);
   const userContext = useContext(UserContext);
+  const [ls, setLs] = useState(
+    JSON.parse(localStorage.getItem("googleData")) || {}
+  );
 
   useEffect(() => {
     if (Object.keys(appData).length > 0) {
@@ -49,8 +52,11 @@ function MainApp(props) {
         setVideoVisible(true);
       }, 5000);
       // setOpenModal(true); //  comment this later
+      if (Object.keys(ls).length > 0) {
+        localStorage.setItem("googleData", JSON.stringify(ls));
+      }
     }
-  }, [appData]);
+  }, [appData, ls]);
 
   const onNavBarToggle = () => {
     setNavBarExpanded(!navBarExpanded);
@@ -82,10 +88,10 @@ function MainApp(props) {
     __html: `<span><i class="fa fa-thumbs-down"></i> Error: Unable to fetch from Google API..</span>`
   });
   const responseGoogle = response => {
+    setLs(response);
     userContext.updateUserData(response);
     onNavBarToggle(false);
     history.push("/write");
-    console.log(response);
   };
   const errorGoogle = () => {
     onNavBarToggle(false);
@@ -94,82 +100,78 @@ function MainApp(props) {
     );
     console.error("errorGoogle");
   };
+  const onLogout = () => {
+    setLs({});
+    userContext.removeUserData();
+    localStorage.removeItem("googleData");
+    history.push("/");
+  };
   return (
     Object.keys(appData).length > 0 && (
-      <UserContext.Consumer>
-        {userContextCallBack => {
-          const { userData } = userContextCallBack;
-          return (
-            <Router history={history}>
-              <ToastContainer autoClose={autoClose} className="bniToaster" />
-              <div className="menu-wrapper">
-                {openModal && (
-                  <BackendUpdate
-                    show={openModal}
-                    onHide={bool => setOpenModal(bool)}
-                    size="sm"
-                    animation={false}
-                    style={{ zIndex: 9999 }}
-                  />
-                )}
-                {!toggleSideBar && videoVisible && (
-                  <Video videoRoot={require("../../videos/video.mp4")} />
-                )}
-                <MobileApp
-                  menus={menus}
-                  onNavBarToggle={onNavBarToggle}
-                  navBarExpanded={navBarExpanded}
-                  onNavBarClose={onNavBarClose}
-                  socialMedias={socialMedias}
-                  oAuthToken={appData.google_login_auth_token}
-                  responseGoogle={responseGoogle}
-                  errorGoogle={errorGoogle}
-                  userData={userData}
-                  openBlank={openBlank}
-                  appData={appData}
-                />
-                <DesktopApp
-                  togglePlay={togglePlay}
-                  audioVisible={audioVisible}
-                  audioState={audioState}
-                  menus={menus}
-                  userData={userData}
-                  socialMedias={socialMedias}
-                  oAuthToken={appData.google_login_auth_token}
-                  responseGoogle={responseGoogle}
-                  errorGoogle={errorGoogle}
-                  openBlank={openBlank}
-                  setToggleSideBar={setToggleSideBar}
-                  toggleSideBar={toggleSideBar}
-                  appData={appData}
-                />
-                <Audio
-                  myAudio={myAudio}
-                  togglePlay={togglePlay}
-                  audioVisible={audioVisible}
-                  audioState={audioState}
-                />
-              </div>
-              <div
-                className={`wrapper ${
-                  toggleSideBar ? "toggleOn" : "toggleOff"
-                }`}
-              >
-                {userData &&
-                  userData.profileObj &&
-                  userData.profileObj.name &&
-                  userData.profileObj.imageUrl && (
-                    <LoginUser
-                      userData={userData}
-                      toggleSideBar={toggleSideBar}
-                    />
-                  )}
-                <Wrapper />
-              </div>
-            </Router>
-          );
-        }}
-      </UserContext.Consumer>
+      <Router history={history}>
+        <ToastContainer autoClose={autoClose} className="bniToaster" />
+        <div className="menu-wrapper">
+          {openModal && (
+            <BackendUpdate
+              show={openModal}
+              onHide={bool => setOpenModal(bool)}
+              size="sm"
+              animation={false}
+              style={{ zIndex: 9999 }}
+            />
+          )}
+          {!toggleSideBar && videoVisible && (
+            <Video videoRoot={require("../../videos/video.mp4")} />
+          )}
+          <MobileApp
+            menus={menus}
+            onNavBarToggle={onNavBarToggle}
+            navBarExpanded={navBarExpanded}
+            onNavBarClose={onNavBarClose}
+            socialMedias={socialMedias}
+            oAuthToken={appData.google_login_auth_token}
+            responseGoogle={responseGoogle}
+            errorGoogle={errorGoogle}
+            ls={ls}
+            openBlank={openBlank}
+            appData={appData}
+          />
+          <DesktopApp
+            togglePlay={togglePlay}
+            audioVisible={audioVisible}
+            audioState={audioState}
+            menus={menus}
+            ls={ls}
+            socialMedias={socialMedias}
+            oAuthToken={appData.google_login_auth_token}
+            responseGoogle={responseGoogle}
+            errorGoogle={errorGoogle}
+            openBlank={openBlank}
+            setToggleSideBar={setToggleSideBar}
+            toggleSideBar={toggleSideBar}
+            appData={appData}
+          />
+          <Audio
+            myAudio={myAudio}
+            togglePlay={togglePlay}
+            audioVisible={audioVisible}
+            audioState={audioState}
+          />
+        </div>
+        <div className={`wrapper ${toggleSideBar ? "toggleOn" : "toggleOff"}`}>
+          {ls &&
+            ls.profileObj &&
+            ls.profileObj.name &&
+            ls.profileObj.imageUrl && (
+              <LoginUser
+                userData={ls}
+                toggleSideBar={toggleSideBar}
+                onLogout={onLogout}
+              />
+            )}
+          <Wrapper />
+        </div>
+      </Router>
     )
   );
 }
