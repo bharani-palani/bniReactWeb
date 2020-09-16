@@ -65,14 +65,13 @@ function Technologies() {
           <>
             <div className="section-title text-center">
               <div
-                style={{ backgroundColor: "transparent" }}
                 className="process-box"
               >
                 <div className="process-front text-center">
                   <h2 style={{ color: "#aaa" }}>Technologies</h2>
                   <hr />
                   <i className="fi-creative-computer"></i>
-                  <p>
+                  <p className="container-fluid">
                     {techHeading ? techHeading.tech_value : null}
                   </p>
                 </div>
@@ -133,10 +132,7 @@ function Technologies() {
                 </div>
               </div>
             ))}
-            <div
-              style={{ backgroundColor: "transparent" }}
-              className="process-box"
-            >
+            <div className="process-box">
               <div className="process-front text-center">
                 <h2 style={{ color: "#aaa" }}>IDE</h2>
                 <i className="flaticon-monitor"></i>
@@ -148,7 +144,6 @@ function Technologies() {
                 <div key={i} className="col-lg-3 col-md-6">
                   <div className="process-box">
                     <div className="process-front text-center">
-                      {/* <i class="flaticon-lightbulb-idea"></i> */}
                       {ide.ide_image_url ? (
                         <img
                           style={{
@@ -188,7 +183,6 @@ function Technologies() {
                 <div key={i} className="col-lg-3 col-md-6">
                   <div className="process-box">
                     <div className="process-front text-center">
-                      {/* <i class="flaticon-lightbulb-idea"></i> */}
                       {os.os_image_url ? (
                         <img
                           style={{

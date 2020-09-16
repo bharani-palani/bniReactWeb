@@ -70,7 +70,7 @@ class ArrayDiff extends React.Component {
             className="form-control"
           />
         </div>
-        <div className="col-lg-12 section-title">
+        <div className="col-lg-12">
           <PrettyCode code={onArrayDiff} />
         </div>
       </div>

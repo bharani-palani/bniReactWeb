@@ -42,7 +42,7 @@ function Utilities() {
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title text-center">
-        <div style={{ backgroundColor: "transparent" }} className="process-box">
+        <div className="process-box">
           <div className="process-front text-center">
             <h2 style={{ color: "#aaa" }}>Utilities</h2>
             <hr />

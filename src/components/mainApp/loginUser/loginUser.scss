@@ -21,6 +21,8 @@
   }
   .rightMenu {
     color: $fluorescent-color;
+    margin: auto;
+    margin-right: 0;
     .signOut {
       font-size: 2rem;
       cursor: pointer;

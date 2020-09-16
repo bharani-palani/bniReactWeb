@@ -58,7 +58,7 @@ function Destructure() {
             value={output}
           />
         </div>
-        <div className="col-lg-12 section-title">
+        <div className="col-lg-12">
           <PrettyCode code={onDestruct} />
         </div>
       </div>

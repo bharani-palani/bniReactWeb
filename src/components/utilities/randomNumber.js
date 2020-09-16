@@ -101,7 +101,7 @@ class RandomNumber extends React.Component {
             className="form-control"
           />
         </div>
-        <div className="col-lg-12 section-title">
+        <div className="col-lg-12">
           {this.state.choice === "range" && (
             <PrettyCode code={getRandomNumber} />
           )}

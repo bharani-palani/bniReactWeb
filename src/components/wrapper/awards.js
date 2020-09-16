@@ -37,14 +37,13 @@ function Awards() {
         <>
           <div className="section-title">
             <div
-              style={{ backgroundColor: "transparent" }}
               className="process-box"
             >
               <div className="process-front text-center">
                 <h2 style={{ color: "#aaa" }}>Awards</h2>
                 <hr />
                 <i className="fi-tech-shield-6"></i>
-                <p>
+                <p className="container-fluid">
                   {awardsHeading ? awardsHeading.award_value : null}
                 </p>
               </div>

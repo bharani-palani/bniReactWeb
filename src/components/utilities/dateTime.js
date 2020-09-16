@@ -159,7 +159,7 @@ class DateTime extends React.Component {
             />
           </div>
         </div>
-        <div className="col-lg-12 section-title">
+        <div className="col-lg-12">
           <PrettyCode code={onDateConvert} />
         </div>
       </div>

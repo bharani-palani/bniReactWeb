@@ -40,14 +40,13 @@ function Projects() {
         <>
           <div className="section-title">
             <div
-              style={{ backgroundColor: "transparent" }}
               className="process-box"
             >
               <div className="process-front text-center">
                 <h2 style={{ color: "#aaa" }}>Projects</h2>
                 <hr />
                 <i className="fi-creative-cloud-computing-3"></i>
-                <p>
+                <p className="pl-10 pr-10">
                   {projectsHeading ? projectsHeading.project_value : null}
                 </p>
               </div>

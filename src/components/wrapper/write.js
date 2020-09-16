@@ -111,7 +111,6 @@ function Write(props) {
           <>
             <div className="section-title">
               <div
-                style={{ backgroundColor: "transparent" }}
                 className="process-box"
               >
                 <div className="process-front text-center">

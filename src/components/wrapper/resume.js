@@ -311,7 +311,6 @@ function Resume() {
         <>
           <div className="section-title">
             <div
-              style={{ backgroundColor: "transparent" }}
               className="process-box hidden-print"
             >
               <div className="process-front text-center">

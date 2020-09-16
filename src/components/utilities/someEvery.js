@@ -97,7 +97,7 @@ function SomeEvery() {
           value={output}
         />
       </div>
-      <div className="col-lg-12 section-title">
+      <div className="col-lg-12">
         <PrettyCode code={someEveryCode} />
         <label>Conditional Every (sample code):</label>
         <PrettyCode code={someEveryAdvanced} />

@@ -12,8 +12,20 @@ import AppContext from "../../contexts/AppContext";
 
 const MapWithAMarker = withScriptjs(
   withGoogleMap(props => (
-    <GoogleMap defaultZoom={16} defaultCenter={{ lat: Number(props.userData.latitude), lng: Number(props.userData.longitude) }}>
-      <Marker onClick={props.onMarkerClick} position={{ lat: Number(props.userData.latitude), lng: Number(props.userData.longitude) }} />
+    <GoogleMap
+      defaultZoom={16}
+      defaultCenter={{
+        lat: Number(props.userData.latitude),
+        lng: Number(props.userData.longitude)
+      }}
+    >
+      <Marker
+        onClick={props.onMarkerClick}
+        position={{
+          lat: Number(props.userData.latitude),
+          lng: Number(props.userData.longitude)
+        }}
+      />
     </GoogleMap>
   ))
 );
@@ -39,8 +51,8 @@ function Contact() {
       .finally(() => 1);
   }, []);
 
-  const initMap = (userData) => {
-    const {address1, address2, city, state, country, postcode} = userData;
+  const initMap = userData => {
+    const { address1, address2, city, state, country, postcode } = userData;
     const str = `${address1} ${address2} ${city} ${state} ${country} ${postcode}`;
     let directionsUrl = "";
     switch (true) {
@@ -60,7 +72,9 @@ function Contact() {
         directionsUrl = `javascript:blackberry.launch.newMap({'address':{${str}}})`;
         break;
       default:
-        directionsUrl = `https://maps.google.com?q=${Number(userData.latitude)},${Number(userData.longitude)}`;
+        directionsUrl = `https://maps.google.com?q=${Number(
+          userData.latitude
+        )},${Number(userData.longitude)}`;
     }
     window.open(directionsUrl);
   };
@@ -85,54 +99,53 @@ function Contact() {
             ) : (
               <>
                 <div className="section-title">
-                  <div
-                    style={{ backgroundColor: "transparent" }}
-                    className="process-box"
-                  >
+                  <div className="process-box">
                     <div className="process-front text-center">
                       <h2 style={{ color: "#aaa" }}>Contact</h2>
                       <hr />
                       <i className="fi-creative-telephone"></i>
-                      <p>
+                      <p className="container-fluid">
                         {contactHeading ? contactHeading.contact_value : null}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="row container-fluid">
-                  <div className="col-lg-12">
-                    <p className="contactLabel m-0">
-                      Ping me <i className="fa fa-phone" />
-                    </p>
-                    {contacts.length > 0
-                      ? contacts.map((c, i) => (
-                          <div key={i}>
-                            <div
-                              style={{ height: "20px" }}
-                              className="col-lg-3 col-md-6 pl-0"
-                            >
-                              <span className="contactLabel">
+                <div className="container-fluid">
+                  <h4 className="contactLabel">
+                    Ping me <i className="fa fa-phone" />
+                  </h4>
+                  <div className="row">
+                    <div className="col-lg-12">
+                      {contacts.length > 0
+                        ? contacts.map((c, i) => (
+                            <div key={i}>
+                              <div className="col-lg-3 col-md-6 pl-0">
                                 {c.contact_label}
-                              </span>
+                              </div>
+                              <div className="col-lg-9 col-md-6 pl-0">
+                                <em>
+                                  {c.contact_href ? (
+                                    <a
+                                      className="normalLink"
+                                      href={c.contact_href}
+                                    >
+                                      {c.contact_value}
+                                    </a>
+                                  ) : (
+                                    c.contact_value
+                                  )}
+                                </em>
+                              </div>
                             </div>
-                            <div className="col-lg-9 col-md-6 pl-0">
-                              {c.contact_href ? (
-                                <a className="normalLink" href={c.contact_href}>
-                                  {c.contact_value}
-                                </a>
-                              ) : (
-                                c.contact_value
-                              )}
-                            </div>
-                          </div>
-                        ))
-                      : null}
+                          ))
+                        : null}
+                    </div>
                   </div>
-                  <div className="col-lg-12 mt-20">
-                    <div className="contactLabel">
-                      <div>
-                        Reach me <i className="fa fa-car" />
-                      </div>
+                  <h4 className="contactLabel">
+                    Reach me <i className="fa fa-car" />
+                  </h4>
+                  <div className="row">
+                    <div className="col-lg-12">
                       <div>
                         <small>
                           <i className="fa fa-map-marker" /> Click marker to
@@ -140,16 +153,18 @@ function Contact() {
                         </small>
                       </div>
                     </div>
-                    {userData && userData.google_map_api_key && (
-                      <MapWithAMarker
-                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${userData.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`}
-                        loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `400px` }} />}
-                        mapElement={<div style={{ height: `100%` }} />}
-                        onMarkerClick={() => initMap(userData)}
-                        userData={userData}
-                      />
-                    )}
+                    <div className="col-lg-12">
+                      {userData && userData.google_map_api_key && (
+                        <MapWithAMarker
+                          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${userData.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`}
+                          loadingElement={<div style={{ height: `100%` }} />}
+                          containerElement={<div style={{ height: `400px` }} />}
+                          mapElement={<div style={{ height: `100%` }} />}
+                          onMarkerClick={() => initMap(userData)}
+                          userData={userData}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </>

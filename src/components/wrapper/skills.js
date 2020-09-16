@@ -45,14 +45,13 @@ function Skills() {
         <>
           <div className="section-title">
             <div
-              style={{ backgroundColor: "transparent" }}
               className="process-box"
             >
               <div className="process-front text-center">
                 <h2 style={{ color: "#aaa" }}>Skills</h2>
                 <hr />
                 <i className="fi-tech-gamepad-1"></i>
-                <p>
+                <p className="container-fluid">
                   {skillsHeading ? skillsHeading.skill_value : null}
                 </p>
               </div>
