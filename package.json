@@ -5,6 +5,7 @@
   "homepage": "http://bharani.tech",
   "main": "./src/index.js",
   "dependencies": {
+    "animate.css": "^4.1.1",
     "axios": "^0.19.2",
     "bootstrap": "^3.4.1",
     "code-prettify": "^0.1.0",

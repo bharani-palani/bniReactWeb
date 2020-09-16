@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { baseUrl } from "../../environment";
 import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 const DesktopApp = props => {
   const {
@@ -32,6 +33,12 @@ const DesktopApp = props => {
       ? { position: "absolute", right: "calc(100% - 0px)" }
       : { position: "absolute", right: "calc(100% - 260px)" };
   };
+
+  const renderTooltip = props => (
+    <Tooltip id="button-tooltip" className="in show" {...props}>
+      Login with Google
+    </Tooltip>
+  );
 
   return (
     <header className="vertical-header hidden-print">
@@ -75,7 +82,11 @@ const DesktopApp = props => {
               ls.profileObj &&
               ls.profileObj.googleId &&
               menus
-                .filter(menu => menu.showOnlyIfSuperUser && ls.profileObj.googleId === appData.google_id)
+                .filter(
+                  menu =>
+                    menu.showOnlyIfSuperUser &&
+                    ls.profileObj.googleId === appData.google_id
+                )
                 .map((menu, i) => (
                   <li key={i} className="child-menu">
                     <Link to={menu.href}>{menu.label}</Link>
@@ -92,18 +103,32 @@ const DesktopApp = props => {
                 </li>
               ))}
               <li className="google">
-                <GoogleLogin
-                  clientId={oAuthToken}
-                  buttonText=""
-                  onSuccess={responseGoogle}
-                  onFailure={errorGoogle}
-                  cookiePolicy={"single_host_origin"}
-                />
+                <OverlayTrigger
+                  placement="right"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip}
+                  triggerType="hover"
+                >
+                  <div>
+                    <GoogleLogin
+                      clientId={oAuthToken}
+                      buttonText=""
+                      onSuccess={responseGoogle}
+                      onFailure={errorGoogle}
+                      cookiePolicy={"single_host_origin"}
+                    />
+                  </div>
+                </OverlayTrigger>
               </li>
             </ul>
             <div className="text-center designedBy">
-            Design and development by <a className="normalLink" href={"mailto:barani.potshot@gmail.com"}>Bharani</a>
-               
+              Design and development by{" "}
+              <a
+                className="normalLink"
+                href={"mailto:barani.potshot@gmail.com"}
+              >
+                Bharani
+              </a>
             </div>
           </div>
         </nav>

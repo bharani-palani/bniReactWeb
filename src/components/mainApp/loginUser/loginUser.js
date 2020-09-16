@@ -4,9 +4,14 @@ import "./loginUser.scss";
 
 const LoginUser = (props) => {
   const { userData, toggleSideBar, onLogout } = props;
+  /*
+    Bounce types vailable @
+    https://github.com/animate-css/animate.css/tree/a8d92e585b1b302f7749809c3308d5e381f9cb17
+  */
+  const animateType = "bounceInUp";
   return (
     <div
-      className={`userContainer hidden-print ${
+      className={`userContainer hidden-print animate__animated animate__${animateType} ${
         toggleSideBar ? "toggleOn" : "toggleOff"
       }`}
     >

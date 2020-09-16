@@ -1,40 +1,50 @@
 @import "../../../variable";
 .userContainer {
-  position: fixed;
+  position: absolute;
   display: grid;
   grid-template-columns: auto auto !important;
-  z-index: 1;
-  background: #111;
-  opacity: 0.8;
-  &.toggleOff {
-    width: calc(100% - 260px);
-  }
-  &.toggleOn {
-    width: 100%;
-  }
+  z-index: 2;
+  padding: 5px 0px;
+  // background: #111;
+  // opacity: 0.8;
   .leftMenu {
-    padding: 0.3rem 4rem;
     .welcomeText {
       padding: 10px;
       color: $fluorescent-color;
     }
     .userImage {
       border-radius: 100%;
-      width: 45px;
-      height: 45px;
+      width: 50px;
+      height: 50px;
       cursor: pointer;
     }
   }
   .rightMenu {
-    padding: 10px;
     color: $fluorescent-color;
     .signOut {
       font-size: 2rem;
       cursor: pointer;
       border: solid 1px $fluorescent-color;
-      padding: 5px 15px;
-      border-radius: 5px;
+      padding: 10px;
+      border-radius: 100%;
       margin-right: 5px;
+    }
+    @media only screen and (max-width: 767px) {
+      .signOut {
+        margin-right: 20px;
+      }
+    }
+  }
+  &.toggleOff {
+    width: calc(100% - 260px);
+    .leftMenu {
+      padding-left: 5px;
+    }
+  }
+  &.toggleOn {
+    width: 100%;
+    .leftMenu {
+      padding-left: 50px;
     }
   }
 }
@@ -47,7 +57,7 @@
     padding-right: 0;
     .rightMenu {
       .signOut {
-      }  
+      }
     }
     .leftMenu {
       padding: 0.3rem 1rem;
@@ -56,4 +66,8 @@
       }
     }
   }
+}
+.tooltip {
+  left: 10px !important;
+  z-index: 1151 !important;
 }

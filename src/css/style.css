@@ -290,7 +290,8 @@ MENU
 @media(max-width:768px) {
     .primary-menu {
         list-style: none;
-        margin-top: -15px;
+        margin-top: -10px;
+        margin-left: -20px;
     }
 }
 
@@ -439,7 +440,7 @@ ul.mobile-menu-social {
     list-style: none;
     position: fixed;
     top: 60px;
-    left: -20px;
+    left: -35px;
     background: #000;
 }
 ul.mobile-menu-social li.google-mobile button {
