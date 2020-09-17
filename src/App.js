@@ -5,26 +5,31 @@ import MainApp from "./components/mainApp/MainApp";
 import AppContext from "./contexts/AppContext";
 import UserContextProvider from "./contexts/UserContext";
 import apiInstance from "./services/apiServices";
+import ErrorService from "./components/wrapper/errorService";
 import "./css/style.css";
 
 function App() {
   const [value, setValue] = useState({});
-  const getData = async() => {
-    await apiInstance.get("/").then(response => {
-      setValue(response.data.response[0])
-    })
-    .catch(error => console.log(error))
-    .finally(() => false);
-  }
+  const [fetchStatus, setFetchStatus] = useState(true);
+  const getData = async () => {
+    await apiInstance
+      .get("/")
+      .then(response => {
+        setValue(response.data.response[0]);
+        setFetchStatus(true);
+      })
+      .catch(error => setFetchStatus(false))
+      .finally(error => false);
+  };
 
   useEffect(() => {
     getData();
   }, []);
-  
+
   return (
     <AppContext.Provider value={[value, setValue]}>
       <UserContextProvider>
-        <MainApp appData={value} />
+        {fetchStatus ? <MainApp appData={value} /> : <ErrorService />}
       </UserContextProvider>
     </AppContext.Provider>
   );

@@ -20,7 +20,7 @@ function Awards() {
       })
       .catch(error => console.log(error))
       .finally(() => 1);
-  });
+  },[]);
 
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>

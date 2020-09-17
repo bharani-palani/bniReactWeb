@@ -8,9 +8,12 @@
   // background: #111;
   // opacity: 0.8;
   .leftMenu {
+    display: flex;
     .welcomeText {
-      padding: 10px;
+      margin: auto 0;
       color: $fluorescent-color;
+      overflow-x: hidden;
+      max-height: 50px;
     }
     .userImage {
       border-radius: 100%;
@@ -21,8 +24,7 @@
   }
   .rightMenu {
     color: $fluorescent-color;
-    margin: auto;
-    margin-right: 0;
+    margin: auto 5px;
     .signOut {
       font-size: 2rem;
       cursor: pointer;
@@ -70,6 +72,7 @@
   }
 }
 .tooltip {
-  left: 10px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
   z-index: 1151 !important;
 }

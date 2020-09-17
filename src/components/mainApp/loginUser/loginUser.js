@@ -1,14 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import "./loginUser.scss";
 
-const LoginUser = (props) => {
+const LoginUser = props => {
   const { userData, toggleSideBar, onLogout } = props;
   /*
     Bounce types vailable @
     https://github.com/animate-css/animate.css/tree/a8d92e585b1b302f7749809c3308d5e381f9cb17
   */
   const animateType = "bounceInUp";
+
+  const renderTooltip = props => (
+    <Tooltip id="button-tooltip" className="in show" {...props}>
+      Logout
+    </Tooltip>
+  );
+
   return (
     <div
       className={`userContainer hidden-print animate__animated animate__${animateType} ${
@@ -26,7 +34,17 @@ const LoginUser = (props) => {
         </span>
       </div>
       <div className="rightMenu text-right">
-        <i onClick={onLogout} className="fa fa-sign-out signOut" title="Logout" />
+        <OverlayTrigger
+          placement="left"
+          delay={{ show: 250, hide: 400 }}
+          overlay={renderTooltip}
+          triggerType="hover"
+        >
+            <i
+              onClick={onLogout}
+              className="fa fa-sign-out signOut"
+            />
+        </OverlayTrigger>
       </div>
     </div>
   );
@@ -37,6 +55,5 @@ LoginUser.propTypes = {
   userData: PropTypes.object
 };
 LoginUser.defaultProps = {};
-
 
 export default LoginUser;

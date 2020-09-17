@@ -177,3 +177,15 @@ code {
 .capitalize {
   text-transform: capitalize;
 }
+.no-internet {
+  h1, h2 {
+    color: #ddd;
+  }
+  i::before {
+    font-size: 75px;
+    color: $fluorescent-color;  
+  }
+  .error-details {
+    color: $fluorescent-color;  
+  }
+}
