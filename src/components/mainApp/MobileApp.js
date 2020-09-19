@@ -19,6 +19,18 @@ const MobileApp = props => {
     ls,
     appData
   } = props;
+
+  const isGoogleLogged = ls && ls.profileObj && ls.profileObj.googleId;
+  const googleMenu =
+    isGoogleLogged &&
+    menus
+      .sort((a, b) => a.label > b.label)
+      .filter(
+        menu =>
+          menu.showOnlyIfSuperUser &&
+          ls.profileObj.googleId === appData.google_id
+      );
+
   return (
     <div className="mobile-menu">
       <Navbar
@@ -67,6 +79,18 @@ const MobileApp = props => {
             </li>
           </ul>
           <ul className="primary-menu">
+            {isGoogleLogged && googleMenu.length > 0 && (
+              <li className="menuHeading">Config menu</li>
+            )}
+            {isGoogleLogged &&
+              googleMenu
+                .map((menu, i) => (
+                  <li key={i} className={`child-menu ${i === googleMenu.length - 1 ? "last-child-menu" : ""}`}>
+                    <Link onClick={onNavBarToggle} to={menu.href}>
+                      {menu.label}
+                    </Link>
+                  </li>
+                ))}
             {menus
               .filter(menu => !menu.showOnlyIfSuperUser)
               .map((menu, i) => (
@@ -76,18 +100,6 @@ const MobileApp = props => {
                   </Link>
                 </li>
               ))}
-            {ls &&
-              ls.profileObj &&
-              ls.profileObj.googleId &&
-              menus
-              .filter(menu => menu.showOnlyIfSuperUser && ls.profileObj.googleId === appData.google_id)
-              .map((menu, i) => (
-                  <li key={i} className="child-menu">
-                    <Link onClick={onNavBarToggle} to={menu.href}>
-                      {menu.label}
-                    </Link>
-                  </li>
-                ))}
           </ul>
         </Navbar.Collapse>
       </Navbar>
