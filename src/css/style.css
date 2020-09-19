@@ -229,8 +229,9 @@ MENU
   background-color: #191919;
 }
 .primary-menu {
-  height: 60vh;
-  overflow: scroll;
+  height: auto;
+  max-height: 60vh;
+  overflow: auto;
   margin-top: 2rem;
 }
 .primary-menu li:hover .subsub-menu li:hover a,

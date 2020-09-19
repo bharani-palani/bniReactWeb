@@ -13,10 +13,10 @@ class Wrapper extends React.Component {
         <Switch>
           <Route exact path="/" component={About} />
           {
-            menus.map(menu => {
+            menus.map((menu,i) => {
               return !menu.showOnlyIfSuperUser ? 
-                <Route exact path={menu.href} component={menu.component} /> : 
-                  <ProtectedRoute exact path={menu.href} component={menu.component} />
+                <Route key={i} exact path={menu.href} component={menu.component} /> : 
+                  <ProtectedRoute key={i} exact path={menu.href} component={menu.component} />
             })
           }
           <Route exact path="/unAuth" component={UnAuthPage} />

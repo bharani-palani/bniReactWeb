@@ -41,12 +41,15 @@ const DesktopApp = props => {
   );
 
   const isGoogleLogged = ls && ls.profileObj && ls.profileObj.googleId;
-  const googleMenu = isGoogleLogged && menus
-    .sort((a, b) => a.label > b.label)
-    .filter(
-      menu =>
-        menu.showOnlyIfSuperUser && ls.profileObj.googleId === appData.google_id
-    );
+  const googleMenu =
+    isGoogleLogged &&
+    menus
+      .sort((a, b) => a.label > b.label)
+      .filter(
+        menu =>
+          menu.showOnlyIfSuperUser &&
+          ls.profileObj.googleId === appData.google_id
+      );
   return (
     <header className="vertical-header hidden-print">
       <i
@@ -78,26 +81,28 @@ const DesktopApp = props => {
             </button>
           </div>
           <ul className="primary-menu">
-            {isGoogleLogged && googleMenu.length > 0 && (
-              <li className="menuHeading">Config menu</li>
-            )}
-            {isGoogleLogged &&
-              googleMenu.map((menu, i) => (
-                <li
-                  key={i}
-                  className={`child-menu ${i === googleMenu.length - 1 ? "last-child-menu" : ""}`}
-                >
-                  <Link to={menu.href}>{menu.label}</Link>
-                </li>
-              ))}
-            {menus
-              .filter(menu => !menu.showOnlyIfSuperUser)
-              .sort((a, b) => a.label > b.label)
-              .map((menu, j) => (
-                <li key={j} className="child-menu">
-                  <Link to={menu.href}>{menu.label}</Link>
-                </li>
-              ))}
+              {isGoogleLogged && googleMenu.length > 0 && (
+                <li className="menuHeading">Config menu</li>
+              )}
+              {isGoogleLogged &&
+                googleMenu.map((menu, i) => (
+                  <li
+                    key={i}
+                    className={`child-menu ${
+                      i === googleMenu.length - 1 ? "last-child-menu" : ""
+                    }`}
+                  >
+                    <Link to={menu.href}>{menu.label}</Link>
+                  </li>
+                ))}
+              {menus
+                .filter(menu => !menu.showOnlyIfSuperUser)
+                .sort((a, b) => a.label > b.label)
+                .map((menu, j) => (
+                  <li key={j} className="child-menu">
+                    <Link to={menu.href}>{menu.label}</Link>
+                  </li>
+                ))}
           </ul>
           <div className="menu-social">
             <ul className="list-inline text-center">
