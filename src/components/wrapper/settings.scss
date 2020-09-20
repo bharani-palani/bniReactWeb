@@ -9,6 +9,7 @@
       transition: 0.5s;
       display: block;
       outline: 0;
+      line-height: 3;
       &:hover,
       &:active,
       &:focus {
@@ -27,6 +28,38 @@
         border-bottom: solid 1px $fluorescent-color;
         transition: 0.5s;
       }
+    }
+  }
+  .backendConfigureSection {
+    .heading {
+      color: $fluorescent-color;
+      font-weight: 600;
+    }
+    .header {
+      color: $fluorescent-color;
+    }
+    .fa {
+      font-size: 2.2rem;
+      cursor: pointer;
+      &.danger {
+        color: #f33333;
+      }
+      &.success {
+        color: #40bd40;
+      }
+    }
+    @media (max-width: 767px) {
+      .header {
+        display: none;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 991px) {
+      .header {
+        display: none;
+      }
+    }
+    .tab-content {
+      margin-top: 3rem; 
     }
   }
 }

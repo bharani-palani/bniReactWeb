@@ -80,7 +80,7 @@ const MobileApp = props => {
           </ul>
           <ul className="primary-menu">
             {isGoogleLogged && googleMenu.length > 0 && (
-              <li className="menuHeading">Config menu</li>
+              <li className="menuHeading">Setup</li>
             )}
             {isGoogleLogged &&
               googleMenu

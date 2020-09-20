@@ -37,17 +37,17 @@ function MainApp(props) {
         }
       });
 
-      const nav = document.getElementsByTagName("nav")[0];
-      nav.addEventListener("touchmove", function(event) {
-        event.preventDefault();
-        setOpenModal(true);
-      });
+      // const nav = document.getElementsByTagName("nav")[0];
+      // nav.addEventListener("touchmove", function(event) {
+      //   event.preventDefault();
+      //   setOpenModal(true);
+      // });
 
-      const div = document.getElementsByClassName("vertical-header-wrapper")[0];
-      div.addEventListener("touchmove", function(event) {
-        event.preventDefault();
-        setOpenModal(true);
-      });
+      // const div = document.getElementsByClassName("vertical-header-wrapper")[0];
+      // div.addEventListener("touchmove", function(event) {
+      //   event.preventDefault();
+      //   setOpenModal(true);
+      // });
       setTimeout(() => {
         setVideoVisible(true);
       }, 5000);

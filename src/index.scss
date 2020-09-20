@@ -100,12 +100,12 @@ code {
   }
 }
 .bniToaster {
+  z-index: 1;
   .Toastify__toast {
     font-size: 14px;
     &.Toastify__toast--success {
       background: $fluorescent-color;
       color: #000;
-      text-shadow: 1px 1px 0px #fff;
     }
     color: #fff;
     i {
@@ -122,6 +122,11 @@ code {
       color: #fff;
       text-decoration: underline !important;
     }
+  }
+}
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    top: 120px !important;
   }
 }
 .vcard {
@@ -178,14 +183,66 @@ code {
   text-transform: capitalize;
 }
 .no-internet {
-  h1, h2 {
+  h1,
+  h2 {
     color: #ddd;
   }
   i::before {
     font-size: 75px;
-    color: $fluorescent-color;  
+    color: $fluorescent-color;
   }
   .error-details {
-    color: $fluorescent-color;  
+    color: $fluorescent-color;
+  }
+}
+.dropdown {
+  &.show {
+    .btn {
+      i.fa {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+  .btn {
+    font-size: 1.2rem;
+    padding: 1rem 2.5rem 1rem 1rem;
+    background-color: $fluorescent-color !important;
+    color: #222 !important;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 3px;
+    outline: 0;
+    &:active:focus {
+      color: #222 !important;
+      background-color: $fluorescent-color !important;
+    }
+    i.fa {
+      transition-property: transform;
+      transition-duration: 0.5s;
+      font-size: 1rem;
+      position: absolute;
+      right: 1rem;
+      top: 1.25rem;
+    }
+  }
+  .dropdown-menu {
+    padding: 0;
+    a {
+      display: inline-block;
+      padding-left: 0.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: solid 1px #ddd;
+      color: #333;
+      font-size: 1.2rem;
+      word-break: break-word;
+      width: 100%;
+      &:hover {
+        background: $fluorescent-color;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
   }
 }

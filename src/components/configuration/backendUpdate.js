@@ -37,7 +37,7 @@ function BackendUpdate(props) {
           />)}
           {auth && cObj.viewMode === "Configure" && (
             <Accordion bsPrefix="util" defaultActiveKey="0">
-            {configArray.map((t,i) => 
+            {configArray.sort((a,b) => a.label > b.label).map((t,i) => 
                 <Card key={t.id}>
                     <Card.Header>
                         <Accordion.Toggle onClick={() => setCollapse(t.label)} as={Button} variant="link" eventKey={t.id}>
@@ -51,9 +51,6 @@ function BackendUpdate(props) {
                     </Accordion.Collapse>
                 </Card>                                
             )}
-            <div className="footer">
-                Last login: {lastLogin}
-            </div>
             </Accordion>
           )}
           {auth && cObj.viewMode === "Messages" && (

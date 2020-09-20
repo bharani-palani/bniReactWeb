@@ -24,9 +24,6 @@ function ResumeBackend(props) {
                 </Accordion.Collapse>
             </Card>                                
         })}
-        <div className="footer">
-            Last login: {props.lastLogin}
-        </div>
         </Accordion>
     )
 }

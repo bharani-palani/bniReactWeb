@@ -6,7 +6,7 @@ import {
   GoogleMap,
   Marker
 } from "react-google-maps";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import AppContext from "../../contexts/AppContext";
 
 function ViewMessages(props) {
@@ -112,7 +112,7 @@ function ViewMessages(props) {
       {appcontext => {
         const [userData] = appcontext;
         return <>
-          <ToastContainer className="bniToaster" />
+          {/* <ToastContainer autoClose={3000} className="bniToaster" /> // popping up 2 times */}
           {comments.length > 0 && userData && userData.google_map_api_key && (
             <MapWithAMarker
               googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${userData.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`}

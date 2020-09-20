@@ -82,7 +82,7 @@ const DesktopApp = props => {
           </div>
           <ul className="primary-menu">
               {isGoogleLogged && googleMenu.length > 0 && (
-                <li className="menuHeading">Config menu</li>
+                <li className="menuHeading">Setup</li>
               )}
               {isGoogleLogged &&
                 googleMenu.map((menu, i) => (

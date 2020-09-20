@@ -5,22 +5,40 @@ import PropTypes from "prop-types";
 
 const AccountPlanner = props => {
   // const {id, name} = props;
+  const style = {border: "solid 1px"};
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
-      <div className="section-title mt-100">
-        <h1 style={{ color: "#fff" }} className="text-center">Account Planner Content</h1>
-        <p>
-          <b>Points to remember before starting development</b>
-        </p>
-        <ul>
-          <li>Responsiveness</li>
-          <li>Context available for userdata and appData</li>
-          <li>D3 JS as react component (Will be at the header)</li>
-          <li>Textbox hit enter save data with progress bar like google sheet</li>
-          <li>Year by year responsive horizantal scroll for month (clickable) to year expenses</li>
-          <li>Create Schema, table structure and logical diagram</li>
-          <li>Gather data from monthly planning from google drive and upload to your DB</li>
-        </ul>
+      <div className="section-title">
+        <div className="process-box">
+          <div className="process-front text-center">
+            <h2 style={{ color: "#aaa" }}>Account planner</h2>
+            <hr />
+            <i className="fi-ecommerce-dollar-symbol-4"></i>
+            <p>
+              Plan my Salary credits to expenses with analytical or
+              visualization status
+            </p>
+          </div>
+        </div>
+        <div className="container-fluid">
+          <div className="accountPlanner">
+            <div className="grid-1" style={style}>
+              horizontal scroll graph content for last 12 months,
+              consisting category based chart with expenditure amount with credit and debit
+            </div>
+            <div className="equal-grid-3" style={style}>
+              <div style={style}>Clicked month Expenditures</div>
+              <div style={style}>Type this month expenditure (clone feature), with this month history in the top (Inline edit, multi checkbox with delete).</div>
+              <div style={style}>Category Table</div>
+            </div>
+            <div className="grid-1" style={style}>
+              <ol>
+                <li>Detailled Tabular Report with search feature, export as csv, share</li>
+                <li>Cron alert on email</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
