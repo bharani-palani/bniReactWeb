@@ -2,10 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 // import Loader from "react-loader-spinner";
 // import helpers from "../../helpers";
+import Donut from "../charts/donut";
+import "./AccountPlanner.scss";
 
 const AccountPlanner = props => {
   // const {id, name} = props;
-  const style = {border: "solid 1px"};
+  const style = { };
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title">
@@ -22,18 +24,29 @@ const AccountPlanner = props => {
         </div>
         <div className="container-fluid">
           <div className="accountPlanner">
-            <div className="grid-1" style={style}>
-              horizontal scroll graph content for last 12 months,
-              consisting category based chart with expenditure amount with credit and debit
+            <div className="">
+              <div className="flex bigWidth">
+              {
+                ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",].map(n => 
+                  <div className="chartWrapper"><h4 className="text-center">{n}</h4><Donut /></div>
+                )
+              }              
+              </div>
             </div>
             <div className="equal-grid-3" style={style}>
               <div style={style}>Clicked month Expenditures</div>
-              <div style={style}>Type this month expenditure (clone feature), with this month history in the top (Inline edit, multi checkbox with delete).</div>
+              <div style={style}>
+                Type this month expenditure (clone feature), with this month
+                history in the top (Inline edit, multi checkbox with delete).
+              </div>
               <div style={style}>Category Table</div>
             </div>
             <div className="grid-1" style={style}>
               <ol>
-                <li>Detailled Tabular Report with search feature, export as csv, share</li>
+                <li>
+                  Detailled Tabular Report with search feature, export as csv,
+                  share
+                </li>
                 <li>Cron alert on email</li>
               </ol>
             </div>
