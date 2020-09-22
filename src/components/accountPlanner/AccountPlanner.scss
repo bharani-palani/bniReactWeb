@@ -1,16 +1,19 @@
 .accountPlanner {
-    .bigWidth {
-        overflow-x: auto;
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: #aeaeae;
+  }
+  .bigWidth {
+    overflow-x: auto;
+  }
+  .chartWrapper {
+  }
+  svg {
+    text {
+      fill: #fff;
+      font-size: 12px;
     }
-    .chartWrapper {
-        h4 {
-            color: #fff;
-        }
-    }
-    svg {
-        text {
-            fill: #fff;
-            font-size: 12px;
-        }
-    }
+  }
 }

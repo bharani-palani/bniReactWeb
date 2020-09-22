@@ -3,7 +3,6 @@ import DonutChart from "react-donut-chart";
 // import PropTypes from "prop-types";
 
 const colors = [
-  "#c2d82e",
   "#e91e63",
   "#9c27b0",
   "#673ab7",
@@ -21,33 +20,22 @@ const colors = [
   "#ff5722",
   "#795548",
   "#607d8b",
-//   "#f44336"
+  "#f44336"
 ];
 const Donut = props => {
-  //   const { id, chartData, chartProperties } = props;
+  const { data } = props;
   return (
     <DonutChart
-    strokeColor={`#000`}
-    innerRadius={0.8}
-    clickToggle={true}
+      strokeColor={`#000`}
+      innerRadius={0.7}
+      outerRadius={0.9}
+      clickToggle={true}
       colors={colors}
       height={200}
       width={200}
       legend={false}
-      data={[
-        {
-          label: "bharani",
-          value: 25
-        },
-        {
-          label: "pavithra",
-          value: 25
-        },
-        {
-          label: "sugan",
-          value: 50
-        }
-      ]}
+      data={data}
+      formatValues={(values, total) => `${values} / (${((values/total) * 100).toFixed(2)}%)`}
     />
   );
 };
