@@ -2,11 +2,33 @@
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     color: #aeaeae;
   }
   .bigWidth {
     overflow-x: auto;
+  }
+  .heading {
+    position: relative;
+    .title {
+      width: 100%;
+      text-align: center;
+    }
+    .icon {
+      position: absolute;
+      right: 0;
+    }
+  }
+  .static {
+    font-weight: bold;
+  }
+  .success, .danger {
+    font-size: 2rem;
+  }
+  .danger {
+      color: #f33333;
   }
   .chartWrapper {
   }
