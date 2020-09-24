@@ -6,6 +6,7 @@ import Chart from "./Chart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
 import SetConfig from "./SetConfig";
 import TypeExpenditureTable from "./TypeExpenditureTable";
+import CreateBank from "./CreateBank";
 import "./AccountPlanner.scss";
 
 const AccountPlanner = props => {
@@ -33,6 +34,11 @@ const AccountPlanner = props => {
                 <i className={`fa fa-circle-o-notch fa-2x fa-fw`} />
               </div>
             </div>
+            <div className="row">
+              <div className="col-sm-3 pl-0 pr-0">
+                <SetConfig />
+              </div>
+            </div>
             <div className="flex bigWidth">
               <Chart />
             </div>
@@ -40,11 +46,11 @@ const AccountPlanner = props => {
               <div className="col-md-4 b-0 mb-10">
                 <MonthExpenditureTable />
               </div>
-              <div className="col-md-6 mb-10">
+              <div className="col-md-5 mb-10">
                 <TypeExpenditureTable />
               </div>
-              <div className="col-md-2">
-                <SetConfig />
+              <div className="col-md-3 pl-0 pr-0">
+                <CreateBank />
               </div>
             </div>
             <div className="grid-1">

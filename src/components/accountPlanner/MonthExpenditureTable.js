@@ -11,8 +11,9 @@ const MonthExpenditureTable = props => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Description</th>
+              <th>Transaction</th>
               <th>Amount</th>
+              <th>Type</th>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +25,7 @@ const MonthExpenditureTable = props => {
                     <td>{(i += 1)}</td>
                     <td>Test</td>
                     <td>120</td>
+                    <td>Cr</td>
                   </tr>
                 );
               })}
