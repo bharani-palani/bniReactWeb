@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 // import helpers from "../../helpers";
 import Chart from "./Chart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
-import SetConfig from "./SetConfig";
+import SetDefault from "./SetDefault";
 import TypeExpenditureTable from "./TypeExpenditureTable";
-import CreateBank from "./CreateBank";
+import CreateModule from "./CreateModule";
+import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
 import "./AccountPlanner.scss";
 
 const AccountPlanner = props => {
@@ -36,21 +37,26 @@ const AccountPlanner = props => {
             </div>
             <div className="row">
               <div className="col-sm-3 pl-0 pr-0">
-                <SetConfig />
+                <SetDefault />
               </div>
             </div>
             <div className="flex bigWidth">
               <Chart />
             </div>
             <div className="row">
-              <div className="col-md-4 b-0 mb-10">
+              <div className="col-md-6 b-0 mb-10 m-reduce-padding">
                 <MonthExpenditureTable />
               </div>
-              <div className="col-md-5 mb-10">
+              <div className="col-md-6 mb-10 m-reduce-padding">
                 <TypeExpenditureTable />
               </div>
-              <div className="col-md-3 pl-0 pr-0">
-                <CreateBank />
+            </div>
+            <div className="row">
+              <div className="col-md-6 m-reduce-padding">
+                <CreateModule />
+              </div>
+              <div className="col-md-6 m-reduce-padding">
+                <TypeCreditCardExpenditure />
               </div>
             </div>
             <div className="grid-1">

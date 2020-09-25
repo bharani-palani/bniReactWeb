@@ -10,9 +10,17 @@ const TypeExpenditureTable = props => {
     { id: 1, value: "Cr" }
   ]);
   const [dropDownSelected, setDropDownSelected] = useState("Dr");
+  const [catDropDownList, setCatDropDownList] = useState([
+    { id: 0, value: "Mobile bill" },
+    { id: 1, value: "Savings" }
+  ]);
+  const [catDropDownSelected, setCatDropDownSelected] = useState("Savings");
 
   const onDropDownSelect = id => {
     setDropDownSelected(dropDownList.filter(d => d.id === id)[0].value);
+  };
+  const onCatDropDownSelect = id => {
+    setCatDropDownSelected(catDropDownList.filter(d => d.id === id)[0].value);
   };
 
   return (
@@ -28,6 +36,7 @@ const TypeExpenditureTable = props => {
               <th>Transaction</th>
               <th>Amount</th>
               <th>Type</th>
+              <th>Category</th>
             </tr>
           </thead>
           <tbody>
@@ -83,6 +92,27 @@ const TypeExpenditureTable = props => {
                           key={i}
                           onClick={e => {
                             onDropDownSelect(d.id);
+                          }}
+                        >
+                          {d.value}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </SelectableContext.Provider>
+              </td>
+              <td>
+                <SelectableContext.Provider value={false}>
+                  <Dropdown>
+                    <Dropdown.Toggle>
+                      {catDropDownSelected} <i className="fa fa-chevron-down" />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {catDropDownList.map((d, i) => (
+                        <Dropdown.Item
+                          key={i}
+                          onClick={e => {
+                            onCatDropDownSelect(d.id);
                           }}
                         >
                           {d.value}

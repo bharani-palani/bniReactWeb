@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
-const SetConfig = props => {
+const SetDefault = props => {
   const [dropDownList, setDropDownList] = useState([
     { id: 1, value: "HDFC" },
     { id: 2, value: "INDIAN BANK" }
@@ -39,11 +39,11 @@ const SetConfig = props => {
   );
 };
 
-SetConfig.propTypes = {
+SetDefault.propTypes = {
   property: PropTypes.string
 };
-SetConfig.defaultProps = {
+SetDefault.defaultProps = {
   property: "String name"
 };
 
-export default SetConfig;
+export default SetDefault;
