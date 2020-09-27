@@ -21,12 +21,15 @@
   .static {
     font-weight: bold;
   }
-  .success,
-  .danger {
-    font-size: 2rem;
-  }
-  .danger {
-    color: #f33333;
+  .fa {
+    &.success,
+    &.danger {
+      cursor: pointer;
+      font-size: 2rem;
+    }
+    &.danger {
+      color: #f33333;
+    }
   }
   .chartWrapper {
   }
@@ -36,28 +39,19 @@
       font-size: 12px;
     }
   }
-  .list-group {
-    .list-group-item {
-      background: transparent;
-      border-left: 0;
-      border-top: 0;
-      border-right: 0;
-      border-radius: 0;
-    }
-  }
   @media only screen and (max-width: 767px) {
     .m-reduce-padding {
-        padding-left: 0;
-        padding-right: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
   }
   .roundedIcon {
-      border: solid 1px $fluorescent-color;
-      border-radius: 100%;
-      padding: .5rem;
-      cursor: pointer;
+    border: solid 1px $fluorescent-color;
+    border-radius: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
   }
   .list-group-item {
-      border:0;
+    border: 0;
   }
 }

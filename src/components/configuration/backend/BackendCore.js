@@ -153,7 +153,7 @@ function BackendCore(props) {
       <div className={`mt-10 form-group grid-${TableRows.length}`}>
         {TableRows.map((heading, i) => (
           <div key={`key-${i}`} className="header">
-            {i !== 0 ? heading : "Action"}
+            {i !== 0 ? heading : <i className="fa fa-cog" />}
           </div>
         ))}
         {dbData.map((d, i) =>

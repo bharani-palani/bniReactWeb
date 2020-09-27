@@ -42,7 +42,7 @@ const TypeExpenditureTable = props => {
             >
               <i className="fa fa-copy roundedIcon ml-5" />
             </OverlayTrigger>
-            <i className={`icon fa fa-circle-o-notch fa-2x fa-fw`} />
+            <i className={`icon fa fa-circle-o-notch fa-spin fa-2x fa-fw`} />
           </div>
       </h5>
       <div className="tableFixHead">
