@@ -4,6 +4,7 @@ import { Accordion, Card, Button } from "react-bootstrap";
 import CreateBank from "./CreateBank";
 import CreateCreditCardAccount from "./CreateCreditCardAccount";
 import CreateIncExpCategory from "./CreateIncExpCategory";
+import CreateVendor from "./CreateVendor";
 
 const CreateModule = props => {
     // const {id, name} = props; 
@@ -11,6 +12,7 @@ const CreateModule = props => {
         {id: 1, label: "Bank account", component: <CreateBank />},
         {id: 2, label: "Credit card account", component: <CreateCreditCardAccount />},
         {id: 3, label: "Income / expense category", component: <CreateIncExpCategory />},
+        {id: 4, label: "Vendor", component: <CreateVendor />}
     ];
     return (
         <div>

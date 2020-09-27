@@ -270,6 +270,15 @@ code {
 table {
   border-collapse: collapse;
   width: 100%;
+  tbody {
+    td {
+      padding: 8px 16px;
+      &:first-child {
+        width: 5rem;
+        display: flex;
+      }
+    }
+  }
 }
 .table-condensed>thead>tr>th {
   border-bottom: 0 !important;
@@ -277,13 +286,7 @@ table {
 .table>tbody>tr>td {
   border-top: 0 !important;
 }
-th,
-td {
-  padding: 8px 16px;
-  &:first-child {
-    width: 6rem;
-  }
-}
+
 th {
   background: #000;
 }

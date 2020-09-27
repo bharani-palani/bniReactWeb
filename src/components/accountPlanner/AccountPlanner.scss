@@ -54,4 +54,13 @@
   .list-group-item {
     border: 0;
   }
+  .react-datetime-picker {
+    cursor: pointer;
+    .react-datetime-picker__wrapper {
+      border:0;
+      rect {
+        stroke: $fluorescent-color;
+      }
+    }  
+  }
 }
