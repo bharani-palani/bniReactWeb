@@ -182,6 +182,9 @@ code {
 .flex {
   display: flex;
 }
+.inlineFlex {
+  display: inline-flex;
+}
 .capitalize {
   text-transform: capitalize;
 }
@@ -250,6 +253,9 @@ code {
     }
   }
 }
+.colorGreen {
+  color: $fluorescent-color
+}
 .tableFixHead {
   overflow-y: auto;
   height: 30rem;
@@ -280,4 +286,14 @@ td {
 }
 th {
   background: #000;
+}
+.tooltip {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  margin-bottom: 10px !important;
+  z-index: 1151 !important;
+}
+
+.margin-auto {
+  margin: auto 0;
 }

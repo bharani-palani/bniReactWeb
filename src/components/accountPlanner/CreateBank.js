@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 const CreateBank = props => {
     const {id, name} = props;
+    const bankArray = Array(10).fill(10);
     return (
         <div>
             <div className="form-group mt-15">
@@ -17,6 +18,12 @@ const CreateBank = props => {
             <div className="form-group">
                 <button className="btn btn-bni btn-block">Submit</button>
             </div>
+            <p><em>Bank list</em></p>
+             <ul className="list-group">
+            {
+                bankArray.map((cat, i) => <li className="list-group-item p-5">Bank - {i}</li>)
+            }
+            </ul>
         </div>
     );
 }

@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 const TypeExpenditureTable = props => {
   const { id, name } = props;
@@ -22,12 +23,30 @@ const TypeExpenditureTable = props => {
   const onCatDropDownSelect = id => {
     setCatDropDownSelected(catDropDownList.filter(d => d.id === id)[0].value);
   };
+  const renderTooltip = props => (
+    <Tooltip id="button-tooltip" className="in show" {...props}>
+      Clone from last month
+    </Tooltip>
+  );
 
   return (
-    <div className="b-0">
-      <h5 className="text-center">Type expenditures for current month</h5>
+    <div>
+      <h5 className="text-center">
+          <div className="colorGreen inlineFlex">
+            <span className="margin-auto">Type expenditures for current month</span>
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+              triggerType="hover"
+            >
+              <i className="fa fa-copy roundedIcon ml-5" />
+            </OverlayTrigger>
+            <i className={`icon fa fa-circle-o-notch fa-2x fa-fw`} />
+          </div>
+      </h5>
       <div className="tableFixHead">
-        <table className="table table-condensed">
+        <table className="table table-condensed" style={{ width: "700px" }}>
           <thead>
             <tr>
               <th>
@@ -56,6 +75,7 @@ const TypeExpenditureTable = props => {
                     <td>Test</td>
                     <td>120</td>
                     <td>Cr</td>
+                    <td>Savings</td>
                   </tr>
                 );
               })}

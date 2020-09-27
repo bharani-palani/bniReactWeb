@@ -6,17 +6,18 @@ const CreateIncExpCategory = props => {
     const catArray = Array(10).fill(10);
     return (
         <div>
-             <ul className="list-group">
-            {
-                catArray.map((cat, i) => <li className="list-group-item">Cat - {i}</li>)
-            }
-            </ul>
             <div className="form-group mt-15">
                 <input type="text" maxLength="23" className="form-control" placeholder="Category name" />
             </div>
             <div className="form-group">
                 <button className="btn btn-bni btn-block">Submit</button>
             </div>
+            <p><em>Category list</em></p>
+             <ul className="list-group">
+            {
+                catArray.map((cat, i) => <li className="list-group-item p-5">Cat - {i}</li>)
+            }
+            </ul>
         </div>
     );
 }

@@ -4,29 +4,29 @@ import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
 const SetDefault = props => {
-  const [dropDownList, setDropDownList] = useState([
-    { id: 1, value: "HDFC" },
-    { id: 2, value: "INDIAN BANK" }
+  const [yearList, setYearList] = useState([
+    { id: 1, value: 2020 },
+    { id: 2, value: 2021 }
   ]);
-  const [dropDownSelected, setDropDownSelected] = useState("HDFC");
+  const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
 
-  const onDropDownSelect = id => {
-    setDropDownSelected(dropDownList.filter(d => d.id === id)[0].value);
+  const onYearSelect = id => {
+    setYearSelected(yearList.filter(d => d.id === id)[0].value);
   };
   return (
     <>
-      <span>Default Bank</span>
+      <span>Select year</span>
       <SelectableContext.Provider value={false}>
         <Dropdown>
           <Dropdown.Toggle>
-            {dropDownSelected} <i className="fa fa-chevron-down" />
+            {yearSelected} <i className="fa fa-chevron-down" />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {dropDownList.map((d, i) => (
+            {yearList.map((d, i) => (
               <Dropdown.Item
                 key={i}
                 onClick={e => {
-                  onDropDownSelect(d.id);
+                  onYearSelect(d.id);
                 }}
               >
                 {d.value}

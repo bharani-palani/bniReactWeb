@@ -6,6 +6,8 @@ import DateTimePicker from "react-datetime-picker";
 const CreateCreditCardAccount = props => {
     const {id, name} = props;
     let [date, setDate] = useState(new Date());
+    const ccArray = Array(10).fill(10);
+
     return (
         <div>
             <div className="form-group mt-15">
@@ -31,6 +33,11 @@ const CreateCreditCardAccount = props => {
             <div className="form-group">
                 <button className="btn btn-bni btn-block">Submit</button>
             </div>
+            <ul className="list-group">
+            {
+                ccArray.map((cat, i) => <li className="list-group-item p-5">CC - {i}</li>)
+            }
+            </ul>
         </div>
     );
 }

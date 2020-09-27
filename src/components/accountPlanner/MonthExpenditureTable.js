@@ -5,7 +5,7 @@ const MonthExpenditureTable = props => {
   //   const { id, name } = props;
   return (
     <div className="b-0">
-      <h5 className="text-center">Expenditures for the selected month</h5>
+      <h5 className="text-center"><span className="colorGreen">Expenditures for the selected month</span></h5>
       <div className="tableFixHead">
         <table className="table table-condensed">
           <thead>

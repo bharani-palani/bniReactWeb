@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 // import helpers from "../../helpers";
 import Chart from "./Chart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
-import SetDefault from "./SetDefault";
+import SetBank from "./SetBank";
+import SetYear from "./SetYear";
 import TypeExpenditureTable from "./TypeExpenditureTable";
 import CreateModule from "./CreateModule";
 import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
@@ -21,23 +22,17 @@ const AccountPlanner = props => {
             <h2 style={{ color: "#aaa" }}>Account planner</h2>
             <hr />
             <i className="fi-ecommerce-dollar-symbol-4"></i>
-            <p>
-              Plan my Salary credits to expenses with analytical or
-              visualization status
-            </p>
+            <p>Plan my credits to expenses with analysis & visualization</p>
           </div>
         </div>
         <div className="container-fluid">
           <div className="accountPlanner">
-            <div className="heading flex">
-              <div className="title">Compare with last months</div>
-              <div className="icon">
-                <i className={`fa fa-circle-o-notch fa-2x fa-fw`} />
-              </div>
-            </div>
             <div className="row">
-              <div className="col-sm-3 pl-0 pr-0">
-                <SetDefault />
+              <div className="col-sm-3 m-reduce-padding">
+                <SetBank />
+              </div>
+              <div className="col-sm-3 m-reduce-padding">
+                <SetYear />
               </div>
             </div>
             <div className="flex bigWidth">

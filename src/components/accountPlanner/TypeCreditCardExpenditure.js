@@ -17,7 +17,7 @@ const TypeCreditCardExpenditure = props => {
 
   return (
     <div className="b-0">
-      <h5 className="text-center">Type expenditures for credit card</h5>
+      <h5 className="text-center"><span className="colorGreen">Type expenditures for credit card</span></h5>
       <div className="tableFixHead">
         <table className="table table-condensed" style={{ width: "700px" }}>
           <thead>
