@@ -37,11 +37,12 @@ const CreateCreditCardAccount = props => {
         <button className="btn btn-bni btn-block">Submit</button>
       </div>
       <h5 className="heading">List of credit cards</h5>
-      <div className="grid-2 form-group backendConfigureSection">
+      <div className="grid-3 form-group backendConfigureSection">
         <div className="header">
           <i className="fa fa-cog" />
         </div>
         <div className="header">Credit card name</div>
+        <div className="header">Credit card number</div>
         {ccArray.map((cat, i) => {
           return (
             <>
@@ -51,15 +52,24 @@ const CreateCreditCardAccount = props => {
               <div>
                 <input
                   type="text"
-                  placeholder=""
+                  placeholder="Credit card name"
                   class="form-control"
                   defaultValue={`CC - ${i}`}
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  placeholder="Credit card number"
+                  class="form-control"
+                  defaultValue={`7851${i}`}
                 />
               </div>
             </>
           );
         })}
       </div>
+      <div className="form-group"><button className="btn btn-bni btn-block">Update</button></div>
     </div>
   );
 };

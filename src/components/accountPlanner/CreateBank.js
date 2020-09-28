@@ -23,11 +23,13 @@ const CreateBank = props => {
         <button className="btn btn-bni btn-block">Submit</button>
       </div>
       <h5 className="heading">List of banks</h5>
-      <div className="grid-2 form-group backendConfigureSection">
+      <div className="grid-4 form-group backendConfigureSection">
         <div className="header">
           <i className="fa fa-cog" />
         </div>
         <div className="header">Bank name</div>
+        <div className="header">Account number</div>
+        <div className="header">IFSC code</div>
         {bankArray.map((cat, i) => {
           return (
             <>
@@ -37,15 +39,32 @@ const CreateBank = props => {
               <div>
                 <input
                   type="text"
-                  placeholder=""
+                  placeholder="Bank name"
                   class="form-control"
                   defaultValue={`Bank - ${i}`}
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  placeholder="Account number"
+                  class="form-control"
+                  defaultValue={`785${i}`}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="IFSC code"
+                  class="form-control"
+                  defaultValue={`IFSC - ${i}`}
                 />
               </div>
             </>
           );
         })}
       </div>
+      <div className="form-group"><button className="btn btn-bni btn-block">Update</button></div>
     </div>
   );
 };

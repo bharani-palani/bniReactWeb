@@ -22,7 +22,7 @@ const CreateIncExpCategory = props => {
         <div className="header">
           <i className="fa fa-cog" />
         </div>
-        <div className="header">Credit card name</div>
+        <div className="header">Category name</div>
         {catArray.map((cat, i) => {
           return (
             <>
@@ -41,6 +41,7 @@ const CreateIncExpCategory = props => {
           );
         })}
       </div>
+      <div className="form-group"><button className="btn btn-bni btn-block">Update</button></div>
     </div>
   );
 };

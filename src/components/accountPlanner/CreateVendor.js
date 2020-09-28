@@ -20,11 +20,12 @@ const CreateVendor = props => {
         <button className="btn btn-bni btn-block">Submit</button>
       </div>
       <h5 className="heading">List of vendors</h5>
-      <div className="grid-2 form-group backendConfigureSection">
+      <div className="grid-3 form-group backendConfigureSection">
         <div className="header">
           <i className="fa fa-cog" />
         </div>
         <div className="header">Vendor name</div>
+        <div className="header">Vendor limit</div>
         {bankArray.map((cat, i) => {
           return (
             <>
@@ -34,15 +35,24 @@ const CreateVendor = props => {
               <div>
                 <input
                   type="text"
-                  placeholder=""
+                  placeholder="Vendor name"
                   class="form-control"
                   defaultValue={`Vendor - ${i}`}
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  placeholder="Vendor limit"
+                  class="form-control"
+                  defaultValue={`1000${i}`}
                 />
               </div>
             </>
           );
         })}
       </div>
+      <div className="form-group"><button className="btn btn-bni btn-block">Update</button></div>
     </div>
   );
 };

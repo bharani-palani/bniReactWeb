@@ -9,6 +9,7 @@ import SetYear from "./SetYear";
 import TypeExpenditureTable from "./TypeExpenditureTable";
 import CreateModule from "./CreateModule";
 import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
+import AnalysisChart from "./AnalysisChart";
 import "./AccountPlanner.scss";
 
 const AccountPlanner = props => {
@@ -47,21 +48,17 @@ const AccountPlanner = props => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-4 m-reduce-padding">
+              <div className="col-md-6 m-reduce-padding">
                 <CreateModule />
               </div>
-              <div className="col-md-8 m-reduce-padding">
-                <TypeCreditCardExpenditure />
+              <div className="col-md-6 m-reduce-padding">
+                <AnalysisChart />
               </div>
             </div>
-            <div className="grid-1">
-              <ol>
-                <li>
-                  Detailled Tabular Report with search feature, export as csv,
-                  share
-                </li>
-                <li>Cron alert on email</li>
-              </ol>
+            <div className="row">
+              <div className="col-md-6 m-reduce-padding">
+                <TypeCreditCardExpenditure />
+              </div>  
             </div>
           </div>
         </div>
