@@ -34,15 +34,16 @@ const CreateCreditCardAccount = props => {
         </div>
       </div>
       <div className="form-group">
-        <button className="btn btn-bni btn-block">Submit</button>
+        <button className="btn btn-bni">Submit</button>
       </div>
       <h5 className="heading">List of credit cards</h5>
-      <div className="grid-3 form-group backendConfigureSection">
+      <div className="grid-4 form-group backendConfigureSection">
         <div className="header">
           <i className="fa fa-cog" />
         </div>
         <div className="header">Credit card name</div>
         <div className="header">Credit card number</div>
+        <div className="header">Statement date</div>
         {ccArray.map((cat, i) => {
           return (
             <>
@@ -65,11 +66,22 @@ const CreateCreditCardAccount = props => {
                   defaultValue={`7851${i}`}
                 />
               </div>
+              <div>
+                <DateTimePicker
+                  onChange={value => false}
+                  value={date}
+                  format={`y-MM-dd`}
+                  required
+                  clearIcon={null}
+                />
+              </div>
             </>
           );
         })}
       </div>
-      <div className="form-group"><button className="btn btn-bni btn-block">Update</button></div>
+      <div className="form-group">
+        <button className="btn btn-bni">Update</button>
+      </div>
     </div>
   );
 };

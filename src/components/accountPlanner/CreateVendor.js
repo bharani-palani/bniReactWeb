@@ -17,7 +17,7 @@ const CreateVendor = props => {
         />
       </div>
       <div className="form-group">
-        <button className="btn btn-bni btn-block">Submit</button>
+        <button className="btn btn-bni">Submit</button>
       </div>
       <h5 className="heading">List of vendors</h5>
       <div className="grid-3 form-group backendConfigureSection">
@@ -52,7 +52,7 @@ const CreateVendor = props => {
           );
         })}
       </div>
-      <div className="form-group"><button className="btn btn-bni btn-block">Update</button></div>
+      <div className="form-group"><button className="btn btn-bni">Update</button></div>
     </div>
   );
 };
