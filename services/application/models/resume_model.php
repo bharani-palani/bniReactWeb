@@ -53,7 +53,7 @@ class resume_model extends CI_Model
         $this->db->join('resume_07_roles_and_responsibilities as b', 'a.project_id = b.project_id','left');
         $this->db->join('resume_03_work_summary as c', 'a.project_company_id = c.work_id', 'left');
         $this->db->group_by('a.project_id');
-        $this->db->order_by('a.project_id');
+        $this->db->order_by('a.project_company_id');
         $query = $this->db->get();
         return get_all_rows($query);
     }
