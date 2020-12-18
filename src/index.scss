@@ -254,7 +254,7 @@ code {
   }
 }
 .colorGreen {
-  color: $fluorescent-color
+  color: $fluorescent-color;
 }
 .tableFixHead {
   overflow-y: auto;
@@ -280,10 +280,10 @@ table {
     }
   }
 }
-.table-condensed>thead>tr>th {
+.table-condensed > thead > tr > th {
   border-bottom: 0 !important;
 }
-.table>tbody>tr>td {
+.table > tbody > tr > td {
   border-top: 0 !important;
 }
 
@@ -299,4 +299,19 @@ th {
 
 .margin-auto {
   margin: auto 0;
+}
+// scrollbar styles
+::-webkit-scrollbar {
+  height: 2px;
+  width: 2px;
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $fluorescent-color;
+  -webkit-border-radius: 1ex;
+}
+
+::-webkit-scrollbar-corner {
+  background: #000;
 }
