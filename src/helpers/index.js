@@ -9,6 +9,9 @@ const helpers = {
         const icons = ["Audio","BallTriangle","Bars","Circles","Grid","Hearts","Oval","Puff","Rings","TailSpin","ThreeDots"]
         const rIndex = Math.floor(Math.random() * icons.length);
         return icons[rIndex - 1];
+    },
+    stringToCapitalize: (string) => {
+        return string.split("_").map(s => s.substring(0,1).toUpperCase()+s.substring(1,s.length)).join(" ")
     }
 }
 

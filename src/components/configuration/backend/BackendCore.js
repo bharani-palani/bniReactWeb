@@ -148,12 +148,12 @@ function BackendCore(props) {
     <div className="container-fluid backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
       <h5 className="heading">
-        Table: {Table} ({dbData.length} record{dbData.length > 1 ? "s" : ""})
+        Table: {helpers.stringToCapitalize(Table)} ({dbData.length} record{dbData.length > 1 ? "s" : ""})
       </h5>
       <div className={`mt-10 form-group grid-${TableRows.length}`}>
         {TableRows.map((heading, i) => (
           <div key={`key-${i}`} className="header">
-            {i !== 0 ? heading : <i className="fa fa-cog" />}
+            {i !== 0 ? helpers.stringToCapitalize(heading) : <i className="fa fa-cog" />}
           </div>
         ))}
         {dbData.map((d, i) =>
@@ -163,7 +163,7 @@ function BackendCore(props) {
               onDelete={index => onDelete(index)}
               onChange={(index, data) => updateDbData(index, data)}
               index={{ i, j: r }}
-              placeholder={[r]}
+              placeholder={[helpers.stringToCapitalize(r)]}
               value={d[r]}
               element={rowElements[j]}
               showIncrementer={dbData.length - 1 === i}
