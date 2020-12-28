@@ -1,35 +1,51 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import apiInstance from "../../services/apiServices";
+import BackendCore from "../configuration/backend/BackendCore";
 
 const CreateBank = props => {
   const [bankArray] = useState([]);
   const [accNo, setAccNo] = useState("");
   const [bankName, setBankName] = useState("");
   const [ifsc, setIfsc] = useState("");
+  const configArray = [
+    {
+      id: 1,
+      Table: "banks",
+      TableRows: [
+        "bank_id",
+        "bank_name",
+        "bank_account_number",
+        "bank_ifsc_code"
+      ],
+      rowElements: ["checkbox", "textbox", "textbox", "textbox"]
+    }
+  ];
   const onBankSubmit = () => {
     var formdata = new FormData();
     formdata.append("accNo", accNo);
     formdata.append("ifsc", ifsc);
     formdata.append("bankName", bankName);
     apiInstance
-    .post("/account_planner/post_bank", formdata)
-    .then(response => {
-      console.log(response);
-      bankArray.push({ accNo, ifsc, bankName });
-      setAccNo("");
-      setBankName("");
-      setIfsc("");
-      document.getElementById("accountForm").reset();
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-  }
-  const genId = i => `bank-${i}`
+      .post("/account_planner/post_bank", formdata)
+      .then(res => {
+        const insertId = res.data.response.insert_id;
+        bankArray.push({ accNo, ifsc, bankName });
+        setAccNo("");
+        setBankName("");
+        setIfsc("");
+        document.getElementById("accountForm").reset();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
   return (
-    <form className="settings" id="accountForm" onSubmit={e => e.preventDefault()}>
+    <form
+      className="settings"
+      id="accountForm"
+      onSubmit={e => e.preventDefault()}
+    >
       <div className="form-group mt-15">
         <input
           type="text"
@@ -71,48 +87,15 @@ const CreateBank = props => {
       </div>
       <h5 className="heading">List of banks</h5>
       <div className="grid-4 form-group backendConfigureSection">
-        <div className="header">
-          <i className="fa fa-cog" />
-        </div>
-        <div className="header">Bank name</div>
-        <div className="header">Account number</div>
-        <div className="header">IFSC code</div>
-        {bankArray.map((cat, i) => {
-          return (
-            <React.Fragment key={genId(i)}>
-              <div>
-                <i class="fa fa-minus-circle danger"></i>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Bank name"
-                  class="form-control"
-                  defaultValue={cat.bankName}
-                />
-              </div>
-              <div>
-                <input
-                  type="number"
-                  placeholder="Account number"
-                  class="form-control"
-                  defaultValue={cat.accNo}
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="IFSC code"
-                  class="form-control"
-                  defaultValue={cat.ifsc}
-                />
-              </div>
-            </React.Fragment>
-          );
-        })}
-      </div>
-      <div className="form-group">
-        <button className="btn btn-bni">Update</button>
+        {configArray.map((t, i) => (
+          <BackendCore
+            Table={t.Table}
+            TableRows={t.TableRows}
+            rowElements={t.rowElements}
+            getApiUrl="/account_planner/getAccountPlanner"
+            postApiUrl="/account_planner/postAccountPlanner"
+          />
+        ))}
       </div>
     </form>
   );

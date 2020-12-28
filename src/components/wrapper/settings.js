@@ -42,33 +42,39 @@ const Settings = props => {
             className="row mb-20"
           >
             <Tab eventKey="web" title="Web" tabClassName="col-md-4">
-            {key === "web" && <Accordion bsPrefix="util" defaultActiveKey="0">
-                {configArray.sort((a,b) => a.label > b.label).map((t, i) => (
-                  <Card key={t.id}>
-                    <Card.Header>
-                      <Accordion.Toggle
-                        onClick={() => setCollapse(t.label)}
-                        as={Button}
-                        variant="link"
-                        eventKey={t.id}
-                      >
-                        {t.label}
-                      </Accordion.Toggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey={t.id}>
-                      <Card.Body>
-                        {collapse === t.label && (
-                          <BackendCore
-                            Table={t.Table}
-                            TableRows={t.TableRows}
-                            rowElements={t.rowElements}
-                          />
-                        )}
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
-                ))}
-              </Accordion>}
+              {key === "web" && (
+                <Accordion bsPrefix="util" defaultActiveKey="0">
+                  {configArray
+                    .sort((a, b) => a.label > b.label)
+                    .map((t, i) => (
+                      <Card key={t.id}>
+                        <Card.Header>
+                          <Accordion.Toggle
+                            onClick={() => setCollapse(t.label)}
+                            as={Button}
+                            variant="link"
+                            eventKey={t.id}
+                          >
+                            {t.label}
+                          </Accordion.Toggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey={t.id}>
+                          <Card.Body>
+                            {collapse === t.label && (
+                              <BackendCore
+                                Table={t.Table}
+                                TableRows={t.TableRows}
+                                rowElements={t.rowElements}
+                                getApiUrl="/getBackend"
+                                postApiUrl="/postBackend"
+                              />
+                            )}
+                          </Card.Body>
+                        </Accordion.Collapse>
+                      </Card>
+                    ))}
+                </Accordion>
+              )}
             </Tab>
             <Tab eventKey="messages" title="Messages" tabClassName="col-md-4">
               {key === "messages" && <ViewMessages />}

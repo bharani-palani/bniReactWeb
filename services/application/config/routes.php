@@ -73,6 +73,8 @@ $route['resume/getProjectList'] = 'resume/resume/getProjectList';
 $route['resume/getResume'] = 'resume/resume/getResume';
 // Account planner
 $route['account_planner/post_bank'] = 'account_planner/account_planner/post_bank';
+$route['account_planner/getAccountPlanner'] = 'account_planner/account_planner/getAccountPlanner';
+$route['account_planner/postAccountPlanner'] = 'account_planner/account_planner/postAccountPlanner';
 
 
 /* End of file routes.php */

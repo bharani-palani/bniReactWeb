@@ -46,7 +46,7 @@ function BackendUpdate(props) {
                     </Card.Header>
                     <Accordion.Collapse eventKey={t.id}>
                         <Card.Body>
-                            {collapse === t.label && <BackendCore Table={t.Table} TableRows={t.TableRows} rowElements={t.rowElements} />}
+                            {collapse === t.label && <BackendCore getApiUrl="/getBackend" postApiUrl="/postBackend" Table={t.Table} TableRows={t.TableRows} rowElements={t.rowElements} />}
                         </Card.Body>
                     </Accordion.Collapse>
                 </Card>                                

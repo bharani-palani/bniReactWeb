@@ -8,6 +8,8 @@ import helpers from "../../../helpers";
 function BackendCore(props) {
   const Table = props.Table;
   const TableRows = props.TableRows;
+  const getApiUrl = props.getApiUrl;
+  const postApiUrl = props.postApiUrl;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
   const dbBackup = JSON.parse(JSON.stringify(dbData));
@@ -45,7 +47,7 @@ function BackendCore(props) {
       formdata.append("TableRows", TableRows);
       formdata.append("Table", Table);
       return apiInstance
-        .post("/getBackend", formdata)
+        .post(getApiUrl, formdata)
         .then(r => r.data.response)
         .catch(error => {
           console.log(error);
@@ -60,8 +62,8 @@ function BackendCore(props) {
       await Promise.all(array[0]).then(a => {
         temp.push(a);
       });
-      setDbData(array[1]);
-      setRowElements(temp[0]);
+      array.length && array[1] && setDbData(array[1]);
+      temp.length && setRowElements(temp[0]);
     });
   }, [TableRows, Table, props.rowElements]);
 
@@ -118,7 +120,7 @@ function BackendCore(props) {
     const formdata = new FormData();
     formdata.append("postData", JSON.stringify(postData));
     apiInstance
-      .post("/postBackend", formdata)
+      .post(postApiUrl, formdata)
       .then(response => {
         response.data.response ? success() : fail();
         // setTimeout(() => {

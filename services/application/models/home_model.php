@@ -142,8 +142,6 @@ class home_model extends CI_Model
         return get_all_rows($query);
     }
     public function postBackend($post) {
-        // var_dump(CI_VERSION);
-        // print_r($post);
         $postData = json_decode($post['postData']);
         $Table = $postData->Table;
         switch ($Table) {

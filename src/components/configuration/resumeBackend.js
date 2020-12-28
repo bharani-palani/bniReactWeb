@@ -18,7 +18,7 @@ function ResumeBackend(props) {
                     <Card.Body>
                         {
                             collapse === t.label && 
-                            <BackendCore onSubmit={(b) => setCollapse("")} Table={t.Table} TableRows={t.TableRows} rowElements={t.rowElements} />
+                            <BackendCore getApiUrl="/getBackend" postApiUrl="/postBackend" onSubmit={(b) => setCollapse("")} Table={t.Table} TableRows={t.TableRows} rowElements={t.rowElements} />
                         }
                     </Card.Body>
                 </Accordion.Collapse>
