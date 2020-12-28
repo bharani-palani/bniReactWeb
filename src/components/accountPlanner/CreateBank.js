@@ -13,7 +13,7 @@ const CreateBank = props => {
     formdata.append("ifsc", ifsc);
     formdata.append("bankName", bankName);
     apiInstance
-    .post("/accountPlanner/postBank", formdata)
+    .post("/account_planner/postBank", formdata)
     .then(response => {
       console.log(response);
       bankArray.push({ accNo, ifsc, bankName });

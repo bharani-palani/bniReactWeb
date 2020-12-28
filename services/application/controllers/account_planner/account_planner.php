@@ -7,15 +7,15 @@ class account_planner extends CI_Controller {
 		$this->load->model('account_planner_model');
 		$this->load->library("../controllers/auth");
     }
-	public function post_write()
+	public function post_bank()
 	{
 		$validate = $this->auth->validateAll();
 		if($validate === 2) {
 			$this->auth->invalidTokenResponse();
 		}
-		// if($validate === 3) {
-		// 	$this->auth->invalidDomainResponse();
-		// }
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
 		if($validate === 1) {
 		$post = array(
 				'bank_name'=>$this->input->post('bankName'),
