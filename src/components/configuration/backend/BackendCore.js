@@ -15,6 +15,7 @@ function BackendCore(props) {
   const dbBackup = JSON.parse(JSON.stringify(dbData));
   const [deleteData, setDeleteData] = useState([]);
   const autoClose = 3000;
+  const [loader, setLoader] = useState(true);
 
   const getElementAjax = row => {
     return apiInstance
@@ -61,6 +62,7 @@ function BackendCore(props) {
       const temp = [];
       await Promise.all(array[0]).then(a => {
         temp.push(a);
+        setLoader(false);
       });
       array.length && array[1] && setDbData(array[1]);
       temp.length && setRowElements(temp[0]);
@@ -150,12 +152,19 @@ function BackendCore(props) {
     <div className="container-fluid backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
       <h5 className="heading">
-        Table: {helpers.stringToCapitalize(Table)} ({dbData.length} record{dbData.length > 1 ? "s" : ""})
+        Table: {helpers.stringToCapitalize(Table)} ({dbData.length} record
+        {dbData.length > 1 ? "s" : ""})
       </h5>
       <div className={`mt-10 form-group grid-${TableRows.length}`}>
         {TableRows.map((heading, i) => (
           <div key={`key-${i}`} className="header">
-            {i !== 0 ? <span title={helpers.stringToCapitalize(heading)}>{helpers.stringToCapitalize(heading)}</span> : <i className="fa fa-cog" />}
+            {i !== 0 ? (
+              <span title={helpers.stringToCapitalize(heading)}>
+                {helpers.stringToCapitalize(heading)}
+              </span>
+            ) : (
+              <i className="fa fa-cog" />
+            )}
           </div>
         ))}
         {dbData.map((d, i) =>
@@ -181,7 +190,7 @@ function BackendCore(props) {
         </button>
       </div>
     </div>
-  ) : (
+  ) : loader ? (
     <div className="relativeSpinner">
       <Loader
         type={helpers.LoadRandomSpinnerIcon()}
@@ -190,6 +199,8 @@ function BackendCore(props) {
         width={100}
       />
     </div>
+  ) : (
+    <div className="noRecords">No Records</div>
   );
 }
 

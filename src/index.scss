@@ -315,3 +315,13 @@ th {
 ::-webkit-scrollbar-corner {
   background: #000;
 }
+
+.noRecords {
+  text-align: center;
+  font-style: italic;
+  padding: 1rem 0;
+  background: #222;
+  margin-bottom: 1rem;
+  color: $fluorescent-color;
+  border: solid 1px $fluorescent-color;
+}

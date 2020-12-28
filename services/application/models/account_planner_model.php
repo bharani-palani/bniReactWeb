@@ -9,9 +9,7 @@ class account_planner_model extends CI_Model
 	{
 		$this->db = $this->load->database('default', TRUE);  
 		$this->db->insert('banks',$post);
-		$insert_id = $this->db->insert_id();
-		$json_data = array("status" => "success", "insert_id" => $insert_id);
-		return $json_data;
+		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
 	}
 	function getAccountPlanner($post) {
 		$Table = $post["Table"];

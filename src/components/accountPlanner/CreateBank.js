@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import apiInstance from "../../services/apiServices";
 import BackendCore from "../configuration/backend/BackendCore";
 
 const CreateBank = props => {
-  const [bankArray] = useState([]);
   const [accNo, setAccNo] = useState("");
   const [bankName, setBankName] = useState("");
   const [ifsc, setIfsc] = useState("");
-  const configArray = [
+  const [configArray] = useState([
     {
       id: 1,
       Table: "banks",
@@ -20,7 +19,10 @@ const CreateBank = props => {
       ],
       rowElements: ["checkbox", "textbox", "textbox", "textbox"]
     }
-  ];
+  ]);
+  useEffect(() => {
+
+  },[])
   const onBankSubmit = () => {
     var formdata = new FormData();
     formdata.append("accNo", accNo);
@@ -29,12 +31,12 @@ const CreateBank = props => {
     apiInstance
       .post("/account_planner/post_bank", formdata)
       .then(res => {
-        const insertId = res.data.response.insert_id;
-        bankArray.push({ accNo, ifsc, bankName });
-        setAccNo("");
-        setBankName("");
-        setIfsc("");
-        document.getElementById("accountForm").reset();
+        if(res) {
+          setAccNo("");
+          setBankName("");
+          setIfsc("");
+          document.getElementById("accountForm").reset();
+        }
       })
       .catch(error => {
         console.log(error);
@@ -86,17 +88,15 @@ const CreateBank = props => {
         </button>
       </div>
       <h5 className="heading">List of banks</h5>
-      <div className="grid-4 form-group backendConfigureSection">
-        {configArray.map((t, i) => (
-          <BackendCore
-            Table={t.Table}
-            TableRows={t.TableRows}
-            rowElements={t.rowElements}
-            getApiUrl="/account_planner/getAccountPlanner"
-            postApiUrl="/account_planner/postAccountPlanner"
-          />
-        ))}
-      </div>
+      {configArray.map((t, i) => (
+        <BackendCore
+          Table={t.Table}
+          TableRows={t.TableRows}
+          rowElements={t.rowElements}
+          getApiUrl="/account_planner/getAccountPlanner"
+          postApiUrl="/account_planner/postAccountPlanner"
+        />
+      ))}
     </form>
   );
 };
