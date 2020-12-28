@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import apiInstance from "../../services/apiServices";
 
 const CreateBank = props => {
   const [bankArray] = useState([]);
@@ -7,15 +8,28 @@ const CreateBank = props => {
   const [bankName, setBankName] = useState("");
   const [ifsc, setIfsc] = useState("");
   const onBankSubmit = () => {
-    bankArray.push({ accNo, ifsc, bankName });
-    setAccNo("");
-    setBankName("");
-    setIfsc("");
-    console.log(bankArray)
+    var formdata = new FormData();
+    formdata.append("accNo", accNo);
+    formdata.append("ifsc", ifsc);
+    formdata.append("bankName", bankName);
+    apiInstance
+    .post("/write", formdata)
+    .then(response => {
+      console.log(response);
+      bankArray.push({ accNo, ifsc, bankName });
+      setAccNo("");
+      setBankName("");
+      setIfsc("");
+      document.getElementById("accountForm").reset();
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
   }
   const genId = i => `bank-${i}`
   return (
-    <form className="settings" onSubmit={e => e.preventDefault()}>
+    <form className="settings" id="accountForm" onSubmit={e => e.preventDefault()}>
       <div className="form-group mt-15">
         <input
           type="text"

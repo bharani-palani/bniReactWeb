@@ -10,7 +10,8 @@ class accountPlanner_model extends CI_Model
 	{
 		$this->db = $this->load->database('default', TRUE);  
 		$this->db->insert('banks',$post);
-		$json_data = array("status" => "success");
+		$insert_id = $this->db->insert_id();
+		$json_data = array("status" => "success", "insert_id" => $insert_id);
 		return $json_data;
 	}
 

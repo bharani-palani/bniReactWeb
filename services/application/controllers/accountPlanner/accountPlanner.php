@@ -20,7 +20,8 @@ class accountPlanner extends CI_Controller {
 		$post = array(
 				'bank_name'=>$this->input->post('bankName'),
 				'bank_account_number'=>$this->input->post('accNo'),
-				'bank_ifsc_code'=>$this->input->post('ifsc'),
+                'bank_ifsc_code'=>$this->input->post('ifsc'),
+                'created_at' => date("Y-m-d")
 			);
 			$data["response"] = $this->accountPlanner_model->post_bank($post);
 			$this->auth->response($data,array(),200);
