@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class accountPlanner extends CI_Controller {
+class account_planner extends CI_Controller {
 	public function __construct()
     {
 		parent::__construct();
-		$this->load->model('accountPlanner_model');
+		$this->load->model('account_planner_model');
 		$this->load->library("../controllers/auth");
     }
 	public function post_write()
@@ -23,7 +23,7 @@ class accountPlanner extends CI_Controller {
                 'bank_ifsc_code'=>$this->input->post('ifsc'),
                 'bank_created_at' => date("Y-m-d")
 			);
-			$data["response"] = $this->accountPlanner_model->post_bank($post);
+			$data["response"] = $this->account_planner_model->post_bank($post);
 			$this->auth->response($data,array(),200);
 		}
 	}

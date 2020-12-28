@@ -1,6 +1,6 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class accountPlanner_model extends CI_Model
+class account_planner_model extends CI_Model
 {
 	public function __construct()
     {
