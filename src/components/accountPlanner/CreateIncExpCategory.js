@@ -18,11 +18,12 @@ const CreateIncExpCategory = props => {
         <button className="btn btn-bni">Submit</button>
       </div>
       <h5 className="heading">List of categories</h5>
-      <div className="grid-2 form-group backendConfigureSection">
+      <div className="grid-3 form-group backendConfigureSection">
         <div className="header">
           <i className="fa fa-cog" />
         </div>
         <div className="header">Category name</div>
+        <div className="header">Vendor</div>
         {catArray.map((cat, i) => {
           return (
             <>
@@ -37,6 +38,7 @@ const CreateIncExpCategory = props => {
                   defaultValue={`CC - ${i}`}
                 />
               </div>
+              <div>dropdown</div>
             </>
           );
         })}

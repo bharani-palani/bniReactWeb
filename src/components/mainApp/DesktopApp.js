@@ -36,7 +36,7 @@ const DesktopApp = props => {
 
   const renderTooltip = props => (
     <Tooltip id="button-tooltip" className="in show" {...props}>
-      Login with Google
+      Sign in with Google
     </Tooltip>
   );
 

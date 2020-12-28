@@ -1,26 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const CreateBank = props => {
-  const { id, name } = props;
-  const bankArray = Array(10).fill(10);
+  const [bankArray] = useState([]);
+  const [accNo, setAccNo] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [ifsc, setIfsc] = useState("");
+  const onBankSubmit = () => {
+    bankArray.push({ accNo, ifsc, bankName });
+    setAccNo("");
+    setBankName("");
+    setIfsc("");
+    console.log(bankArray)
+  }
+  const genId = i => `bank-${i}`
   return (
-    <div className="settings">
+    <form className="settings" onSubmit={e => e.preventDefault()}>
       <div className="form-group mt-15">
-        <input type="text" className="form-control" placeholder="Bank name" />
+        <input
+          type="text"
+          onChange={e => setBankName(e.target.value)}
+          defaultValue={bankName}
+          value={bankName}
+          className="form-control"
+          placeholder="Bank name"
+        />
       </div>
       <div className="form-group">
         <input
           type="number"
           className="form-control"
           placeholder="Account number"
+          onChange={e => setAccNo(e.target.value)}
+          defaultValue={accNo}
+          value={accNo}
         />
       </div>
       <div className="form-group">
-        <input type="text" className="form-control" placeholder="IFSC code" />
+        <input
+          type="text"
+          onChange={e => setIfsc(e.target.value)}
+          defaultValue={ifsc}
+          value={ifsc}
+          className="form-control"
+          placeholder="IFSC code"
+        />
       </div>
       <div className="form-group">
-        <button className="btn btn-bni">Submit</button>
+        <button
+          onClick={onBankSubmit}
+          className="btn btn-bni"
+          disabled={!(accNo && ifsc && bankName)}
+        >
+          Submit
+        </button>
       </div>
       <h5 className="heading">List of banks</h5>
       <div className="grid-4 form-group backendConfigureSection">
@@ -32,7 +65,7 @@ const CreateBank = props => {
         <div className="header">IFSC code</div>
         {bankArray.map((cat, i) => {
           return (
-            <>
+            <React.Fragment key={genId(i)}>
               <div>
                 <i class="fa fa-minus-circle danger"></i>
               </div>
@@ -41,7 +74,7 @@ const CreateBank = props => {
                   type="text"
                   placeholder="Bank name"
                   class="form-control"
-                  defaultValue={`Bank - ${i}`}
+                  defaultValue={cat.bankName}
                 />
               </div>
               <div>
@@ -49,7 +82,7 @@ const CreateBank = props => {
                   type="number"
                   placeholder="Account number"
                   class="form-control"
-                  defaultValue={`785${i}`}
+                  defaultValue={cat.accNo}
                 />
               </div>
               <div>
@@ -57,15 +90,17 @@ const CreateBank = props => {
                   type="text"
                   placeholder="IFSC code"
                   class="form-control"
-                  defaultValue={`IFSC - ${i}`}
+                  defaultValue={cat.ifsc}
                 />
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>
-      <div className="form-group"><button className="btn btn-bni">Update</button></div>
-    </div>
+      <div className="form-group">
+        <button className="btn btn-bni">Update</button>
+      </div>
+    </form>
   );
 };
 

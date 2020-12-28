@@ -11,15 +11,15 @@ const CreateModule = props => {
     const createArray = [
         {id: 1, label: "Bank account", component: <CreateBank />},
         {id: 2, label: "Credit card account", component: <CreateCreditCardAccount />},
-        {id: 3, label: "Income / expense category", component: <CreateIncExpCategory />},
-        {id: 4, label: "Vendor", component: <CreateVendor />}
+        {id: 3, label: "Vendor", component: <CreateVendor />},
+        {id: 4, label: "Income / expense category", component: <CreateIncExpCategory />},
     ];
     return (
         <div>
             <h5 className="text-center"><span className="colorGreen">Create</span></h5>
             <div className="tableFixHead pr-10">
                 <Accordion bsPrefix="util" defaultActiveKey={1}>
-                {createArray.sort((a,b) => a.label > b.label).map((t,i) => 
+                {createArray.sort((a,b) => a.id > b.id).map((t,i) => 
                     <Card key={t.id}>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey={t.id}>

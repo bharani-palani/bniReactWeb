@@ -37,6 +37,9 @@
     }
     .header {
       color: $fluorescent-color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .fa {
       font-size: 2rem;

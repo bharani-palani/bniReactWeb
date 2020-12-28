@@ -153,7 +153,7 @@ function BackendCore(props) {
       <div className={`mt-10 form-group grid-${TableRows.length}`}>
         {TableRows.map((heading, i) => (
           <div key={`key-${i}`} className="header">
-            {i !== 0 ? helpers.stringToCapitalize(heading) : <i className="fa fa-cog" />}
+            {i !== 0 ? <span title={helpers.stringToCapitalize(heading)}>{helpers.stringToCapitalize(heading)}</span> : <i className="fa fa-cog" />}
           </div>
         ))}
         {dbData.map((d, i) =>
