@@ -264,10 +264,8 @@ MENU
 }
 .menuHeading {
   color: #c2d82e;
-  border-bottom: solid 1px;
 }
 .last-child-menu {
-    border-bottom: solid 1px #c2d82e;
 }
 .sub-menu li:hover .subsub-menu-wrapper,
 :hover .sub-menu-wrapper {

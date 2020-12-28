@@ -79,9 +79,9 @@ const MobileApp = props => {
             </li>
           </ul>
           <ul className="primary-menu">
-            {isGoogleLogged && googleMenu.length > 0 && (
+            {/* {isGoogleLogged && googleMenu.length > 0 && (
               <li className="menuHeading">Setup</li>
-            )}
+            )} */}
             {isGoogleLogged &&
               googleMenu
                 .map((menu, i) => (

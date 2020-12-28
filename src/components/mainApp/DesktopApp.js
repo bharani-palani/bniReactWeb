@@ -44,12 +44,12 @@ const DesktopApp = props => {
   const googleMenu =
     isGoogleLogged &&
     menus
-      .sort((a, b) => a.label > b.label)
       .filter(
         menu =>
           menu.showOnlyIfSuperUser &&
           ls.profileObj.googleId === appData.google_id
-      );
+      )
+      .sort((a, b) => a.label > b.label);
   return (
     <header className="vertical-header hidden-print">
       <i
@@ -81,9 +81,9 @@ const DesktopApp = props => {
             </button>
           </div>
           <ul className="primary-menu">
-              {isGoogleLogged && googleMenu.length > 0 && (
+              {/* {isGoogleLogged && googleMenu.length > 0 && (
                 <li className="menuHeading">Setup</li>
-              )}
+              )} */}
               {isGoogleLogged &&
                 googleMenu.map((menu, i) => (
                   <li
