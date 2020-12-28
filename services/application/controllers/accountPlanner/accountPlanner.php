@@ -13,15 +13,15 @@ class accountPlanner extends CI_Controller {
 		if($validate === 2) {
 			$this->auth->invalidTokenResponse();
 		}
-		if($validate === 3) {
-			$this->auth->invalidDomainResponse();
-		}
+		// if($validate === 3) {
+		// 	$this->auth->invalidDomainResponse();
+		// }
 		if($validate === 1) {
 		$post = array(
 				'bank_name'=>$this->input->post('bankName'),
 				'bank_account_number'=>$this->input->post('accNo'),
                 'bank_ifsc_code'=>$this->input->post('ifsc'),
-                'created_at' => date("Y-m-d")
+                'bank_created_at' => date("Y-m-d")
 			);
 			$data["response"] = $this->accountPlanner_model->post_bank($post);
 			$this->auth->response($data,array(),200);
