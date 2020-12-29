@@ -23,6 +23,12 @@ class account_planner_model extends CI_Model
 		$this->db->insert('vendors',$post);
 		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
 	}
+	public function post_inc_exp_category($post)
+	{
+		$this->db = $this->load->database('default', TRUE);  
+		$this->db->insert('income_expense_category',$post);
+		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
+	}
 	function getAccountPlanner($post) {
 		$Table = $post["Table"];
 		$this->db->select($post["TableRows"]);

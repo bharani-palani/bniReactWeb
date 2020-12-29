@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import apiInstance from "../../services/apiServices";
 import BackendCore from "../configuration/backend/BackendCore";
@@ -23,8 +23,8 @@ const CreateVendor = props => {
   const onVendorSubmit = async () => {
     setLoading(false);
     var formdata = new FormData();
-    formdata.append("accNo", vendorName);
-    formdata.append("ifsc", vendorLimit);
+    formdata.append("vendorName", vendorName);
+    formdata.append("vendorLimit", vendorLimit);
     return await apiInstance
       .post("/account_planner/post_vendor", formdata)
       .then(res => {

@@ -1,50 +1,89 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import apiInstance from "../../services/apiServices";
+import BackendCore from "../configuration/backend/BackendCore";
 
 const CreateIncExpCategory = props => {
-  // const {id, name} = props;
-  const catArray = Array(10).fill(10);
+  const [catName, setCatName] = useState("");
+  const [catVendor, setVendor] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [configArray] = useState([
+    {
+      id: 1,
+      Table: "income_expense_category",
+      TableRows: [
+        "inc_exp_cat_id",
+        "inc_exp_cat_name",
+        "inc_exp_cat_vendor",
+      ],
+      rowElements: ["checkbox", "textbox", "textbox"]
+    }
+  ]);
+
+  const onCatSubmit = async () => {
+    setLoading(false);
+    var formdata = new FormData();
+    formdata.append("catName", catName);
+    formdata.append("catVendor", catVendor);
+    return await apiInstance
+      .post("/account_planner/post_inc_exp_category", formdata)
+      .then(res => {
+        if (res) {
+          setCatName("");
+          setVendor("");
+          document.getElementById("catForm").reset();
+          setLoading(true);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
   return (
-    <div className="settings">
+    <form
+      className="settings"
+      id="catForm"
+      onSubmit={e => e.preventDefault()}
+    >
       <div className="form-group mt-15">
         <input
           type="text"
-          maxLength="23"
+          onChange={e => setCatName(e.target.value)}
+          value={catName}
           className="form-control"
           placeholder="Category name"
         />
       </div>
       <div className="form-group">
-        <button className="btn btn-bni">Submit</button>
+        <input
+          type="number"
+          className="form-control"
+          placeholder="Pointed vendor"
+          onChange={e => setVendor(e.target.value)}
+          value={catVendor}
+        />
       </div>
-      <h5 className="heading">List of categories</h5>
-      <div className="grid-3 form-group backendConfigureSection">
-        <div className="header">
-          <i className="fa fa-cog" />
-        </div>
-        <div className="header">Category name</div>
-        <div className="header">Vendor</div>
-        {catArray.map((cat, i) => {
-          return (
-            <React.Fragment key={i}>
-              <div>
-                <i className="fa fa-minus-circle danger"></i>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder=""
-                  className="form-control"
-                  defaultValue={`CC - ${i}`}
-                />
-              </div>
-              <div>dropdown</div>
-            </React.Fragment>
-          );
-        })}
+      <div className="form-group">
+        <button
+          onClick={() => onCatSubmit()}
+          className="btn btn-bni"
+          disabled={!(catName && catVendor)}
+        >
+          Submit
+        </button>
       </div>
-      <div className="form-group"><button className="btn btn-bni">Update</button></div>
-    </div>
+      {loading &&
+        configArray.map((t, i) => (
+          <BackendCore
+            key={i}
+            Table={t.Table}
+            TableRows={t.TableRows}
+            rowElements={t.rowElements}
+            getApiUrl="/account_planner/getAccountPlanner"
+            postApiUrl="/account_planner/postAccountPlanner"
+          />
+        ))}
+    </form>
   );
 };
 

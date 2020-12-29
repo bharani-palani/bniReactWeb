@@ -83,6 +83,29 @@ class account_planner extends CI_Controller {
 			}
 		}
 	}
+	public function post_inc_exp_category()
+	{
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			if(
+				$this->input->post('catName') && 
+				$this->input->post('catVendor')
+			) {
+			$post = array(
+					'vendor_name'=>$this->input->post('catName'),
+					'vendor_limit'=>$this->input->post('catVendor'),
+				);
+				$data["response"] = $this->account_planner_model->post_inc_exp_category($post);
+				$this->auth->response($data,array(),200);
+			}
+		}
+	}
 	public function getAccountPlanner() {
 		$validate = $this->auth->validateAll();
 		if($validate === 2) {
