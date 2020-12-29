@@ -30,6 +30,36 @@ class account_planner extends CI_Controller {
 		}
 	}
 
+	public function post_credit_card()
+	{
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			if(
+				$this->input->post('ccName') && 
+				$this->input->post('ccNumber') && 
+				$this->input->post('ccStartDate') &&
+				$this->input->post('ccEndDate') &&
+				$this->input->post('ccPayDate')
+			) {
+			$post = array(
+					'ccName'=>$this->input->post('ccName'),
+					'ccNumber'=>$this->input->post('ccNumber'),
+					'ccStartDate'=>$this->input->post('ccStartDate'),
+					'ccEndDate' => $this->input->post('ccEndDate'),
+					'ccPayDate' => $this->input->post('ccPayDate'),
+				);
+				$data["response"] = $this->account_planner_model->post_credit_card($post);
+				$this->auth->response($data,array(),200);
+			}
+		}
+	}
+
 	public function getAccountPlanner() {
 		$validate = $this->auth->validateAll();
 		if($validate === 2) {

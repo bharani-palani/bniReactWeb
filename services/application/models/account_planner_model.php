@@ -11,6 +11,12 @@ class account_planner_model extends CI_Model
 		$this->db->insert('banks',$post);
 		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
 	}
+	public function post_credit_card($post)
+	{
+		$this->db = $this->load->database('default', TRUE);  
+		$this->db->insert('credit_cards',$post);
+		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
+	}
 	function getAccountPlanner($post) {
 		$Table = $post["Table"];
 		$this->db->select($post["TableRows"]);
