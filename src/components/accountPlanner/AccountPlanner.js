@@ -37,7 +37,7 @@ const AccountPlanner = props => {
               </div>
             </div>
             <div className="flex bigWidth">
-              <Chart />
+              <Chart key={1} />
             </div>
             <div className="row">
               <div className="col-md-4 b-0 mb-10 m-reduce-padding">

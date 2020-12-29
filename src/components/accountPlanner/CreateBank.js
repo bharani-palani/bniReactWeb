@@ -7,6 +7,7 @@ const CreateBank = props => {
   const [accNo, setAccNo] = useState("");
   const [bankName, setBankName] = useState("");
   const [ifsc, setIfsc] = useState("");
+  const [loading, setLoading] = useState(true);
   const [configArray] = useState([
     {
       id: 1,
@@ -20,22 +21,22 @@ const CreateBank = props => {
       rowElements: ["checkbox", "textbox", "textbox", "textbox"]
     }
   ]);
-  useEffect(() => {
 
-  },[])
-  const onBankSubmit = () => {
+  const onBankSubmit = async () => {
+    setLoading(false);
     var formdata = new FormData();
     formdata.append("accNo", accNo);
     formdata.append("ifsc", ifsc);
     formdata.append("bankName", bankName);
-    apiInstance
+    return await apiInstance
       .post("/account_planner/post_bank", formdata)
       .then(res => {
-        if(res) {
+        if (res) {
           setAccNo("");
           setBankName("");
           setIfsc("");
           document.getElementById("accountForm").reset();
+          setLoading(true);
         }
       })
       .catch(error => {
@@ -80,23 +81,23 @@ const CreateBank = props => {
       </div>
       <div className="form-group">
         <button
-          onClick={onBankSubmit}
+          onClick={() => onBankSubmit()}
           className="btn btn-bni"
           disabled={!(accNo && ifsc && bankName)}
         >
           Submit
         </button>
       </div>
-      <h5 className="heading">List of banks</h5>
-      {configArray.map((t, i) => (
-        <BackendCore
-          Table={t.Table}
-          TableRows={t.TableRows}
-          rowElements={t.rowElements}
-          getApiUrl="/account_planner/getAccountPlanner"
-          postApiUrl="/account_planner/postAccountPlanner"
-        />
-      ))}
+      {loading &&
+        configArray.map((t, i) => (
+          <BackendCore
+            Table={t.Table}
+            TableRows={t.TableRows}
+            rowElements={t.rowElements}
+            getApiUrl="/account_planner/getAccountPlanner"
+            postApiUrl="/account_planner/postAccountPlanner"
+          />
+        ))}
     </form>
   );
 };
