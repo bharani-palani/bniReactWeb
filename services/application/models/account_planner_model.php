@@ -36,8 +36,8 @@ class account_planner_model extends CI_Model
 				case "banks":
 						$query = $this->db->order_by("bank_name","asc")->get('banks');
 				break;
-				case "income_expense":
-						$query = $this->db->order_by("inc_exp_name","asc")->get('income_expense');
+				case "income_expense_category":
+						$query = $this->db->order_by("inc_exp_name","asc")->get('income_expense_category');
 				break;
 				case "credit_cards":
 						$query = $this->db->order_by("credit_card_name","asc")->get('credit_cards');
