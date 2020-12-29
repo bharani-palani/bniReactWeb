@@ -48,11 +48,11 @@ class account_planner extends CI_Controller {
 				$this->input->post('ccPayDate')
 			) {
 			$post = array(
-					'ccName'=>$this->input->post('ccName'),
-					'ccNumber'=>$this->input->post('ccNumber'),
-					'ccStartDate'=>$this->input->post('ccStartDate'),
-					'ccEndDate' => $this->input->post('ccEndDate'),
-					'ccPayDate' => $this->input->post('ccPayDate'),
+					'credit_card_name'=>$this->input->post('ccName'),
+					'credit_card_number'=>$this->input->post('ccNumber'),
+					'credit_card_start_date'=>$this->input->post('ccStartDate'),
+					'credit_card_end_date' => $this->input->post('ccEndDate'),
+					'credit_card_payment_date' => $this->input->post('ccPayDate'),
 				);
 				$data["response"] = $this->account_planner_model->post_credit_card($post);
 				$this->auth->response($data,array(),200);
