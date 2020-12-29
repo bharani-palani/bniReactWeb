@@ -6,7 +6,7 @@ import AppContext from "./contexts/AppContext";
 import UserContextProvider from "./contexts/UserContext";
 import apiInstance from "./services/apiServices";
 import ErrorService from "./components/wrapper/errorService";
-import "./css/style.css";
+import "./css/style.scss";
 
 function App() {
   const [value, setValue] = useState({});

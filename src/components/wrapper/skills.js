@@ -48,7 +48,7 @@ function Skills() {
               className="process-box"
             >
               <div className="process-front text-center">
-                <h2 style={{ color: "#aaa" }}>Skills</h2>
+                <h2 className="grey-color">Skills</h2>
                 <hr />
                 <i className="fi-tech-gamepad-1"></i>
                 <p className="container-fluid">
@@ -58,7 +58,7 @@ function Skills() {
             </div>
           </div>
           <div className="container-fluid">
-            <div style={{ color: "#333" }} className="row">
+            <div className="row black-three-color">
               {skills.map((skills, i) => (
                 <div
                   key={i}

@@ -40,7 +40,7 @@ function Awards() {
               className="process-box"
             >
               <div className="process-front text-center">
-                <h2 style={{ color: "#aaa" }}>Awards</h2>
+                <h2 className="grey-color">Awards</h2>
                 <hr />
                 <i className="fi-tech-shield-6"></i>
                 <p className="container-fluid">
@@ -50,9 +50,8 @@ function Awards() {
             </div>
             {awards.map((award, i) => (
               <div
-                style={{ color: "#333" }}
                 key={i}
-                className={`${(i + 1) % 3 === 0 ? "row form-group" : null}`}
+                className={`grey-color ${(i + 1) % 3 === 0 ? "row form-group" : null}`}
               >
                 <div className="col-md-4">
                   <div className="blog-box">

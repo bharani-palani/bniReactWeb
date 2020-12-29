@@ -15,7 +15,7 @@ code {
 }
 .btn-bni {
   background: $fluorescent-color;
-  color: #000 !important;
+  color: $black-color !important;
   text-shadow: 1px 1px 1px #fff;
   &:focus,
   &:hover {
@@ -28,7 +28,7 @@ code {
   color: $fluorescent-color;
   border-radius: 20px;
   font-size: 1.2rem;
-  border: solid 1px #000;
+  border: solid 1px $black-color;
   outline: 0;
 }
 .downloadIcon {
@@ -105,7 +105,7 @@ code {
     font-size: 14px;
     &.Toastify__toast--success {
       background: $fluorescent-color;
-      color: #000;
+      color: $black-color;
     }
     color: #fff;
     i {
@@ -191,7 +191,7 @@ code {
 .no-internet {
   h1,
   h2 {
-    color: #ddd;
+    color: $border-grey;
   }
   i::before {
     font-size: 75px;
@@ -213,13 +213,13 @@ code {
     font-size: 1.2rem;
     padding: 1rem 2.5rem 1rem 1rem;
     background-color: $fluorescent-color !important;
-    color: #222 !important;
+    color: $black-two !important;
     font-weight: 500;
     width: 100%;
     border-radius: 3px;
     outline: 0;
     &:active:focus {
-      color: #222 !important;
+      color: $black-two !important;
       background-color: $fluorescent-color !important;
     }
     i.fa {
@@ -239,7 +239,7 @@ code {
       padding-left: 0.5rem;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      border-bottom: solid 1px #ddd;
+      border-bottom: solid 1px $border-grey;
       color: #333;
       font-size: 1.2rem;
       word-break: break-word;
@@ -288,7 +288,7 @@ table {
 }
 
 th {
-  background: #000;
+  background: $black-color;
 }
 .tooltip {
   margin-left: 10px !important;
@@ -304,7 +304,7 @@ th {
 ::-webkit-scrollbar {
   height: 2px;
   width: 2px;
-  background: #000;
+  background: $black-color;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -313,15 +313,22 @@ th {
 }
 
 ::-webkit-scrollbar-corner {
-  background: #000;
+  background: $black-color;
 }
 
 .noRecords {
   text-align: center;
   font-style: italic;
+  font-size: 1.2rem;
   padding: 1rem 0;
-  background: #222;
+  background: $black-two;
   margin-bottom: 1rem;
   color: $fluorescent-color;
-  border: solid 1px $fluorescent-color;
+  border-top: solid 1px $fluorescent-color;
+}
+.grey-color {
+  color: $text-color;
+}
+.black-three-color {
+  color: $black-three;
 }

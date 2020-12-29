@@ -94,7 +94,7 @@ function FormElement(props) {
                 <i
                   onClick={() => props.onDelete(index)}
                   className="fa fa-minus-circle danger"
-                />
+                />  
               )}
               {props.showIncrementer && (
                 <div className="pull-right">

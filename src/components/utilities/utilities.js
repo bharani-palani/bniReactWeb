@@ -44,7 +44,7 @@ function Utilities() {
       <div className="section-title text-center">
         <div className="process-box">
           <div className="process-front text-center">
-            <h2 style={{ color: "#aaa" }}>Utilities</h2>
+            <h2 className="greu-color">Utilities</h2>
             <hr />
             <i className="flaticon-computer"></i>
             <p>Some useful javascript utilities</p>

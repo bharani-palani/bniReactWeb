@@ -20,7 +20,7 @@ const AccountPlanner = props => {
       <div className="section-title">
         <div className="process-box">
           <div className="process-front text-center">
-            <h2 style={{ color: "#aaa" }}>Account planner</h2>
+            <h2 className="grey-color">Account planner</h2>
             <hr />
             <i className="fi-ecommerce-dollar-symbol-4"></i>
             <p>Plan my credits to expenses with analysis & visualization</p>

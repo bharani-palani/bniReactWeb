@@ -101,7 +101,7 @@ function Contact() {
                 <div className="section-title">
                   <div className="process-box">
                     <div className="process-front text-center">
-                      <h2 style={{ color: "#aaa" }}>Contact</h2>
+                      <h2 className="grey-color">Contact</h2>
                       <hr />
                       <i className="fi-creative-telephone"></i>
                       <p className="container-fluid">

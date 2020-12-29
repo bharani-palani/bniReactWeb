@@ -43,7 +43,7 @@ function Projects() {
               className="process-box"
             >
               <div className="process-front text-center">
-                <h2 style={{ color: "#aaa" }}>Projects</h2>
+                <h2 className="grey-color">Projects</h2>
                 <hr />
                 <i className="fi-creative-cloud-computing-3"></i>
                 <p className="pl-10 pr-10">
@@ -53,9 +53,8 @@ function Projects() {
             </div>
             {projects.map((project, i) => (
               <div
-                style={{ color: "#333" }}
                 key={i}
-                className={`${(i + 1) % 2 === 0 ? "row form-group" : null}`}
+                className={`grey-color ${(i + 1) % 2 === 0 ? "row form-group" : null}`}
               >
                 <div className="col-md-6">
                   <div className="blog-box">

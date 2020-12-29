@@ -148,7 +148,7 @@ function BackendCore(props) {
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
 
-  return dbData.length > 0 && setRowElements.length > 0 ? (
+  return loader === false ? (
     <div className="container-fluid backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
       <h5 className="heading">
@@ -167,7 +167,7 @@ function BackendCore(props) {
             )}
           </div>
         ))}
-        {dbData.map((d, i) =>
+        {dbData.length > 0 ? dbData.map((d, i) =>
           TableRows.map((r, j) => (
             <FormElement
               key={`${d[r]}-${j}`}
@@ -178,11 +178,11 @@ function BackendCore(props) {
               value={d[r]}
               element={rowElements[j]}
               showIncrementer={dbData.length - 1 === i}
-              showDecrement={i !== 0}
+              showDecrement={true} // i !== 0
               onAddRow={bool => onAddRow(bool)}
             />
           ))
-        )}
+        ) : <div className="noRecords" style={{ gridColumn: `1 / span ${TableRows.length}`}}>No Records</div>}
       </div>
       <div className="form-group text-right">
         <button onClick={() => submitData()} className="btn btn-bni">
@@ -190,7 +190,7 @@ function BackendCore(props) {
         </button>
       </div>
     </div>
-  ) : loader ? (
+  ) : (
     <div className="relativeSpinner">
       <Loader
         type={helpers.LoadRandomSpinnerIcon()}
@@ -199,8 +199,6 @@ function BackendCore(props) {
         width={100}
       />
     </div>
-  ) : (
-    <div className="noRecords">No Records</div>
   );
 }
 

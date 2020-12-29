@@ -114,7 +114,7 @@ function Write(props) {
                 className="process-box"
               >
                 <div className="process-front text-center">
-                  <h2 style={{ color: "#aaa" }}>Write to me</h2>
+                  <h2 className="grey-color">Write to me</h2>
                   <hr />
                   <i className="fi-creative-edit"></i>
                   <p className="pl-5 pr-5">

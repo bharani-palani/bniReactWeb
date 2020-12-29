@@ -314,7 +314,7 @@ function Resume() {
               className="process-box hidden-print"
             >
               <div className="process-front text-center">
-                <h2 style={{ color: "#aaa" }}>Resume</h2>
+                <h2 className="grey-color">Resume</h2>
                 <hr />
                 <i className="fi-ecommerce-invoice"></i>
                 <p>My skills, experience, projects and more</p>

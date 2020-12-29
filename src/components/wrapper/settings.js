@@ -21,7 +21,7 @@ const Settings = props => {
       <div className="section-title">
         <div className="process-box">
           <div className="process-front text-center">
-            <h2 style={{ color: "#aaa" }}>Settings</h2>
+            <h2 className="grey-color">Settings</h2>
             <hr />
             <i className="fi-tech-settings-1"></i>
             <p className="container-fluid">

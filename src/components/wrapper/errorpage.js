@@ -10,9 +10,9 @@ function ErrorPage() {
       <div className="overlay"></div>
       <div className="home-text-wrapper">
         <div className="home-message">
-          <h1 style={{ color: "#ddd" }}>Oops!</h1>
-          <h2 style={{ color: "#ddd" }}>404 Not Found</h2>
-          <div className="error-details" style={{ color: "#ddd" }}>
+          <h1 className="grey-color">Oops!</h1>
+          <h2 className="grey-color">404 Not Found</h2>
+          <div className="error-details grey-color">
             Sorry, an error has occured, Requested page cannot be found!
           </div>
           <hr />

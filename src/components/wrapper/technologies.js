@@ -68,7 +68,7 @@ function Technologies() {
                 className="process-box"
               >
                 <div className="process-front text-center">
-                  <h2 style={{ color: "#aaa" }}>Technologies</h2>
+                  <h2 className="grey-color">Technologies</h2>
                   <hr />
                   <i className="fi-creative-computer"></i>
                   <p className="container-fluid">
@@ -79,9 +79,8 @@ function Technologies() {
             </div>
             {techs ? techs.map((t, i) => (
                   <div
-                    style={{ color: "#333" }}
                     key={i}
-                    className={`text-center ${
+                    className={`black-three-color text-center ${
                       (i + 1) % 3 === 0 ? "row form-group ml-0 mr-0" : null
                     }`}
                   >
@@ -107,9 +106,8 @@ function Technologies() {
               : null}
             {techs.map((t, i) => (
               <div
-                style={{ color: "#333" }}
                 key={i}
-                className={`text-center ${
+                className={`black-three-color text-center ${
                   (i + 1) % 2 === 0 ? "row form-group" : null
                 }`}
               >
@@ -134,7 +132,7 @@ function Technologies() {
             ))}
             <div className="process-box">
               <div className="process-front text-center">
-                <h2 style={{ color: "#aaa" }}>IDE</h2>
+                <h2 className="grey-color">IDE</h2>
                 <i className="flaticon-monitor"></i>
               </div>
             </div>
@@ -173,7 +171,7 @@ function Technologies() {
               className="process-box"
             >
               <div className="process-front text-center">
-                <h2 style={{ color: "#aaa" }}>OS</h2>
+                <h2 className="grey-color">OS</h2>
                 <i className="flaticon-point-mark-on-a-circle"></i>
               </div>
             </div>
