@@ -98,8 +98,8 @@ class account_planner extends CI_Controller {
 				$this->input->post('catVendor')
 			) {
 			$post = array(
-					'vendor_name'=>$this->input->post('catName'),
-					'vendor_limit'=>$this->input->post('catVendor'),
+					'inc_exp_cat_name'=>$this->input->post('catName'),
+					'inc_exp_cat_vendor'=>$this->input->post('catVendor'),
 				);
 				$data["response"] = $this->account_planner_model->post_inc_exp_category($post);
 				$this->auth->response($data,array(),200);
