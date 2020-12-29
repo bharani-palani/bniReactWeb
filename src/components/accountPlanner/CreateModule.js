@@ -16,7 +16,7 @@ const CreateModule = props => {
     ];
     return (
         <div>
-            <h5 className="text-center"><span className="colorGreen">Create</span></h5>
+            <h5 className="text-center"><span className="colorGreen">CRUD</span></h5>
             <div className="tableFixHead pr-10">
                 <Accordion bsPrefix="util" defaultActiveKey={1}>
                 {createArray.sort((a,b) => a.id > b.id).map((t,i) => 

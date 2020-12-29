@@ -17,6 +17,7 @@ const Chart = props => {
     { label: "Home snacks", value: 1420 },
     { label: "Bike petrol", value: 310 } // isEmpty:true
   ];
+  const genId = i => `chrat-${i}`
   const colors = [
     "#e91e63",
     "#9c27b0",
@@ -52,8 +53,9 @@ const Chart = props => {
         "Oct",
         "Nov",
         "Dec"
-      ].map(n => (
+      ].map((n,i) => (
         <div
+          key={genId(i)}
           className="chartWrapper"
           onClick={() => setLoaderState(!loaderState)}
         >

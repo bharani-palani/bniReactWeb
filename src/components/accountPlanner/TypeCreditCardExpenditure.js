@@ -44,9 +44,9 @@ const TypeCreditCardExpenditure = props => {
           <tbody>
             {Array(10)
               .fill(10)
-              .map(u => {
+              .map((u,i) => {
                 return (
-                  <tr>
+                  <tr key={i}>
                     <td>
                       <>
                         <i

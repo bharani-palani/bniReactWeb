@@ -26,20 +26,20 @@ const CreateIncExpCategory = props => {
         <div className="header">Vendor</div>
         {catArray.map((cat, i) => {
           return (
-            <>
+            <React.Fragment key={i}>
               <div>
-                <i class="fa fa-minus-circle danger"></i>
+                <i className="fa fa-minus-circle danger"></i>
               </div>
               <div>
                 <input
                   type="text"
                   placeholder=""
-                  class="form-control"
+                  className="form-control"
                   defaultValue={`CC - ${i}`}
                 />
               </div>
               <div>dropdown</div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

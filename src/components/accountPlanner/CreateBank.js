@@ -53,7 +53,6 @@ const CreateBank = props => {
         <input
           type="text"
           onChange={e => setBankName(e.target.value)}
-          defaultValue={bankName}
           value={bankName}
           className="form-control"
           placeholder="Bank name"
@@ -65,7 +64,6 @@ const CreateBank = props => {
           className="form-control"
           placeholder="Account number"
           onChange={e => setAccNo(e.target.value)}
-          defaultValue={accNo}
           value={accNo}
         />
       </div>
@@ -73,7 +71,6 @@ const CreateBank = props => {
         <input
           type="text"
           onChange={e => setIfsc(e.target.value)}
-          defaultValue={ifsc}
           value={ifsc}
           className="form-control"
           placeholder="IFSC code"
@@ -91,6 +88,7 @@ const CreateBank = props => {
       {loading &&
         configArray.map((t, i) => (
           <BackendCore
+            key={i}
             Table={t.Table}
             TableRows={t.TableRows}
             rowElements={t.rowElements}

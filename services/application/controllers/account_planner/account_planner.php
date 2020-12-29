@@ -60,6 +60,29 @@ class account_planner extends CI_Controller {
 		}
 	}
 
+	public function post_vendor()
+	{
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			if(
+				$this->input->post('vendorName') && 
+				$this->input->post('vendorLimit')
+			) {
+			$post = array(
+					'vendor_name'=>$this->input->post('vendorName'),
+					'vendor_limit'=>$this->input->post('vendorLimit'),
+				);
+				$data["response"] = $this->account_planner_model->post_vendor($post);
+				$this->auth->response($data,array(),200);
+			}
+		}
+	}
 	public function getAccountPlanner() {
 		$validate = $this->auth->validateAll();
 		if($validate === 2) {

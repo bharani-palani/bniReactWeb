@@ -21,7 +21,7 @@ const MonthExpenditureTable = props => {
               .fill(10)
               .map((u, i) => {
                 return (
-                  <tr>
+                  <tr key={i}>
                     <td>{(i += 1)}</td>
                     <td>Test</td>
                     <td>120</td>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import apiInstance from "../../services/apiServices";
 import BackendCore from "../configuration/backend/BackendCore";
-import DateTimePicker from "react-datetime-picker";
 
 const CreateCreditCardAccount = props => {
   const [ccName, setCcname] = useState("");
@@ -11,7 +10,6 @@ const CreateCreditCardAccount = props => {
   const [ccEndDate, setCcEndDate] = useState("");
   const [ccPayDate, setPayDate] = useState("");
   const [loading, setLoading] = useState(true);
-  let [date, setDate] = useState(new Date());
   const [configArray] = useState([
     {
       id: 1,
@@ -49,7 +47,7 @@ const CreateCreditCardAccount = props => {
         if (res) {
           setCcname("");
           setCcNumber("");
-          ccStartDate("");
+          setCcStartDate("");
           setCcEndDate("");
           setPayDate("");
           document.getElementById("cCForm").reset();
@@ -60,17 +58,17 @@ const CreateCreditCardAccount = props => {
         console.log(error);
       });
   };
+  const createfromToArray = (a, b) =>
+    Array(a)
+      .fill()
+      .map((_, idx) => b + idx);
+
   return (
-    <form
-      className="settings"
-      id="cCForm"
-      onSubmit={e => e.preventDefault()}
-    >
+    <form className="settings" id="cCForm" onSubmit={e => e.preventDefault()}>
       <div className="form-group mt-15">
         <input
           type="text"
           onChange={e => setCcname(e.target.value)}
-          defaultValue={ccName}
           value={ccName}
           className="form-control"
           placeholder="Credit card bank name"
@@ -78,49 +76,65 @@ const CreateCreditCardAccount = props => {
       </div>
       <div className="form-group">
         <input
-          type="number"
+          type="text"
           className="form-control"
           placeholder="Card number"
-          onChange={e => setCcNumber(e.target.value)}
-          defaultValue={ccNumber}
+          onChange={e => 
+            setCcNumber(e.target.value.replace(/[^0-9]/g, "").replace(/\W/gi, '').replace(/(.{4})/g, '$1 '))
+          }
+          maxLength="19"
           value={ccNumber}
         />
       </div>
       <div className="form-group">
-        <input
-          type="text"
+        <select
           onChange={e => setCcStartDate(e.target.value)}
-          defaultValue={ccStartDate}
           value={ccStartDate}
           className="form-control"
-          placeholder="Statement start date"
-        />
+        >
+          <option value="">Statement start date</option>
+          {createfromToArray(31, 1).map((d, i) => (
+            <option key={i} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-group">
-        <input
-          type="text"
+        <select
           onChange={e => setCcEndDate(e.target.value)}
-          defaultValue={ccEndDate}
           value={ccEndDate}
           className="form-control"
-          placeholder="Statement end date"
-        />
+        >
+          <option value="">Statement end date</option>
+          {createfromToArray(31, 1).map((d, i) => (
+            <option key={i} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-group">
-        <input
-          type="text"
+        <select
           onChange={e => setPayDate(e.target.value)}
-          defaultValue={ccPayDate}
           value={ccPayDate}
           className="form-control"
-          placeholder="Statement pay date"
-        />
+        >
+          <option value="">Statement pay date</option>
+          {createfromToArray(31, 1).map((d, i) => (
+            <option key={i} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-group">
         <button
           onClick={() => onCCSubmit()}
           className="btn btn-bni"
-          disabled={!(ccName && ccNumber && ccStartDate && ccEndDate && ccPayDate)}
+          disabled={
+            !(ccName && ccNumber && ccStartDate && ccEndDate && ccPayDate)
+          }
         >
           Submit
         </button>
@@ -128,6 +142,7 @@ const CreateCreditCardAccount = props => {
       {loading &&
         configArray.map((t, i) => (
           <BackendCore
+            key={i}
             Table={t.Table}
             TableRows={t.TableRows}
             rowElements={t.rowElements}
