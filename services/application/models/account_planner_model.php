@@ -58,8 +58,8 @@ class account_planner_model extends CI_Model
 				case "banks":
 						return $this->onTransaction($postData, 'banks', 'bank_id');
 				break;
-				case "income_expense":
-						return $this->onTransaction($postData, 'income_expense', 'inc_exp_id');
+				case "income_expense_category":
+						return $this->onTransaction($postData, 'income_expense_category', 'inc_exp_cat_id');
 				break;
 				case "credit_cards":
 						return $this->onTransaction($postData, 'credit_cards', 'credit_card_id');
