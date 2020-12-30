@@ -47,7 +47,7 @@ const CreateVendor = props => {
   };
 
   const sMessage = () => ({
-    __html: `<span><i class="fa fa-thumbs-up"></i> Bank saved successfully</span>`
+    __html: `<span><i class="fa fa-thumbs-up"></i> Vendor saved successfully</span>`
   });
   const fMessage = () => ({
     __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes or some error !!</span>`
