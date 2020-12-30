@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import apiInstance from "../../services/apiServices";
 import BackendCore from "../configuration/backend/BackendCore";
+import { ToastContainer, toast } from "react-toastify";
 
 const CreateVendor = props => {
   const [vendorName, setVendorName] = useState("");
   const [vendorLimit, setVendorLimit] = useState("");
   const [loading, setLoading] = useState(false);
+  const autoClose = 3000;
   const [configArray] = useState([
     {
       id: 1,
@@ -28,11 +30,14 @@ const CreateVendor = props => {
     return await apiInstance
       .post("/account_planner/post_vendor", formdata)
       .then(res => {
-        if (res) {
+        if (res.data.response.status === "success") {
+          success();
           setVendorName("");
           setVendorLimit("");
           document.getElementById("vendorForm").reset();
           setLoading(false);
+        } else {
+          fail();
         }
       })
       .catch(error => {
@@ -40,12 +45,30 @@ const CreateVendor = props => {
         console.log(error);
       });
   };
+
+  const sMessage = () => ({
+    __html: `<span><i class="fa fa-thumbs-up"></i> Bank saved successfully</span>`
+  });
+  const fMessage = () => ({
+    __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes or some error !!</span>`
+  });
+
+  const success = () =>
+    toast.success(
+      <div className="capitalize" dangerouslySetInnerHTML={sMessage()} />
+    );
+  const fail = () =>
+    toast.error(
+      <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
+    );
+
   return (
     <form
       className="settings"
       id="vendorForm"
       onSubmit={e => e.preventDefault()}
     >
+      <ToastContainer autoClose={autoClose} className="bniToaster" />
       <div className="form-group mt-15">
         <input
           type="text"

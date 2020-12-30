@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import apiInstance from "../../services/apiServices";
 import BackendCore from "../configuration/backend/BackendCore";
+import { ToastContainer, toast } from "react-toastify";
 
 const CreateCreditCardAccount = props => {
   const [ccName, setCcname] = useState("");
@@ -10,6 +11,7 @@ const CreateCreditCardAccount = props => {
   const [ccEndDate, setCcEndDate] = useState("");
   const [ccPayDate, setPayDate] = useState("");
   const [loading, setLoading] = useState(false);
+  const autoClose = 3000;
   const [configArray] = useState([
     {
       id: 1,
@@ -44,7 +46,8 @@ const CreateCreditCardAccount = props => {
     return await apiInstance
       .post("/account_planner/post_credit_card", formdata)
       .then(res => {
-        if (res) {
+        if (res.data.response.status === "success") {
+          success();
           setCcname("");
           setCcNumber("");
           setCcStartDate("");
@@ -52,6 +55,8 @@ const CreateCreditCardAccount = props => {
           setPayDate("");
           document.getElementById("cCForm").reset();
           setLoading(false);
+        } else {
+          fail();
         }
       })
       .catch(error => {
@@ -64,8 +69,25 @@ const CreateCreditCardAccount = props => {
       .fill()
       .map((_, idx) => b + idx);
 
+  const sMessage = () => ({
+    __html: `<span><i class="fa fa-thumbs-up"></i> Bank saved successfully</span>`
+  });
+  const fMessage = () => ({
+    __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes or some error !!</span>`
+  });
+
+  const success = () =>
+    toast.success(
+      <div className="capitalize" dangerouslySetInnerHTML={sMessage()} />
+    );
+  const fail = () =>
+    toast.error(
+      <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
+    );
+
   return (
     <form className="settings" id="cCForm" onSubmit={e => e.preventDefault()}>
+      <ToastContainer autoClose={autoClose} className="bniToaster" />
       <div className="form-group mt-15">
         <input
           type="text"
@@ -80,8 +102,13 @@ const CreateCreditCardAccount = props => {
           type="text"
           className="form-control"
           placeholder="Card number"
-          onChange={e => 
-            setCcNumber(e.target.value.replace(/[^0-9]/g, "").replace(/\W/gi, '').replace(/(.{4})/g, '$1 '))
+          onChange={e =>
+            setCcNumber(
+              e.target.value
+                .replace(/[^0-9]/g, "")
+                .replace(/\W/gi, "")
+                .replace(/(.{4})/g, "$1 ")
+            )
           }
           maxLength="19"
           value={ccNumber}
