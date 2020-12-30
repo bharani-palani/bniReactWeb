@@ -28,7 +28,7 @@ class account_planner_model extends CI_Model
 	}
 	public function vendor_list()
 	{
-		$query = $this->db->select(["vendor_id", "vendor_name"])->get('vendors');
+		$query = $this->db->select(array("vendor_id as id", "vendor_name as value"))->get('vendors');
 		return get_all_rows($query);
 	}
 	function getAccountPlanner($post) {
