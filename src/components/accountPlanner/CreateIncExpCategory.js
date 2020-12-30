@@ -6,7 +6,7 @@ import BackendCore from "../configuration/backend/BackendCore";
 const CreateIncExpCategory = props => {
   const [catName, setCatName] = useState("");
   const [catVendor, setVendor] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [configArray] = useState([
     {
       id: 1,
@@ -21,7 +21,7 @@ const CreateIncExpCategory = props => {
   ]);
 
   const onCatSubmit = async () => {
-    setLoading(false);
+    setLoading(true);
     var formdata = new FormData();
     formdata.append("catName", catName);
     formdata.append("catVendor", catVendor);
@@ -32,10 +32,11 @@ const CreateIncExpCategory = props => {
           setCatName("");
           setVendor("");
           document.getElementById("catForm").reset();
-          setLoading(true);
+          setLoading(false);
         }
       })
       .catch(error => {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -72,7 +73,7 @@ const CreateIncExpCategory = props => {
           Submit
         </button>
       </div>
-      {loading &&
+      {!loading &&
         configArray.map((t, i) => (
           <BackendCore
             key={i}
