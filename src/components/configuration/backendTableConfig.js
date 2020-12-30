@@ -292,4 +292,57 @@ const resumeArray = [
   }
 ];
 
-export { configArray, resumeArray };
+const crudFormArray = [
+  {
+    id: 22,
+    Table: "banks",
+    label: "Bank account",
+    TableRows: [
+      "bank_id",
+      "bank_name",
+      "bank_account_number",
+      "bank_ifsc_code"
+    ],
+    rowElements: ["checkbox", "textbox", "textbox", "textbox"]
+  },
+  {
+    id: 23,
+    Table: "credit_cards",
+    label: "Credit card account",
+    TableRows: [
+      "credit_card_id",
+      "credit_card_name",
+      "credit_card_number",
+      "credit_card_start_date",
+      "credit_card_end_date",
+      "credit_card_payment_date"
+    ],
+    rowElements: ["checkbox", "textbox", "number", "number", "number", "number"]
+  },
+  {
+    id: 24,
+    Table: "vendors",
+    label: "Vendors",
+    TableRows: ["vendor_id", "vendor_name", "vendor_limit"],
+    rowElements: ["checkbox", "textbox", "textbox"]
+  },
+  {
+    id: 25,
+    Table: "income_expense_category",
+    label: "Income / expense category",
+    TableRows: ["inc_exp_cat_id", "inc_exp_cat_name", "inc_exp_cat_vendor"],
+    rowElements: [
+      "checkbox",
+      "textbox",
+      {
+        dropDownFetch: {
+          apiUrl: "/account_planner/vendor_list",
+          table: "vendors",
+          fetch: ["vendor_id", "vendor_name"]
+        }
+      }
+    ]
+  }
+];
+
+export { configArray, resumeArray, crudFormArray };

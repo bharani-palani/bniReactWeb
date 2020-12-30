@@ -167,22 +167,41 @@ function BackendCore(props) {
             )}
           </div>
         ))}
-        {dbData.length > 0 ? dbData.map((d, i) =>
-          TableRows.map((r, j) => (
+        {dbData.length > 0 ? (
+          dbData.map((d, i) =>
+            TableRows.map((r, j) => (
+              <FormElement
+                key={`${d[r]}-${j}`}
+                onDelete={index => onDelete(index)}
+                onChange={(index, data) => updateDbData(index, data)}
+                index={{ i, j: r }}
+                placeholder={[helpers.stringToCapitalize(r)]}
+                value={d[r]}
+                element={rowElements[j]}
+                showIncrementer={dbData.length - 1 === i}
+                showDecrement={true} // i !== 0
+                onAddRow={bool => onAddRow(bool)}
+              />
+            ))
+          )
+        ) : (
+          <>
             <FormElement
-              key={`${d[r]}-${j}`}
-              onDelete={index => onDelete(index)}
-              onChange={(index, data) => updateDbData(index, data)}
-              index={{ i, j: r }}
-              placeholder={[helpers.stringToCapitalize(r)]}
-              value={d[r]}
-              element={rowElements[j]}
-              showIncrementer={dbData.length - 1 === i}
-              showDecrement={true} // i !== 0
+              key={-1}
+              index={{ i: 0, j: 0 }}
+              element={rowElements[0]}
+              showIncrementer={true}
+              showDecrement={false}
               onAddRow={bool => onAddRow(bool)}
             />
-          ))
-        ) : <div className="noRecords" style={{ gridColumn: `1 / span ${TableRows.length}`}}>No Records</div>}
+            <div
+              className="noRecords"
+              style={{ gridColumn: `2 / span ${TableRows.length - 1}` }}
+            >
+              No Records
+            </div>
+          </>
+        )}
       </div>
       <div className="form-group text-right">
         <button onClick={() => submitData()} className="btn btn-bni">

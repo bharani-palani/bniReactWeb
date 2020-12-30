@@ -23,7 +23,7 @@ function FormElement(props) {
       today = objectToDate(today);
       date = new Date(today);
       setDate(date);
-      setTimeout(() => {        
+      setTimeout(() => {
         props.onChange(props.index, today);
       }, 100);
     }
@@ -94,10 +94,14 @@ function FormElement(props) {
                 <i
                   onClick={() => props.onDelete(index)}
                   className="fa fa-minus-circle danger"
-                />  
+                />
               )}
               {props.showIncrementer && (
-                <div className="pull-right">
+                <div
+                  className={
+                    props.showDecrement === false ? "pull-left" : "pull-right"
+                  }
+                >
                   <i
                     onClick={() => props.onAddRow(true)}
                     className="fa fa-plus-circle success"
@@ -108,18 +112,16 @@ function FormElement(props) {
           );
         case "date":
           return (
-            <>
-              <DateTimePicker
-                onChange={value => {
-                  setDate(value);
-                  props.onChange(index, objectToDate(value));
-                }}
-                value={date}
-                format={`y-MM-dd`}
-                required
-                clearIcon={null}
-              />
-            </>
+            <DateTimePicker
+              onChange={value => {
+                setDate(value);
+                props.onChange(index, objectToDate(value));
+              }}
+              value={date}
+              format={`y-MM-dd`}
+              required
+              clearIcon={null}
+            />
           );
         default:
           return null;

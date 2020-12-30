@@ -5,26 +5,6 @@ class account_planner_model extends CI_Model
 	public function __construct(){
 		parent::__construct();
 		$this->db = $this->load->database('default', TRUE);  
-	}	
-	public function post_bank($post)
-	{
-		$this->db->insert('banks',$post);
-		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
-	}
-	public function post_credit_card($post)
-	{
-		$this->db->insert('credit_cards',$post);
-		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
-	}
-	public function post_vendor($post)
-	{
-		$this->db->insert('vendors',$post);
-		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
-	}
-	public function post_inc_exp_category($post)
-	{
-		$this->db->insert('income_expense_category',$post);
-		return ($this->db->affected_rows() !== 1) ? array("status" => "failed") : array("status" => "success");
 	}
 	public function vendor_list()
 	{
