@@ -7,7 +7,7 @@ const CreateBank = props => {
   const [accNo, setAccNo] = useState("");
   const [bankName, setBankName] = useState("");
   const [ifsc, setIfsc] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [configArray] = useState([
     {
       id: 1,
@@ -23,7 +23,7 @@ const CreateBank = props => {
   ]);
 
   const onBankSubmit = async () => {
-    setLoading(false);
+    setLoading(true);
     var formdata = new FormData();
     formdata.append("accNo", accNo);
     formdata.append("ifsc", ifsc);
@@ -36,10 +36,11 @@ const CreateBank = props => {
           setBankName("");
           setIfsc("");
           document.getElementById("accountForm").reset();
-          setLoading(true);
+          setLoading(false);
         }
       })
       .catch(error => {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -85,7 +86,7 @@ const CreateBank = props => {
           Submit
         </button>
       </div>
-      {loading &&
+      {!loading &&
         configArray.map((t, i) => (
           <BackendCore
             key={i}

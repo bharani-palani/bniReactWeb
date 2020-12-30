@@ -6,7 +6,7 @@ import BackendCore from "../configuration/backend/BackendCore";
 const CreateVendor = props => {
   const [vendorName, setVendorName] = useState("");
   const [vendorLimit, setVendorLimit] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [configArray] = useState([
     {
       id: 1,
@@ -21,7 +21,7 @@ const CreateVendor = props => {
   ]);
 
   const onVendorSubmit = async () => {
-    setLoading(false);
+    setLoading(true);
     var formdata = new FormData();
     formdata.append("vendorName", vendorName);
     formdata.append("vendorLimit", vendorLimit);
@@ -32,10 +32,11 @@ const CreateVendor = props => {
           setVendorName("");
           setVendorLimit("");
           document.getElementById("vendorForm").reset();
-          setLoading(true);
+          setLoading(false);
         }
       })
       .catch(error => {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -72,7 +73,7 @@ const CreateVendor = props => {
           Submit
         </button>
       </div>
-      {loading &&
+      {!loading &&
         configArray.map((t, i) => (
           <BackendCore
             key={i}

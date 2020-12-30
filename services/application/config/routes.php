@@ -76,6 +76,7 @@ $route['account_planner/post_bank'] = 'account_planner/account_planner/post_bank
 $route['account_planner/post_credit_card'] = 'account_planner/account_planner/post_credit_card';
 $route['account_planner/post_vendor'] = 'account_planner/account_planner/post_vendor';
 $route['account_planner/post_inc_exp_category'] = 'account_planner/account_planner/post_inc_exp_category';
+$route['account_planner/vendor_list'] = 'account_planner/account_planner/vendor_list';
 $route['account_planner/getAccountPlanner'] = 'account_planner/account_planner/getAccountPlanner';
 $route['account_planner/postAccountPlanner'] = 'account_planner/account_planner/postAccountPlanner';
 

@@ -28,7 +28,7 @@ const CreateIncExpCategory = props => {
     return await apiInstance
       .post("/account_planner/post_inc_exp_category", formdata)
       .then(res => {
-        if (res) {
+        if (res.data.response.status === "success") {
           setCatName("");
           setVendor("");
           document.getElementById("catForm").reset();
@@ -37,7 +37,6 @@ const CreateIncExpCategory = props => {
       })
       .catch(error => {
         setLoading(false);
-        console.log(error);
       });
   };
   return (

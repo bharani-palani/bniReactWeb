@@ -9,7 +9,7 @@ const CreateCreditCardAccount = props => {
   const [ccStartDate, setCcStartDate] = useState("");
   const [ccEndDate, setCcEndDate] = useState("");
   const [ccPayDate, setPayDate] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [configArray] = useState([
     {
       id: 1,
@@ -34,7 +34,7 @@ const CreateCreditCardAccount = props => {
   ]);
 
   const onCCSubmit = async () => {
-    setLoading(false);
+    setLoading(true);
     var formdata = new FormData();
     formdata.append("ccName", ccName);
     formdata.append("ccNumber", ccNumber);
@@ -51,10 +51,11 @@ const CreateCreditCardAccount = props => {
           setCcEndDate("");
           setPayDate("");
           document.getElementById("cCForm").reset();
-          setLoading(true);
+          setLoading(false);
         }
       })
       .catch(error => {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -139,7 +140,7 @@ const CreateCreditCardAccount = props => {
           Submit
         </button>
       </div>
-      {loading &&
+      {!loading &&
         configArray.map((t, i) => (
           <BackendCore
             key={i}
