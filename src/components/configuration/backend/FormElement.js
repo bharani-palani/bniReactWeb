@@ -40,15 +40,15 @@ function FormElement(props) {
     }
   }, [props]);
 
-  const onDropDownSelect = (index, id) => {
+  const onDropDownSelect = (index, id, primaryKey) => {
     const dropDownSelected = dropDownList.filter(
       d => Number(d.id) === Number(id)
     )[0].value;
     setDropDownSelected(dropDownSelected);
-    props.onChange(index, id);
+    props.onChange(index, id, primaryKey);
   };
 
-  const renderElement = (index, element, value) => {
+  const renderElement = (index, element, value, primaryKey) => {
     if (typeof element === "string") {
       switch (element) {
         case "textbox":
@@ -56,7 +56,7 @@ function FormElement(props) {
             <input
               type="text"
               placeholder={props.placeholder}
-              onChange={e => props.onChange(index, e.target.value)}
+              onBlur={e => props.onChange(index, e.target.value, primaryKey)}
               className="form-control"
               defaultValue={value}
             />
@@ -66,7 +66,7 @@ function FormElement(props) {
             <input
               type="number"
               placeholder={props.placeholder}
-              onChange={e => props.onChange(index, e.target.value)}
+              onBlur={e => props.onChange(index, e.target.value, primaryKey)}
               className="form-control"
               defaultValue={value}
             />
@@ -75,7 +75,7 @@ function FormElement(props) {
           return (
             <textarea
               placeholder={props.placeholder}
-              onChange={e => props.onChange(index, e.target.value)}
+              onBlur={e => props.onChange(index, e.target.value, primaryKey)}
               rows="3"
               className="form-control"
               defaultValue={value}
@@ -115,7 +115,7 @@ function FormElement(props) {
             <DateTimePicker
               onChange={value => {
                 setDate(value);
-                props.onChange(index, objectToDate(value));
+                props.onChange(index, objectToDate(value),primaryKey);
               }}
               value={date}
               format={`y-MM-dd`}
@@ -141,7 +141,7 @@ function FormElement(props) {
                     <Dropdown.Item
                       key={i}
                       onClick={e => {
-                        onDropDownSelect(index, d.id);
+                        onDropDownSelect(index, d.id, primaryKey);
                       }}
                     >
                       {d.value}
@@ -152,12 +152,12 @@ function FormElement(props) {
             </SelectableContext.Provider>
           );
         default:
-          return null;
+          return <div>Unknown Element</div>;
       }
     }
   };
 
-  return <div>{renderElement(props.index, props.element, props.value)}</div>;
+  return <div>{renderElement(props.index, props.element, props.value, props.primaryKey)}</div>;
 }
 
 export default FormElement;

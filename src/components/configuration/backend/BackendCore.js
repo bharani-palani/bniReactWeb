@@ -16,6 +16,7 @@ function BackendCore(props) {
   const [deleteData, setDeleteData] = useState([]);
   const autoClose = 3000;
   const [loader, setLoader] = useState(true);
+  const [updatedIds, setUpdatedIds] = useState([]);
 
   const getElementAjax = row => {
     return apiInstance
@@ -30,31 +31,31 @@ function BackendCore(props) {
       });
   };
 
-  useEffect(() => {
-    const createRowElementArray = () => {
-      const rows = props.rowElements.map(row => {
-        if (typeof row === "object") {
-          return getElementAjax(row);
-        }
-        return new Promise((resolve, reject) => {
-          resolve(row);
-        });
+  const getBackendAjax = () => {
+    const formdata = new FormData();
+    formdata.append("TableRows", TableRows);
+    formdata.append("Table", Table);
+    return apiInstance
+      .post(getApiUrl, formdata)
+      .then(r => r.data.response)
+      .catch(error => {
+        console.log(error);
       });
-      return rows;
-    };
+  };
 
-    const getBackendAjax = () => {
-      const formdata = new FormData();
-      formdata.append("TableRows", TableRows);
-      formdata.append("Table", Table);
-      return apiInstance
-        .post(getApiUrl, formdata)
-        .then(r => r.data.response)
-        .catch(error => {
-          console.log(error);
-        });
-    };
+  const createRowElementArray = () => {
+    const rows = props.rowElements.map(row => {
+      if (typeof row === "object") {
+        return getElementAjax(row);
+      }
+      return new Promise((resolve, reject) => {
+        resolve(row);
+      });
+    });
+    return rows;
+  };
 
+  const runAllApis = callBack => {
     const a = createRowElementArray();
     const b = getBackendAjax();
 
@@ -66,13 +67,23 @@ function BackendCore(props) {
       });
       array.length && array[1] && setDbData(array[1]);
       temp.length && setRowElements(temp[0]);
+      typeof callBack === "function" && callBack();
     });
+  };
+
+  useEffect(() => {
+    runAllApis();
   }, [TableRows, Table, props.rowElements]);
 
-  const updateDbData = (index, data) => {
+  const updateDbData = (index, data, primaryKey) => {
     const { i, j } = index;
     dbData[i][j] = data;
     setDbData(dbData);
+    // update editing rows
+    const id = dbData.filter((db, ind) => ind === i && db)[0][primaryKey];
+    let array = [...updatedIds, id];
+    array = [...new Set(array)];
+    setUpdatedIds(array);
   };
 
   const onDelete = index => {
@@ -102,14 +113,9 @@ function BackendCore(props) {
 
   const submitData = () => {
     const insertData = dbData.filter(d => d[TableRows[0]] === "");
-    const updateAllData = dbData.filter(d => d[TableRows[0]] !== "");
-
-    const updateData = updateAllData.filter((u, i) => {
-      return (
-        TableRows.map(t => u[t] !== dbBackup[i][t]).some(u => u === true) && u
-      );
-    });
-
+    const updateData = dbData
+      .filter(d => updatedIds.includes(d[TableRows[0]]))
+      .filter(d => Number(d[TableRows[0]]) > 0 && d);
     const postData = {
       ...((insertData.length > 0 ||
         deleteData.length > 0 ||
@@ -125,9 +131,12 @@ function BackendCore(props) {
       .post(postApiUrl, formdata)
       .then(response => {
         response.data.response ? success() : fail();
-        // setTimeout(() => {
-        //   props.onSubmit(true);
-        // }, autoClose);
+        if (insertData.length > 0) {
+          setLoader(true);
+          setTimeout(() => {
+            runAllApis(() => setLoader(false));
+          }, 2000);
+        }
       })
       .catch(error => console.error(error));
   };
@@ -173,7 +182,9 @@ function BackendCore(props) {
               <FormElement
                 key={`${d[r]}-${j}`}
                 onDelete={index => onDelete(index)}
-                onChange={(index, data) => updateDbData(index, data)}
+                onChange={(index, data, primaryKey) =>
+                  updateDbData(index, data, primaryKey)
+                }
                 index={{ i, j: r }}
                 placeholder={[helpers.stringToCapitalize(r)]}
                 value={d[r]}
@@ -181,6 +192,7 @@ function BackendCore(props) {
                 showIncrementer={dbData.length - 1 === i}
                 showDecrement={true} // i !== 0
                 onAddRow={bool => onAddRow(bool)}
+                primaryKey={TableRows[0]}
               />
             ))
           )

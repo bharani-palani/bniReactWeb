@@ -301,9 +301,18 @@ const crudFormArray = [
       "bank_id",
       "bank_name",
       "bank_account_number",
-      "bank_ifsc_code"
+      "bank_ifsc_code",
+      "bank_card_no",
+      "bank_card_validity"
     ],
-    rowElements: ["checkbox", "textbox", "textbox", "textbox"]
+    rowElements: [
+      "checkbox",
+      "textbox",
+      "textbox",
+      "textbox",
+      "textbox",
+      "textbox"
+    ]
   },
   {
     id: 23,
@@ -317,14 +326,21 @@ const crudFormArray = [
       "credit_card_end_date",
       "credit_card_payment_date"
     ],
-    rowElements: ["checkbox", "textbox", "number", "number", "number", "number"]
+    rowElements: [
+      "checkbox",
+      "textbox",
+      "textbox",
+      "number",
+      "number",
+      "number"
+    ]
   },
   {
     id: 24,
     Table: "vendors",
     label: "Vendors",
     TableRows: ["vendor_id", "vendor_name", "vendor_limit"],
-    rowElements: ["checkbox", "textbox", "textbox"]
+    rowElements: ["checkbox", "textbox", "number"]
   },
   {
     id: 25,
@@ -345,4 +361,27 @@ const crudFormArray = [
   }
 ];
 
-export { configArray, resumeArray, crudFormArray };
+const monthExpenditureConfig = [
+  {
+    id: 25,
+    Table: "income_expense",
+    label: "Expenditures for selected month",
+    TableRows: ["inc_exp_id", "inc_exp_name", "inc_exp_amount","inc_exp_type", "inc_exp_date_time", "inc_exp_category", "inc_exp_bank"],
+    rowElements: [
+      "checkbox",
+      "textbox",
+      "number",
+      "radio",
+      "date",
+      {
+        dropDownFetch: {
+          apiUrl: "/account_planner/inc_exp_list",
+          table: "income_expense_category",
+          fetch: ["inc_exp_cat_id", "inc_exp_cat_name"]
+        }
+      }
+    ]
+  }
+];
+
+export { configArray, resumeArray, crudFormArray, monthExpenditureConfig };
