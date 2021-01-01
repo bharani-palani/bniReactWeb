@@ -115,7 +115,7 @@ function FormElement(props) {
             <DateTimePicker
               onChange={value => {
                 setDate(value);
-                props.onChange(index, objectToDate(value),primaryKey);
+                props.onChange(index, objectToDate(value), primaryKey);
               }}
               value={date}
               format={`y-MM-dd`}
@@ -124,7 +124,7 @@ function FormElement(props) {
             />
           );
         default:
-          return null;
+          return <div>Unknown Element</div>;
       }
     } else if (typeof element === "object") {
       const firstKey = Object.keys(element)[0];
@@ -157,7 +157,11 @@ function FormElement(props) {
     }
   };
 
-  return <div>{renderElement(props.index, props.element, props.value, props.primaryKey)}</div>;
+  return (
+    <div>
+      {renderElement(props.index, props.element, props.value, props.primaryKey)}
+    </div>
+  );
 }
 
 export default FormElement;

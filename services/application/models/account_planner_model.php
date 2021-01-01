@@ -16,6 +16,11 @@ class account_planner_model extends CI_Model
 		$query = $this->db->select(array("inc_exp_cat_id as id", "inc_exp_cat_name as value"))->get('income_expense_category');
 		return get_all_rows($query);
 	}
+	public function bank_list()
+	{
+		$query = $this->db->select(array("bank_id as id", "bank_name as value"))->get('banks');
+		return get_all_rows($query);
+	}
 	function getAccountPlanner($post) {
 		$Table = $post["Table"];
 		$this->db->select($post["TableRows"]);

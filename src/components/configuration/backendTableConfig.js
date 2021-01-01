@@ -363,7 +363,7 @@ const crudFormArray = [
 
 const monthExpenditureConfig = [
   {
-    id: 25,
+    id: 26,
     Table: "income_expense",
     label: "Expenditures for selected month",
     TableRows: ["inc_exp_id", "inc_exp_name", "inc_exp_amount","inc_exp_type", "inc_exp_date_time", "inc_exp_category", "inc_exp_bank"],
@@ -378,6 +378,13 @@ const monthExpenditureConfig = [
           apiUrl: "/account_planner/inc_exp_list",
           table: "income_expense_category",
           fetch: ["inc_exp_cat_id", "inc_exp_cat_name"]
+        }
+      },
+      {
+        dropDownFetch: {
+          apiUrl: "/account_planner/bank_list",
+          table: "banks",
+          fetch: ["bank_id", "bank_name"]
         }
       }
     ]
