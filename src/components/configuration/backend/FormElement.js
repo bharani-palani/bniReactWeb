@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DateTimePicker from "react-datetime-picker";
-import { Dropdown } from "react-bootstrap";
-import SelectableContext from "react-bootstrap/SelectableContext";
 import Radio from "./FormElements/Radio";
+import DropDownFetch from "./FormElements/DropDownFetch";
 
 function FormElement(props) {
   let [date, setDate] = useState(new Date(props.value));
-
-  const [dropDownList, setDropDownList] = useState([]);
-  const [dropDownSelected, setDropDownSelected] = useState(props.value);
 
   const objectToDate = date => {
     const [YYYY, MM, DD] = [
@@ -62,30 +58,6 @@ function FormElement(props) {
     }
   }
 
-  useEffect(() => {
-    if (
-      props.element &&
-      props.element.fetch &&
-      props.element.fetch.dropDownList
-    ) {
-      // fetch dropdown
-      const dropDownList = props.element.fetch.dropDownList;
-      setDropDownList(dropDownList);
-      const dropDownSelected =
-        dropDownList.filter(d => Number(d.id) === Number(props.value))[0]
-          .value || null;
-      setDropDownSelected(dropDownSelected);
-    }
-  }, [props.element]);
-
-  const onDropDownSelect = (index, id, primaryKey) => {
-    const dropDownSelected = dropDownList.filter(
-      d => Number(d.id) === Number(id)
-    )[0].value;
-    setDropDownSelected(dropDownSelected);
-    props.onChange(index, id, primaryKey);
-  };
-
   const renderElement = (index, element, value, primaryKey) => {
     if (typeof element === "string") {
       switch (element) {
@@ -121,8 +93,8 @@ function FormElement(props) {
           );
         case "label":
           return (
-            <div className="text-danger">
-              <b>{value}</b>
+            <div className="">
+              {value}
             </div>
           );
         case "checkbox":
@@ -184,25 +156,13 @@ function FormElement(props) {
       switch (firstKey) {
         case "fetch":
           return (
-            <SelectableContext.Provider value={false}>
-              <Dropdown>
-                <Dropdown.Toggle>
-                  {dropDownSelected} <i className="fa fa-chevron-down" />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {dropDownList.map((d, i) => (
-                    <Dropdown.Item
-                      key={i}
-                      onClick={e => {
-                        onDropDownSelect(index, d.id, primaryKey);
-                      }}
-                    >
-                      {d.value}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </SelectableContext.Provider>
+            <DropDownFetch
+              index={index}
+              primaryKey={primaryKey}
+              onChange={(ind, val, pKey) => props.onChange(ind, val, pKey)}
+              element={props.element}
+              value={props.value}
+            />
           );
         case "radio":
           return (

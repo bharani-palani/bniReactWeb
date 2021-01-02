@@ -6,7 +6,6 @@ import Chart from "./Chart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
 import SetBank from "./SetBank";
 import SetYear from "./SetYear";
-import TypeExpenditureTable from "./TypeExpenditureTable";
 import CreateModule from "./CreateModule";
 import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
 import AnalysisChart from "./AnalysisChart";
@@ -42,11 +41,6 @@ const AccountPlanner = props => {
             <div className="row">
               <div className="col-md-12 b-0 mb-10 m-reduce-padding">
                 <MonthExpenditureTable />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 mb-10 m-reduce-padding">
-                <TypeExpenditureTable />
               </div>
             </div>
             <div className="row">

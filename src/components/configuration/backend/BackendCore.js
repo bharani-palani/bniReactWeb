@@ -10,14 +10,13 @@ function BackendCore(props) {
   const TableRows = props.TableRows;
   const getApiUrl = props.getApiUrl;
   const postApiUrl = props.postApiUrl;
+  const showTotal = props.showTotal;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
-  const dbBackup = JSON.parse(JSON.stringify(dbData));
   const [deleteData, setDeleteData] = useState([]);
   const autoClose = 3000;
   const [loader, setLoader] = useState(true);
   const [updatedIds, setUpdatedIds] = useState([]);
-
   const getElementAjax = row => {
     return apiInstance
       .get(row.fetch.apiUrl)
@@ -142,7 +141,9 @@ function BackendCore(props) {
   };
 
   const sMessage = () => ({
-    __html: `<span><i class="fa fa-thumbs-up"></i> ${Table} saved successfully</span>`
+    __html: `<span><i class="fa fa-thumbs-up"></i> ${helpers.stringToCapitalize(
+      Table
+    )} saved successfully</span>`
   });
   const fMessage = () => ({
     __html: `<span><i class="fa fa-thumbs-down"></i> Oops.. No changes or some error !!</span>`
@@ -156,7 +157,11 @@ function BackendCore(props) {
     toast.error(
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
-
+  const getColumnTotal = key => {
+    let total = dbData.reduce((a, b) => Number(a) + Number(b[key]), 0);
+    total = total.toFixed(2);
+    return total;
+  };
   return loader === false ? (
     <div className="container-fluid backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
@@ -177,25 +182,47 @@ function BackendCore(props) {
           </div>
         ))}
         {dbData.length > 0 ? (
-          dbData.map((d, i) =>
-            TableRows.map((r, j) => (
-              <FormElement
-                key={`${d[r]}-${j}`}
-                onDelete={index => onDelete(index)}
-                onChange={(index, data, primaryKey) =>
-                  updateDbData(index, data, primaryKey)
-                }
-                index={{ i, j: r }}
-                placeholder={[helpers.stringToCapitalize(r)]}
-                value={d[r]}
-                element={rowElements[j]}
-                showIncrementer={dbData.length - 1 === i}
-                showDecrement={true} // i !== 0
-                onAddRow={bool => onAddRow(bool)}
-                primaryKey={TableRows[0]}
-              />
-            ))
-          )
+          <>
+            {dbData.map((d, i) =>
+              TableRows.map((r, j) => (
+                <FormElement
+                  key={`${d[r]}-${j}`}
+                  onDelete={index => onDelete(index)}
+                  onChange={(index, data, primaryKey) =>
+                    updateDbData(index, data, primaryKey)
+                  }
+                  index={{ i, j: r }}
+                  placeholder={[helpers.stringToCapitalize(r)]}
+                  value={d[r]}
+                  element={rowElements[j]}
+                  showIncrementer={dbData.length - 1 === i}
+                  showDecrement={true} // i !== 0
+                  onAddRow={bool => onAddRow(bool)}
+                  primaryKey={TableRows[0]}
+                />
+              ))
+            )}
+            {showTotal && (
+              <>
+                <div className="text-center">Total</div>
+                {TableRows.slice(1).map((r, i) => {
+                  const isTotalColumn = showTotal.includes(r);
+                  return (
+                    <div className={isTotalColumn ? "totalColumn" : ""} key={i}>
+                      {isTotalColumn ? (
+                        <>
+                          <span className="visible-xs">{helpers.stringToCapitalize(r)}</span>
+                          <span>{getColumnTotal(r)}</span>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </>
         ) : (
           <>
             <FormElement
@@ -215,6 +242,7 @@ function BackendCore(props) {
           </>
         )}
       </div>
+
       <div className="form-group text-right">
         <button onClick={() => submitData()} className="btn btn-bni">
           Update

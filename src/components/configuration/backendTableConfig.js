@@ -375,6 +375,7 @@ const monthExpenditureConfig = [
       "inc_exp_category",
       "inc_exp_bank"
     ],
+    showTotal: ["inc_exp_amount"],
     rowElements: [
       "checkbox",
       "textbox",

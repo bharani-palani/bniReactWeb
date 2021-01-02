@@ -18,6 +18,7 @@ const MonthExpenditureTable = props => {
             Table={t.Table}
             TableRows={t.TableRows}
             rowElements={t.rowElements}
+            showTotal={t.showTotal}
             getApiUrl="/account_planner/getAccountPlanner"
             postApiUrl="/account_planner/postAccountPlanner"
           />
