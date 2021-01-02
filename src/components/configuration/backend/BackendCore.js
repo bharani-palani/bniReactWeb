@@ -20,9 +20,9 @@ function BackendCore(props) {
 
   const getElementAjax = row => {
     return apiInstance
-      .get(row.dropDownFetch.apiUrl)
+      .get(row.fetch.apiUrl)
       .then(r => ({
-        dropDownFetch: {
+        fetch: {
           dropDownList: [{ id: null, value: "Select" }, ...r.data.response]
         }
       }))
@@ -45,7 +45,7 @@ function BackendCore(props) {
 
   const createRowElementArray = () => {
     const rows = props.rowElements.map(row => {
-      if (typeof row === "object") {
+      if (row && row.fetch && row.fetch.apiUrl) {
         return getElementAjax(row);
       }
       return new Promise((resolve, reject) => {

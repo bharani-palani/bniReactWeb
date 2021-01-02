@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import DateTimePicker from "react-datetime-picker";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
+import Radio from "./FormElements/Radio";
 
 function FormElement(props) {
   let [date, setDate] = useState(new Date(props.value));
+
   const [dropDownList, setDropDownList] = useState([]);
   const [dropDownSelected, setDropDownSelected] = useState(props.value);
 
@@ -17,6 +19,25 @@ function FormElement(props) {
     const dateString = `${YYYY}-${MM}-${DD}`;
     return dateString;
   };
+
+  const objectToDateTime = dt => {
+    let [YYYY, MM, DD, hh, mm, ss] = [
+      dt.getFullYear(),
+      dt.getMonth() + 1 > 9 ? dt.getMonth() + 1 : `0${dt.getMonth() + 1}`,
+      dt.getDate() > 9 ? dt.getDate() : `0${dt.getDate()}`,
+      dt.getHours(),
+      dt.getMinutes(),
+      dt.getSeconds()
+    ];
+    hh = hh < 10 ? "0" + hh : hh;
+    mm = mm < 10 ? "0" + mm : mm;
+    ss = ss < 10 ? "0" + ss : ss;
+    const dateString = `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`;
+    return dateString;
+  };
+
+  let [dateTime, setDatetime] = useState(new Date(props.value));
+
   if (props.element === "date") {
     if (isNaN(Date.parse(date))) {
       let today = new Date();
@@ -29,16 +50,33 @@ function FormElement(props) {
     }
   }
 
+  if (props.element === "dateTime") {
+    if (isNaN(Date.parse(dateTime))) {
+      let today = new Date();
+      today = objectToDateTime(today);
+      dateTime = new Date(today);
+      setDatetime(dateTime);
+      setTimeout(() => {
+        props.onChange(props.index, today);
+      }, 100);
+    }
+  }
+
   useEffect(() => {
-    if (typeof props.element === "object") {
-      const dropDownList = props.element.dropDownFetch.dropDownList;
+    if (
+      props.element &&
+      props.element.fetch &&
+      props.element.fetch.dropDownList
+    ) {
+      // fetch dropdown
+      const dropDownList = props.element.fetch.dropDownList;
       setDropDownList(dropDownList);
       const dropDownSelected =
         dropDownList.filter(d => Number(d.id) === Number(props.value))[0]
           .value || null;
       setDropDownSelected(dropDownSelected);
     }
-  }, [props]);
+  }, [props.element]);
 
   const onDropDownSelect = (index, id, primaryKey) => {
     const dropDownSelected = dropDownList.filter(
@@ -123,13 +161,28 @@ function FormElement(props) {
               clearIcon={null}
             />
           );
+        case "dateTime":
+          return (
+            <DateTimePicker
+              onChange={value => {
+                setDatetime(value);
+                props.onChange(index, objectToDateTime(value), primaryKey);
+              }}
+              value={dateTime}
+              format={`y-MM-dd h:mm:ss a`}
+              required
+              clearIcon={null}
+              calendarIcon={null}
+            />
+            // null
+          );
         default:
           return <div>Unknown Element</div>;
       }
     } else if (typeof element === "object") {
       const firstKey = Object.keys(element)[0];
       switch (firstKey) {
-        case "dropDownFetch":
+        case "fetch":
           return (
             <SelectableContext.Provider value={false}>
               <Dropdown>
@@ -150,6 +203,16 @@ function FormElement(props) {
                 </Dropdown.Menu>
               </Dropdown>
             </SelectableContext.Provider>
+          );
+        case "radio":
+          return (
+            <Radio
+              index={index}
+              primaryKey={primaryKey}
+              onChange={(ind, val, pKey) => props.onChange(ind, val, pKey)}
+              element={props.element}
+              value={props.value}
+            />
           );
         default:
           return <div>Unknown Element</div>;

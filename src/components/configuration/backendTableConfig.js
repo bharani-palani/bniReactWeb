@@ -213,7 +213,7 @@ const resumeArray = [
       "textbox",
       "textarea",
       {
-        dropDownFetch: {
+        fetch: {
           apiUrl: "/resume/getCompanyList",
           table: "resume_03_work_summary",
           fetch: ["work_id", "work_company"]
@@ -232,7 +232,7 @@ const resumeArray = [
       "checkbox",
       "textbox",
       {
-        dropDownFetch: {
+        fetch: {
           apiUrl: "/resume/getProjectList",
           table: "resume_06_project_experience",
           fetch: ["work_id", "work_company"]
@@ -351,7 +351,7 @@ const crudFormArray = [
       "checkbox",
       "textbox",
       {
-        dropDownFetch: {
+        fetch: {
           apiUrl: "/account_planner/vendor_list",
           table: "vendors",
           fetch: ["vendor_id", "vendor_name"]
@@ -366,22 +366,37 @@ const monthExpenditureConfig = [
     id: 26,
     Table: "income_expense",
     label: "Expenditures for selected month",
-    TableRows: ["inc_exp_id", "inc_exp_name", "inc_exp_amount","inc_exp_type", "inc_exp_date_time", "inc_exp_category", "inc_exp_bank"],
+    TableRows: [
+      "inc_exp_id",
+      "inc_exp_name",
+      "inc_exp_amount",
+      "inc_exp_type",
+      "inc_exp_date_time",
+      "inc_exp_category",
+      "inc_exp_bank"
+    ],
     rowElements: [
       "checkbox",
       "textbox",
       "number",
-      "radio",
-      "date",
       {
-        dropDownFetch: {
+        radio: {
+          radioList: [
+            { label: "Cr", value: "Cr", checked: false },
+            { label: "Dr", value: "Dr", checked: true }
+          ]
+        }
+      },
+      "dateTime",
+      {
+        fetch: {
           apiUrl: "/account_planner/inc_exp_list",
           table: "income_expense_category",
           fetch: ["inc_exp_cat_id", "inc_exp_cat_name"]
         }
       },
       {
-        dropDownFetch: {
+        fetch: {
           apiUrl: "/account_planner/bank_list",
           table: "banks",
           fetch: ["bank_id", "bank_name"]

@@ -37,6 +37,9 @@ class account_planner_model extends CI_Model
 				case "vendors":
 						$query = $this->db->order_by("vendor_name","asc")->get('vendors');
 				break;
+				case "income_expense":
+						$query = $this->db->order_by("inc_exp_name","asc")->get('income_expense');
+				break;
 				default:
 					return false;
 		}
@@ -58,6 +61,9 @@ class account_planner_model extends CI_Model
 				break;
 				case "vendors":
 						return $this->onTransaction($postData, 'vendors', 'vendor_id');
+				break;
+				case "income_expense":
+						return $this->onTransaction($postData, 'income_expense', 'inc_exp_id');
 				break;
 				default:
 					return false;
