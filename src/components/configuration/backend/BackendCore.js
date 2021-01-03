@@ -16,6 +16,7 @@ function BackendCore(props) {
   const [deleteData, setDeleteData] = useState([]);
   const autoClose = 3000;
   const [loader, setLoader] = useState(true);
+  const [btnLoader, setBtnLoader] = useState(false);
   const [updatedIds, setUpdatedIds] = useState([]);
 
   const getElementAjax = row => {
@@ -112,6 +113,7 @@ function BackendCore(props) {
   };
 
   const submitData = () => {
+    setBtnLoader(true);
     const insertData = dbData.filter(d => d[TableRows[0]] === "");
     const updateData = dbData
       .filter(d => updatedIds.includes(d[TableRows[0]]))
@@ -139,8 +141,9 @@ function BackendCore(props) {
         }
         setDeleteData([]);
         setUpdatedIds([]);
+        setBtnLoader(false);
       })
-      .catch(error => console.error(error));
+      .catch(error => {console.error(error); setBtnLoader(false);});
   };
 
   const sMessage = () => ({
@@ -248,7 +251,7 @@ function BackendCore(props) {
 
       <div className="form-group text-right">
         <button onClick={() => submitData()} className="btn btn-bni">
-          Update
+          {btnLoader ? <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> : "Update"}
         </button>
       </div>
     </div>
