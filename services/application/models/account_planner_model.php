@@ -21,6 +21,11 @@ class account_planner_model extends CI_Model
 		$query = $this->db->select(array("bank_id as id", "bank_name as value"))->get('banks');
 		return get_all_rows($query);
 	}
+	public function credit_card_list()
+	{
+		$query = $this->db->select(array("credit_card_id as id", "credit_card_name as value"))->get('credit_cards');
+		return get_all_rows($query);
+	}
 	function getAccountPlanner($post) {
 		$Table = $post["Table"];
 		$this->db->select($post["TableRows"]);

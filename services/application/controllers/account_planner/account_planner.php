@@ -46,6 +46,19 @@ class account_planner extends CI_Controller {
 			$this->auth->response($data,array(),200);
 		}
 	}
+	public function credit_card_list() {
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$data["response"] = $this->account_planner_model->credit_card_list();
+			$this->auth->response($data,array(),200);
+		}
+	}
 	public function getAccountPlanner() {
 		$validate = $this->auth->validateAll();
 		if($validate === 2) {
