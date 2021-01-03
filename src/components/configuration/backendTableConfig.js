@@ -434,7 +434,7 @@ const creditCardConfig = [
     rowElements: [
       "checkbox",
       "textbox",
-      "dateTime",
+      "date",
       {
         radio: {
           radioList: [
