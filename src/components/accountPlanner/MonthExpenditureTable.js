@@ -7,9 +7,6 @@ const MonthExpenditureTable = props => {
   //   const { id, name } = props;
   return (
     <div className="settings">
-      <h5 className="text-center">
-        <span className="colorGreen">Expenditures for the selected month</span>
-      </h5>
       {monthExpenditureConfig
         .sort((a, b) => a.id > b.id)
         .map((t, i) => (

@@ -8,11 +8,8 @@ const CreateModule = props => {
   const [collapse, setCollapse] = useState("");
 
   return (
-    <div className="settings">
-      <h5 className="text-center">
-        <span className="colorGreen">CRUD Operations</span>
-      </h5>
-      <div className="tableFixHead pr-10">
+    <div className="settings mb-10">
+      <div className="pr-10">
         <Accordion bsPrefix="util" defaultActiveKey={1}>
           {crudFormArray
             .sort((a, b) => a.id > b.id)

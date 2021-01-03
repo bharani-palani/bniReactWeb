@@ -256,15 +256,6 @@ code {
 .colorGreen {
   color: $fluorescent-color;
 }
-.tableFixHead {
-  overflow-y: auto;
-  height: 30rem;
-}
-.tableFixHead thead th {
-  position: sticky;
-  top: 0;
-  border: 0;
-}
 
 /* Just common table stuff. Really. */
 table {

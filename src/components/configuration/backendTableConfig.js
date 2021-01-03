@@ -407,4 +407,56 @@ const monthExpenditureConfig = [
   }
 ];
 
-export { configArray, resumeArray, crudFormArray, monthExpenditureConfig };
+const creditCardConfig = [
+  {
+    id: 26,
+    Table: "credit_card_transactions",
+    label: "Credit card transactions",
+    TableRows: [
+      "cc_id",
+      "cc_transaction",
+      "cc_date",
+      "cc_pay_type",
+      "cc_opening_balance",
+      "cc_payment_&_credits",
+      "cc_purchases",
+      "cc_taxes_&_interest",
+      "cc_expected_balance",
+      "cc_for_card"
+    ],
+    showTotal: [
+      "cc_opening_balance",
+      "cc_payment_&_credits",
+      "cc_purchases",
+      "cc_taxes_&_interest",
+      "cc_expected_balance"
+    ],
+    rowElements: [
+      "checkbox",
+      "textbox",
+      "dateTime",
+      {
+        radio: {
+          radioList: [
+            { label: "Cr", value: "Cr", checked: false },
+            { label: "Dr", value: "Dr", checked: true }
+          ]
+        }
+      },
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      {
+        fetch: {
+          apiUrl: "/account_planner/credit_card_list",
+          table: "credit_cards",
+          fetch: ["credit_card_id", "credit_card_name"]
+        }
+      }
+    ]
+  }
+];
+
+export { configArray, resumeArray, crudFormArray, monthExpenditureConfig, creditCardConfig };

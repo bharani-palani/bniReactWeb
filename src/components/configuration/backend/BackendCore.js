@@ -17,6 +17,7 @@ function BackendCore(props) {
   const autoClose = 3000;
   const [loader, setLoader] = useState(true);
   const [updatedIds, setUpdatedIds] = useState([]);
+
   const getElementAjax = row => {
     return apiInstance
       .get(row.fetch.apiUrl)
@@ -115,7 +116,7 @@ function BackendCore(props) {
     const updateData = dbData
       .filter(d => updatedIds.includes(d[TableRows[0]]))
       .filter(d => Number(d[TableRows[0]]) > 0 && d);
-    const postData = {
+    let postData = {
       ...((insertData.length > 0 ||
         deleteData.length > 0 ||
         updateData.length > 0) && { Table }),
@@ -136,6 +137,8 @@ function BackendCore(props) {
             runAllApis(() => setLoader(false));
           }, 2000);
         }
+        setDeleteData([]);
+        setUpdatedIds([]);
       })
       .catch(error => console.error(error));
   };
