@@ -39,13 +39,13 @@ const AccountPlanner = props => {
               <Chart key={1} />
             </div>
             <div className="row">
-              <div className="col-md-12 b-0 mb-10 m-reduce-padding">
-                <MonthExpenditureTable />
+              <div className="col-md-12 m-reduce-padding">
+                <CreateModule />
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12 m-reduce-padding">
-                <CreateModule />
+              <div className="col-md-12 b-0 mb-10 m-reduce-padding">
+                <MonthExpenditureTable />
               </div>
             </div>
             <div className="row">

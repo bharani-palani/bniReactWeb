@@ -418,19 +418,20 @@ const creditCardConfig = [
       "cc_date",
       "cc_pay_type",
       "cc_opening_balance",
-      "cc_payment_&_credits",
+      "cc_payment_credits",
       "cc_purchases",
-      "cc_taxes_&_interest",
+      "cc_taxes_interest",
       "cc_expected_balance",
       "cc_for_card"
     ],
     showTotal: [
       "cc_opening_balance",
-      "cc_payment_&_credits",
+      "cc_payment_credits",
       "cc_purchases",
-      "cc_taxes_&_interest",
+      "cc_taxes_interest",
       "cc_expected_balance"
     ],
+    rowKeyUp: "cc_expected_balance=(Number(row.cc_opening_balance) - Number(row.cc_payment_credits)) + (Number(row.cc_purchases) + Number(row.cc_taxes_interest))",
     rowElements: [
       "checkbox",
       "textbox",
@@ -447,7 +448,7 @@ const creditCardConfig = [
       "number",
       "number",
       "number",
-      "number",
+      "label",
       {
         fetch: {
           apiUrl: "/account_planner/credit_card_list",

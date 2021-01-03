@@ -4,7 +4,6 @@ import { creditCardConfig } from "../configuration/backendTableConfig";
 import BackendCore from "../../components/configuration/backend/BackendCore";
 
 const TypeCreditCardExpenditure = props => {
-  //   const { id, name } = props;
   return (
     <div className="settings">
       {creditCardConfig
@@ -16,6 +15,7 @@ const TypeCreditCardExpenditure = props => {
             TableRows={t.TableRows}
             rowElements={t.rowElements}
             showTotal={t.showTotal}
+            rowKeyUp={t.rowKeyUp}
             getApiUrl="/account_planner/getAccountPlanner"
             postApiUrl="/account_planner/postAccountPlanner"
           />

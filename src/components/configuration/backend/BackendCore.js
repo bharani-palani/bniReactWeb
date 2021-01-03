@@ -11,6 +11,7 @@ function BackendCore(props) {
   const getApiUrl = props.getApiUrl;
   const postApiUrl = props.postApiUrl;
   const showTotal = props.showTotal;
+  const rowKeyUp = props.rowKeyUp;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
@@ -67,7 +68,7 @@ function BackendCore(props) {
         setLoader(false);
       });
       array.length && array[1] && setDbData(array[1]);
-      temp.length && setRowElements(temp[0]);
+      temp && temp.length && setRowElements(temp[0]);
       typeof callBack === "function" && callBack();
     });
   };
@@ -77,14 +78,24 @@ function BackendCore(props) {
   }, [TableRows, Table, props.rowElements]);
 
   const updateDbData = (index, data, primaryKey) => {
+    // update DB data
     const { i, j } = index;
     dbData[i][j] = data;
     setDbData(dbData);
-    // update editing rows
+    // update changes rows
     const id = dbData.filter((db, ind) => ind === i && db)[0][primaryKey];
     let array = [...updatedIds, id];
     array = [...new Set(array)];
     setUpdatedIds(array);
+    // update row if value changed
+    if(rowKeyUp) {
+      let [declare, operands] = rowKeyUp.split("=");
+      const newDbData = dbData.map(row => {
+          row[declare] = eval(operands);
+          return row;
+      })
+      setDbData(newDbData);
+    }
   };
 
   const onDelete = index => {
@@ -251,7 +262,7 @@ function BackendCore(props) {
 
       <div className="form-group text-right">
         <button onClick={() => submitData()} className="btn btn-bni">
-          {btnLoader ? <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> : "Update"}
+          {btnLoader ? <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i> : "Update"}
         </button>
       </div>
     </div>
