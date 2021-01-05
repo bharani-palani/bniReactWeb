@@ -50,13 +50,13 @@ const AccountPlanner = props => {
             </div>
             <div className="row">
               <div className="col-md-12 m-reduce-padding">
-                <AnalysisChart />
-              </div>
+                <TypeCreditCardExpenditure />
+              </div>  
             </div>
             <div className="row">
               <div className="col-md-12 m-reduce-padding">
-                <TypeCreditCardExpenditure />
-              </div>  
+                <AnalysisChart />
+              </div>
             </div>
           </div>
         </div>

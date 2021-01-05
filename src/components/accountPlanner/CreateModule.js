@@ -8,7 +8,7 @@ const CreateModule = props => {
   const [collapse, setCollapse] = useState("");
 
   return (
-    <div className="settings mb-10">
+    <div className="settings mt-20">
       <div className="pr-10">
         <Accordion bsPrefix="util" defaultActiveKey={1}>
           {crudFormArray

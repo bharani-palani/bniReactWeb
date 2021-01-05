@@ -88,12 +88,12 @@ function BackendCore(props) {
     array = [...new Set(array)];
     setUpdatedIds(array);
     // update row if value changed
-    if(rowKeyUp) {
+    if (rowKeyUp) {
       let [declare, operands] = rowKeyUp.split("=");
       const newDbData = dbData.map(row => {
-          row[declare] = eval(operands);
-          return row;
-      })
+        row[declare] = eval(operands);
+        return row;
+      });
       setDbData(newDbData);
     }
   };
@@ -154,7 +154,10 @@ function BackendCore(props) {
         setUpdatedIds([]);
         setBtnLoader(false);
       })
-      .catch(error => {console.error(error); setBtnLoader(false);});
+      .catch(error => {
+        console.error(error);
+        setBtnLoader(false);
+      });
   };
 
   const sMessage = () => ({
@@ -174,11 +177,38 @@ function BackendCore(props) {
     toast.error(
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
+
+  const indianLacSeperator = value => {
+    return value.toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      style: "currency",
+      currency: "INR"
+    });
+  };
   const getColumnTotal = key => {
-    let total = dbData.reduce((a, b) => Number(a) + Number(b[key]), 0);
-    total = total.toFixed(2);
+    let total = "";
+    if (showTotal && showTotal.length && showTotal[0].whichKey) {
+      total = showTotal
+        .filter(s => s.whichKey === key)
+        .map(f => {
+          return f.forValue.map((v, i) => {
+            const number = dbData
+              .filter(db => db[f.forKey] === v)
+              .reduce((a, b) => Number(a) + Number(b[key]), 0);
+            return (
+              <div key={i}>
+                {indianLacSeperator(number)}{` (${v})`}
+              </div>
+            );
+          });
+        });
+    } else {
+      total = dbData.reduce((a, b) => Number(a) + Number(b[key]), 0);
+      total = indianLacSeperator(total);
+    }
     return total;
   };
+
   return loader === false ? (
     <div className="container-fluid backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
@@ -223,12 +253,16 @@ function BackendCore(props) {
               <>
                 <div className="text-center">Total</div>
                 {TableRows.slice(1).map((r, i) => {
-                  const isTotalColumn = showTotal.includes(r);
+                  const isTotalColumn =
+                    showTotal.includes(r) ||
+                    (showTotal.length > 0 && showTotal[0].whichKey) === r;
                   return (
                     <div className={isTotalColumn ? "totalColumn" : ""} key={i}>
                       {isTotalColumn ? (
                         <>
-                          <span className="visible-xs">{helpers.stringToCapitalize(r)}</span>
+                          <span className="visible-xs">
+                            {helpers.stringToCapitalize(r)}
+                          </span>
                           <span>{getColumnTotal(r)}</span>
                         </>
                       ) : (
@@ -262,7 +296,11 @@ function BackendCore(props) {
 
       <div className="form-group text-right">
         <button onClick={() => submitData()} className="btn btn-bni">
-          {btnLoader ? <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i> : "Update"}
+          {btnLoader ? (
+            <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          ) : (
+            "Update"
+          )}
         </button>
       </div>
     </div>

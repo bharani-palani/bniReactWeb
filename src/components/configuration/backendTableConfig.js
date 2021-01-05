@@ -375,7 +375,9 @@ const monthExpenditureConfig = [
       "inc_exp_category",
       "inc_exp_bank"
     ],
-    showTotal: ["inc_exp_amount"],
+    showTotal: [
+      { whichKey: "inc_exp_amount", forKey: "inc_exp_type", forValue: ["Cr", "Dr"] }
+    ],
     rowElements: [
       "checkbox",
       "textbox",
@@ -416,7 +418,6 @@ const creditCardConfig = [
       "cc_id",
       "cc_transaction",
       "cc_date",
-      "cc_pay_type",
       "cc_opening_balance",
       "cc_payment_credits",
       "cc_purchases",
@@ -436,14 +437,6 @@ const creditCardConfig = [
       "checkbox",
       "textbox",
       "date",
-      {
-        radio: {
-          radioList: [
-            { label: "Cr", value: "Cr", checked: false },
-            { label: "Dr", value: "Dr", checked: true }
-          ]
-        }
-      },
       "number",
       "number",
       "number",
