@@ -296,7 +296,7 @@ const crudFormArray = [
   {
     id: 22,
     Table: "banks",
-    label: "Bank account",
+    label: "Bank accounts",
     TableRows: [
       "bank_id",
       "bank_name",
@@ -317,7 +317,7 @@ const crudFormArray = [
   {
     id: 23,
     Table: "credit_cards",
-    label: "Credit card account",
+    label: "Credit cards",
     TableRows: [
       "credit_card_id",
       "credit_card_name",
@@ -345,7 +345,7 @@ const crudFormArray = [
   {
     id: 25,
     Table: "income_expense_category",
-    label: "Income / expense category",
+    label: "Income / expense categories",
     TableRows: ["inc_exp_cat_id", "inc_exp_cat_name", "inc_exp_cat_vendor"],
     rowElements: [
       "checkbox",
@@ -376,7 +376,7 @@ const monthExpenditureConfig = [
       "inc_exp_bank"
     ],
     showTotal: [
-      { whichKey: "inc_exp_amount", forKey: "inc_exp_type", forValue: ["Cr", "Dr"] }
+      { whichKey: "inc_exp_amount", forKey: "inc_exp_type", forCondition: "equals", forValue: ["Cr", "Dr"] } //forCondition: includes or equals
     ],
     rowElements: [
       "checkbox",

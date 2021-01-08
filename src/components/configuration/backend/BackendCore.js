@@ -197,7 +197,8 @@ function BackendCore(props) {
               .reduce((a, b) => Number(a) + Number(b[key]), 0);
             return (
               <div key={i}>
-                {indianLacSeperator(number)}{` (${v})`}
+                {indianLacSeperator(number)}
+                {` (${v})`}
               </div>
             );
           });
@@ -293,16 +294,17 @@ function BackendCore(props) {
           </>
         )}
       </div>
-
-      <div className="form-group text-right">
-        <button onClick={() => submitData()} className="btn btn-bni">
-          {btnLoader ? (
-            <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-          ) : (
-            "Update"
-          )}
-        </button>
-      </div>
+      {dbData.length > 0 && (
+        <div className="form-group text-right">
+          <button onClick={() => submitData()} className="btn btn-bni">
+            {btnLoader ? (
+              <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            ) : (
+              "Update"
+            )}
+          </button>
+        </div>
+      )}
     </div>
   ) : (
     <div className="relativeSpinner">
