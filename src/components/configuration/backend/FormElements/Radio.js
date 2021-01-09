@@ -13,7 +13,7 @@ const Radio = props => {
   }, [radioSelected]);
 
   return (
-    <div className={`grid-${radioList.length} pl-5`}>
+    <div className={`grid-${radioList.length} pl-5 pt-5`}>
       {radioList.length &&
         radioList.map((radio, k) => (
           <div key={k}>

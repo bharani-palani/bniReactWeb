@@ -373,7 +373,8 @@ const monthExpenditureConfig = [
       "inc_exp_type",
       "inc_exp_date_time",
       "inc_exp_category",
-      "inc_exp_bank"
+      "inc_exp_bank",
+      "inc_exp_comments"
     ],
     showTotal: [
       { whichKey: "inc_exp_amount", forKey: "inc_exp_type", forCondition: "equals", forValue: ["Cr", "Dr"] } //forCondition: includes or equals
@@ -404,8 +405,10 @@ const monthExpenditureConfig = [
           table: "banks",
           fetch: ["bank_id", "bank_name"]
         }
-      }
+      },
+      "textbox"
     ]
+    
   }
 ];
 
@@ -423,7 +426,8 @@ const creditCardConfig = [
       "cc_purchases",
       "cc_taxes_interest",
       "cc_expected_balance",
-      "cc_for_card"
+      "cc_for_card",
+      "cc_comments"
     ],
     showTotal: [
       "cc_opening_balance",
@@ -448,7 +452,8 @@ const creditCardConfig = [
           table: "credit_cards",
           fetch: ["credit_card_id", "credit_card_name"]
         }
-      }
+      },
+      "textbox"
     ]
   }
 ];

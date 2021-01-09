@@ -61,14 +61,12 @@ function BackendCore(props) {
     const a = createRowElementArray();
     const b = getBackendAjax();
 
-    Promise.all([[...a], b]).then(async array => {
-      const temp = [];
+    Promise.all([a, b]).then(async array => {
+      setDbData(array[1]);
       await Promise.all(array[0]).then(a => {
-        temp.push(a);
+        setRowElements(a);
         setLoader(false);
       });
-      array.length && array[1] && setDbData(array[1]);
-      temp && temp.length && setRowElements(temp[0]);
       typeof callBack === "function" && callBack();
     });
   };
