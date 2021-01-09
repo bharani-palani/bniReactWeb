@@ -261,10 +261,10 @@ function BackendCore(props) {
                     <div className={isTotalColumn ? "totalColumn" : ""} key={i}>
                       {isTotalColumn ? (
                         <>
-                          <span className="visible-xs">
+                          <div className="visible-xs">
                             {helpers.stringToCapitalize(r)}
-                          </span>
-                          <span>{getColumnTotal(r)}</span>
+                          </div>
+                          {getColumnTotal(r)}
                         </>
                       ) : (
                         ""
