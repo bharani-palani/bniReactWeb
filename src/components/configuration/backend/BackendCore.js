@@ -20,6 +20,7 @@ function BackendCore(props) {
   const [loader, setLoader] = useState(true);
   const [btnLoader, setBtnLoader] = useState(false);
   const [updatedIds, setUpdatedIds] = useState([]);
+  const [sortType, setSortType] = useState(false);
 
   const getElementAjax = row => {
     return apiInstance
@@ -209,6 +210,17 @@ function BackendCore(props) {
     return total;
   };
 
+  const onSort = (key, type) => {
+    const filteredDbData = dbData.sort((a,b) => {
+      if(type) {
+        return isNaN(Number(b[key])) ? a[key] < b[key] : a[key] < Number(b[key])
+      } else {
+        return isNaN(Number(b[key])) ? a[key] > b[key] : a[key] > Number(b[key])
+      };
+    });
+    setDbData(filteredDbData);
+    setSortType(!type);
+  }
   return loader === false ? (
     <div className="container-fluid backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
@@ -218,7 +230,7 @@ function BackendCore(props) {
       </h5>
       <div className={`mt-10 form-group grid-${TableRows.length}`}>
         {TableRows.map((heading, i) => (
-          <div key={`key-${i}`} className="header">
+          <div key={`key-${i}`} onClick={() => onSort(heading, sortType)} className="header">
             {i !== 0 ? (
               <span title={helpers.stringToCapitalize(heading)}>
                 {helpers.stringToCapitalize(heading)}
