@@ -371,7 +371,7 @@ const monthExpenditureConfig = [
       "inc_exp_name",
       "inc_exp_amount",
       "inc_exp_type",
-      "inc_exp_date_time",
+      "inc_exp_date",
       "inc_exp_category",
       "inc_exp_bank",
       "inc_exp_comments"
@@ -392,7 +392,7 @@ const monthExpenditureConfig = [
           ]
         }
       },
-      "dateTime",
+      "date",
       {
         fetch: {
           apiUrl: "/account_planner/inc_exp_list",
