@@ -4,6 +4,7 @@ import FormElement from "./FormElement";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "react-loader-spinner";
 import helpers from "../../../helpers";
+import PropTypes from "prop-types";
 
 function BackendCore(props) {
   const Table = props.Table;
@@ -315,5 +316,18 @@ function BackendCore(props) {
     </div>
   );
 }
+
+BackendCore.propTypes = {
+  Table: PropTypes.string,
+  label: PropTypes.string,
+  TableRows: PropTypes.array,
+  showTotal: PropTypes.array,
+  rowKeyUp: PropTypes.string,
+  rowElements: PropTypes.array,
+};
+BackendCore.defaultProps = {
+  rowKeyUp: "",
+  showTotal: []
+};
 
 export default BackendCore;

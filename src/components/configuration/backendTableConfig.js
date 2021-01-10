@@ -379,6 +379,7 @@ const monthExpenditureConfig = [
     showTotal: [
       { whichKey: "inc_exp_amount", forKey: "inc_exp_type", forCondition: "equals", forValue: ["Cr", "Dr"] } //forCondition: includes or equals
     ],
+    rowKeyUp: "",
     rowElements: [
       "checkbox",
       "textbox",
@@ -414,7 +415,7 @@ const monthExpenditureConfig = [
 
 const creditCardConfig = [
   {
-    id: 26,
+    id: 27,
     Table: "credit_card_transactions",
     label: "Credit card transactions",
     TableRows: [
