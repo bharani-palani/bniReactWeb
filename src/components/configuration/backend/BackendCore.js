@@ -261,7 +261,7 @@ function BackendCore(props) {
                 />
               ))
             )}
-            {showTotal && (
+            {showTotal && showTotal.length > 0 && (
               <>
                 <div className="text-center">Total</div>
                 {TableRows.slice(1).map((r, i) => {
