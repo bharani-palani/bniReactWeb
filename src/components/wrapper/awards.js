@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import apiInstance from "../../services/apiServices";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
+import AppContext from "../../contexts/AppContext";
 
 function Awards() {
   const [awards, setAwards] = useState([]);
   const [awardsHeading, setAwardsHeading] = useState("");
+  const [appData] = useContext(AppContext);
+  document.title = `${appData.display_name} | Awards`;
 
   useEffect(() => {
     apiInstance
