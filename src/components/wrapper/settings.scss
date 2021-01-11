@@ -67,9 +67,11 @@
     }
     .totalColumn {
       border-bottom: dashed 1px;
+      border-top: dashed 1px;
       margin-top: 1rem;
       @media (max-width: 767px) {
         padding-left: 0;
+        border-top: 0;
       }
     }
   }

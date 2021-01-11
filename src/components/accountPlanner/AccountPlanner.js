@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 import PropTypes from "prop-types";
 // import Loader from "react-loader-spinner";
 // import helpers from "../../helpers";
@@ -10,9 +10,14 @@ import CreateModule from "./CreateModule";
 import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
 import AnalysisChart from "./AnalysisChart";
 import "./AccountPlanner.scss";
+import AppContext from "../../contexts/AppContext";
 
 const AccountPlanner = props => {
-  // const {id, name} = props;
+  const [appData] = useContext(AppContext);
+
+  useEffect(() => {
+    document.title = `${appData.display_name} | Account planner`;
+  },[])
 
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>

@@ -211,16 +211,20 @@ function BackendCore(props) {
   };
 
   const onSort = (key, type) => {
-    const filteredDbData = dbData.sort((a,b) => {
-      if(type) {
-        return isNaN(Number(b[key])) ? a[key] < b[key] : a[key] < Number(b[key])
+    const filteredDbData = dbData.sort((a, b) => {
+      if (type) {
+        return isNaN(Number(b[key]))
+          ? a[key] < b[key]
+          : a[key] < Number(b[key]);
       } else {
-        return isNaN(Number(b[key])) ? a[key] > b[key] : a[key] > Number(b[key])
-      };
+        return isNaN(Number(b[key]))
+          ? a[key] > b[key]
+          : a[key] > Number(b[key]);
+      }
     });
     setDbData(filteredDbData);
     setSortType(!type);
-  }
+  };
   return loader === false ? (
     <div className="container-fluid backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
@@ -228,82 +232,91 @@ function BackendCore(props) {
         Table: {helpers.stringToCapitalize(Table)} ({dbData.length} record
         {dbData.length > 1 ? "s" : ""})
       </h5>
-      <div className={`mt-10 form-group grid-${TableRows.length}`}>
-        {TableRows.map((heading, i) => (
-          <div key={`key-${i}`} onClick={() => onSort(heading, sortType)} className="header">
-            {i !== 0 ? (
-              <span title={helpers.stringToCapitalize(heading)}>
-                {helpers.stringToCapitalize(heading)}
-              </span>
-            ) : (
-              <i className="fa fa-cog" />
-            )}
-          </div>
-        ))}
-        {dbData.length > 0 ? (
-          <>
-            {dbData.map((d, i) =>
-              TableRows.map((r, j) => (
-                <FormElement
-                  key={`${d[r]}-${j}`}
-                  onDelete={index => onDelete(index)}
-                  onChange={(index, data, primaryKey) =>
-                    updateDbData(index, data, primaryKey)
-                  }
-                  index={{ i, j: r }}
-                  placeholder={[helpers.stringToCapitalize(r)]}
-                  value={d[r]}
-                  element={rowElements[j]}
-                  showIncrementer={dbData.length - 1 === i}
-                  showDecrement={true} // i !== 0
-                  onAddRow={bool => onAddRow(bool)}
-                  primaryKey={TableRows[0]}
-                />
-              ))
-            )}
-            {showTotal && showTotal.length > 0 && (
-              <>
-                <div className="text-center">Total</div>
-                {TableRows.slice(1).map((r, i) => {
-                  const isTotalColumn =
-                    showTotal.includes(r) ||
-                    (showTotal.length > 0 && showTotal[0].whichKey) === r;
-                  return (
-                    <div className={isTotalColumn ? "totalColumn" : ""} key={i}>
-                      {isTotalColumn ? (
-                        <>
-                          <div className="visible-xs">
-                            {helpers.stringToCapitalize(r)}
-                          </div>
-                          {getColumnTotal(r)}
-                        </>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  );
-                })}
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            <FormElement
-              key={-1}
-              index={{ i: 0, j: 0 }}
-              element={rowElements[0]}
-              showIncrementer={true}
-              showDecrement={false}
-              onAddRow={bool => onAddRow(bool)}
-            />
+      <div className="table-responsive">
+        <div className={`mt-10 form-group grid-${TableRows.length}`}>
+          {TableRows.map((heading, i) => (
             <div
-              className="noRecords"
-              style={{ gridColumn: `2 / span ${TableRows.length - 1}` }}
+              key={`key-${i}`}
+              onClick={() => onSort(heading, sortType)}
+              className="header"
             >
-              No Records
+              {i !== 0 ? (
+                <span title={helpers.stringToCapitalize(heading)}>
+                  {helpers.stringToCapitalize(heading)}
+                </span>
+              ) : (
+                <i className="fa fa-cog" />
+              )}
             </div>
-          </>
-        )}
+          ))}
+          {dbData.length > 0 ? (
+            <>
+              {dbData.map((d, i) =>
+                TableRows.map((r, j) => (
+                  <FormElement
+                    key={`${d[r]}-${j}`}
+                    onDelete={index => onDelete(index)}
+                    onChange={(index, data, primaryKey) =>
+                      updateDbData(index, data, primaryKey)
+                    }
+                    index={{ i, j: r }}
+                    placeholder={[helpers.stringToCapitalize(r)]}
+                    value={d[r]}
+                    element={rowElements[j]}
+                    showIncrementer={dbData.length - 1 === i}
+                    showDecrement={true} // i !== 0
+                    onAddRow={bool => onAddRow(bool)}
+                    primaryKey={TableRows[0]}
+                  />
+                ))
+              )}
+              {showTotal && showTotal.length > 0 && (
+                <>
+                  <div className="text-center">Total</div>
+                  {TableRows.slice(1).map((r, i) => {
+                    const isTotalColumn =
+                      showTotal.includes(r) ||
+                      (showTotal.length > 0 && showTotal[0].whichKey) === r;
+                    return (
+                      <div
+                        className={isTotalColumn ? "totalColumn" : ""}
+                        key={i}
+                      >
+                        {isTotalColumn ? (
+                          <>
+                            <div className="visible-xs">
+                              {helpers.stringToCapitalize(r)}
+                            </div>
+                            {getColumnTotal(r)}
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    );
+                  })}
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              <FormElement
+                key={-1}
+                index={{ i: 0, j: 0 }}
+                element={rowElements[0]}
+                showIncrementer={true}
+                showDecrement={false}
+                onAddRow={bool => onAddRow(bool)}
+              />
+              <div
+                className="noRecords"
+                style={{ gridColumn: `2 / span ${TableRows.length - 1}` }}
+              >
+                No Records
+              </div>
+            </>
+          )}
+        </div>
       </div>
       {dbData.length > 0 && (
         <div className="form-group text-right">
@@ -335,7 +348,7 @@ BackendCore.propTypes = {
   TableRows: PropTypes.array,
   showTotal: PropTypes.array,
   rowKeyUp: PropTypes.string,
-  rowElements: PropTypes.array,
+  rowElements: PropTypes.array
 };
 BackendCore.defaultProps = {
   rowKeyUp: "",
