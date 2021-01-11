@@ -8,22 +8,22 @@ class account_planner_model extends CI_Model
 	}
 	public function vendor_list()
 	{
-		$query = $this->db->select(array("vendor_id as id", "vendor_name as value"))->get('vendors');
+		$query = $this->db->select(array("vendor_id as id", "vendor_name as value"))->order_by("vendor_name")->get('vendors');
 		return get_all_rows($query);
 	}
 	public function inc_exp_list()
 	{
-		$query = $this->db->select(array("inc_exp_cat_id as id", "inc_exp_cat_name as value"))->get('income_expense_category');
+		$query = $this->db->select(array("inc_exp_cat_id as id", "inc_exp_cat_name as value"))->order_by("inc_exp_cat_name")->get('income_expense_category');
 		return get_all_rows($query);
 	}
 	public function bank_list()
 	{
-		$query = $this->db->select(array("bank_id as id", "bank_name as value"))->get('banks');
+		$query = $this->db->select(array("bank_id as id", "bank_name as value"))->order_by("bank_name")->get('banks');
 		return get_all_rows($query);
 	}
 	public function credit_card_list()
 	{
-		$query = $this->db->select(array("credit_card_id as id", "credit_card_name as value"))->get('credit_cards');
+		$query = $this->db->select(array("credit_card_id as id", "credit_card_name as value"))->order_by("credit_card_name")->get('credit_cards');
 		return get_all_rows($query);
 	}
 	function getAccountPlanner($post) {
