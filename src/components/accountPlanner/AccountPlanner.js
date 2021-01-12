@@ -11,12 +11,16 @@ import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
 import AnalysisChart from "./AnalysisChart";
 import "./AccountPlanner.scss";
 import AppContext from "../../contexts/AppContext";
+import apiInstance from "../../services/apiServices";
 
 const AccountPlanner = props => {
   const [appData] = useContext(AppContext);
 
   useEffect(() => {
     document.title = `${appData.display_name} | Account planner`;
+    apiInstance
+      .get("/account_planner/year_list")
+      .then(data => console.log(data))
   },[])
 
   return (

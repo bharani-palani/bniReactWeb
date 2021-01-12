@@ -154,7 +154,7 @@ code {
   @for $i from 1 through 12 {
     .#{"grid"}-#{$i} {
       grid-template-columns: 50px repeat(#{($i)-1}, auto);
-      width: 180%;
+      width: #{($i * 20)}#{"%"};
     }
   }
 }
@@ -323,7 +323,4 @@ th {
 }
 .black-three-color {
   color: $black-three;
-}
-.table-responsive {
-  border: 0;
 }

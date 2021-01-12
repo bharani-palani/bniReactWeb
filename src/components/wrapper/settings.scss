@@ -74,5 +74,20 @@
         border-top: 0;
       }
     }
+    @mixin tr-b-0 {
+      .table-responsive {
+        border: 0 !important;
+      }
+    }
+    @include tr-b-0;
+    @media only screen and (max-width: 767px) {
+      @include tr-b-0;
+    }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      @include tr-b-0;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      @include tr-b-0;
+    }    
   }
 }

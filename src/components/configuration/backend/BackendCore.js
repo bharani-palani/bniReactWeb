@@ -319,7 +319,7 @@ function BackendCore(props) {
         </div>
       </div>
       {dbData.length > 0 && (
-        <div className="form-group text-right">
+        <div className="form-group pt-10 text-right">
           <button onClick={() => submitData()} className="btn btn-bni">
             {btnLoader ? (
               <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>

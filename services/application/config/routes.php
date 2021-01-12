@@ -72,6 +72,7 @@ $route['resume/getCompanyList'] = 'resume/resume/getCompanyList';
 $route['resume/getProjectList'] = 'resume/resume/getProjectList';
 $route['resume/getResume'] = 'resume/resume/getResume';
 // Account planner
+$route['account_planner/year_list'] = 'account_planner/account_planner/year_list';
 $route['account_planner/vendor_list'] = 'account_planner/account_planner/vendor_list';
 $route['account_planner/inc_exp_list'] = 'account_planner/account_planner/inc_exp_list';
 $route['account_planner/bank_list'] = 'account_planner/account_planner/bank_list';
