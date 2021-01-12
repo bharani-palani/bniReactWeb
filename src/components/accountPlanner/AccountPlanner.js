@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import PropTypes from "prop-types";
 // import Loader from "react-loader-spinner";
 // import helpers from "../../helpers";
@@ -15,12 +15,13 @@ import apiInstance from "../../services/apiServices";
 
 const AccountPlanner = props => {
   const [appData] = useContext(AppContext);
+  const [yearList, setYearList] = useState([]);
 
   useEffect(() => {
     document.title = `${appData.display_name} | Account planner`;
     apiInstance
       .get("/account_planner/year_list")
-      .then(data => console.log(data))
+      .then(res => setYearList(res.data.response))
   },[])
 
   return (
@@ -41,7 +42,7 @@ const AccountPlanner = props => {
                 <SetBank />
               </div>
               <div className="col-sm-3 m-reduce-padding">
-                <SetYear />
+                <SetYear yearList={yearList} onSelectYear={(year) => alert(year)}  />
               </div>
             </div>
             <div className="flex bigWidth">

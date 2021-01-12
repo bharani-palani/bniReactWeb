@@ -4,15 +4,9 @@ import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
 const SetDefault = props => {
-  const [yearList, setYearList] = useState([
-    { id: 1, value: 2020 },
-    { id: 2, value: 2021 }
-  ]);
+  const {yearList, onSelectYear} = props;
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
 
-  const onYearSelect = id => {
-    setYearSelected(yearList.filter(d => d.id === id)[0].value);
-  };
   return (
     <>
       <span>Select year</span>
@@ -25,8 +19,9 @@ const SetDefault = props => {
             {yearList.map((d, i) => (
               <Dropdown.Item
                 key={i}
-                onClick={e => {
-                  onYearSelect(d.id);
+                onClick={() => {
+                  setYearSelected(d.id);
+                  onSelectYear(d.id)
                 }}
               >
                 {d.value}
