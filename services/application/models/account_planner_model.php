@@ -28,7 +28,7 @@ class account_planner_model extends CI_Model
 	}
 	public function year_list()
 	{
-		$query = $this->db->select(array("DISTINCT DATE_FORMAT(inc_exp_date, '%Y') as id", "DISTINCT DATE_FORMAT(inc_exp_date, '%Y') as value"))->order_by("id desc")->get('income_expense');
+		$query = $this->db->select(array("DISTINCT DATE_FORMAT(inc_exp_date, '%Y') as id", "DATE_FORMAT(inc_exp_date, '%Y') as value"))->order_by("id desc")->get('income_expense');
 		return get_all_rows($query);
 	}
 	function getAccountPlanner($post) {
