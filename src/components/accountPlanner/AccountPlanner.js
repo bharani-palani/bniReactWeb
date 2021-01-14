@@ -18,7 +18,8 @@ const AccountPlanner = props => {
   const [yearList, setYearList] = useState([]);
   let yearString = new Date();
   yearString = yearString.getFullYear();
-  yearString = `"${yearString}-01-01" and "${yearString}-12-31"`;
+  // yearString = `"${yearString}-01-01" and "${yearString}-12-31"`;
+  yearString = `"2021-01-01" and "2021-12-31"`;
   const [year, setYear] = useState();
 
   const getIncExpChartData = () => {
