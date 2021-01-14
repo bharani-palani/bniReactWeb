@@ -54,7 +54,7 @@ class account_planner_model extends CI_Model
 			b.inc_exp_cat_name as category 
 		FROM (`income_expense` as a) 
 		LEFT JOIN `income_expense_category` as b ON a.inc_exp_category = b.inc_exp_cat_id 
-		WHERE a.`inc_exp_date` between ".$year." 
+		WHERE a.inc_exp_date between ".$year." 
 		group by dated, category 
 		order by DATE_FORMAT(a.inc_exp_date, '%Y-%m') desc";
 		$query = $this->db->query($sql);
