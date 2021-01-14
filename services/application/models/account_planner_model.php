@@ -33,7 +33,7 @@ class account_planner_model extends CI_Model
 	}
 	public function getIncExpChartData($post)
 	{
-		$where = 'inc_exp_date between "2021-01-01" and "2021-01-31"';
+		$year = $post['year'];
 		$query = $this->db
 					->select(array(
 						'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
@@ -42,7 +42,7 @@ class account_planner_model extends CI_Model
 					))
 					->from('income_expense as a')
 					->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
-					->where('inc_exp_date between '.$post)
+					->where('inc_exp_date between '.$year)
 					->group_by(array("dated", "category"))
 					->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc")
 					->get();
