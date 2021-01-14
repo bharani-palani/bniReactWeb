@@ -34,6 +34,7 @@ class account_planner_model extends CI_Model
 	public function getIncExpChartData($post)
 	{
 		$year = $post['year'];
+		$this->db->_protect_identifiers=false;
 		$query = $this->db
 					->select(array(
 						'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
