@@ -4,7 +4,8 @@ class account_planner_model extends CI_Model
 {
 	public function __construct(){
 		parent::__construct();
-		$this->db = $this->load->database('default', TRUE);  
+		$this->db = $this->load->database('default', TRUE);
+		$this->db->_protect_identifiers=false;
 	}
 	public function vendor_list()
 	{
