@@ -35,7 +35,6 @@ class account_planner_model extends CI_Model
 	{
 		$year = $post['year'];
 		$query = $this->db
-					->protect_idenifiers(FALSE)
 					->select(array(
 						'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
 						'sum(a.inc_exp_amount) as total',
