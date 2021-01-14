@@ -31,8 +31,26 @@ class account_planner_model extends CI_Model
 		$query = $this->db->select(array("DISTINCT DATE_FORMAT(inc_exp_date, '%Y') as id", "DATE_FORMAT(inc_exp_date, '%Y') as value"), false)->order_by("id desc")->get('income_expense');
 		return get_all_rows($query);
 	}
+	public function getIncExpChartData($where)
+	{
+		$query = $this->db
+					->select(array(
+						'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
+						'sum(a.inc_exp_amount) as total',
+						'b.inc_exp_cat_name as category'
+					))
+					->from('income_expense as a')
+					->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
+					->where($where)
+					->group_by(array("dated", "category"))
+					->order_by("DATE_FORMAT(a.inc_exp_date, '%Y-%m')", "desc")
+					->get();
+		return get_all_rows($query);
+	}
+
 	function getAccountPlanner($post) {
 		$Table = $post["Table"];
+		$where = $post["where"];
 		$this->db->select($post["TableRows"]);
 		switch ($Table) {
 				case "banks":
@@ -48,7 +66,7 @@ class account_planner_model extends CI_Model
 						$query = $this->db->order_by("vendor_name","asc")->get('vendors');
 				break;
 				case "income_expense":
-						$query = $this->db->where('inc_exp_date between "2021-01-01" and "2021-01-31"')->order_by("inc_exp_date","asc")->get('income_expense');
+						$query = $this->db->where($where)->order_by("inc_exp_date","asc")->get('income_expense');
 				break;
 				case "credit_card_transactions":
 						$query = $this->db->order_by("cc_date","asc")->get('credit_card_transactions');

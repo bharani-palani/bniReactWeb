@@ -79,6 +79,7 @@ $route['account_planner/bank_list'] = 'account_planner/account_planner/bank_list
 $route['account_planner/credit_card_list'] = 'account_planner/account_planner/credit_card_list';
 $route['account_planner/getAccountPlanner'] = 'account_planner/account_planner/getAccountPlanner';
 $route['account_planner/postAccountPlanner'] = 'account_planner/account_planner/postAccountPlanner';
+$route['account_planner/getIncExpChartData'] = 'account_planner/account_planner/getIncExpChartData';
 
 
 /* End of file routes.php */
