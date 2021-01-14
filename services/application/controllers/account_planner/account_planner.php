@@ -81,7 +81,10 @@ class account_planner extends CI_Controller {
 			$this->auth->invalidDomainResponse();
 		}
 		if($validate === 1) {
-			$data["response"] = $this->account_planner_model->getIncExpChartData();
+			$post = array(
+				"year" => $this->input->post("year")
+			);
+			$data["response"] = $this->account_planner_model->getIncExpChartData($post);
 			$this->auth->response($data,array(),200);
 		}
 	}

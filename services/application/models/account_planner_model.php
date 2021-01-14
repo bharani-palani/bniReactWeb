@@ -31,7 +31,7 @@ class account_planner_model extends CI_Model
 		$query = $this->db->select(array("DISTINCT DATE_FORMAT(inc_exp_date, '%Y') as id", "DATE_FORMAT(inc_exp_date, '%Y') as value"), false)->order_by("id desc")->get('income_expense');
 		return get_all_rows($query);
 	}
-	public function getIncExpChartData($where)
+	public function getIncExpChartData($post)
 	{
 		$where = 'inc_exp_date between "2021-01-01" and "2021-01-31"';
 		$query = $this->db
@@ -42,9 +42,9 @@ class account_planner_model extends CI_Model
 					))
 					->from('income_expense as a')
 					->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
-					->where($where)
+					->where('inc_exp_date between '.$post)
 					->group_by(array("dated", "category"))
-					->order_by("DATE_FORMAT(a.inc_exp_date, '%Y-%m')", "desc")
+					->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc")
 					->get();
 		return get_all_rows($query);
 	}
