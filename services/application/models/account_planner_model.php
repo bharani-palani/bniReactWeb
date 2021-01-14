@@ -48,7 +48,7 @@ class account_planner_model extends CI_Model
 						$query = $this->db->order_by("vendor_name","asc")->get('vendors');
 				break;
 				case "income_expense":
-						$query = $this->db->where('inc_exp_date between 2020-01-01 and 2020-01-31')->order_by("inc_exp_name","asc")->get('inc_exp_date');
+						$query = $this->db->where('inc_exp_date between 2020-01-01 and 2020-01-31')->order_by("inc_exp_date","asc")->get('income_expense');
 				break;
 				case "credit_card_transactions":
 						$query = $this->db->order_by("cc_date","asc")->get('credit_card_transactions');
