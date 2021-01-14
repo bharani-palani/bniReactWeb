@@ -39,12 +39,12 @@ class account_planner_model extends CI_Model
 						'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
 						'sum(a.inc_exp_amount) as total',
 						'b.inc_exp_cat_name as category'
-					))
+					), FALSE)
 					->from('income_expense as a')
 					->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
 					->where('inc_exp_date between '.$year)
 					->group_by(array("dated", "category"))
-					->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc")
+					->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc", false)
 					->get();
 		return get_all_rows($query);
 	}
