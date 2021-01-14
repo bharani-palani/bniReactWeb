@@ -16,12 +16,40 @@ import apiInstance from "../../services/apiServices";
 const AccountPlanner = props => {
   const [appData] = useContext(AppContext);
   const [yearList, setYearList] = useState([]);
+  let yearString = new Date();
+  yearString = yearString.getFullYear();
+  yearString = `"${yearString}-01-01" and "${yearString}-12-31"`;
+  const [year, setYear] = useState();
+
+  const getIncExpChartData = row => {
+    return apiInstance
+      .get("/account_planner/getIncExpChartData",{year: yearString})
+      .then(res => console.log(res))
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const getYearList = row => {
+    return apiInstance
+      .get("/account_planner/year_list")
+      .then(res => console.log(res))
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     document.title = `${appData.display_name} | Account planner`;
-    apiInstance
-      .get("/account_planner/year_list")
-      .then(res => setYearList(res.data.response))
+    // apiInstance
+    //   .get("/account_planner/year_list")
+    //   .then(res => setYearList(res.data.response))
+
+     Promise.all([getIncExpChartData(), getYearList()]).then(r => {
+      const [chartData, y] = r;
+      console.log(chartData, y);
+    });
+
   },[])
 
   return (
