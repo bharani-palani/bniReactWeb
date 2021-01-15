@@ -35,7 +35,6 @@ class account_planner_model extends CI_Model
 	function getIncExpChartData($post)
 	{
 		$postData = json_decode($post['year']);
-		echo '<pre>';
 		print_r($postData);
 		// $year = $post['year'];
 		// $this->db
