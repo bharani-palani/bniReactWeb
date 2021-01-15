@@ -61,7 +61,7 @@ class account_planner_model extends CI_Model
 			GROUP BY `dated`, `category` 
 			ORDER BY DATE_FORMAT(a.inc_exp_date, "%m-%Y") desc';
 		$query = $this->db->query($sql,array($startDate, $endDate));
-		return get_all_rows($query);
+		return array("query" => $this->db->last_query() ,"result" => get_all_rows($query));
 	}
 
 	function getAccountPlanner($post) {

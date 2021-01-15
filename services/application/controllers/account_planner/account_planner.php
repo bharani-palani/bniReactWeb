@@ -85,8 +85,9 @@ class account_planner extends CI_Controller {
 				"startDate" => $this->input->post("startDate"),
 				"endDate" => $this->input->post("endDate")
 			);
-			$data["response"] = $this->account_planner_model->getIncExpChartData($post);
-			$this->auth->response($data,array(),200);
+			$data = $this->account_planner_model->getIncExpChartData($post);
+			$op["response"] = $data["result"];
+			$this->auth->response($op,array("query" => $data["query"]),200);
 		}
 	}
 	public function getAccountPlanner() {
