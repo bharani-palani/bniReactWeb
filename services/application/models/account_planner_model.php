@@ -32,7 +32,7 @@ class account_planner_model extends CI_Model
 		$query = $this->db->select(array("DISTINCT DATE_FORMAT(inc_exp_date, '%Y') as id", "DATE_FORMAT(inc_exp_date, '%Y') as value"), false)->order_by("id desc")->get('income_expense');
 		return get_all_rows($query);
 	}
-	public function getIncExpChartData($post)
+	function getIncExpChartData($post)
 	{
 		$year = $post['year'];
 		$this->db
