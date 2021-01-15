@@ -19,12 +19,13 @@ const AccountPlanner = props => {
   let yearString = new Date();
   yearString = yearString.getFullYear();
   // yearString = `"${yearString}-01-01" and "${yearString}-12-31"`;
-  yearString = `"2020-01-01" and "2020-12-31"`;
+  yearString = '2020-01-01 and 2020-12-31';
   const [year, setYear] = useState();
 
   const getIncExpChartData = () => {
     const formdata = new FormData();
-    formdata.append("year", yearString);
+    formdata.append("startDate", "2020-01-01");
+    formdata.append("endDate", "2020-12-31");
     return apiInstance
       .post("/account_planner/getIncExpChartData",formdata)
       .then(res => res.data.response)
@@ -47,8 +48,9 @@ const AccountPlanner = props => {
     // apiInstance
     //   .get("/account_planner/year_list")
     //   .then(res => setYearList(res.data.response))
-
-     Promise.all([getIncExpChartData(), getYearList()]).then(r => {
+    const a = getIncExpChartData();
+    const b = getYearList();
+     Promise.all([a, b]).then(r => {
       console.log(r);
     });
 
