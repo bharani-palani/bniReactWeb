@@ -35,19 +35,29 @@ class account_planner_model extends CI_Model
 	function getIncExpChartData($post)
 	{
 		$year = $post['year'];
-		$this->db
-			->select(array(
-				'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
-				'sum(a.inc_exp_amount) as total',
-				'b.inc_exp_cat_name as category'
-			), FALSE)
-			->from('income_expense as a')
-			->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
-			->where('a.inc_exp_date between '.$year)
-			->where('inc_exp_type', "Dr")
-			->group_by(array("dated", "category"))
-			->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc");
-		$query = $this->db->get();
+		// $this->db
+		// 	->select(array(
+		// 		'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
+		// 		'sum(a.inc_exp_amount) as total',
+		// 		'b.inc_exp_cat_name as category'
+		// 	), FALSE)
+		// 	->from('income_expense as a')
+		// 	->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
+		// 	->where('a.inc_exp_date between '.$year)
+		// 	->where('inc_exp_type', "Dr")
+		// 	->group_by(array("dated", "category"))
+		// 	->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc");
+		// $query = $this->db->get();
+
+		$sql = '
+			SELECT DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated, 
+				sum(a.inc_exp_amount) as total, b.inc_exp_cat_name as category 
+			FROM (`income_expense` as a) 
+			LEFT JOIN `income_expense_category` as b ON `a`.`inc_exp_category` = `b`.`inc_exp_cat_id` 
+			WHERE `a`.`inc_exp_date` between ? and inc_exp_type = "Dr" 
+			GROUP BY `dated`, `category` 
+			ORDER BY DATE_FORMAT(a.inc_exp_date, "%m-%Y") desc';
+		$query = $this->db->query($query,array($year));
 		return get_all_rows($query);
 	}
 
