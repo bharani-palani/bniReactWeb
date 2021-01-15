@@ -57,7 +57,7 @@ class account_planner_model extends CI_Model
 				sum(a.inc_exp_amount) as total, b.inc_exp_cat_name as category 
 			FROM (`income_expense` as a) 
 			LEFT JOIN `income_expense_category` as b ON `a`.`inc_exp_category` = `b`.`inc_exp_cat_id` 
-			WHERE `a`.`inc_exp_date` ? between ? and a.inc_exp_type = "Dr" 
+			WHERE `a`.`inc_exp_date` between ? and ? and a.inc_exp_type = "Dr" 
 			GROUP BY `dated`, `category` 
 			ORDER BY DATE_FORMAT(a.inc_exp_date, "%m-%Y") desc';
 		$query = $this->db->query($sql,array($startDate, $endDate));
