@@ -75,17 +75,20 @@ class account_planner extends CI_Controller {
 	public function getIncExpChartData() {
 		$validate = $this->auth->validateAll();
 		if($validate === 2) {
+			echo 'one';
 			$this->auth->invalidTokenResponse();
 		}
 		if($validate === 3) {
+			echo 'two';
 			$this->auth->invalidDomainResponse();
 		}
 		if($validate === 1) {
+			echo 'three';
 			$post = array(
 				"year" => $this->input->post("year")
 			);
 			$data["response"] = $this->account_planner_model->getIncExpChartData($post);
-			print_r($data["response"]);
+			print_r($post);
 			// $this->auth->response($data,array(),200);
 		}
 	}
