@@ -76,10 +76,10 @@ $route['account_planner/year_list'] = 'account_planner/account_planner/year_list
 $route['account_planner/vendor_list'] = 'account_planner/account_planner/vendor_list';
 $route['account_planner/inc_exp_list'] = 'account_planner/account_planner/inc_exp_list';
 $route['account_planner/bank_list'] = 'account_planner/account_planner/bank_list';
+$route['account_planner/getIncExpChartData'] = 'account_planner/account_planner/getIncExpChartData';
 $route['account_planner/credit_card_list'] = 'account_planner/account_planner/credit_card_list';
 $route['account_planner/getAccountPlanner'] = 'account_planner/account_planner/getAccountPlanner';
 $route['account_planner/postAccountPlanner'] = 'account_planner/account_planner/postAccountPlanner';
-$route['account_planner/getIncExpChartData'] = 'account_planner/account_planner/getIncExpChartData';
 
 
 /* End of file routes.php */
