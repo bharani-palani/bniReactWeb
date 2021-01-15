@@ -78,6 +78,7 @@ class auth extends CI_Controller {
     public function allowed_http_origins($headers) {
         $http_origin = array_key_exists('Origin', $headers) ? $headers['Origin'] : $headers['Referer'];
         $allowed_http_origins   = array(
+            "localhost:3000",
             "http://localhost:3000",
             "https://bharani.tech",
             "https://www.bharani.tech",
