@@ -57,7 +57,7 @@ class account_planner_model extends CI_Model
 			WHERE `a`.`inc_exp_date` between ? and inc_exp_type = "Dr" 
 			GROUP BY `dated`, `category` 
 			ORDER BY DATE_FORMAT(a.inc_exp_date, "%m-%Y") desc';
-		$query = $this->db->query($query,array($year));
+		$query = $this->db->query($sql,array($year));
 		return get_all_rows($query);
 	}
 
