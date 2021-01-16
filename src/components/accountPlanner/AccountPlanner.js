@@ -18,7 +18,7 @@ const AccountPlanner = props => {
   const [yearList, setYearList] = useState([]);
   let yearString = new Date();
   yearString = yearString.getFullYear();
-  // yearString = `"${yearString}-01-01" and "${yearString}-12-31"`;
+  const [chartData, setChartData] = useState([]);
   yearString = '2020-01-01 and 2020-12-31';
   const [year, setYear] = useState();
 
@@ -28,7 +28,7 @@ const AccountPlanner = props => {
     formdata.append("endDate", "2020-12-31");
     return apiInstance
       .post("/account_planner/getIncExpChartData",formdata)
-      .then(res => res.data.response)
+      .then(res => res.data)
       .catch(error => {
         console.log(error);
       });
@@ -45,13 +45,11 @@ const AccountPlanner = props => {
 
   useEffect(() => {
     document.title = `${appData.display_name} | Account planner`;
-    // apiInstance
-    //   .get("/account_planner/year_list")
-    //   .then(res => setYearList(res.data.response))
     const a = getIncExpChartData();
     const b = getYearList();
      Promise.all([a, b]).then(r => {
-      console.log(r);
+      setChartData(r[0].response);
+      setYearList(r[1]);
     });
 
   },[])
@@ -78,7 +76,7 @@ const AccountPlanner = props => {
               </div>
             </div>
             <div className="flex bigWidth">
-              <Chart key={1} />
+              <Chart chartData={chartData} key={1} />
             </div>
             <div className="row">
               <div className="col-md-12 m-reduce-padding">
