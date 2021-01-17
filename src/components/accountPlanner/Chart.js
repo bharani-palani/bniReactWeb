@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import DonutChart from "react-donut-chart";
 import helpers from "../../helpers";
-import Loader from "react-loader-spinner";
 // https://www.npmjs.com/package/react-donut-chart
 
 const Chart = props => {
   let { chartData, onMonthYearSelected } = props;
   const [data, setData] = useState([]);
-  const [loaderState, setLoaderState] = useState(false);
   const [monthYearSelected, setMonthYearSelected] = useState("");
+  const [noRecords, setNoRecords] = useState(false);
 
   useEffect(() => {
-    setLoaderState(true);
     let monthArray = chartData.map(d => String(d.dated));
     monthArray = [...new Set(monthArray)];
     const data = monthArray.map(m => {
@@ -30,11 +28,12 @@ const Chart = props => {
       return obj;
     });
     setData(data);
-    if(data.length > 0) {
+    if (data.length > 0) {
       setMonthYearSelected(data[0].month);
       onMonthYearSelected(data[0].month);
-      setLoaderState(false)
-    };
+    } else {
+      setNoRecords(true)
+    }
   }, [chartData]);
 
   // Interface
@@ -45,48 +44,40 @@ const Chart = props => {
   const colors = helpers.donutChartColors;
   return (
     <>
-      {loaderState ? (
-        <div className="relativeSpinner">
-          <Loader
-            type={helpers.LoadRandomSpinnerIcon()}
-            color={helpers.fluorescentColor}
-            height={100}
-            width={100}
+      {data.length > 0 ? data.map((d, i) => (
+        <div className="chartWrapper" key={genId(i)}>
+          <div className="text-center pt-10 pb-10">
+            <button
+              className={`btn btn-sm btn-capsule ${
+                String(monthYearSelected) === String(d.month) ? "active" : ""
+              }`}
+              onClick={() => {
+                setMonthYearSelected(d.month);
+                onMonthYearSelected(d.month);
+              }}
+            >
+              {d.month}
+            </button>
+          </div>
+          <DonutChart
+            strokeColor={`#000`}
+            innerRadius={0.7}
+            outerRadius={0.9}
+            clickToggle={true}
+            colors={colors}
+            height={220}
+            width={220}
+            legend={false}
+            data={d.cData}
+            formatValues={(values, total) =>
+              `${helpers.indianLacSeperator(values)} / (${(
+                (values / total) *
+                100
+              ).toFixed(2)}%)`
+            }
           />
         </div>
-      ) : (
-        data.map((d, i) => (
-          <div className="chartWrapper" key={genId(i)}>
-            <div className="text-center pt-10 pb-10">
-              <button
-                className={`btn btn-sm btn-capsule ${
-                  String(monthYearSelected) === String(d.month) ? "active" : ""
-                }`}
-                onClick={() => {
-                  setMonthYearSelected(d.month);
-                  onMonthYearSelected(d.month);
-                }}
-              >
-                {d.month}
-              </button>
-            </div>
-            <DonutChart
-              strokeColor={`#000`}
-              innerRadius={0.7}
-              outerRadius={0.9}
-              clickToggle={true}
-              colors={colors}
-              height={200}
-              width={200}
-              legend={false}
-              data={d.cData}
-              formatValues={(values, total) =>
-                `${values} / (${((values / total) * 100).toFixed(2)}%)`
-              }
-            />
-          </div>
-        ))
-      )}
+      )) : (<div className="noRecords block mt-10 ml-15 mr-25">No records</div>)}
     </>
   );
 };

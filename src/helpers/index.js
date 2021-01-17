@@ -47,7 +47,15 @@ const helpers = {
     "#795548",
     "#607d8b",
     "#f44336"
-  ]
+  ],
+  indianLacSeperator: value => {
+    return value.toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      style: "currency",
+      currency: "INR"
+    });
+  }
+
 };
 
 export default helpers;

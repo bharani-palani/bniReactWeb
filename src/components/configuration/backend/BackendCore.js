@@ -181,13 +181,6 @@ function BackendCore(props) {
       <div className="capitalize" dangerouslySetInnerHTML={fMessage()} />
     );
 
-  const indianLacSeperator = value => {
-    return value.toLocaleString("en-IN", {
-      maximumFractionDigits: 2,
-      style: "currency",
-      currency: "INR"
-    });
-  };
   const getColumnTotal = key => {
     let total = "";
     if (showTotal && showTotal.length && showTotal[0].whichKey) {
@@ -200,7 +193,7 @@ function BackendCore(props) {
               .reduce((a, b) => Number(a) + Number(b[key]), 0);
             return (
               <div key={i}>
-                {indianLacSeperator(number)}
+                {helpers.indianLacSeperator(number)}
                 {` (${v})`}
               </div>
             );
@@ -208,7 +201,7 @@ function BackendCore(props) {
         });
     } else {
       total = dbData.reduce((a, b) => Number(a) + Number(b[key]), 0);
-      total = indianLacSeperator(total);
+      total = helpers.indianLacSeperator(total);
     }
     return total;
   };

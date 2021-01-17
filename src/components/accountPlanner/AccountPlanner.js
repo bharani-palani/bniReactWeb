@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-// import Loader from "react-loader-spinner";
-// import helpers from "../../helpers";
+import Loader from "react-loader-spinner";
+import helpers from "../../helpers";
 import Chart from "./Chart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
 import SetBank from "./SetBank";
@@ -24,6 +24,8 @@ const AccountPlanner = props => {
   const [yearSelected, setYearSelected] = useState("");
   const [bankSelected, setBankSelected] = useState("");
   const [monthYearSelected, setMonthYearSelected] = useState("");
+
+  const [chartLoader, setChartLoader] = useState(false);
 
   const startDate = `${yearSelected}-01-01`;
   const endtDate = `${yearSelected}-12-31`;
@@ -65,42 +67,48 @@ const AccountPlanner = props => {
       setYearList(r[0]);
       setYearSelected(r[0][0].id);
       setBankList(r[1]);
-      setBankSelected(r[1][0].id)
+      setBankSelected(r[1][0].id);
     });
-  },[]);
+  }, []);
 
   useEffect(() => {
-      const a = getIncExpChartData(startDate, endtDate, bankSelected);
-      Promise.all([a]).then(r => {
-        setChartData(r[0].response);
-      });
+    setChartLoader(true);
+    const a = getIncExpChartData(startDate, endtDate, bankSelected);
+    Promise.all([a]).then(r => {
+      setChartData(r[0].response);
+      setChartLoader(false);
+    });
   }, [startDate, endtDate, bankSelected]);
 
   const onChangeYear = year => {
     setChartData([]);
     setYearSelected(year);
+    setChartLoader(true);
     const sDate = `${year}-01-01`;
     const eDate = `${year}-12-31`;
     const a = getIncExpChartData(sDate, eDate, bankSelected);
     Promise.all([a]).then(r => {
       setChartData(r[0].response);
+      setChartLoader(false);
     });
   };
 
-  const onChangeBank = (bank) => {
+  const onChangeBank = bank => {
     setChartData([]);
     setBankSelected(bank);
+    setChartLoader(true);
     const sDate = `${yearSelected}-01-01`;
     const eDate = `${yearSelected}-12-31`;
     const a = getIncExpChartData(sDate, eDate, bank);
     Promise.all([a]).then(r => {
       setChartData(r[0].response);
+      setChartLoader(false);
     });
-  }
+  };
 
-  const onMonthYearSelected = (monthYear) => {
+  const onMonthYearSelected = monthYear => {
     setMonthYearSelected(monthYear);
-  }
+  };
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title">
@@ -133,7 +141,21 @@ const AccountPlanner = props => {
               </div>
             </div>
             <div className="flex bigWidth">
-              <Chart chartData={chartData} onMonthYearSelected={onMonthYearSelected} />
+              {chartLoader ? (
+                <div className="relativeSpinner">
+                  <Loader
+                    type={helpers.LoadRandomSpinnerIcon()}
+                    color={helpers.fluorescentColor}
+                    height={100}
+                    width={100}
+                  />
+                </div>
+              ) : (
+                <Chart
+                  chartData={chartData}
+                  onMonthYearSelected={onMonthYearSelected}
+                />
+              )}
             </div>
             <div className="row">
               <div className="col-md-12 m-reduce-padding">
@@ -142,7 +164,11 @@ const AccountPlanner = props => {
             </div>
             <div className="row">
               <div className="col-md-12 b-0 mb-10 m-reduce-padding">
-                <MonthExpenditureTable bankSelected={bankSelected} startDate={startDate} endtDate={endtDate} />
+                <MonthExpenditureTable
+                  bankSelected={bankSelected}
+                  startDate={startDate}
+                  endtDate={endtDate}
+                />
               </div>
             </div>
             <div className="row">

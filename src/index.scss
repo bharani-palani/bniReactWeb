@@ -333,6 +333,9 @@ th {
   margin-bottom: 1rem;
   color: $fluorescent-color;
   border-top: solid 1px $fluorescent-color;
+  &.block {
+    width: 100%;
+  }
 }
 .grey-color {
   color: $text-color;
