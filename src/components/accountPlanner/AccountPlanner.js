@@ -14,7 +14,6 @@ import AppContext from "../../contexts/AppContext";
 import apiInstance from "../../services/apiServices";
 
 const AccountPlanner = props => {
-  const date = new Date();
   const [appData] = useContext(AppContext);
   document.title = `${appData.display_name} | Account planner`;
 
@@ -24,6 +23,7 @@ const AccountPlanner = props => {
 
   const [yearSelected, setYearSelected] = useState("");
   const [bankSelected, setBankSelected] = useState("");
+  const [monthYearSelected, setMonthYearSelected] = useState("");
 
   const startDate = `${yearSelected}-01-01`;
   const endtDate = `${yearSelected}-12-31`;
@@ -98,6 +98,9 @@ const AccountPlanner = props => {
     });
   }
 
+  const onMonthYearSelected = (monthYear) => {
+    setMonthYearSelected(monthYear);
+  }
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title">
@@ -130,7 +133,7 @@ const AccountPlanner = props => {
               </div>
             </div>
             <div className="flex bigWidth">
-              <Chart chartData={chartData} key={1} />
+              <Chart chartData={chartData} onMonthYearSelected={onMonthYearSelected} />
             </div>
             <div className="row">
               <div className="col-md-12 m-reduce-padding">
@@ -139,7 +142,7 @@ const AccountPlanner = props => {
             </div>
             <div className="row">
               <div className="col-md-12 b-0 mb-10 m-reduce-padding">
-                <MonthExpenditureTable />
+                <MonthExpenditureTable bankSelected={bankSelected} startDate={startDate} endtDate={endtDate} />
               </div>
             </div>
             <div className="row">

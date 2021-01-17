@@ -6,9 +6,10 @@ import Loader from "react-loader-spinner";
 // https://www.npmjs.com/package/react-donut-chart
 
 const Chart = props => {
-  let { chartData } = props;
+  let { chartData, onMonthYearSelected } = props;
   const [data, setData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
+  const [monthYearSelected, setMonthYearSelected] = useState("");
 
   useEffect(() => {
     setLoaderState(true);
@@ -24,12 +25,16 @@ const Chart = props => {
       }));
       const obj = {
         month: m,
-        cData: isThere,
+        cData: isThere
       };
       return obj;
     });
     setData(data);
-    data.length > 0 && setLoaderState(false);
+    if(data.length > 0) {
+      setMonthYearSelected(data[0].month);
+      onMonthYearSelected(data[0].month);
+      setLoaderState(false)
+    };
   }, [chartData]);
 
   // Interface
@@ -51,8 +56,20 @@ const Chart = props => {
         </div>
       ) : (
         data.map((d, i) => (
-          <div className="chartWrapper" key={genId(i)} onClick={() => alert(d.month)}>
-            <h4 className="text-center">{d.month}</h4>
+          <div className="chartWrapper" key={genId(i)}>
+            <div className="text-center pt-10 pb-10">
+              <button
+                className={`btn btn-sm btn-capsule ${
+                  String(monthYearSelected) === String(d.month) ? "active" : ""
+                }`}
+                onClick={() => {
+                  setMonthYearSelected(d.month);
+                  onMonthYearSelected(d.month);
+                }}
+              >
+                {d.month}
+              </button>
+            </div>
             <DonutChart
               strokeColor={`#000`}
               innerRadius={0.7}

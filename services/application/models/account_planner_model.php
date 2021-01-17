@@ -36,6 +36,7 @@ class account_planner_model extends CI_Model
 	{
 		$startDate = $post['startDate'];
 		$endDate = $post['endDate'];
+		$bank = $post['bank'];
 		$this->db
 			->select(array(
 				'DATE_FORMAT(a.inc_exp_date, "%b-%Y") as dated', 
@@ -46,6 +47,7 @@ class account_planner_model extends CI_Model
 			->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
 			->where('a.inc_exp_date >=', $startDate)
 			->where('a.inc_exp_date <=', $endDate)
+			->where('inc_exp_bank', $bank)
 			->where('a.inc_exp_type', "Dr")
 			->group_by(array("dated", "category"))
 			->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc");

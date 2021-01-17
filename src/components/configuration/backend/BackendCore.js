@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 function BackendCore(props) {
   const Table = props.Table;
   const TableRows = props.TableRows;
+  const WhereClause = props.WhereClause;
   const getApiUrl = props.getApiUrl;
   const postApiUrl = props.postApiUrl;
   const showTotal = props.showTotal;
@@ -39,6 +40,8 @@ function BackendCore(props) {
     const formdata = new FormData();
     formdata.append("TableRows", TableRows);
     formdata.append("Table", Table);
+    formdata.append("WhereClause", WhereClause);
+
     return apiInstance
       .post(getApiUrl, formdata)
       .then(r => r.data.response)
@@ -346,13 +349,15 @@ BackendCore.propTypes = {
   Table: PropTypes.string,
   label: PropTypes.string,
   TableRows: PropTypes.array,
+  WhereClause: PropTypes.string,
   showTotal: PropTypes.array,
   rowKeyUp: PropTypes.string,
   rowElements: PropTypes.array
 };
 BackendCore.defaultProps = {
   rowKeyUp: "",
-  showTotal: []
+  showTotal: [],
+  WhereClause: ""
 };
 
 export default BackendCore;

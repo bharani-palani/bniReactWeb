@@ -4,7 +4,8 @@ import { monthExpenditureConfig } from "../configuration/backendTableConfig";
 import BackendCore from "../../components/configuration/backend/BackendCore";
 
 const MonthExpenditureTable = props => {
-  //   const { id, name } = props;
+    const { startDate, endtDate, bankSelected } = props;
+    const WhereClause = 'inc_exp_date between "'+startDate+'" and "'+endtDate+'" and inc_exp_bank = "'+bankSelected+'"';
   return (
     <div className="settings">
       {monthExpenditureConfig
@@ -14,6 +15,7 @@ const MonthExpenditureTable = props => {
             key={i}
             Table={t.Table}
             TableRows={t.TableRows}
+            WhereClause={WhereClause}
             rowElements={t.rowElements}
             showTotal={t.showTotal}
             rowKeyUp={t.rowKeyUp}

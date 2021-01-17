@@ -83,7 +83,8 @@ class account_planner extends CI_Controller {
 		if($validate === 1) {
 			$post = array(
 				"startDate" => $this->input->post("startDate"),
-				"endDate" => $this->input->post("endDate")
+				"endDate" => $this->input->post("endDate"),
+				"bank" => $this->input->post("bank")
 			);
 			$data = $this->account_planner_model->getIncExpChartData($post);
 			$op["response"] = $data["result"];
