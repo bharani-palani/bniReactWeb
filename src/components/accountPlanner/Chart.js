@@ -16,20 +16,22 @@ const Chart = props => {
     monthArray = [...new Set(monthArray)];
     const data = monthArray.map(m => {
       let isThere = chartData.filter(cd => String(cd.dated) === String(m));
-      isThere = isThere.map(({ category, total }) => ({
+      isThere = isThere.map(({ category, total, dated }) => ({
+        month: dated,
         label: category,
-        value: Number(total)
+        value: Number(total),
+        isEmpty: Number(total) <= 0
       }));
       const obj = {
         month: m,
-        cData: isThere
-        // isEmpty:true
+        cData: isThere,
       };
       return obj;
     });
     setData(data);
     data.length > 0 && setLoaderState(false);
   }, [chartData]);
+
   // Interface
   // {dated: "Dec-2020", total: "0.00", category: "Bike petrol"}
   // cData = { label: "Mobile bill", value: 120 },
@@ -49,7 +51,7 @@ const Chart = props => {
         </div>
       ) : (
         data.map((d, i) => (
-          <div className="chartWrapper" key={genId(i)} onClick={() => alert(i)}>
+          <div className="chartWrapper" key={genId(i)} onClick={() => alert(d.month)}>
             <h4 className="text-center">{d.month}</h4>
             <DonutChart
               strokeColor={`#000`}

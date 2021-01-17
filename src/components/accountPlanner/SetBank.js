@@ -1,31 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
 const SetDefault = props => {
-  const [dropDownList, setDropDownList] = useState([
-    { id: 1, value: "HDFC" },
-    { id: 2, value: "INDIAN BANK" }
-  ]);
-  const [dropDownSelected, setDropDownSelected] = useState("HDFC");
-  const onDropDownSelect = id => {
-    setDropDownSelected(dropDownList.filter(d => d.id === id)[0].value);
-  };
+  const {bankList, onSelectYear} = props;
+  const [bankSelected, setBankSelected] = useState("");
+  
+  useEffect(() => {
+    if(bankList.length > 0) {
+      setBankSelected(bankList[0].value);
+    }
+  },[bankList])
   return (
     <>
       <span>Select bank</span>
       <SelectableContext.Provider value={false}>
         <Dropdown>
           <Dropdown.Toggle>
-            {dropDownSelected} <i className="fa fa-chevron-down" />
+            {bankSelected} <i className="fa fa-chevron-down" />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {dropDownList.map((d, i) => (
+            {bankList.map((d, i) => (
               <Dropdown.Item
                 key={i}
                 onClick={e => {
-                  onDropDownSelect(d.id);
+                  setBankSelected(d.value);
+                  onSelectYear(d.id);
                 }}
               >
                 {d.value}

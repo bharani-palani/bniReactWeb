@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
 const SetDefault = props => {
   const {yearList, onSelectYear} = props;
-  const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
+  const [yearSelected, setYearSelected] = useState("");
+
+  useEffect(() => {
+    if(yearList.length > 0) {
+      setYearSelected(yearList[0].value);
+    }
+  },[yearList])
 
   return (
     <>

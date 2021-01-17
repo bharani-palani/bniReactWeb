@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 // import Loader from "react-loader-spinner";
 // import helpers from "../../helpers";
@@ -14,20 +14,27 @@ import AppContext from "../../contexts/AppContext";
 import apiInstance from "../../services/apiServices";
 
 const AccountPlanner = props => {
+  const date = new Date();
   const [appData] = useContext(AppContext);
-  const [yearList, setYearList] = useState([]);
-  let yearString = new Date();
-  yearString = yearString.getFullYear();
-  const [chartData, setChartData] = useState([]);
-  yearString = '2020-01-01 and 2020-12-31';
-  const [year, setYear] = useState();
+  document.title = `${appData.display_name} | Account planner`;
 
-  const getIncExpChartData = () => {
+  const [yearList, setYearList] = useState([]);
+  const [bankList, setBankList] = useState([]);
+  const [chartData, setChartData] = useState([]);
+
+  const [yearSelected, setYearSelected] = useState("");
+  const [bankSelected, setBankSelected] = useState("");
+
+  const startDate = `${yearSelected}-01-01`;
+  const endtDate = `${yearSelected}-12-31`;
+
+  const getIncExpChartData = (sDate, eDate, bank) => {
     const formdata = new FormData();
-    formdata.append("startDate", "2020-01-01");
-    formdata.append("endDate", "2020-12-31");
+    formdata.append("startDate", sDate);
+    formdata.append("endDate", eDate);
+    formdata.append("bank", bank);
     return apiInstance
-      .post("/account_planner/getIncExpChartData",formdata)
+      .post("/account_planner/getIncExpChartData", formdata)
       .then(res => res.data)
       .catch(error => {
         console.log(error);
@@ -43,16 +50,53 @@ const AccountPlanner = props => {
       });
   };
 
+  const getBankList = () => {
+    return apiInstance
+      .get("/account_planner/bank_list")
+      .then(res => res.data.response)
+      .catch(error => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
-    document.title = `${appData.display_name} | Account planner`;
-    const a = getIncExpChartData();
-    const b = getYearList();
-     Promise.all([a, b]).then(r => {
-      setChartData(r[0].response);
-      setYearList(r[1]);
+    const a = getYearList();
+    const b = getBankList();
+    Promise.all([a, b]).then(r => {
+      setYearList(r[0]);
+      setYearSelected(r[0][0].id);
+      setBankList(r[1]);
+      setBankSelected(r[1][0].id)
     });
+  },[]);
 
-  },[])
+  useEffect(() => {
+      const a = getIncExpChartData(startDate, endtDate, bankSelected);
+      Promise.all([a]).then(r => {
+        setChartData(r[0].response);
+      });
+  }, [startDate, endtDate, bankSelected]);
+
+  const onChangeYear = year => {
+    setChartData([]);
+    setYearSelected(year);
+    const sDate = `${year}-01-01`;
+    const eDate = `${year}-12-31`;
+    const a = getIncExpChartData(sDate, eDate, bankSelected);
+    Promise.all([a]).then(r => {
+      setChartData(r[0].response);
+    });
+  };
+
+  const onChangeBank = (bank) => {
+    setChartData([]);
+    setBankSelected(bank);
+    const sDate = `${yearSelected}-01-01`;
+    const eDate = `${yearSelected}-12-31`;
+    const a = getIncExpChartData(sDate, eDate, bank);
+    Promise.all([a]).then(r => {
+      setChartData(r[0].response);
+    });
+  }
 
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
@@ -69,10 +113,20 @@ const AccountPlanner = props => {
           <div className="accountPlanner">
             <div className="row">
               <div className="col-sm-3 m-reduce-padding">
-                <SetBank />
+                {bankList.length > 0 && (
+                  <SetBank
+                    bankList={bankList}
+                    onSelectYear={bank => onChangeBank(bank)}
+                  />
+                )}
               </div>
               <div className="col-sm-3 m-reduce-padding">
-                <SetYear yearList={yearList} onSelectYear={(year) => alert(year)}  />
+                {yearList.length > 0 && (
+                  <SetYear
+                    yearList={yearList}
+                    onSelectYear={year => onChangeYear(year)}
+                  />
+                )}
               </div>
             </div>
             <div className="flex bigWidth">
@@ -91,7 +145,7 @@ const AccountPlanner = props => {
             <div className="row">
               <div className="col-md-12 m-reduce-padding">
                 <TypeCreditCardExpenditure />
-              </div>  
+              </div>
             </div>
             <div className="row">
               <div className="col-md-12 m-reduce-padding">
