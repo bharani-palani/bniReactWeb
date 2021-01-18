@@ -102,7 +102,8 @@ class account_planner extends CI_Controller {
 		if($validate === 1) {
 			$post = array(
 				"TableRows" => $this->input->post("TableRows"),
-				"Table" => $this->input->post("Table")
+				"Table" => $this->input->post("Table"),
+				"WhereClause" => $this->input->post("WhereClause")
 			);
 			$data["response"] = $this->account_planner_model->getAccountPlanner($post);
 			$this->auth->response($data,array(),200);
