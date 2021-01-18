@@ -58,7 +58,7 @@ class account_planner_model extends CI_Model
 	function getAccountPlanner($post) {
 		$Table = $post["Table"];
 		// $where = 'inc_exp_date between "2021-01-01" and "2021-01-31"';
-		$where = $post["where"];
+		$where = $post["WhereClause"];
 		$this->db->select($post["TableRows"]);
 		switch ($Table) {
 				case "banks":
