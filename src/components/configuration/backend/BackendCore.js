@@ -18,7 +18,7 @@ function BackendCore(props) {
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
   const autoClose = 3000;
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [btnLoader, setBtnLoader] = useState(false);
   const [updatedIds, setUpdatedIds] = useState([]);
   const [sortType, setSortType] = useState(false);
@@ -40,7 +40,9 @@ function BackendCore(props) {
     const formdata = new FormData();
     formdata.append("TableRows", TableRows);
     formdata.append("Table", Table);
-    formdata.append("WhereClause", WhereClause);
+    if (WhereClause) {
+      formdata.append("WhereClause", WhereClause);
+    }
 
     return apiInstance
       .post(getApiUrl, formdata)
@@ -63,6 +65,7 @@ function BackendCore(props) {
   };
 
   const runAllApis = callBack => {
+    setLoader(true);
     const a = createRowElementArray();
     const b = getBackendAjax();
 
@@ -80,6 +83,10 @@ function BackendCore(props) {
     runAllApis();
   }, [TableRows, Table, props.rowElements]);
 
+  useEffect(() => {
+    runAllApis();
+    // console.log(WhereClause);
+  }, [WhereClause]);
   const updateDbData = (index, data, primaryKey) => {
     // update DB data
     const { i, j } = index;
@@ -221,8 +228,9 @@ function BackendCore(props) {
     setDbData(filteredDbData);
     setSortType(!type);
   };
+
   return loader === false ? (
-    <div className="container-fluid backendConfigureSection">
+    <div className="backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
       <h5 className="heading">
         Table: {helpers.stringToCapitalize(Table)} ({dbData.length} record
@@ -284,6 +292,7 @@ function BackendCore(props) {
                               {helpers.stringToCapitalize(r)}
                             </div>
                             {getColumnTotal(r)}
+                            {/* <div>{getTotal(r)}</div> */}
                           </>
                         ) : (
                           ""

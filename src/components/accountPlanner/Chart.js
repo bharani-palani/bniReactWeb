@@ -77,7 +77,7 @@ const Chart = props => {
             }
           />
         </div>
-      )) : (<div className="noRecords block mt-10 ml-15 mr-25">No records</div>)}
+      )) : (<div className="noRecords block mt-10">No Records</div>)}
     </>
   );
 };

@@ -21,6 +21,11 @@ code {
     border: 0;
     outline: 0 !important;
   }
+  &.sm {
+    padding: 1rem;
+    font-weight: 450;
+    border-radius: 5px;
+  }
 }
 .btn-bni-sm {
   background: #333;

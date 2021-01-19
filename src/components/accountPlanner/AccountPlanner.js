@@ -26,9 +26,10 @@ const AccountPlanner = props => {
   const [monthYearSelected, setMonthYearSelected] = useState("");
 
   const [chartLoader, setChartLoader] = useState(false);
+  const [toggleCoreSettings, setToggleCoreSettings] = useState(false);
 
   const startDate = `${yearSelected}-01-01`;
-  const endtDate = `${yearSelected}-12-31`;
+  const endDate = `${yearSelected}-12-31`;
 
   const getIncExpChartData = (sDate, eDate, bank) => {
     const formdata = new FormData();
@@ -73,12 +74,12 @@ const AccountPlanner = props => {
 
   useEffect(() => {
     setChartLoader(true);
-    const a = getIncExpChartData(startDate, endtDate, bankSelected);
+    const a = getIncExpChartData(startDate, endDate, bankSelected);
     Promise.all([a]).then(r => {
       setChartData(r[0].response);
       setChartLoader(false);
     });
-  }, [startDate, endtDate, bankSelected]);
+  }, [startDate, endDate, bankSelected]);
 
   const onChangeYear = year => {
     setChartData([]);
@@ -123,7 +124,23 @@ const AccountPlanner = props => {
         <div className="container-fluid">
           <div className="accountPlanner">
             <div className="row">
-              <div className="col-sm-3 m-reduce-padding">
+              <div className="col-md-3 pl-0 pr-0">
+                <buttton
+                  className="btn btn-bni sm btn-block"
+                  onClick={() => setToggleCoreSettings(!toggleCoreSettings)}
+                >
+                  Toogle Core Settings
+                  <i className={`fa fa-level-${toggleCoreSettings ? "up" : "down"} pull-right`} />
+                </buttton>
+              </div>
+              {toggleCoreSettings && (
+                <div className="col-md-12 pr-0 pl-0">
+                  <CreateModule />
+                </div>
+              )}
+            </div>
+            <div className="row mt-10">
+              <div className="col-sm-3 pr-0 pl-0">
                 {bankList.length > 0 && (
                   <SetBank
                     bankList={bankList}
@@ -158,26 +175,22 @@ const AccountPlanner = props => {
               )}
             </div>
             <div className="row">
-              <div className="col-md-12 m-reduce-padding">
-                <CreateModule />
+              <div className="col-md-12 b-0 mb-10 pr-0 pl-0">
+                {bankSelected && monthYearSelected && (
+                  <MonthExpenditureTable
+                    bankSelected={bankSelected}
+                    monthYearSelected={monthYearSelected}
+                  />
+                )}
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12 b-0 mb-10 m-reduce-padding">
-                <MonthExpenditureTable
-                  bankSelected={bankSelected}
-                  startDate={startDate}
-                  endtDate={endtDate}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 m-reduce-padding">
+              <div className="col-md-12 pr-0 pl-0">
                 <TypeCreditCardExpenditure />
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12 m-reduce-padding">
+              <div className="col-md-12 pr-0 pl-0">
                 <AnalysisChart />
               </div>
             </div>
