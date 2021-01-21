@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
-const SetDefault = props => {
+const SetYear = props => {
   const {yearList, onSelectYear} = props;
   const [yearSelected, setYearSelected] = useState("");
 
@@ -40,11 +40,11 @@ const SetDefault = props => {
   );
 };
 
-SetDefault.propTypes = {
+SetYear.propTypes = {
   property: PropTypes.string
 };
-SetDefault.defaultProps = {
+SetYear.defaultProps = {
   property: "String name"
 };
 
-export default SetDefault;
+export default SetYear;

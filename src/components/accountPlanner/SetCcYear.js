@@ -3,30 +3,31 @@ import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
-const SetBank = props => {
-  const {bankList, onSelectYear} = props;
-  const [bankSelected, setBankSelected] = useState("");
-  
+const SetCcYear = props => {
+  const {ccYearList, onSelectCcYear} = props;
+  const [ccYearSelected, setCcYearSelected] = useState("");
+
   useEffect(() => {
-    if(bankList.length > 0) {
-      setBankSelected(bankList[0].value);
+    if(ccYearList.length > 0) {
+      setCcYearSelected(ccYearList[0].value);
     }
-  },[bankList])
+  },[ccYearList])
+
   return (
     <>
-      <span>Select bank</span>
+      <span>Select year</span>
       <SelectableContext.Provider value={false}>
         <Dropdown>
           <Dropdown.Toggle>
-            {bankSelected} <i className="fa fa-chevron-down" />
+            {ccYearSelected} <i className="fa fa-chevron-down" />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {bankList.map((d, i) => (
+            {ccYearList && ccYearList.length > 0 && ccYearList.map((d, i) => (
               <Dropdown.Item
                 key={i}
-                onClick={e => {
-                  setBankSelected(d.value);
-                  onSelectYear(d.id);
+                onClick={() => {
+                  setCcYearSelected(d.id);
+                  onSelectCcYear(d.id)
                 }}
               >
                 {d.value}
@@ -39,11 +40,11 @@ const SetBank = props => {
   );
 };
 
-SetBank.propTypes = {
+SetCcYear.propTypes = {
   property: PropTypes.string
 };
-SetBank.defaultProps = {
+SetCcYear.defaultProps = {
   property: "String name"
 };
 
-export default SetBank;
+export default SetCcYear;

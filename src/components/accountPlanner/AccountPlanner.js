@@ -6,6 +6,7 @@ import Chart from "./Chart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
 import SetBank from "./SetBank";
 import SetYear from "./SetYear";
+import SetCcYear from "./SetCcYear";
 import CreateModule from "./CreateModule";
 import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
 import AnalysisChart from "./AnalysisChart";
@@ -18,9 +19,11 @@ const AccountPlanner = props => {
   document.title = `${appData.display_name} | Account planner`;
 
   const [yearList, setYearList] = useState([]);
+  const [ccYearList, setCcYearList] = useState([]);
   const [bankList, setBankList] = useState([]);
   const [chartData, setChartData] = useState([]);
 
+  const [ccYearSelected, setCcYearSelected] = useState("");
   const [yearSelected, setYearSelected] = useState("");
   const [bankSelected, setBankSelected] = useState("");
   const [monthYearSelected, setMonthYearSelected] = useState("");
@@ -53,6 +56,15 @@ const AccountPlanner = props => {
       });
   };
 
+  const getCcYearList = () => {
+    return apiInstance
+      .get("/account_planner/cc_year_list")
+      .then(res => res.data.response)
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   const getBankList = () => {
     return apiInstance
       .get("/account_planner/bank_list")
@@ -64,11 +76,14 @@ const AccountPlanner = props => {
   useEffect(() => {
     const a = getYearList();
     const b = getBankList();
-    Promise.all([a, b]).then(r => {
+    const c = getCcYearList();
+    Promise.all([a, b, c]).then(r => {
       setYearList(r[0]);
       setYearSelected(r[0][0].id);
       setBankList(r[1]);
       setBankSelected(r[1][0].id);
+      setCcYearList(r[2]);
+      setCcYearSelected(r[2][0].id);
     });
   }, []);
 
@@ -94,6 +109,9 @@ const AccountPlanner = props => {
     });
   };
 
+  const onChangeCcYear = (year) => {
+    alert(year)  
+  }
   const onChangeBank = bank => {
     setChartData([]);
     setBankSelected(bank);
@@ -110,6 +128,7 @@ const AccountPlanner = props => {
   const onMonthYearSelected = monthYear => {
     setMonthYearSelected(monthYear);
   };
+
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title">
@@ -130,7 +149,11 @@ const AccountPlanner = props => {
                   onClick={() => setToggleCoreSettings(!toggleCoreSettings)}
                 >
                   Toogle Core Settings
-                  <i className={`fa fa-level-${toggleCoreSettings ? "up" : "down"} pull-right`} />
+                  <i
+                    className={`fa fa-level-${
+                      toggleCoreSettings ? "up" : "down"
+                    } pull-right`}
+                  />
                 </buttton>
               </div>
               {toggleCoreSettings && (
@@ -176,10 +199,22 @@ const AccountPlanner = props => {
             </div>
             <div className="row">
               <div className="col-md-12 b-0 mb-10 pr-0 pl-0">
-                {bankSelected && monthYearSelected && (
-                  <MonthExpenditureTable
-                    bankSelected={bankSelected}
-                    monthYearSelected={monthYearSelected}
+                {!isNaN(bankSelected) &&
+                  new Date(monthYearSelected) instanceof Date &&
+                  !isNaN(new Date(monthYearSelected)) && (
+                    <MonthExpenditureTable
+                      bankSelected={bankSelected}
+                      monthYearSelected={monthYearSelected}
+                    />
+                  )}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-3 m-reduce-padding">
+                {yearList.length > 0 && (
+                  <SetCcYear
+                    ccYearList={ccYearList}
+                    onSelectYear={year => onChangeCcYear(year)}
                   />
                 )}
               </div>

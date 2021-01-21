@@ -44,7 +44,7 @@ const Chart = props => {
   const colors = helpers.donutChartColors;
   return (
     <>
-      {data.length > 0 ? data.map((d, i) => (
+      {data && data.length > 0 ? data.map((d, i) => (
         <div className="chartWrapper" key={genId(i)}>
           <div className="text-center pt-10 pb-10">
             <button
