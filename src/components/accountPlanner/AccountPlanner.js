@@ -7,6 +7,7 @@ import MonthExpenditureTable from "./MonthExpenditureTable";
 import SetBank from "./SetBank";
 import SetYear from "./SetYear";
 import SetCcYear from "./SetCcYear";
+import SetCcBank from "./SetCcBank";
 import CreateModule from "./CreateModule";
 import TypeCreditCardExpenditure from "./TypeCreditCardExpenditure";
 import AnalysisChart from "./AnalysisChart";
@@ -24,15 +25,15 @@ const AccountPlanner = props => {
   const [chartData, setChartData] = useState([]);
 
   const [ccYearSelected, setCcYearSelected] = useState("");
+  const [ccBankList, setCcBankList] = useState([]);
+  const [ccBankSelected, setCcBankSelected] = useState("");
+
   const [yearSelected, setYearSelected] = useState("");
   const [bankSelected, setBankSelected] = useState("");
   const [monthYearSelected, setMonthYearSelected] = useState("");
 
   const [chartLoader, setChartLoader] = useState(false);
   const [toggleCoreSettings, setToggleCoreSettings] = useState(false);
-
-  const startDate = `${yearSelected}-01-01`;
-  const endDate = `${yearSelected}-12-31`;
 
   const getIncExpChartData = (sDate, eDate, bank) => {
     const formdata = new FormData();
@@ -73,52 +74,49 @@ const AccountPlanner = props => {
         console.log(error);
       });
   };
+  const getCcBankList = () => {
+    return apiInstance
+      .get("/account_planner/credit_card_list")
+      .then(res => res.data.response)
+      .catch(error => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     const a = getYearList();
     const b = getBankList();
     const c = getCcYearList();
-    Promise.all([a, b, c]).then(r => {
+    const d = getCcBankList();
+    Promise.all([a, b, c, d]).then(r => {
       setYearList(r[0]);
       setYearSelected(r[0][0].id);
       setBankList(r[1]);
       setBankSelected(r[1][0].id);
       setCcYearList(r[2]);
       setCcYearSelected(r[2][0].id);
+      setCcBankList(r[3]);
+      setCcBankSelected(r[3][0].id);
     });
   }, []);
 
-  useEffect(() => {
-    setChartLoader(true);
-    const a = getIncExpChartData(startDate, endDate, bankSelected);
-    Promise.all([a]).then(r => {
-      setChartData(r[0].response);
-      setChartLoader(false);
-    });
-  }, [startDate, endDate, bankSelected]);
+  // useEffect(() => {
+  //   generateExpenses();
+  // }, [yearSelected, bankSelected]);
 
   const onChangeYear = year => {
-    setChartData([]);
     setYearSelected(year);
-    setChartLoader(true);
-    const sDate = `${year}-01-01`;
-    const eDate = `${year}-12-31`;
-    const a = getIncExpChartData(sDate, eDate, bankSelected);
-    Promise.all([a]).then(r => {
-      setChartData(r[0].response);
-      setChartLoader(false);
-    });
   };
 
-  const onChangeCcYear = (year) => {
-    alert(year)  
-  }
   const onChangeBank = bank => {
-    setChartData([]);
     setBankSelected(bank);
+  };
+
+  const generateExpenses = () => {
     setChartLoader(true);
+    setChartData([]);
     const sDate = `${yearSelected}-01-01`;
     const eDate = `${yearSelected}-12-31`;
-    const a = getIncExpChartData(sDate, eDate, bank);
+    const a = getIncExpChartData(sDate, eDate, bankSelected);
     Promise.all([a]).then(r => {
       setChartData(r[0].response);
       setChartLoader(false);
@@ -129,6 +127,17 @@ const AccountPlanner = props => {
     setMonthYearSelected(monthYear);
   };
 
+  const onChangeCcYear = year => {
+    setCcYearSelected(year);
+  };
+
+  const onChangeCcBank = bank => {
+    setCcBankSelected(bank);
+  };
+
+  const generateCreditCardExpenses = () => {
+    alert(122);
+  };
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title">
@@ -162,23 +171,35 @@ const AccountPlanner = props => {
                 </div>
               )}
             </div>
+            <div class="headLine">Bank Transactions</div>
             <div className="row mt-10">
-              <div className="col-sm-3 pr-0 pl-0">
-                {bankList.length > 0 && (
+              {bankList.length > 0 && (
+                <div className="col-sm-3 pr-0 pl-0">
                   <SetBank
                     bankList={bankList}
-                    onSelectYear={bank => onChangeBank(bank)}
+                    onSelectBank={bank => onChangeBank(bank)}
                   />
-                )}
-              </div>
-              <div className="col-sm-3 m-reduce-padding">
-                {yearList.length > 0 && (
+                </div>
+              )}
+              {yearList.length > 0 && (
+                <div className="col-sm-3 m-reduce-padding">
                   <SetYear
                     yearList={yearList}
                     onSelectYear={year => onChangeYear(year)}
                   />
-                )}
-              </div>
+                </div>
+              )}
+              {bankList.length > 0 && yearList.length > 0 && (
+                <div className="col-sm-3 m-reduce-padding">
+                  <span>&nbsp;</span>
+                  <button
+                    onClick={() => generateExpenses()}
+                    className="btn btn-bni btn-block sm"
+                  >
+                    Generate
+                  </button>
+                </div>
+              )}
             </div>
             <div className="flex bigWidth">
               {chartLoader ? (
@@ -209,15 +230,35 @@ const AccountPlanner = props => {
                   )}
               </div>
             </div>
-            <div className="row">
-              <div className="col-sm-3 m-reduce-padding">
-                {yearList.length > 0 && (
+            <div class="headLine">Credit Card Transactions</div>
+            <div className="row mt-10">
+              {ccBankList.length > 0 && (
+                <div className="col-sm-3 pl-0">
+                  <SetCcBank
+                    ccBankList={ccBankList}
+                    onSelectCcBank={bank => onChangeCcBank(bank)}
+                  />
+                </div>
+              )}
+              {ccYearList.length > 0 && (
+                <div className="col-sm-3 pl-0">
                   <SetCcYear
                     ccYearList={ccYearList}
-                    onSelectYear={year => onChangeCcYear(year)}
+                    onSelectCcYear={year => onChangeCcYear(year)}
                   />
-                )}
-              </div>
+                </div>
+              )}
+              {ccYearList.length > 0 && ccBankList.length > 0 && (
+                <div className="col-sm-3 pl-0">
+                  <span>&nbsp;</span>
+                  <button
+                    onClick={() => generateCreditCardExpenses()}
+                    className="btn btn-bni btn-block sm"
+                  >
+                    Generate
+                  </button>
+                </div>
+              )}
             </div>
             <div className="row">
               <div className="col-md-12 pr-0 pl-0">

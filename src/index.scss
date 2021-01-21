@@ -22,7 +22,7 @@ code {
     outline: 0 !important;
   }
   &.sm {
-    padding: 1rem;
+    padding: 8px;
     font-weight: 450;
     border-radius: 5px;
   }
@@ -45,7 +45,8 @@ code {
     font-size: 12px;
     border-radius: 15px;
   }
-  &:hover, &.active {
+  &:hover,
+  &.active {
     color: $fluorescent-color !important;
     outline: 0 !important;
     border: solid 1px $fluorescent-color;
@@ -337,7 +338,7 @@ th {
   background: $black-two;
   margin-bottom: 1rem;
   color: $fluorescent-color;
-  border-top: solid 1px $fluorescent-color;
+  // border-top: solid 1px $fluorescent-color;
   &.block {
     width: 100%;
   }
@@ -347,4 +348,10 @@ th {
 }
 .black-three-color {
   color: $black-three;
+}
+.headLine {
+  color: #9fb701;
+  padding: 2rem 0;
+  border-bottom: solid 1px $fluorescent-color;
+  font-size: 1.8rem;
 }

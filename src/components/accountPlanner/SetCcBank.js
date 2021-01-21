@@ -3,30 +3,31 @@ import PropTypes from "prop-types";
 import { Dropdown } from "react-bootstrap";
 import SelectableContext from "react-bootstrap/SelectableContext";
 
-const SetBank = props => {
-  const {bankList, onSelectBank} = props;
-  const [bankSelected, setBankSelected] = useState("");
+const SetCcBank = props => {
+  const {ccBankList, onSelectCcBank} = props;
+  const [ccBankSelected, setCcBankSelected] = useState("");
   
   useEffect(() => {
-    if(bankList.length > 0) {
-      setBankSelected(bankList[0].value);
+    if(ccBankList.length > 0) {
+      setCcBankSelected(ccBankList[0].value);
     }
-  },[bankList])
+  },[ccBankList])
+
   return (
     <>
-      <span>Select Accounting Bank</span>
+      <span>Select Credit Card Bank</span>
       <SelectableContext.Provider value={false}>
         <Dropdown>
           <Dropdown.Toggle>
-            {bankSelected} <i className="fa fa-chevron-down" />
+            {ccBankSelected} <i className="fa fa-chevron-down" />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {bankList.map((d, i) => (
+            {ccBankList.map((d, i) => (
               <Dropdown.Item
                 key={i}
                 onClick={e => {
-                  setBankSelected(d.value);
-                  onSelectBank(d.id);
+                  setCcBankSelected(d.value);
+                  onSelectCcBank(d.id);
                 }}
               >
                 {d.value}
@@ -39,11 +40,11 @@ const SetBank = props => {
   );
 };
 
-SetBank.propTypes = {
+SetCcBank.propTypes = {
   property: PropTypes.string
 };
-SetBank.defaultProps = {
+SetCcBank.defaultProps = {
   property: "String name"
 };
 
-export default SetBank;
+export default SetCcBank;
