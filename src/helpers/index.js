@@ -19,8 +19,10 @@ const helpers = {
       "TailSpin",
       "ThreeDots"
     ];
-    const rIndex = Math.floor(Math.random() * icons.length);
-    return icons[rIndex - 1];
+    const rIndex = Math.floor(Math.random() * icons.length) + 1;
+    const icon = icons[rIndex-1];
+    console.log("bbb",rIndex,icon);
+    return icon;
   },
   stringToCapitalize: string => {
     return string
