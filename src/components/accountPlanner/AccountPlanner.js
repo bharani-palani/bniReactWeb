@@ -113,7 +113,6 @@ const AccountPlanner = props => {
 
   const generateExpenses = () => {
     setChartLoader(true);
-    setChartData([]);
     const sDate = `${yearSelected}-01-01`;
     const eDate = `${yearSelected}-12-31`;
     const a = getIncExpChartData(sDate, eDate, bankSelected);
@@ -151,120 +150,116 @@ const AccountPlanner = props => {
         </div>
         <div className="container-fluid">
           <div className="accountPlanner">
-            <div className="row">
-              <div className="col-md-3 pl-0 pr-0">
-                <buttton
-                  className="btn btn-bni sm btn-block"
-                  onClick={() => setToggleCoreSettings(!toggleCoreSettings)}
-                >
-                  Toogle Core Settings
-                  <i
-                    className={`fa fa-level-${
-                      toggleCoreSettings ? "up" : "down"
-                    } pull-right`}
-                  />
-                </buttton>
-              </div>
-              {toggleCoreSettings && (
-                <div className="col-md-12 pr-0 pl-0">
-                  <CreateModule />
+            {bankList.length > 0 && yearList.length > 0 && (
+              <>
+                <div className="row">
+                  <div className="col-md-3 pl-0 pr-0">
+                    <buttton
+                      className="btn btn-bni sm btn-block"
+                      onClick={() => setToggleCoreSettings(!toggleCoreSettings)}
+                    >
+                      Toogle Core Settings
+                      <i
+                        className={`fa fa-level-${
+                          toggleCoreSettings ? "up" : "down"
+                        } pull-right`}
+                      />
+                    </buttton>
+                  </div>
+                  {toggleCoreSettings && (
+                    <div className="col-md-12 pr-0 pl-0">
+                      <CreateModule />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <div class="headLine">Bank Transactions</div>
-            <div className="row mt-10">
-              {bankList.length > 0 && (
-                <div className="col-sm-3 pr-0 pl-0">
-                  <SetBank
-                    bankList={bankList}
-                    onSelectBank={bank => onChangeBank(bank)}
-                  />
+                <div class="headLine">Bank Transactions</div>
+                <div className="row mt-10">
+                  <div className="col-sm-3 pr-0 pl-0">
+                    <SetBank
+                      bankList={bankList}
+                      onSelectBank={bank => onChangeBank(bank)}
+                    />
+                  </div>
+                  <div className="col-sm-3 m-reduce-padding">
+                    <SetYear
+                      yearList={yearList}
+                      onSelectYear={year => onChangeYear(year)}
+                    />
+                  </div>
+                  <div className="col-sm-3 m-reduce-padding">
+                    <span>&nbsp;</span>
+                    <button
+                      onClick={() => generateExpenses()}
+                      className="btn btn-bni btn-block sm"
+                    >
+                      Generate
+                    </button>
+                  </div>
                 </div>
-              )}
-              {yearList.length > 0 && (
-                <div className="col-sm-3 m-reduce-padding">
-                  <SetYear
-                    yearList={yearList}
-                    onSelectYear={year => onChangeYear(year)}
-                  />
-                </div>
-              )}
-              {bankList.length > 0 && yearList.length > 0 && (
-                <div className="col-sm-3 m-reduce-padding">
-                  <span>&nbsp;</span>
-                  <button
-                    onClick={() => generateExpenses()}
-                    className="btn btn-bni btn-block sm"
-                  >
-                    Generate
-                  </button>
-                </div>
-              )}
-            </div>
-            <div className="flex bigWidth">
-              {chartLoader ? (
-                <div className="relativeSpinner">
-                  <Loader
-                    type={helpers.LoadRandomSpinnerIcon()}
-                    color={helpers.fluorescentColor}
-                    height={100}
-                    width={100}
-                  />
-                </div>
-              ) : (
-                <Chart
-                  chartData={chartData}
-                  onMonthYearSelected={onMonthYearSelected}
-                />
-              )}
-            </div>
-            <div className="row">
-              <div className="col-md-12 b-0 mb-10 pr-0 pl-0">
-                {!isNaN(bankSelected) &&
-                  new Date(monthYearSelected) instanceof Date &&
-                  !isNaN(new Date(monthYearSelected)) && (
-                    <MonthExpenditureTable
-                      bankSelected={bankSelected}
-                      monthYearSelected={monthYearSelected}
+                <div className="flex bigWidth">
+                  {chartLoader ? (
+                    <div className="relativeSpinner">
+                      <Loader
+                        type={helpers.LoadRandomSpinnerIcon()}
+                        color={helpers.fluorescentColor}
+                        height={100}
+                        width={100}
+                      />
+                    </div>
+                  ) : (
+                    <Chart
+                      chartData={chartData}
+                      onMonthYearSelected={onMonthYearSelected}
                     />
                   )}
-              </div>
-            </div>
-            <div class="headLine">Credit Card Transactions</div>
-            <div className="row mt-10">
-              {ccBankList.length > 0 && (
-                <div className="col-sm-3 pl-0">
-                  <SetCcBank
-                    ccBankList={ccBankList}
-                    onSelectCcBank={bank => onChangeCcBank(bank)}
-                  />
                 </div>
-              )}
-              {ccYearList.length > 0 && (
-                <div className="col-sm-3 pl-0">
-                  <SetCcYear
-                    ccYearList={ccYearList}
-                    onSelectCcYear={year => onChangeCcYear(year)}
-                  />
+                <div className="row">
+                  <div className="col-md-12 b-0 mb-10 pr-0 pl-0">
+                    {!isNaN(bankSelected) &&
+                      new Date(monthYearSelected) instanceof Date &&
+                      !isNaN(new Date(monthYearSelected)) && (
+                        <MonthExpenditureTable
+                          bankSelected={bankSelected}
+                          monthYearSelected={monthYearSelected}
+                        />
+                      )}
+                  </div>
                 </div>
-              )}
-              {ccYearList.length > 0 && ccBankList.length > 0 && (
-                <div className="col-sm-3 pl-0">
-                  <span>&nbsp;</span>
-                  <button
-                    onClick={() => generateCreditCardExpenses()}
-                    className="btn btn-bni btn-block sm"
-                  >
-                    Generate
-                  </button>
+              </>
+            )}
+            {ccYearList.length > 0 && ccBankList.length > 0 && (
+              <>
+                <div class="headLine">Credit Card Transactions</div>
+                <div className="row mt-10">
+                  <div className="col-sm-3 pl-0">
+                    <SetCcBank
+                      ccBankList={ccBankList}
+                      onSelectCcBank={bank => onChangeCcBank(bank)}
+                    />
+                  </div>
+                  <div className="col-sm-3 pl-0">
+                    <SetCcYear
+                      ccYearList={ccYearList}
+                      onSelectCcYear={year => onChangeCcYear(year)}
+                    />
+                  </div>
+                  <div className="col-sm-3 pl-0">
+                    <span>&nbsp;</span>
+                    <button
+                      onClick={() => generateCreditCardExpenses()}
+                      className="btn btn-bni btn-block sm"
+                    >
+                      Generate
+                    </button>
+                  </div>
                 </div>
-              )}
-            </div>
-            <div className="row">
-              <div className="col-md-12 pr-0 pl-0">
-                <TypeCreditCardExpenditure />
-              </div>
-            </div>
+                <div className="row">
+                  <div className="col-md-12 pr-0 pl-0">
+                    <TypeCreditCardExpenditure />
+                  </div>
+                </div>
+              </>
+            )}
             <div className="row">
               <div className="col-md-12 pr-0 pl-0">
                 <AnalysisChart />
