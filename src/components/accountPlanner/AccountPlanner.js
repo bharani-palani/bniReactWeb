@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
 import Chart from "./Chart";
+import CreditCardChart from "./CreditCardChart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
 import SetBank from "./SetBank";
 import SetYear from "./SetYear";
@@ -154,7 +155,7 @@ const AccountPlanner = props => {
   };
 
   const generateCreditCards = () => {
-    setChartLoader(true);
+    setCcChartLoader(true);
     const sDate = `${ccYearSelected}-01-01`;
     const eDate = `${ccYearSelected}-12-31`;
     const a = getCreditCardChartData(sDate, eDate, ccBankSelected);
@@ -291,9 +292,9 @@ const AccountPlanner = props => {
                       />
                     </div>
                   ) : (
-                    <Chart
-                      chartData={ccChartData}
-                      onMonthYearSelected={onCcMonthYearSelected}
+                    <CreditCardChart
+                      ccChartData={ccChartData}
+                      onCcMonthYearSelected={onCcMonthYearSelected}
                     />
                   )}
                 </div>
@@ -304,6 +305,7 @@ const AccountPlanner = props => {
                       !isNaN(new Date(ccMonthYearSelected)) && (
                         <TypeCreditCardExpenditure
                           ccMonthYearSelected={ccMonthYearSelected}
+                          ccBankSelected={ccBankSelected}
                         />
                       )}
                   </div>

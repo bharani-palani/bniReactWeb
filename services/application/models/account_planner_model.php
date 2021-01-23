@@ -109,7 +109,7 @@ class account_planner_model extends CI_Model
 				$query = $this->db->where($where)->order_by("inc_exp_date", "asc")->get('income_expense');
 				break;
 			case "credit_card_transactions":
-				$query = $this->db->order_by("cc_date", "asc")->get('credit_card_transactions');
+				$query = $this->db->where($where)->order_by("cc_date", "asc")->get('credit_card_transactions');
 				break;
 			default:
 				return false;

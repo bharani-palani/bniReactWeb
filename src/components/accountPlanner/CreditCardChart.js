@@ -4,26 +4,29 @@ import DonutChart from "react-donut-chart";
 import helpers from "../../helpers";
 // https://www.npmjs.com/package/react-donut-chart
 
-const Chart = props => {
-  let { chartData, onMonthYearSelected } = props;
+const CreditCardChart = props => {
+  let { ccChartData, onCcMonthYearSelected } = props;
   const [data, setData] = useState([]);
-  const [monthYearSelected, setMonthYearSelected] = useState("");
+  const [ccMonthYearSelected, setMonthYearSelected] = useState("");
   const [noRecords, setNoRecords] = useState(false);
 
   useEffect(() => {
-    let monthArray = chartData.map(d => String(d.dated));
+    let monthArray = ccChartData.map(d => String(d.dated));
     monthArray = [...new Set(monthArray)];
     const data = monthArray.map(m => {
-      let isThere = chartData.filter(cd => String(cd.dated) === String(m));
-      isThere = isThere.map(({ category, total, dated }) => ({
-        month: dated,
-        label: category,
-        value: Number(total),
-        isEmpty: Number(total) <= 0
-      }));
+      let isThere = ccChartData.filter(cd => String(cd.dated) === String(m));
+      isThere = isThere.map(({ ob, paid, purchases, taxesInterest, balance, dated }) => (
+        [
+          {month: dated, label: "Opening balance", value: Number(ob), isEmpty: Number(ob) === 0 },
+          {month: dated, label: "Paid", value: Number(paid), isEmpty: Number(paid) === 0},
+          {month: dated, label: "Purchases", value: Number(purchases), isEmpty: Number(purchases) === 0},
+          {month: dated, label: "Taxes & Interest", value: Number(taxesInterest), isEmpty: Number(taxesInterest) === 0},
+          {month: dated, label: "Payable", value: Number(balance), isEmpty: Number(balance) === 0},
+        ]
+      ));
       const obj = {
         month: m,
-        cData: isThere
+        cData: isThere[0]
       };
       return obj;
     });
@@ -32,11 +35,11 @@ const Chart = props => {
     setData(data);
     if (data.length > 0) {
       setMonthYearSelected(data[0].month);
-      onMonthYearSelected(data[0].month);
+      onCcMonthYearSelected(data[0].month);
     } else {
       setNoRecords(true)
     }
-  }, [chartData]);
+  }, [ccChartData]);
 
   // Interface
   // {dated: "Dec-2020", total: "0.00", category: "Bike petrol"}
@@ -51,11 +54,11 @@ const Chart = props => {
           <div className="text-center pt-10 pb-10">
             <button
               className={`btn btn-sm btn-capsule ${
-                String(monthYearSelected) === String(d.month) ? "active" : ""
+                String(ccMonthYearSelected) === String(d.month) ? "active" : ""
               }`}
               onClick={() => {
                 setMonthYearSelected(d.month);
-                onMonthYearSelected(d.month);
+                onCcMonthYearSelected(d.month);
               }}
             >
               {d.month}
@@ -84,11 +87,11 @@ const Chart = props => {
   );
 };
 
-Chart.propTypes = {
+CreditCardChart.propTypes = {
   property: PropTypes.string
 };
-Chart.defaultProps = {
+CreditCardChart.defaultProps = {
   property: "String name"
 };
 
-export default Chart;
+export default CreditCardChart;
