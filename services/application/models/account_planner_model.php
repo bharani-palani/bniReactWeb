@@ -65,6 +65,7 @@ class account_planner_model extends CI_Model
 	{
 		$startDate = $post['startDate'];
 		$endDate = $post['endDate'];
+		$bank = $post['bank'];
 		$this->db
 			->select(array(
 				'DATE_FORMAT(a.cc_date, "%b-%Y") as dated',

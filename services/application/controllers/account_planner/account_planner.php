@@ -97,6 +97,7 @@ class account_planner extends CI_Controller {
 			$post = array(
 				"startDate" => $this->input->post("startDate"),
 				"endDate" => $this->input->post("endDate"),
+				"bank" => $this->input->post("bank")
 			);
 			$data = $this->account_planner_model->getCreditCardChartData($post);
 			$op["response"] = $data["result"];
