@@ -85,6 +85,25 @@ class account_planner extends CI_Controller {
 			$this->auth->response($data,array(),200);
 		}
 	}
+	public function getCreditCardChartData() {
+		$validate = $this->auth->validateAll();
+		if($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		if($validate === 3) {
+			$this->auth->invalidDomainResponse();
+		}
+		if($validate === 1) {
+			$post = array(
+				"startDate" => $this->input->post("startDate"),
+				"endDate" => $this->input->post("endDate"),
+			);
+			$data = $this->account_planner_model->getCreditCardChartData($post);
+			$op["response"] = $data["result"];
+			$this->auth->response($op,array("query" => $data["query"]),200);
+		}
+	}
+
 	public function getIncExpChartData() {
 		$validate = $this->auth->validateAll();
 		if($validate === 2) {

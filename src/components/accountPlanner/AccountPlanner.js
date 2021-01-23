@@ -23,6 +23,7 @@ const AccountPlanner = props => {
   const [ccYearList, setCcYearList] = useState([]);
   const [bankList, setBankList] = useState([]);
   const [chartData, setChartData] = useState([]);
+  const [ccChartData, setCcChartData] = useState([]);
 
   const [ccYearSelected, setCcYearSelected] = useState("");
   const [ccBankList, setCcBankList] = useState([]);
@@ -31,8 +32,10 @@ const AccountPlanner = props => {
   const [yearSelected, setYearSelected] = useState("");
   const [bankSelected, setBankSelected] = useState("");
   const [monthYearSelected, setMonthYearSelected] = useState("");
+  const [ccMonthYearSelected, setCcMonthYearSelected] = useState("");
 
   const [chartLoader, setChartLoader] = useState(false);
+  const [ccChartLoader, setCcChartLoader] = useState(false);
   const [toggleCoreSettings, setToggleCoreSettings] = useState(false);
 
   const getIncExpChartData = (sDate, eDate, bank) => {
@@ -48,6 +51,18 @@ const AccountPlanner = props => {
       });
   };
 
+  const getCreditCardChartData = (sDate, eDate, bank) => {
+    const formdata = new FormData();
+    formdata.append("startDate", sDate);
+    formdata.append("endDate", eDate);
+    formdata.append("bank", bank);
+    return apiInstance
+      .post("/account_planner/getCreditCardChartData", formdata)
+      .then(res => res.data)
+      .catch(error => {
+        console.log(error);
+      });
+  };
   const getYearList = () => {
     return apiInstance
       .get("/account_planner/year_list")
@@ -134,9 +149,21 @@ const AccountPlanner = props => {
     setCcBankSelected(bank);
   };
 
-  const generateCreditCardExpenses = () => {
-    alert(122);
+  const onCcMonthYearSelected = monthYear => {
+    setCcMonthYearSelected(monthYear);
   };
+
+  const generateCreditCards = () => {
+    setChartLoader(true);
+    const sDate = `${ccYearSelected}-01-01`;
+    const eDate = `${ccYearSelected}-12-31`;
+    const a = getCreditCardChartData(sDate, eDate, ccBankSelected);
+    Promise.all([a]).then(r => {
+      setCcChartData(r[0].response);
+      setCcChartLoader(false);
+    });
+  };
+
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title">
@@ -246,16 +273,39 @@ const AccountPlanner = props => {
                   <div className="col-sm-3 pl-0">
                     <span>&nbsp;</span>
                     <button
-                      onClick={() => generateCreditCardExpenses()}
+                      onClick={() => generateCreditCards()}
                       className="btn btn-bni btn-block sm"
                     >
                       Generate
                     </button>
                   </div>
                 </div>
+                <div className="flex bigWidth">
+                  {ccChartLoader ? (
+                    <div className="relativeSpinner">
+                      <Loader
+                        type={helpers.LoadRandomSpinnerIcon()}
+                        color={helpers.fluorescentColor}
+                        height={100}
+                        width={100}
+                      />
+                    </div>
+                  ) : (
+                    <Chart
+                      chartData={ccChartData}
+                      onMonthYearSelected={onCcMonthYearSelected}
+                    />
+                  )}
+                </div>
+
                 <div className="row">
                   <div className="col-md-12 pr-0 pl-0">
-                    <TypeCreditCardExpenditure />
+                    {new Date(ccMonthYearSelected) instanceof Date &&
+                      !isNaN(new Date(ccMonthYearSelected)) && (
+                        <TypeCreditCardExpenditure
+                          ccMonthYearSelected={ccMonthYearSelected}
+                        />
+                      )}
                   </div>
                 </div>
               </>

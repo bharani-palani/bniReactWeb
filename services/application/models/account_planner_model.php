@@ -61,6 +61,26 @@ class account_planner_model extends CI_Model
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
 	}
 
+	function getCreditCardChartData($post)
+	{
+		$startDate = $post['startDate'];
+		$endDate = $post['endDate'];
+		$this->db
+			->select(array(
+				'DATE_FORMAT(a.cc_date, "%b-%Y") as dated',
+				'sum(a.cc_opening_balance) as total',
+				'b.credit_card_name as category'
+			), false)
+			->from('credit_card_transactions as a')
+			->join('credit_cards as b', 'a.cc_for_card = b.credit_card_id', 'left')
+			->where('a.cc_date >=', $startDate)
+			->where('a.cc_date <=', $endDate)
+			->group_by(array("dated", "category"))
+			->order_by("DATE_FORMAT(a.cc_date, '%m-%Y')", "desc");
+		$query = $this->db->get();
+		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
+	}
+
 	function getAccountPlanner($post)
 	{
 		$Table = $post["Table"];
