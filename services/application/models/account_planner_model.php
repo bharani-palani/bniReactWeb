@@ -68,14 +68,18 @@ class account_planner_model extends CI_Model
 		$this->db
 			->select(array(
 				'DATE_FORMAT(a.cc_date, "%b-%Y") as dated',
-				'sum(a.cc_opening_balance) as total',
-				'b.credit_card_name as category'
+				'a.cc_opening_balance as ob',
+				'a.cc_payment_credits as paid',
+				'a.cc_purchases as purchases',
+				'a.cc_taxes_interest as taxesInterest',
+				'a.cc_expected_balance as balance',
 			), false)
 			->from('credit_card_transactions as a')
 			->join('credit_cards as b', 'a.cc_for_card = b.credit_card_id', 'left')
 			->where('a.cc_date >=', $startDate)
 			->where('a.cc_date <=', $endDate)
-			->group_by(array("dated", "category"))
+			->where('a.cc_for_card', $bank)
+			->group_by(array("dated"))
 			->order_by("DATE_FORMAT(a.cc_date, '%m-%Y')", "desc");
 		$query = $this->db->get();
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
