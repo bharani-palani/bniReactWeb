@@ -30,7 +30,6 @@ const CreditCardChart = props => {
       };
       return obj;
     });
-    console.log("bbb",data)
 
     setData(data);
     if (data.length > 0) {
@@ -74,12 +73,7 @@ const CreditCardChart = props => {
             width={220}
             legend={false}
             data={d.cData}
-            formatValues={(values, total) =>
-              `${helpers.indianLacSeperator(values)} / (${(
-                (values / total) *
-                100
-              ).toFixed(2)}%)`
-            }
+            formatValues={values => helpers.indianLacSeperator(values)}
           />
         </div>
       )) : (<div className="noRecords block mt-10">No Records Generated</div>)}

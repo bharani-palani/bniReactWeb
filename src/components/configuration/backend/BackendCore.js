@@ -233,7 +233,7 @@ function BackendCore(props) {
     <div className="backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
       <h5 className="heading">
-        Table: {helpers.stringToCapitalize(Table)} ({dbData.length} record
+        Table: {helpers.stringToCapitalize(Table)} ({dbData ? dbData.length : 0} record
         {dbData.length > 1 ? "s" : ""})
       </h5>
       <div className="table-responsive">

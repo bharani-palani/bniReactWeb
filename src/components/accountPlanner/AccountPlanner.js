@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
 import helpers from "../../helpers";
-import Chart from "./Chart";
+import IncExpChart from "./IncExpChart";
 import CreditCardChart from "./CreditCardChart";
 import MonthExpenditureTable from "./MonthExpenditureTable";
 import SetBank from "./SetBank";
@@ -120,10 +120,12 @@ const AccountPlanner = props => {
   // }, [yearSelected, bankSelected]);
 
   const onChangeYear = year => {
+    setChartData([]);
     setYearSelected(year);
   };
 
   const onChangeBank = bank => {
+    setChartData([]);
     setBankSelected(bank);
   };
 
@@ -143,10 +145,12 @@ const AccountPlanner = props => {
   };
 
   const onChangeCcYear = year => {
+    setCcChartData([]);
     setCcYearSelected(year);
   };
 
   const onChangeCcBank = bank => {
+    setCcChartData([]);
     setCcBankSelected(bank);
   };
 
@@ -181,7 +185,7 @@ const AccountPlanner = props => {
             {bankList.length > 0 && yearList.length > 0 && (
               <>
                 <div className="row">
-                  <div className="col-md-3 pl-0 pr-0">
+                  <div className="col-md-3 m-reduce-padding">
                     <buttton
                       className="btn btn-bni sm btn-block"
                       onClick={() => setToggleCoreSettings(!toggleCoreSettings)}
@@ -195,14 +199,14 @@ const AccountPlanner = props => {
                     </buttton>
                   </div>
                   {toggleCoreSettings && (
-                    <div className="col-md-12 pr-0 pl-0">
+                    <div className="col-md-12 m-reduce-padding">
                       <CreateModule />
                     </div>
                   )}
                 </div>
                 <div class="headLine">Bank Transactions</div>
                 <div className="row mt-10">
-                  <div className="col-sm-3 pr-0 pl-0">
+                  <div className="col-sm-3 m-reduce-padding">
                     <SetBank
                       bankList={bankList}
                       onSelectBank={bank => onChangeBank(bank)}
@@ -235,15 +239,16 @@ const AccountPlanner = props => {
                       />
                     </div>
                   ) : (
-                    <Chart
+                    <IncExpChart
                       chartData={chartData}
                       onMonthYearSelected={onMonthYearSelected}
                     />
                   )}
                 </div>
                 <div className="row">
-                  <div className="col-md-12 b-0 mb-10 pr-0 pl-0">
-                    {!isNaN(bankSelected) &&
+                  <div className="col-md-12 b-0 mb-10">
+                    {chartData.length > 0 &&
+                      !isNaN(bankSelected) &&
                       new Date(monthYearSelected) instanceof Date &&
                       !isNaN(new Date(monthYearSelected)) && (
                         <MonthExpenditureTable
@@ -259,19 +264,19 @@ const AccountPlanner = props => {
               <>
                 <div class="headLine">Credit Card Transactions</div>
                 <div className="row mt-10">
-                  <div className="col-sm-3 pl-0">
+                  <div className="col-sm-3 m-reduce-padding">
                     <SetCcBank
                       ccBankList={ccBankList}
                       onSelectCcBank={bank => onChangeCcBank(bank)}
                     />
                   </div>
-                  <div className="col-sm-3 pl-0">
+                  <div className="col-sm-3 m-reduce-padding">
                     <SetCcYear
                       ccYearList={ccYearList}
                       onSelectCcYear={year => onChangeCcYear(year)}
                     />
                   </div>
-                  <div className="col-sm-3 pl-0">
+                  <div className="col-sm-3 m-reduce-padding">
                     <span>&nbsp;</span>
                     <button
                       onClick={() => generateCreditCards()}
@@ -300,8 +305,10 @@ const AccountPlanner = props => {
                 </div>
 
                 <div className="row">
-                  <div className="col-md-12 pr-0 pl-0">
-                    {new Date(ccMonthYearSelected) instanceof Date &&
+                  <div className="col-md-12 m-reduce-padding">
+                    {ccChartData.length > 0 &&
+                      !isNaN(ccBankSelected) &&
+                      new Date(ccMonthYearSelected) instanceof Date &&
                       !isNaN(new Date(ccMonthYearSelected)) && (
                         <TypeCreditCardExpenditure
                           ccMonthYearSelected={ccMonthYearSelected}
@@ -313,7 +320,7 @@ const AccountPlanner = props => {
               </>
             )}
             <div className="row">
-              <div className="col-md-12 pr-0 pl-0">
+              <div className="col-md-12">
                 <AnalysisChart />
               </div>
             </div>

@@ -11,11 +11,11 @@ const SetCcBank = props => {
     if(ccBankList.length > 0) {
       setCcBankSelected(ccBankList[0].value);
     }
-  },[ccBankList])
+  },[])
 
   return (
     <>
-      <span>Select Credit Card Bank</span>
+      <span>Select Credit Card</span>
       <SelectableContext.Provider value={false}>
         <Dropdown>
           <Dropdown.Toggle>

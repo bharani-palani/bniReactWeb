@@ -4,7 +4,7 @@ import DonutChart from "react-donut-chart";
 import helpers from "../../helpers";
 // https://www.npmjs.com/package/react-donut-chart
 
-const Chart = props => {
+const IncExpChart = props => {
   let { chartData, onMonthYearSelected } = props;
   const [data, setData] = useState([]);
   const [monthYearSelected, setMonthYearSelected] = useState("");
@@ -27,7 +27,6 @@ const Chart = props => {
       };
       return obj;
     });
-    console.log("bbb",data)
 
     setData(data);
     if (data.length > 0) {
@@ -42,7 +41,7 @@ const Chart = props => {
   // {dated: "Dec-2020", total: "0.00", category: "Bike petrol"}
   // cData = { label: "Mobile bill", value: 120 },
 
-  const genId = i => `chrat-${i}`;
+  const genId = i => `chart-${i}`;
   const colors = helpers.donutChartColors;
   return (
     <>
@@ -84,11 +83,11 @@ const Chart = props => {
   );
 };
 
-Chart.propTypes = {
+IncExpChart.propTypes = {
   property: PropTypes.string
 };
-Chart.defaultProps = {
+IncExpChart.defaultProps = {
   property: "String name"
 };
 
-export default Chart;
+export default IncExpChart;

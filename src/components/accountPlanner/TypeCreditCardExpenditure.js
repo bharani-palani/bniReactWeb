@@ -17,23 +17,28 @@ const TypeCreditCardExpenditure = props => {
 
   return (
     <div className="settings">
-      {ccMonthYearSelected &&
-        WhereClause &&
-        creditCardConfig
-        .sort((a, b) => a.id > b.id)
-        .map((t, i) => (
-          <BackendCore
-            key={i}
-            Table={t.Table}
-            TableRows={t.TableRows}
-            WhereClause={WhereClause}
-            rowElements={t.rowElements}
-            showTotal={t.showTotal}
-            rowKeyUp={t.rowKeyUp}
-            getApiUrl="/account_planner/getAccountPlanner"
-            postApiUrl="/account_planner/postAccountPlanner"
-          />
-        ))}
+      <div className="backendConfigureSection">
+        <div className="btn btn-capsule btn-sm active mt-10">
+          {ccMonthYearSelected}
+        </div>
+        {ccMonthYearSelected &&
+          WhereClause &&
+          creditCardConfig
+            .sort((a, b) => a.id > b.id)
+            .map((t, i) => (
+              <BackendCore
+                key={i}
+                Table={t.Table}
+                TableRows={t.TableRows}
+                WhereClause={WhereClause}
+                rowElements={t.rowElements}
+                showTotal={t.showTotal}
+                rowKeyUp={t.rowKeyUp}
+                getApiUrl="/account_planner/getAccountPlanner"
+                postApiUrl="/account_planner/postAccountPlanner"
+              />
+            ))}
+      </div>
     </div>
   );
 };

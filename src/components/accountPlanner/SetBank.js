@@ -11,10 +11,10 @@ const SetBank = props => {
     if(bankList.length > 0) {
       setBankSelected(bankList[0].value);
     }
-  },[bankList])
+  },[])
   return (
     <>
-      <span>Select Accounting Bank</span>
+      <span>Select Bank</span>
       <SelectableContext.Provider value={false}>
         <Dropdown>
           <Dropdown.Toggle>
