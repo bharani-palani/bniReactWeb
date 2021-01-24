@@ -191,6 +191,7 @@ function BackendCore(props) {
   const getColumnTotal = key => {
     let total = "";
     if (showTotal && showTotal.length && showTotal[0].whichKey) {
+      let totArrays = [];
       total = showTotal
         .filter(s => s.whichKey === key)
         .map(f => {
@@ -198,6 +199,7 @@ function BackendCore(props) {
             const number = dbData
               .filter(db => db[f.forKey] === v)
               .reduce((a, b) => Number(a) + Number(b[key]), 0);
+            totArrays.push(number);
             return (
               <div key={i}>
                 {helpers.indianLacSeperator(number)}
@@ -205,14 +207,31 @@ function BackendCore(props) {
               </div>
             );
           });
-        });
+        })
+        .concat(
+          <div key={`totRow`} className={checkSettlement(totArrays[0].toFixed(2) - totArrays[1].toFixed(2))}>
+            {helpers.indianLacSeperator(totArrays[0].toFixed(2) - totArrays[1].toFixed(2))}&nbsp;
+            {checkSettlementString(totArrays[0].toFixed(2) - totArrays[1].toFixed(2))}
+          </div>
+        );
     } else {
       total = dbData.reduce((a, b) => Number(a) + Number(b[key]), 0);
       total = helpers.indianLacSeperator(total);
     }
     return total;
   };
-
+  const checkSettlement = number => {
+    return number === 0 ? "text-success" : "text-danger";
+  };
+  const checkSettlementString = number => {
+    if (number === 0) {
+      return <span>(Settled)</span>;
+    } else if (number < 0) {
+      return <span>(Ahead)</span>;
+    } else if (number > 0) {
+      return <span>(YetTo)</span>;
+    }
+  };
   const onSort = (key, type) => {
     const filteredDbData = dbData.sort((a, b) => {
       if (type) {
@@ -233,7 +252,8 @@ function BackendCore(props) {
     <div className="backendConfigureSection">
       <ToastContainer autoClose={autoClose} className="bniToaster" />
       <h5 className="heading">
-        Table: {helpers.stringToCapitalize(Table)} ({dbData ? dbData.length : 0} record
+        Table: {helpers.stringToCapitalize(Table)} ({dbData ? dbData.length : 0}{" "}
+        record
         {dbData.length > 1 ? "s" : ""})
       </h5>
       <div className="table-responsive">

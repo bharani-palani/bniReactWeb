@@ -204,7 +204,7 @@ const AccountPlanner = props => {
                     </div>
                   )}
                 </div>
-                <div class="headLine">Bank Transactions</div>
+                <div className="headLine">Bank Transactions</div>
                 <div className="row mt-10">
                   <div className="col-sm-3 m-reduce-padding">
                     <SetBank
@@ -262,7 +262,7 @@ const AccountPlanner = props => {
             )}
             {ccYearList.length > 0 && ccBankList.length > 0 && (
               <>
-                <div class="headLine">Credit Card Transactions</div>
+                <div className="headLine">Credit Card Transactions</div>
                 <div className="row mt-10">
                   <div className="col-sm-3 m-reduce-padding">
                     <SetCcBank
