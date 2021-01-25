@@ -69,11 +69,11 @@ class account_planner_model extends CI_Model
 		$this->db
 			->select(array(
 				'DATE_FORMAT(a.cc_date, "%b-%Y") as dated',
-				'a.cc_opening_balance as ob',
-				'a.cc_payment_credits as paid',
-				'a.cc_purchases as purchases',
-				'a.cc_taxes_interest as taxesInterest',
-				'a.cc_expected_balance as balance',
+				'sum(a.cc_opening_balance) as ob',
+				'sum(a.cc_payment_credits) as paid',
+				'sum(a.cc_purchases) as purchases',
+				'sum(a.cc_taxes_interest) as taxesInterest',
+				'sum(a.cc_expected_balance) as balance',
 			), false)
 			->from('credit_card_transactions as a')
 			->join('credit_cards as b', 'a.cc_for_card = b.credit_card_id', 'left')
