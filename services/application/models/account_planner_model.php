@@ -38,6 +38,11 @@ class account_planner_model extends CI_Model
 		$query = $this->db->select(array("DISTINCT DATE_FORMAT(cc_date, '%Y') as id", "DATE_FORMAT(cc_date, '%Y') as value"), false)->order_by("id desc")->get('credit_card_transactions');
 		return get_all_rows($query);
 	}
+	public function credit_card_details($bank)
+	{
+		$query = $this->db->get_where('credit_cards', array("credit_card_id" => $bank));
+		return get_all_rows($query);
+	}
 	function getIncExpChartData($post)
 	{
 		$startDate = $post['startDate'];
