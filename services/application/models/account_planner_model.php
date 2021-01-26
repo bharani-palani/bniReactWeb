@@ -85,7 +85,7 @@ class account_planner_model extends CI_Model
 			->where('a.cc_date <=', $endDate)
 			->where('a.cc_for_card', $bank)
 			// ->group_by(array("dated"))
-			->order_by("month", "desc");
+			->order_by("month", "asc");
 		$query = $this->db->get();
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
 	}
