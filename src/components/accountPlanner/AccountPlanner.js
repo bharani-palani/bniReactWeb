@@ -35,9 +35,22 @@ const AccountPlanner = props => {
   const [monthYearSelected, setMonthYearSelected] = useState("");
   const [ccMonthYearSelected, setCcMonthYearSelected] = useState("");
 
+  const [ccDetails, setCcDetails] = useState({});
+
   const [chartLoader, setChartLoader] = useState(false);
   const [ccChartLoader, setCcChartLoader] = useState(false);
   const [toggleCoreSettings, setToggleCoreSettings] = useState(false);
+
+  const getCreditCardDetails = bank => {
+    const formdata = new FormData();
+    formdata.append("bank", bank);
+    return apiInstance
+      .post("/account_planner/credit_card_details", formdata)
+      .then(res => res.data)
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   const getIncExpChartData = (sDate, eDate, bank) => {
     const formdata = new FormData();
@@ -107,7 +120,7 @@ const AccountPlanner = props => {
       setYearList(r[0]);
       setYearSelected(r[0][0].id);
       setBankList(r[1]);
-      setBankSelected(r[1][0].id);
+      setBankSelected(r[1][0].id); // bank
       setCcYearList(r[2]);
       setCcYearSelected(r[2][0].id);
       setCcBankList(r[3]);
@@ -160,15 +173,37 @@ const AccountPlanner = props => {
 
   const generateCreditCards = () => {
     setCcChartLoader(true);
-    const sDate = `${ccYearSelected}-01-01`;
-    const eDate = `${ccYearSelected}-12-31`;
-    const a = getCreditCardChartData(sDate, eDate, ccBankSelected);
+    const a = getCreditCardDetails(ccBankSelected);
     Promise.all([a]).then(r => {
-      setCcChartData(r[0].response);
-      setCcChartLoader(false);
+      const data = r[0].response[0];
+      setCcDetails(data);
+
+      const sDate = `${ccYearSelected - 1}-12-${data.credit_card_start_date}`;
+      const eDate = `${ccYearSelected}-12-${data.credit_card_end_date}`;
+      const b = getCreditCardChartData(sDate, eDate, ccBankSelected);
+      Promise.all([b]).then(rr => {
+        let data = rr[0].response;
+        data = data.sort((a, b) => new Date(b.month).getTime() - new Date(a.month).getTime());
+        setCcChartData(data);
+        console.log(helpers.dateToMonthYear(data[0].month));
+        setCcMonthYearSelected(helpers.dateToMonthYear(data[0].month));
+        setCcChartLoader(false);
+      });
     });
   };
 
+  const loaderComp = () => {
+    return (
+      <div className="relativeSpinner">
+        <Loader
+          type={helpers.LoadRandomSpinnerIcon()}
+          color={helpers.fluorescentColor}
+          height={100}
+          width={100}
+        />
+      </div>
+    );
+  };
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
       <div className="section-title">
@@ -182,7 +217,10 @@ const AccountPlanner = props => {
         </div>
         <div className="container-fluid">
           <div className="accountPlanner">
-            {bankList.length > 0 && yearList.length > 0 && (
+            {bankList.length > 0 &&
+            yearList.length &&
+            ccYearList.length > 0 &&
+            ccBankList.length > 0 > 0 ? (
               <>
                 <div className="row">
                   <div className="col-md-3 m-reduce-padding">
@@ -230,14 +268,7 @@ const AccountPlanner = props => {
                 </div>
                 <div className="flex bigWidth">
                   {chartLoader ? (
-                    <div className="relativeSpinner">
-                      <Loader
-                        type={helpers.LoadRandomSpinnerIcon()}
-                        color={helpers.fluorescentColor}
-                        height={100}
-                        width={100}
-                      />
-                    </div>
+                    loaderComp()
                   ) : (
                     <IncExpChart
                       chartData={chartData}
@@ -258,10 +289,6 @@ const AccountPlanner = props => {
                       )}
                   </div>
                 </div>
-              </>
-            )}
-            {ccYearList.length > 0 && ccBankList.length > 0 && (
-              <>
                 <div className="headLine">Credit Card Transactions</div>
                 <div className="row mt-10">
                   <div className="col-sm-3 m-reduce-padding">
@@ -288,19 +315,19 @@ const AccountPlanner = props => {
                 </div>
                 <div className="flex bigWidth">
                   {ccChartLoader ? (
-                    <div className="relativeSpinner">
-                      <Loader
-                        type={helpers.LoadRandomSpinnerIcon()}
-                        color={helpers.fluorescentColor}
-                        height={100}
-                        width={100}
-                      />
-                    </div>
-                  ) : (
+                    loaderComp()
+                  ) : ccChartData && ccChartData.length > 0 ? (
                     <CreditCardChart
                       ccChartData={ccChartData}
                       onCcMonthYearSelected={onCcMonthYearSelected}
+                      ccDetails={ccDetails}
+                      ccYearSelected={ccYearSelected}
+                      ccMonthYearSelected={ccMonthYearSelected}
                     />
+                  ) : (
+                    <div className="noRecords block mt-10">
+                      No Records Generated
+                    </div>
                   )}
                 </div>
 
@@ -313,16 +340,17 @@ const AccountPlanner = props => {
                         <TypeCreditCardExpenditure
                           ccMonthYearSelected={ccMonthYearSelected}
                           ccBankSelected={ccBankSelected}
+                          ccDetails={ccDetails}
                         />
                       )}
                   </div>
                 </div>
               </>
+            ) : (
+              loaderComp()
             )}
             <div className="row">
-              <div className="col-md-12">
-                <AnalysisChart />
-              </div>
+              <div className="col-md-12">{/* <AnalysisChart /> */}</div>
             </div>
           </div>
         </div>
