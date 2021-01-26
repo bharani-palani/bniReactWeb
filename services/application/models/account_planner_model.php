@@ -73,7 +73,7 @@ class account_planner_model extends CI_Model
 		$bank = $post['bank'];
 		$this->db
 			->select(array(
-				'a.cc_date as dated',
+				'a.cc_date as month',
 				'a.cc_opening_balance as ob',
 				'a.cc_payment_credits as paid',
 				'a.cc_purchases as purchases',
