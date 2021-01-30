@@ -42,7 +42,7 @@ const AccountPlanner = props => {
   const [ccChartLoader, setCcChartLoader] = useState(false);
   const [toggleCoreSettings, setToggleCoreSettings] = useState(false);
 
-  const [openModal, setOpenModal] = useState(true); // change to false
+  const [openModal, setOpenModal] = useState(false); // change to false
 
   const getCreditCardDetails = bank => {
     const formdata = new FormData();
