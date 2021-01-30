@@ -15,6 +15,7 @@ import AnalysisChart from "./AnalysisChart";
 import "./AccountPlanner.scss";
 import AppContext from "../../contexts/AppContext";
 import apiInstance from "../../services/apiServices";
+import CheckCardCycleDate from "./CheckCardCycleDate";
 
 const AccountPlanner = props => {
   const [appData] = useContext(AppContext);
@@ -40,6 +41,8 @@ const AccountPlanner = props => {
   const [chartLoader, setChartLoader] = useState(false);
   const [ccChartLoader, setCcChartLoader] = useState(false);
   const [toggleCoreSettings, setToggleCoreSettings] = useState(false);
+
+  const [openModal, setOpenModal] = useState(true); // change to false
 
   const getCreditCardDetails = bank => {
     const formdata = new FormData();
@@ -183,7 +186,9 @@ const AccountPlanner = props => {
       const b = getCreditCardChartData(sDate, eDate, ccBankSelected);
       Promise.all([b]).then(rr => {
         let data = rr[0].response;
-        data = data.sort((a, b) => new Date(b.month).getTime() - new Date(a.month).getTime());
+        data = data.sort(
+          (a, b) => new Date(b.month).getTime() - new Date(a.month).getTime()
+        );
         setCcChartData(data);
         console.log(helpers.dateToMonthYear(data[0].month));
         setCcMonthYearSelected(helpers.dateToMonthYear(data[0].month));
@@ -206,6 +211,13 @@ const AccountPlanner = props => {
   };
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
+      {openModal && <CheckCardCycleDate
+        className="backendUpdate"
+        show={openModal}
+        onHide={() => setOpenModal(false)}
+        size="sm"
+        animation={false}
+      />}
       <div className="section-title">
         <div className="process-box">
           <div className="process-front text-center">
@@ -263,6 +275,20 @@ const AccountPlanner = props => {
                       className="btn btn-bni btn-block sm"
                     >
                       Generate
+                      <i
+                        style={{ transform: "rotate(90deg)" }}
+                        className="fa fa-level-down pull-right"
+                      />
+                    </button>
+                  </div>
+                  <div className="col-sm-3 m-reduce-padding">
+                    <span>&nbsp;</span>
+                    <button
+                      onClick={() => setOpenModal(true)}
+                      className="btn btn-bni btn-block sm"
+                    >
+                      Check card cycle date
+                      <i className="fa fa-calendar-o pull-right" />
                     </button>
                   </div>
                 </div>
@@ -310,6 +336,10 @@ const AccountPlanner = props => {
                       className="btn btn-bni btn-block sm"
                     >
                       Generate
+                      <i
+                        style={{ transform: "rotate(90deg)" }}
+                        className="fa fa-level-down pull-right"
+                      />
                     </button>
                   </div>
                 </div>

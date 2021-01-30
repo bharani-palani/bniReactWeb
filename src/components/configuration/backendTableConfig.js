@@ -437,7 +437,7 @@ const creditCardConfig = [
       "cc_taxes_interest",
       "cc_expected_balance"
     ],
-    rowKeyUp: "cc_expected_balance=(Number(row.cc_opening_balance) - Number(row.cc_payment_credits)) + (Number(row.cc_purchases) + Number(row.cc_taxes_interest))",
+    rowKeyUp: "cc_expected_balance=((Number(row.cc_opening_balance) - Number(row.cc_payment_credits)) + (Number(row.cc_purchases) + Number(row.cc_taxes_interest))).toFixed(2)",
     rowElements: [
       "checkbox",
       "textbox",

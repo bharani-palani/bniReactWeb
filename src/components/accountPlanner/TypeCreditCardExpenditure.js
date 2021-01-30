@@ -33,15 +33,19 @@ const TypeCreditCardExpenditure = props => {
 
     const wClause = `cc_date between "${sDateStr}" and "${eDateStr}" and cc_for_card = ${ccBankSelected}`;
     setWhereClause(wClause);
-    setDateRanges({sDateStr, eDateStr});
+    setDateRanges({ sDateStr, eDateStr });
   }, [ccMonthYearSelected, ccBankSelected, ccDetails]);
 
   let payDate = Number(ccDetails.credit_card_payment_date);
   payDate = payDate < 10 ? `0${payDate}` : payDate;
   payDate = new Date(`${payDate}-${ccMonthYearSelected}`);
-  payDate = helpers.addMonths(payDate,1);
+  payDate = helpers.addMonths(payDate, 1);
   console.log(payDate);
-  let [yyyy,mmm,dd] = [payDate.getFullYear(), payDate.getMonth()+1, payDate.getDate()];
+  let [yyyy, mmm, dd] = [
+    payDate.getFullYear(),
+    payDate.getMonth() + 1,
+    payDate.getDate()
+  ];
   mmm = mmm < 10 ? `0${mmm}` : mmm;
   dd = dd < 10 ? `0${dd}` : dd;
   payDate = `${yyyy}-${mmm}-${dd}`;
@@ -50,7 +54,9 @@ const TypeCreditCardExpenditure = props => {
     <div className="settings">
       <div className="backendConfigureSection">
         <div className="row mt-10">
-          <div className="col-sm-3 text-center">For Month: {ccMonthYearSelected}</div>
+          <div className="col-sm-3 text-center">
+            For Month: {ccMonthYearSelected}
+          </div>
           <div className="col-sm-3 text-center">
             For Card: {ccDetails.credit_card_number}
           </div>
