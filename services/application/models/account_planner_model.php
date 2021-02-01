@@ -115,6 +115,9 @@ class account_planner_model extends CI_Model
 			case "credit_card_transactions":
 				$query = $this->db->where($where)->order_by("cc_date", "asc")->get('credit_card_transactions');
 				break;
+			case "income_expense_template":
+				$query = $this->db->order_by("temp_inc_exp_name", "asc")->get('income_expense_template');
+				break;
 			default:
 				return false;
 		}
@@ -143,6 +146,9 @@ class account_planner_model extends CI_Model
 				break;
 			case "credit_card_transactions":
 				return $this->onTransaction($postData, 'credit_card_transactions', 'cc_id');
+				break;
+			case "income_expense_template":
+				return $this->onTransaction($postData, 'income_expense_template', 'template_id');
 				break;
 			default:
 				return false;

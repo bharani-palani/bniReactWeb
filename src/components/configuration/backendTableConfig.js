@@ -358,6 +358,30 @@ const crudFormArray = [
         }
       }
     ]
+  },
+  {
+    id: "24A",
+    Table: "income_expense_template",
+    label: "Income expense template",
+    TableRows: [
+      "template_id",
+      "temp_inc_exp_name",
+      "temp_amount",
+      "temp_inc_exp_type"
+    ],
+    rowElements: [
+      "checkbox",
+      "textbox",
+      "number",
+      {
+        radio: {
+          radioList: [
+            { label: "Cr", value: "Cr", checked: false },
+            { label: "Dr", value: "Dr", checked: true }
+          ]
+        }
+      }
+    ]
   }
 ];
 
@@ -377,7 +401,12 @@ const monthExpenditureConfig = [
       "inc_exp_comments"
     ],
     showTotal: [
-      { whichKey: "inc_exp_amount", forKey: "inc_exp_type", forCondition: "equals", forValue: ["Cr", "Dr"] } //forCondition: includes or equals
+      {
+        whichKey: "inc_exp_amount",
+        forKey: "inc_exp_type",
+        forCondition: "equals",
+        forValue: ["Cr", "Dr"]
+      } //forCondition: includes or equals
     ],
     rowKeyUp: "",
     rowElements: [
@@ -409,7 +438,6 @@ const monthExpenditureConfig = [
       },
       "textbox"
     ]
-    
   }
 ];
 
@@ -437,7 +465,8 @@ const creditCardConfig = [
       "cc_taxes_interest",
       "cc_expected_balance"
     ],
-    rowKeyUp: "cc_expected_balance=((Number(row.cc_opening_balance) - Number(row.cc_payment_credits)) + (Number(row.cc_purchases) + Number(row.cc_taxes_interest))).toFixed(2)",
+    rowKeyUp:
+      "cc_expected_balance=((Number(row.cc_opening_balance) - Number(row.cc_payment_credits)) + (Number(row.cc_purchases) + Number(row.cc_taxes_interest))).toFixed(2)",
     rowElements: [
       "checkbox",
       "textbox",
@@ -459,4 +488,10 @@ const creditCardConfig = [
   }
 ];
 
-export { configArray, resumeArray, crudFormArray, monthExpenditureConfig, creditCardConfig };
+export {
+  configArray,
+  resumeArray,
+  crudFormArray,
+  monthExpenditureConfig,
+  creditCardConfig
+};
