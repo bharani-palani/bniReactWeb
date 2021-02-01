@@ -211,13 +211,15 @@ const AccountPlanner = props => {
   };
   return (
     <section className="section lb" style={{ minHeight: window.screen.height }}>
-      {openModal && <CheckCardCycleDate
-        className="backendUpdate"
-        show={openModal}
-        onHide={() => setOpenModal(false)}
-        size="sm"
-        animation={false}
-      />}
+      {openModal && (
+        <CheckCardCycleDate
+          className="backendUpdate"
+          show={openModal}
+          onHide={() => setOpenModal(false)}
+          size="sm"
+          animation={false}
+        />
+      )}
       <div className="section-title">
         <div className="process-box">
           <div className="process-front text-center">
@@ -256,19 +258,19 @@ const AccountPlanner = props => {
                 </div>
                 <div className="headLine">Bank Transactions</div>
                 <div className="row mt-10">
-                  <div className="col-sm-3 m-reduce-padding">
+                  <div className="col-md-3 m-reduce-padding">
                     <SetBank
                       bankList={bankList}
                       onSelectBank={bank => onChangeBank(bank)}
                     />
                   </div>
-                  <div className="col-sm-3 m-reduce-padding">
+                  <div className="col-md-3 m-reduce-padding">
                     <SetYear
                       yearList={yearList}
                       onSelectYear={year => onChangeYear(year)}
                     />
                   </div>
-                  <div className="col-sm-3 m-reduce-padding">
+                  <div className="col-md-3 m-reduce-padding">
                     <span>&nbsp;</span>
                     <button
                       onClick={() => generateExpenses()}
@@ -279,16 +281,6 @@ const AccountPlanner = props => {
                         style={{ transform: "rotate(90deg)" }}
                         className="fa fa-level-down pull-right"
                       />
-                    </button>
-                  </div>
-                  <div className="col-sm-3 m-reduce-padding">
-                    <span>&nbsp;</span>
-                    <button
-                      onClick={() => setOpenModal(true)}
-                      className="btn btn-bni btn-block sm"
-                    >
-                      Check card cycle date
-                      <i className="fa fa-calendar-o pull-right" />
                     </button>
                   </div>
                 </div>
@@ -317,19 +309,19 @@ const AccountPlanner = props => {
                 </div>
                 <div className="headLine">Credit Card Transactions</div>
                 <div className="row mt-10">
-                  <div className="col-sm-3 m-reduce-padding">
+                  <div className="col-md-3 m-reduce-padding">
                     <SetCcBank
                       ccBankList={ccBankList}
                       onSelectCcBank={bank => onChangeCcBank(bank)}
                     />
                   </div>
-                  <div className="col-sm-3 m-reduce-padding">
+                  <div className="col-md-3 m-reduce-padding">
                     <SetCcYear
                       ccYearList={ccYearList}
                       onSelectCcYear={year => onChangeCcYear(year)}
                     />
                   </div>
-                  <div className="col-sm-3 m-reduce-padding">
+                  <div className="col-md-3 m-reduce-padding">
                     <span>&nbsp;</span>
                     <button
                       onClick={() => generateCreditCards()}
@@ -341,6 +333,10 @@ const AccountPlanner = props => {
                         className="fa fa-level-down pull-right"
                       />
                     </button>
+                  </div>
+                  <div className="col-md-3 m-reduce-padding">
+                    <span>&nbsp;</span>
+                      <i onClick={() => setOpenModal(true)} className="fa fa-calendar-o roundedButton mt-20" />
                   </div>
                 </div>
                 <div className="flex bigWidth">

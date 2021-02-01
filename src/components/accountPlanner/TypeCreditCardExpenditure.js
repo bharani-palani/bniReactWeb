@@ -54,16 +54,16 @@ const TypeCreditCardExpenditure = props => {
     <div className="settings">
       <div className="backendConfigureSection">
         <div className="row mt-10">
-          <div className="col-sm-3 text-center">
+          <div className="col-md-3 text-center">
             For Month: {ccMonthYearSelected}
           </div>
-          <div className="col-sm-3 text-center">
+          <div className="col-md-3 text-center">
             For Card: {ccDetails.credit_card_number}
           </div>
-          <div className="col-sm-3 text-center">
+          <div className="col-md-3 text-center">
             Cycle: {dateRanges.sDateStr} to {dateRanges.eDateStr}
           </div>
-          <div className="col-sm-3 text-center">
+          <div className="col-md-3 text-center">
             PayDate: {payDate}
           </div>
         </div>

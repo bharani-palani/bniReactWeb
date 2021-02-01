@@ -355,3 +355,12 @@ th {
   border-bottom: solid 1px $fluorescent-color;
   font-size: 1.8rem;
 }
+.roundedButton {
+  font-size: 2rem;
+  cursor: pointer;
+  border: solid 1px $fluorescent-color;
+  color: $fluorescent-color;
+  padding: 10px;
+  border-radius: 100%;
+  margin-right: 5px;
+}

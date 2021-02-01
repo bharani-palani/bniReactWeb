@@ -127,7 +127,10 @@ function BackendCore(props) {
       for (var i = 0; i < TableRows.length; ++i) {
         obj[TableRows[i]] = "";
       }
-      let backup = [...dbData];
+      let backup =
+        dbData != null && typeof dbData[Symbol.iterator] === "function"
+          ? [...dbData]
+          : [];
       backup.push(obj);
       setDbData(backup);
     }
@@ -209,9 +212,19 @@ function BackendCore(props) {
           });
         })
         .concat(
-          <div key={`totRow`} className={checkSettlement(totArrays[0].toFixed(2) - totArrays[1].toFixed(2))}>
-            {helpers.indianLacSeperator(totArrays[0].toFixed(2) - totArrays[1].toFixed(2))}&nbsp;
-            {checkSettlementString(totArrays[0].toFixed(2) - totArrays[1].toFixed(2))}
+          <div
+            key={`totRow`}
+            className={checkSettlement(
+              totArrays[0].toFixed(2) - totArrays[1].toFixed(2)
+            )}
+          >
+            {helpers.indianLacSeperator(
+              totArrays[0].toFixed(2) - totArrays[1].toFixed(2)
+            )}
+            &nbsp;
+            {checkSettlementString(
+              totArrays[0].toFixed(2) - totArrays[1].toFixed(2)
+            )}
           </div>
         );
     } else {
@@ -343,17 +356,15 @@ function BackendCore(props) {
           )}
         </div>
       </div>
-      {dbData.length > 0 && (
-        <div className="form-group pt-10 text-right">
-          <button onClick={() => submitData()} className="btn btn-bni">
-            {btnLoader ? (
-              <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-            ) : (
-              "Update"
-            )}
-          </button>
-        </div>
-      )}
+      <div className="form-group pt-10 text-right">
+        <button onClick={() => submitData()} className="btn btn-bni">
+          {btnLoader ? (
+            <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          ) : (
+            "Update"
+          )}
+        </button>
+      </div>
     </div>
   ) : (
     <div className="relativeSpinner">

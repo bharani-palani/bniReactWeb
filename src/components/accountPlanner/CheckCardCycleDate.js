@@ -7,8 +7,9 @@ import CountDown from "./CountDown";
 import Loader from "react-loader-spinner";
 
 const CheckCardCycleDate = props => {
-const [loader, setLoader] = useState(false);
-const [childLoader, setChildLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [childLoader, setChildLoader] = useState(false);
+  const [selectedBank, setSelectedBank] = useState(false);
   let [ccDetails, setCcDetails] = useState({});
   const [cardList, setCardList] = useState([]);
   const now = new Date();
@@ -39,7 +40,8 @@ const [childLoader, setChildLoader] = useState(false);
     const formdata = new FormData();
     formdata.append("bank", bank);
     setCcDetails({});
-    setChildLoader(true)
+    setChildLoader(true);
+    setSelectedBank(bank)
     return apiInstance
       .post("/account_planner/credit_card_details", formdata)
       .then(res => {
@@ -123,7 +125,7 @@ const [childLoader, setChildLoader] = useState(false);
               <div
                 key={i}
                 onClick={() => getCreditCardDetails(card.id)}
-                className="text-center cardWrapper"
+                className={`text-center cardWrapper ${selectedBank === card.id ? "active" : ""}`}
               >
                 <i className="fa fa-credit-card-alt" />
                 {card.value}

@@ -70,9 +70,8 @@
 .cardWrapper {
   line-height: 3;
   padding: 2rem;
-  &:hover{
+  &:hover, &.active{
     color: $fluorescent-color;
-    border-bottom: solid 1px $fluorescent-color;
   }
   cursor: pointer;
   .fa {

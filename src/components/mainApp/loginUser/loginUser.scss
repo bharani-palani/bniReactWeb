@@ -25,14 +25,6 @@
   .rightMenu {
     color: $fluorescent-color;
     margin: auto 5px;
-    .signOut {
-      font-size: 2rem;
-      cursor: pointer;
-      border: solid 1px $fluorescent-color;
-      padding: 10px;
-      border-radius: 100%;
-      margin-right: 5px;
-    }
     @media only screen and (max-width: 767px) {
       .signOut {
         margin-right: 15px;

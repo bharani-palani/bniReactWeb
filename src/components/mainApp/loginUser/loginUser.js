@@ -42,7 +42,7 @@ const LoginUser = props => {
         >
             <i
               onClick={onLogout}
-              className="fa fa-sign-out signOut"
+              className="fa fa-sign-out roundedButton"
             />
         </OverlayTrigger>
       </div>
