@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { monthExpenditureConfig } from "../configuration/backendTableConfig";
 import BackendCore from "../../components/configuration/backend/BackendCore";
 import helpers from "../../helpers";
+import apiInstance from "../../services/apiServices";
 
 const MonthExpenditureTable = props => {
   const { monthYearSelected, bankSelected } = props;
@@ -17,10 +18,30 @@ const MonthExpenditureTable = props => {
     }
   }, [monthYearSelected, bankSelected]);
 
+  const getTemplate = () => {
+    return apiInstance
+      .get("/account_planner/credit_card_list")
+      .then(res => res.data.response)
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const cloneFromTemplate = () => {
+    const a = getTemplate();
+    Promise.all([a]).then(r => {
+      console.log(r[0])
+    });
+  }
   return (
     <div className="settings">
       <div className="backendConfigureSection">
-        <div className="btn btn-capsule btn-sm active mt-10">{monthYearSelected}</div>
+        <div className="equal-grid-2 mt-10">
+          <button className="btn btn-capsule btn-sm active disabled">{monthYearSelected}</button>
+          <div>
+            <i onClick={() => cloneFromTemplate()} className="fa fa-copy roundedButton pull-right" />
+          </div>
+        </div>
         {monthYearSelected && bankSelected &&
           WhereClause &&
           monthExpenditureConfig

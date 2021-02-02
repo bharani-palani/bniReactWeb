@@ -43,6 +43,11 @@ class account_planner_model extends CI_Model
 		$query = $this->db->get_where('credit_cards', array("credit_card_id" => $bank));
 		return get_all_rows($query);
 	}
+	function getIncExpTemplate()
+	{
+		$query = $this->db->get('income_expense_template');
+		return get_all_rows($query);
+	}
 	function getIncExpChartData($post)
 	{
 		$startDate = $post['startDate'];
