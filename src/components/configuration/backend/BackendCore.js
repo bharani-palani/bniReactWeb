@@ -14,6 +14,7 @@ function BackendCore(props) {
   const postApiUrl = props.postApiUrl;
   const showTotal = props.showTotal;
   const rowKeyUp = props.rowKeyUp;
+  const insertCloneData = props.insertCloneData;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
@@ -87,6 +88,18 @@ function BackendCore(props) {
     runAllApis();
     // console.log(WhereClause);
   }, [WhereClause]);
+
+  useEffect(() => {
+    if(insertCloneData && insertCloneData.length > 0){
+      setLoader(true);
+      const newDbData = [...insertCloneData, ...dbData];
+      setDbData(newDbData);
+      setTimeout(() => {
+        setLoader(false);
+      }, 500);
+    }
+  }, [insertCloneData]);
+
   const updateDbData = (index, data, primaryKey) => {
     // update DB data
     const { i, j } = index;
@@ -385,7 +398,8 @@ BackendCore.propTypes = {
   WhereClause: PropTypes.string,
   showTotal: PropTypes.array,
   rowKeyUp: PropTypes.string,
-  rowElements: PropTypes.array
+  rowElements: PropTypes.array,
+  insertCloneData: PropTypes.array,
 };
 BackendCore.defaultProps = {
   rowKeyUp: "",
