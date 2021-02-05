@@ -40,7 +40,7 @@ const TypeCreditCardExpenditure = props => {
   payDate = payDate < 10 ? `0${payDate}` : payDate;
   payDate = new Date(`${payDate}-${ccMonthYearSelected}`);
   payDate = helpers.addMonths(payDate, 1);
-  console.log(payDate);
+
   let [yyyy, mmm, dd] = [
     payDate.getFullYear(),
     payDate.getMonth() + 1,

@@ -64,7 +64,7 @@ class account_planner_model extends CI_Model
 			->where('a.inc_exp_date >=', $startDate)
 			->where('a.inc_exp_date <=', $endDate)
 			->where('inc_exp_bank', $bank)
-			->where('a.inc_exp_type', "Dr")
+			// ->where('a.inc_exp_type', "Dr")
 			->group_by(array("dated", "category"))
 			->order_by("DATE_FORMAT(a.inc_exp_date, '%m-%Y')", "desc");
 		$query = $this->db->get();

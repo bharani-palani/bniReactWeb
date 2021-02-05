@@ -190,7 +190,6 @@ const AccountPlanner = props => {
           (a, b) => new Date(b.month).getTime() - new Date(a.month).getTime()
         );
         setCcChartData(data);
-        console.log(helpers.dateToMonthYear(data[0].month));
         setCcMonthYearSelected(helpers.dateToMonthYear(data[0].month));
         setCcChartLoader(false);
       });

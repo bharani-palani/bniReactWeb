@@ -394,6 +394,7 @@ const monthExpenditureConfig = [
       "inc_exp_id",
       "inc_exp_name",
       "inc_exp_amount",
+      "inc_exp_plan_amount",
       "inc_exp_type",
       "inc_exp_date",
       "inc_exp_category",
@@ -406,12 +407,14 @@ const monthExpenditureConfig = [
         forKey: "inc_exp_type",
         forCondition: "equals",
         forValue: ["Cr", "Dr"]
-      } //forCondition: includes or equals
+      }, //forCondition: includes or equals
+      "inc_exp_plan_amount"
     ],
     rowKeyUp: "",
     rowElements: [
       "checkbox",
       "textbox",
+      "number",
       "number",
       {
         radio: {

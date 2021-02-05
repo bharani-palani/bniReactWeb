@@ -90,7 +90,7 @@ function BackendCore(props) {
   }, [WhereClause]);
 
   useEffect(() => {
-    if(insertCloneData && insertCloneData.length > 0){
+    if (insertCloneData && insertCloneData.length > 0) {
       setLoader(true);
       const newDbData = [...insertCloneData, ...dbData];
       setDbData(newDbData);
@@ -206,43 +206,50 @@ function BackendCore(props) {
 
   const getColumnTotal = key => {
     let total = "";
-    if (showTotal && showTotal.length && showTotal[0].whichKey) {
-      let totArrays = [];
-      total = showTotal
-        .filter(s => s.whichKey === key)
-        .map(f => {
-          return f.forValue.map((v, i) => {
-            const number = dbData
-              .filter(db => db[f.forKey] === v)
-              .reduce((a, b) => Number(a) + Number(b[key]), 0);
-            totArrays.push(number);
-            return (
-              <div key={i}>
-                {helpers.indianLacSeperator(number)}
-                {` (${v})`}
+    if (showTotal) {
+      showTotal.forEach(show => {
+        if (typeof show === "string" && String(show) === String(key)) {
+          total = dbData.reduce((a, b) => Number(a) + Number(b[key]), 0);
+          total = helpers.indianLacSeperator(total);
+        } else if (typeof show === "object" && show.whichKey === String(key)) {
+          let totArrays = [];
+          total = [show]
+            .map(f => {
+              return f.forValue.map((v, i) => {
+                const number = dbData
+                  .filter(db => db[f.forKey] === v)
+                  .reduce((a, b) => Number(a) + Number(b[key]), 0);
+                totArrays.push(number);
+                // return helpers.indianLacSeperator(number);
+                return (
+                  <div key={i}>
+                    {helpers.indianLacSeperator(number)}
+                    {` (${v})`}
+                  </div>
+                );
+              });
+            })
+            .concat(
+              <div
+                key={`totRow`}
+                className={checkSettlement(
+                  Number(totArrays[0]).toFixed(2) -
+                    Number(totArrays[1]).toFixed(2)
+                )}
+              >
+                {helpers.indianLacSeperator(
+                  Number(totArrays[0]).toFixed(2) -
+                    Number(totArrays[1]).toFixed(2)
+                )}
+                &nbsp;
+                {checkSettlementString(
+                  Number(totArrays[0]).toFixed(2) -
+                    Number(totArrays[1]).toFixed(2)
+                )}
               </div>
             );
-          });
-        })
-        .concat(
-          <div
-            key={`totRow`}
-            className={checkSettlement(
-              totArrays[0].toFixed(2) - totArrays[1].toFixed(2)
-            )}
-          >
-            {helpers.indianLacSeperator(
-              totArrays[0].toFixed(2) - totArrays[1].toFixed(2)
-            )}
-            &nbsp;
-            {checkSettlementString(
-              totArrays[0].toFixed(2) - totArrays[1].toFixed(2)
-            )}
-          </div>
-        );
-    } else {
-      total = dbData.reduce((a, b) => Number(a) + Number(b[key]), 0);
-      total = helpers.indianLacSeperator(total);
+        }
+      });
     }
     return total;
   };
@@ -399,7 +406,7 @@ BackendCore.propTypes = {
   showTotal: PropTypes.array,
   rowKeyUp: PropTypes.string,
   rowElements: PropTypes.array,
-  insertCloneData: PropTypes.array,
+  insertCloneData: PropTypes.array
 };
 BackendCore.defaultProps = {
   rowKeyUp: "",
