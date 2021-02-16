@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Loader from "react-loader-spinner";
 import helpers from "../../../helpers";
 import PropTypes from "prop-types";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 function BackendCore(props) {
   const Table = props.Table;
@@ -15,6 +16,7 @@ function BackendCore(props) {
   const showTotal = props.showTotal;
   const rowKeyUp = props.rowKeyUp;
   const insertCloneData = props.insertCloneData;
+  const showTooltipFor = props.showTooltipFor;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
@@ -280,6 +282,14 @@ function BackendCore(props) {
     setDbData(filteredDbData);
     setSortType(!type);
   };
+  const renderCloneTooltip = (props, value, elm, key) =>
+    showTooltipFor.includes(elm) && value ? (
+      <Tooltip id={key} className="in show" {...props}>
+        {value}
+      </Tooltip>
+    ) : (
+      <Tooltip />
+    );
 
   return loader === false ? (
     <div className="backendConfigureSection">
@@ -310,21 +320,36 @@ function BackendCore(props) {
             <>
               {dbData.map((d, i) =>
                 TableRows.map((r, j) => (
-                  <FormElement
+                  <OverlayTrigger
                     key={`${d[r]}-${j}`}
-                    onDelete={index => onDelete(index)}
-                    onChange={(index, data, primaryKey) =>
-                      updateDbData(index, data, primaryKey)
-                    }
-                    index={{ i, j: r }}
-                    placeholder={[helpers.stringToCapitalize(r)]}
-                    value={d[r]}
-                    element={rowElements[j]}
-                    showIncrementer={dbData.length - 1 === i}
-                    showDecrement={true} // i !== 0
-                    onAddRow={bool => onAddRow(bool)}
-                    primaryKey={TableRows[0]}
-                  />
+                    placement="top"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderCloneTooltip(
+                      props,
+                      dbData[i][TableRows[j]],
+                      rowElements[j],
+                      `${d[r]}-${j}`
+                    )}
+                    triggerType="hover"
+                  >
+                    <div>
+                      <FormElement
+                        onDelete={index => onDelete(index)}
+                        onChange={(index, data, primaryKey) =>
+                          updateDbData(index, data, primaryKey)
+                        }
+                        index={{ i, j: r }}
+                        placeholder={[helpers.stringToCapitalize(r)]}
+                        value={d[r]}
+                        element={rowElements[j]}
+                        showIncrementer={dbData.length - 1 === i}
+                        showDecrement={true} // i !== 0
+                        onAddRow={bool => onAddRow(bool)}
+                        primaryKey={TableRows[0]}
+                        onDoubleClick={() => console.log(rowElements[j])}
+                      />
+                    </div>
+                  </OverlayTrigger>
                 ))
               )}
               {showTotal && showTotal.length > 0 && (
@@ -406,12 +431,14 @@ BackendCore.propTypes = {
   showTotal: PropTypes.array,
   rowKeyUp: PropTypes.string,
   rowElements: PropTypes.array,
-  insertCloneData: PropTypes.array
+  insertCloneData: PropTypes.array,
+  showTooltipFor: PropTypes.array
 };
 BackendCore.defaultProps = {
   rowKeyUp: "",
   showTotal: [],
-  WhereClause: ""
+  WhereClause: "",
+  showTooltipFor: []
 };
 
 export default BackendCore;

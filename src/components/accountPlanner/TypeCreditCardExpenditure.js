@@ -82,6 +82,7 @@ const TypeCreditCardExpenditure = props => {
                 rowKeyUp={t.rowKeyUp}
                 getApiUrl="/account_planner/getAccountPlanner"
                 postApiUrl="/account_planner/postAccountPlanner"
+                showTooltipFor={t.showTooltipFor}
               />
             ))}
       </div>

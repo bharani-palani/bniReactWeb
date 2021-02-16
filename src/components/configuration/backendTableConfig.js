@@ -440,7 +440,8 @@ const monthExpenditureConfig = [
         }
       },
       "textbox"
-    ]
+    ],
+    showTooltipFor: ["textbox"]
   }
 ];
 
@@ -487,7 +488,8 @@ const creditCardConfig = [
         }
       },
       "textbox"
-    ]
+    ],
+    showTooltipFor: ["textbox"]
   }
 ];
 

@@ -115,7 +115,7 @@ function FormElement(props) {
                   <i
                     onClick={() => props.onAddRow(true)}
                     className="fa fa-plus-circle success"
-                  />
+                    />
                 </div>
               )}
             </>

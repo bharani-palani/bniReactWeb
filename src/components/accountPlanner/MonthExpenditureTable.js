@@ -104,6 +104,7 @@ const MonthExpenditureTable = props => {
                 getApiUrl="/account_planner/getAccountPlanner"
                 postApiUrl="/account_planner/postAccountPlanner"
                 insertCloneData={insertData}
+                showTooltipFor={t.showTooltipFor}
               />
             ))}
       </div>
