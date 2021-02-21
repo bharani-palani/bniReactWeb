@@ -10,6 +10,7 @@ const MonthExpenditureTable = props => {
   const { monthYearSelected, bankSelected } = props;
   const [WhereClause, setWhereClause] = useState("");
   const [insertData, setInsertData] = useState([]);
+  const [planCards, setPlanCards] = useState([]);
   useEffect(() => {
     if (monthYearSelected && bankSelected) {
       let [smonth, year] = monthYearSelected.split("-");
@@ -56,6 +57,84 @@ const MonthExpenditureTable = props => {
     });
   };
 
+  const calculatePlanning = dbData => {
+    const plan = dbData
+      .map(data => {
+        data.inc_exp_plan_amount = Number(data.inc_exp_plan_amount);
+        data.inc_exp_amount = Number(data.inc_exp_amount);
+        return data;
+      })
+      .reduce(
+        (a, b) => {
+          a.planTotal += b.inc_exp_plan_amount;
+          if (b.inc_exp_type === "Dr") {
+            a.expenseTotal += b.inc_exp_amount;
+          }
+          if (b.inc_exp_type === "Cr") {
+            a.incomeTotal += b.inc_exp_amount;
+          }
+          let diff = b.inc_exp_plan_amount / b.inc_exp_amount;
+          diff = Number(
+            ((diff === Infinity || isNaN(diff) ? 0 : diff) * 100).toFixed(2)
+          );
+          a.totalPlans.push(diff);
+          const rest = {
+            percent: diff,
+            ...b
+          };
+          if (diff === 0) {
+            a.noPlans.push(rest);
+          }
+          if (diff === 100) {
+            a.achievedPlans.push(rest);
+          }
+          if (diff > 100) {
+            a.goodPlans.push(rest);
+          }
+          if (diff < 100 && diff > 0) {
+            a.badPlans.push(rest);
+          }
+          return a;
+        },
+        {
+          planTotal: 0,
+          expenseTotal: 0,
+          incomeTotal: 0,
+          totalPlans: [],
+          goodPlans: [],
+          badPlans: [],
+          noPlans: [],
+          achievedPlans: []
+        }
+      );
+    const cards = [
+      { key: "goodPlans", planString: "Good plans", planArray: plan.goodPlans },
+      {
+        key: "achievedPlans",
+        planString: "Achieved plans",
+        planArray: plan.achievedPlans
+      },
+      { key: "badPlans", planString: "Bad plans", planArray: plan.badPlans },
+      { key: "noPlans", planString: "No plans", planArray: plan.noPlans }
+    ];
+    console.log(cards);
+    setPlanCards(cards);
+  };
+  const getFontColor = key => {
+    switch (key) {
+      case "goodPlans":
+        return "text-success";
+      case "achievedPlans":
+        return "text-primary";
+      case "badPlans":
+        return "text-danger";
+      case "noPlans":
+        return "text-warning";
+      default:
+        return "";
+    }
+  };
+  const getPlanAmount = planArray => helpers.indianLacSeperator(planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0));
   return (
     <div className="settings">
       <div className="backendConfigureSection">
@@ -105,8 +184,30 @@ const MonthExpenditureTable = props => {
                 postApiUrl="/account_planner/postAccountPlanner"
                 insertCloneData={insertData}
                 showTooltipFor={t.showTooltipFor}
+                onTableUpdate={dbData => calculatePlanning(dbData)}
               />
             ))}
+      </div>
+      <div className="row">
+        {planCards.map(plan => (
+          <div key={plan.key} className="col-md-3 mt-10 pr-1 pl-0">
+            <div className="blog-box">
+              <div className="post-media">
+                <div className="title text-center">
+                  <h4 className="posRelative">
+                    {plan.planString}
+                    <sup className="superScript">{plan.planArray.length}</sup>
+                  </h4>
+                </div>
+              </div>
+              <div className="blog-desc">
+                <div className={`text-center ${getFontColor(plan.key)}`}>
+                  {getPlanAmount(plan.planArray)}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

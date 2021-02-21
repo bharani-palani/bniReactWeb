@@ -103,10 +103,14 @@ function BackendCore(props) {
   }, [insertCloneData]);
 
   const updateDbData = (index, data, primaryKey) => {
+    const {
+      onTableUpdate
+    } = props;
     // update DB data
     const { i, j } = index;
     dbData[i][j] = data;
     setDbData(dbData);
+    onTableUpdate(dbData);
     // update changes rows
     const id = dbData.filter((db, ind) => ind === i && db)[0][primaryKey];
     let array = [...updatedIds, id];
@@ -120,6 +124,7 @@ function BackendCore(props) {
         return row;
       });
       setDbData(newDbData);
+      onTableUpdate(newDbData);
     }
   };
 
@@ -432,7 +437,8 @@ BackendCore.propTypes = {
   rowKeyUp: PropTypes.string,
   rowElements: PropTypes.array,
   insertCloneData: PropTypes.array,
-  showTooltipFor: PropTypes.array
+  showTooltipFor: PropTypes.array,
+  onTableUpdate: PropTypes.func
 };
 BackendCore.defaultProps = {
   rowKeyUp: "",
