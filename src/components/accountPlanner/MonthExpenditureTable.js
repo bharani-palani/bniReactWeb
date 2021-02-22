@@ -29,9 +29,9 @@ const MonthExpenditureTable = props => {
         console.log(error);
       });
   };
-  const renderCloneTooltip = props => (
+  const renderCloneTooltip = (props, content) => (
     <Tooltip id="button-tooltip-1" className="in show" {...props}>
-      Clone from template
+      {content}
     </Tooltip>
   );
 
@@ -150,6 +150,11 @@ const MonthExpenditureTable = props => {
     );
   return (
     <div className="settings">
+          {/* <div>
+        {JSON.stringify([Boolean(monthYearSelected &&
+          bankSelected &&
+          WhereClause)])}
+      </div> */}
       <div className="backendConfigureSection">
         <div className="equal-grid-2 mt-10">
           <div>
@@ -160,9 +165,9 @@ const MonthExpenditureTable = props => {
           <div>
             <div>
               <OverlayTrigger
-                placement="left"
+                placement="top"
                 delay={{ show: 250, hide: 400 }}
-                overlay={renderCloneTooltip}
+                overlay={renderCloneTooltip(props, "Clone template")}
                 triggerType="hover"
               >
                 <i
@@ -172,10 +177,30 @@ const MonthExpenditureTable = props => {
               </OverlayTrigger>
             </div>
             <div>
-              <i
-                onClick={() => alert(123)}
-                className="fa fa-upload roundedButton pull-right"
-              />
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderCloneTooltip(props, "Add Expense")}
+                triggerType="hover"
+              >
+                <i
+                  onClick={() => alert("Add Expense")}
+                  className="fa fa-upload roundedButton pull-right"
+                />
+              </OverlayTrigger>
+            </div>
+            <div>
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderCloneTooltip(props, "Export XLS")}
+                triggerType="hover"
+              >
+                <i
+                  onClick={() => alert("Export XLS")}
+                  className="fa fa-file-excel-o roundedButton pull-right"
+                />
+              </OverlayTrigger>
             </div>
           </div>
         </div>
@@ -221,7 +246,9 @@ const MonthExpenditureTable = props => {
                     overlay={renderPlanTooltip(props, plan.planArray)}
                     triggerType="hover"
                   >
-                    <div className="cursorHelp">{getPlanAmount(plan.planArray)}</div>
+                    <div className="cursorHelp">
+                      {getPlanAmount(plan.planArray)}
+                    </div>
                   </OverlayTrigger>
                 </div>
               </div>
