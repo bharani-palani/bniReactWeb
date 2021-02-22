@@ -17,6 +17,7 @@ function BackendCore(props) {
   const rowKeyUp = props.rowKeyUp;
   const insertCloneData = props.insertCloneData;
   const showTooltipFor = props.showTooltipFor;
+  const onTableUpdate = props.onTableUpdate;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
@@ -103,14 +104,11 @@ function BackendCore(props) {
   }, [insertCloneData]);
 
   const updateDbData = (index, data, primaryKey) => {
-    const {
-      onTableUpdate
-    } = props;
     // update DB data
     const { i, j } = index;
     dbData[i][j] = data;
     setDbData(dbData);
-    onTableUpdate(dbData);
+    onTableUpdate && onTableUpdate(dbData);
     // update changes rows
     const id = dbData.filter((db, ind) => ind === i && db)[0][primaryKey];
     let array = [...updatedIds, id];
@@ -124,7 +122,7 @@ function BackendCore(props) {
         return row;
       });
       setDbData(newDbData);
-      onTableUpdate(newDbData);
+      onTableUpdate && onTableUpdate(newDbData);
     }
   };
 

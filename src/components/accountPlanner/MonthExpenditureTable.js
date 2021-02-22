@@ -35,6 +35,17 @@ const MonthExpenditureTable = props => {
     </Tooltip>
   );
 
+  const renderPlanTooltip = (props, planArray) => {
+    const values = planArray.map(p => p.inc_exp_name).join(" | ");
+    return values ? (
+      <Tooltip id="button-tooltip-2" className="in show" {...props}>
+        {values}
+      </Tooltip>
+    ) : (
+      <Tooltip />
+    );
+  };
+
   const cloneFromTemplate = () => {
     const a = getTemplate();
     Promise.all([a]).then(r => {
@@ -117,7 +128,6 @@ const MonthExpenditureTable = props => {
       { key: "badPlans", planString: "Bad plans", planArray: plan.badPlans },
       { key: "noPlans", planString: "No plans", planArray: plan.noPlans }
     ];
-    console.log(cards);
     setPlanCards(cards);
   };
   const getFontColor = key => {
@@ -134,7 +144,10 @@ const MonthExpenditureTable = props => {
         return "";
     }
   };
-  const getPlanAmount = planArray => helpers.indianLacSeperator(planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0));
+  const getPlanAmount = planArray =>
+    helpers.indianLacSeperator(
+      planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0)
+    );
   return (
     <div className="settings">
       <div className="backendConfigureSection">
@@ -202,7 +215,14 @@ const MonthExpenditureTable = props => {
               </div>
               <div className="blog-desc">
                 <div className={`text-center ${getFontColor(plan.key)}`}>
-                  {getPlanAmount(plan.planArray)}
+                  <OverlayTrigger
+                    placement="top"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderPlanTooltip(props, plan.planArray)}
+                    triggerType="hover"
+                  >
+                    <div className="cursorHelp">{getPlanAmount(plan.planArray)}</div>
+                  </OverlayTrigger>
                 </div>
               </div>
             </div>
