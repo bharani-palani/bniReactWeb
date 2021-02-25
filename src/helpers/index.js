@@ -134,8 +134,23 @@ const helpers = {
       if (date.getMonth() !== m) date.setDate(0);
     }
     return date;
+  },
+  getNextMonthFirst: () => {
+    // get
+    const now = new Date();
+    let year = now.getFullYear();
+    let month = now.getMonth() + 2;
+    if(month > 12) {
+      year += 1;
+      month = 1;
+    }
+    // set
+    const date = new Date(`${year}-${month}-01`);
+    let mm = date.getMonth() + 1;
+    mm = mm < 10 ? `0${mm}` : mm;
+    const yyyy = date.getFullYear();
+    return `${yyyy}-${mm}-01`;
   }
-
 };
 
 export default helpers;

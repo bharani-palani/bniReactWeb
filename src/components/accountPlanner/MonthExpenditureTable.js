@@ -56,8 +56,9 @@ const MonthExpenditureTable = props => {
             inc_exp_id: "",
             inc_exp_name: temp_inc_exp_name,
             inc_exp_amount: temp_amount,
+            inc_exp_plan_amount: temp_amount,
             inc_exp_type: temp_inc_exp_type,
-            inc_exp_date: "",
+            inc_exp_date: helpers.getNextMonthFirst(),
             inc_exp_category: "",
             inc_exp_bank: "",
             inc_exp_comments: ""
@@ -165,7 +166,7 @@ const MonthExpenditureTable = props => {
           <div>
             <div>
               <OverlayTrigger
-                placement="top"
+                placement="left"
                 delay={{ show: 250, hide: 400 }}
                 overlay={renderCloneTooltip(props, "Clone template")}
                 triggerType="hover"
@@ -180,12 +181,12 @@ const MonthExpenditureTable = props => {
               <OverlayTrigger
                 placement="top"
                 delay={{ show: 250, hide: 400 }}
-                overlay={renderCloneTooltip(props, "Add Expense")}
+                overlay={renderCloneTooltip(props, "Fast shopping")}
                 triggerType="hover"
               >
                 <i
                   onClick={() => alert("Add Expense")}
-                  className="fa fa-upload roundedButton pull-right"
+                  className="fa fa-cart-plus roundedButton pull-right"
                 />
               </OverlayTrigger>
             </div>
