@@ -137,6 +137,7 @@ function BackendCore(props) {
       setDeleteData(deleteData);
     }
     setDbData(backup);
+    onTableUpdate && onTableUpdate(backup);
   };
 
   const onAddRow = bool => {

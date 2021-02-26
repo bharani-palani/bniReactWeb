@@ -5,12 +5,16 @@ import BackendCore from "../../components/configuration/backend/BackendCore";
 import helpers from "../../helpers";
 import apiInstance from "../../services/apiServices";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const MonthExpenditureTable = props => {
   const { monthYearSelected, bankSelected } = props;
   const [WhereClause, setWhereClause] = useState("");
   const [insertData, setInsertData] = useState([]);
   const [planCards, setPlanCards] = useState([]);
+  const [dbData, setDbData] = useState([]);
+
   useEffect(() => {
     if (monthYearSelected && bankSelected) {
       let [smonth, year] = monthYearSelected.split("-");
@@ -20,6 +24,10 @@ const MonthExpenditureTable = props => {
       setWhereClause(wClause);
     }
   }, [monthYearSelected, bankSelected]);
+
+  useEffect(() => {
+    calculatePlanning(dbData);
+  }, [JSON.stringify(dbData)]);
 
   const getTemplate = () => {
     return apiInstance
@@ -149,13 +157,39 @@ const MonthExpenditureTable = props => {
     helpers.indianLacSeperator(
       planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0)
     );
+  const exportToPdf = () => {
+    const body = dbData.map(
+      ({
+        inc_exp_name,
+        inc_exp_amount,
+        inc_exp_plan_amount,
+        inc_exp_type,
+        inc_exp_date,
+        inc_exp_comments
+      }, i) => {
+        return [
+          i+1,
+          inc_exp_name,
+          inc_exp_amount,
+          inc_exp_plan_amount,
+          inc_exp_type,
+          inc_exp_date,
+          inc_exp_comments
+        ];
+      }
+    );
+    const head = ["#", "Name", "Amount", "Plan amount", "Type", "Date", "Comments"];
+    const doc = new jsPDF();
+    doc.autoTable({
+      styles: { overflow: "linebreak" },
+      theme: "grid",
+      head: [head],
+      body: [...body]
+    });
+    doc.save(monthExpenditureConfig[0].Table);
+  };
   return (
     <div className="settings">
-          {/* <div>
-        {JSON.stringify([Boolean(monthYearSelected &&
-          bankSelected &&
-          WhereClause)])}
-      </div> */}
       <div className="backendConfigureSection">
         <div className="equal-grid-2 mt-10">
           <div>
@@ -194,12 +228,12 @@ const MonthExpenditureTable = props => {
               <OverlayTrigger
                 placement="top"
                 delay={{ show: 250, hide: 400 }}
-                overlay={renderCloneTooltip(props, "Export XLS")}
+                overlay={renderCloneTooltip(props, "Export PDF")}
                 triggerType="hover"
               >
                 <i
-                  onClick={() => alert("Export XLS")}
-                  className="fa fa-file-excel-o roundedButton pull-right"
+                  onClick={() => exportToPdf()}
+                  className="fa fa-file-pdf-o roundedButton pull-right"
                 />
               </OverlayTrigger>
             </div>
@@ -223,7 +257,7 @@ const MonthExpenditureTable = props => {
                 postApiUrl="/account_planner/postAccountPlanner"
                 insertCloneData={insertData}
                 showTooltipFor={t.showTooltipFor}
-                onTableUpdate={dbData => calculatePlanning(dbData)}
+                onTableUpdate={data => setDbData(() => [...data])}
               />
             ))}
       </div>
