@@ -2004,6 +2004,9 @@ BLOG
   padding: 30px;
   display: block;
   position: relative;
+  &.black {
+    background: #000;
+  }
 }
 
 .blog-desc h4 a,

@@ -1,4 +1,5 @@
 const helpers = {
+  self: this,
   fluorescentColor: "#c2d82e",
   sageHeaderAndList: (response, sortKey) => {
     const list = response.filter(e => Number(e[sortKey]) > 1);
@@ -150,6 +151,21 @@ const helpers = {
     mm = mm < 10 ? `0${mm}` : mm;
     const yyyy = date.getFullYear();
     return `${yyyy}-${mm}-01`;
+  },
+  getNow: () => {
+    const leadingZeros = (number) => {
+      let num = Number(number);
+      return num < 10 ? `0${num}` : num;
+    };
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mmm = leadingZeros(now.getMonth() + 1);
+    const dd = leadingZeros(now.getDate());
+    const hh = leadingZeros(now.getHours());
+    const mm = leadingZeros(now.getMinutes());
+    const ss = leadingZeros(now.getSeconds());
+    const zzz = leadingZeros(now.getMilliseconds());
+    return `${yyyy}-${mmm}-${dd}T${hh}|${mm}|${ss}|${zzz}`;
   }
 };
 

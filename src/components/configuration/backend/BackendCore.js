@@ -18,6 +18,7 @@ function BackendCore(props) {
   const insertCloneData = props.insertCloneData;
   const showTooltipFor = props.showTooltipFor;
   const onTableUpdate = props.onTableUpdate;
+  const loaderState = props.loaderState;
   const [rowElements, setRowElements] = useState([]);
   const [dbData, setDbData] = useState([]);
   const [deleteData, setDeleteData] = useState([]);
@@ -70,6 +71,7 @@ function BackendCore(props) {
 
   const runAllApis = callBack => {
     setLoader(true);
+    loaderState && loaderState(true);
     const a = createRowElementArray();
     const b = getBackendAjax();
 
@@ -78,6 +80,7 @@ function BackendCore(props) {
       await Promise.all(array[0]).then(a => {
         setRowElements(a);
         setLoader(false);
+        loaderState && loaderState(false);
       });
       typeof callBack === "function" && callBack();
     });
@@ -95,10 +98,12 @@ function BackendCore(props) {
   useEffect(() => {
     if (insertCloneData && insertCloneData.length > 0) {
       setLoader(true);
+      loaderState && loaderState(true);
       const newDbData = [...insertCloneData, ...dbData];
       setDbData(newDbData);
       setTimeout(() => {
         setLoader(false);
+        loaderState && loaderState(false);
       }, 500);
     }
   }, [insertCloneData]);
@@ -178,8 +183,12 @@ function BackendCore(props) {
         response.data.response ? success() : fail();
         if (insertData.length > 0) {
           setLoader(true);
+          loaderState && loaderState(true);
           setTimeout(() => {
-            runAllApis(() => setLoader(false));
+            runAllApis(() => {
+              setLoader(false);
+              loaderState && loaderState(false);
+            });
           }, 2000);
         }
         setDeleteData([]);
@@ -437,7 +446,8 @@ BackendCore.propTypes = {
   rowElements: PropTypes.array,
   insertCloneData: PropTypes.array,
   showTooltipFor: PropTypes.array,
-  onTableUpdate: PropTypes.func
+  onTableUpdate: PropTypes.func,
+  loaderState: PropTypes.func
 };
 BackendCore.defaultProps = {
   rowKeyUp: "",

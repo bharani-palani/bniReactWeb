@@ -14,6 +14,7 @@ const MonthExpenditureTable = props => {
   const [insertData, setInsertData] = useState([]);
   const [planCards, setPlanCards] = useState([]);
   const [dbData, setDbData] = useState([]);
+  const [planLoader, setPlanLoader] = useState(false);
 
   useEffect(() => {
     if (monthYearSelected && bankSelected) {
@@ -77,7 +78,7 @@ const MonthExpenditureTable = props => {
     });
   };
 
-  const calculatePlanning = dbData => {
+  const calculatePlanning = (dbData) => {
     const plan = dbData
       .map(data => {
         data.inc_exp_plan_amount = Number(data.inc_exp_plan_amount);
@@ -128,30 +129,17 @@ const MonthExpenditureTable = props => {
         }
       );
     const cards = [
-      { key: "goodPlans", planString: "Good plans", planArray: plan.goodPlans },
+      { key: "goodPlans", flagString: "success", planString: "Good plans", planArray: plan.goodPlans },
       {
         key: "achievedPlans",
+        flagString: "info",
         planString: "Achieved plans",
         planArray: plan.achievedPlans
       },
-      { key: "badPlans", planString: "Bad plans", planArray: plan.badPlans },
-      { key: "noPlans", planString: "No plans", planArray: plan.noPlans }
+      { key: "badPlans", flagString: "danger", planString: "Bad plans", planArray: plan.badPlans },
+      { key: "noPlans", flagString: "warning", planString: "No plans", planArray: plan.noPlans }
     ];
     setPlanCards(cards);
-  };
-  const getFontColor = key => {
-    switch (key) {
-      case "goodPlans":
-        return "text-success";
-      case "achievedPlans":
-        return "text-primary";
-      case "badPlans":
-        return "text-danger";
-      case "noPlans":
-        return "text-warning";
-      default:
-        return "";
-    }
   };
   const getPlanAmount = planArray =>
     helpers.indianLacSeperator(
@@ -186,7 +174,7 @@ const MonthExpenditureTable = props => {
       head: [head],
       body: [...body]
     });
-    doc.save(monthExpenditureConfig[0].Table);
+    doc.save(`${monthExpenditureConfig[0].Table}-${helpers.getNow()}`);
   };
   return (
     <div className="settings">
@@ -258,23 +246,25 @@ const MonthExpenditureTable = props => {
                 insertCloneData={insertData}
                 showTooltipFor={t.showTooltipFor}
                 onTableUpdate={data => setDbData(() => [...data])}
+                loaderState={(lState) => setPlanLoader(lState)}
               />
             ))}
       </div>
+      {!planLoader &&
       <div className="row">
         {planCards.map(plan => (
-          <div key={plan.key} className="col-md-3 mt-10 pr-1 pl-0">
+          <div key={plan.key} className="col-md-3 mt-10 pr-0 pl-0">
             <div className="blog-box">
               <div className="post-media">
-                <div className="title text-center">
+                <div className={`title text-center`}>
                   <h4 className="posRelative">
                     {plan.planString}
                     <sup className="superScript">{plan.planArray.length}</sup>
                   </h4>
                 </div>
               </div>
-              <div className="blog-desc">
-                <div className={`text-center ${getFontColor(plan.key)}`}>
+              <div className={`blog-desc black`}>
+                <div className={`text-center text-${plan.flagString}`}>
                   <OverlayTrigger
                     placement="top"
                     delay={{ show: 250, hide: 400 }}
@@ -291,6 +281,7 @@ const MonthExpenditureTable = props => {
           </div>
         ))}
       </div>
+      }
     </div>
   );
 };

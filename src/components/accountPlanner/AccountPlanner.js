@@ -294,7 +294,7 @@ const AccountPlanner = props => {
                   )}
                 </div>
                 <div className="row">
-                  <div className="col-md-12 b-0 mb-10">
+                  <div className="col-md-12 b-0 mb-10 pr-0 pl-0">
                     {chartData.length > 0 &&
                       !isNaN(bankSelected) &&
                       new Date(monthYearSelected) instanceof Date &&
