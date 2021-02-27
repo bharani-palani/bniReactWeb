@@ -15,6 +15,7 @@ const MonthExpenditureTable = props => {
   const [planCards, setPlanCards] = useState([]);
   const [dbData, setDbData] = useState([]);
   const [planLoader, setPlanLoader] = useState(false);
+  const [totals, setTotals] = useState([]);
 
   useEffect(() => {
     if (monthYearSelected && bankSelected) {
@@ -78,7 +79,7 @@ const MonthExpenditureTable = props => {
     });
   };
 
-  const calculatePlanning = (dbData) => {
+  const calculatePlanning = dbData => {
     const plan = dbData
       .map(data => {
         data.inc_exp_plan_amount = Number(data.inc_exp_plan_amount);
@@ -128,35 +129,57 @@ const MonthExpenditureTable = props => {
           achievedPlans: []
         }
       );
+    const totals = [
+      { amount: plan.incomeTotal, label: "Income", flagString: "success" },
+      { amount: plan.expenseTotal, label: "Expense", flagString: "info" },
+      { amount: (plan.incomeTotal - plan.expenseTotal), label: "Balance", flagString: "danger" },
+      { amount: plan.planTotal, label: "Planning", flagString: "warning" }
+    ];
+    setTotals(totals);
     const cards = [
-      { key: "goodPlans", flagString: "success", planString: "Good plans", planArray: plan.goodPlans },
+      {
+        key: "goodPlans",
+        flagString: "success",
+        planString: "Good plans",
+        planArray: plan.goodPlans
+      },
       {
         key: "achievedPlans",
         flagString: "info",
         planString: "Achieved plans",
         planArray: plan.achievedPlans
       },
-      { key: "badPlans", flagString: "danger", planString: "Bad plans", planArray: plan.badPlans },
-      { key: "noPlans", flagString: "warning", planString: "No plans", planArray: plan.noPlans }
+      {
+        key: "badPlans",
+        flagString: "danger",
+        planString: "Bad plans",
+        planArray: plan.badPlans
+      },
+      {
+        key: "noPlans",
+        flagString: "warning",
+        planString: "No plans",
+        planArray: plan.noPlans
+      }
     ];
     setPlanCards(cards);
   };
-  const getPlanAmount = planArray =>
-    helpers.indianLacSeperator(
-      planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0)
-    );
+  const getPlanAmount = planArray => planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0);
   const exportToPdf = () => {
     const body = dbData.map(
-      ({
-        inc_exp_name,
-        inc_exp_amount,
-        inc_exp_plan_amount,
-        inc_exp_type,
-        inc_exp_date,
-        inc_exp_comments
-      }, i) => {
+      (
+        {
+          inc_exp_name,
+          inc_exp_amount,
+          inc_exp_plan_amount,
+          inc_exp_type,
+          inc_exp_date,
+          inc_exp_comments
+        },
+        i
+      ) => {
         return [
-          i+1,
+          i + 1,
           inc_exp_name,
           inc_exp_amount,
           inc_exp_plan_amount,
@@ -166,67 +189,102 @@ const MonthExpenditureTable = props => {
         ];
       }
     );
-    const head = ["#", "Name", "Amount", "Plan amount", "Type", "Date", "Comments"];
+    const now = helpers.getNow();
+    const head = [
+      "#",
+      "Name",
+      "Amount",
+      "Plan amount",
+      "Type",
+      "Date",
+      "Comments"
+    ];
     const doc = new jsPDF();
+    doc.text(
+      `${helpers.stringToCapitalize(
+        monthExpenditureConfig[0].Table
+      )} (${monthYearSelected})`,
+      15,
+      10
+    );
     doc.autoTable({
       styles: { overflow: "linebreak" },
       theme: "grid",
       head: [head],
       body: [...body]
     });
-    doc.save(`${monthExpenditureConfig[0].Table}-${helpers.getNow()}`);
+
+    const mTotal = totals.map(total => helpers.lacSeperator(total.amount));
+    doc.autoTable({
+      styles: { overflow: "linebreak", halign: "center" },
+      theme: "striped",
+      head: [["Income", "Expense", "Balance", "Planning"]],
+      body: [mTotal]
+    });
+
+    const pTotal = planCards.map(plan => helpers.lacSeperator(getPlanAmount(plan.planArray)));
+    doc.autoTable({
+      styles: { overflow: "linebreak", halign: "center" },
+      theme: "striped",
+      head: [["Good Plans", "Achieved Plans", "Bad Plans", "No Plans"]],
+      body: [pTotal]
+    });
+
+    doc.save(`${monthExpenditureConfig[0].Table}-${now}`);
   };
   return (
     <div className="settings">
       <div className="backendConfigureSection">
-        <div className="equal-grid-2 mt-10">
-          <div>
-            <button className="btn btn-capsule btn-sm active disabled">
-              {monthYearSelected}
-            </button>
+        {!planLoader && (
+          <div className="equal-grid-2 mt-10">
+            <div>
+              <button className="btn btn-capsule btn-sm active disabled">
+                {monthYearSelected}
+              </button>
+            </div>
+            <div>
+              <div>
+                <OverlayTrigger
+                  placement="left"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderCloneTooltip(props, "Clone template")}
+                  triggerType="hover"
+                >
+                  <i
+                    onClick={() => cloneFromTemplate()}
+                    className="fa fa-copy roundedButton pull-right"
+                  />
+                </OverlayTrigger>
+              </div>
+              <div>
+                <OverlayTrigger
+                  placement="top"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderCloneTooltip(props, "Fast shopping")}
+                  triggerType="hover"
+                >
+                  <i
+                    onClick={() => alert("Add Expense")}
+                    className="fa fa-cart-plus roundedButton pull-right"
+                  />
+                </OverlayTrigger>
+              </div>
+              <div>
+                <OverlayTrigger
+                  placement="top"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderCloneTooltip(props, "Export PDF")}
+                  triggerType="hover"
+                >
+                  <i
+                    onClick={() => exportToPdf()}
+                    className="fa fa-file-pdf-o roundedButton pull-right"
+                  />
+                </OverlayTrigger>
+              </div>
+            </div>
           </div>
-          <div>
-            <div>
-              <OverlayTrigger
-                placement="left"
-                delay={{ show: 250, hide: 400 }}
-                overlay={renderCloneTooltip(props, "Clone template")}
-                triggerType="hover"
-              >
-                <i
-                  onClick={() => cloneFromTemplate()}
-                  className="fa fa-copy roundedButton pull-right"
-                />
-              </OverlayTrigger>
-            </div>
-            <div>
-              <OverlayTrigger
-                placement="top"
-                delay={{ show: 250, hide: 400 }}
-                overlay={renderCloneTooltip(props, "Fast shopping")}
-                triggerType="hover"
-              >
-                <i
-                  onClick={() => alert("Add Expense")}
-                  className="fa fa-cart-plus roundedButton pull-right"
-                />
-              </OverlayTrigger>
-            </div>
-            <div>
-              <OverlayTrigger
-                placement="top"
-                delay={{ show: 250, hide: 400 }}
-                overlay={renderCloneTooltip(props, "Export PDF")}
-                triggerType="hover"
-              >
-                <i
-                  onClick={() => exportToPdf()}
-                  className="fa fa-file-pdf-o roundedButton pull-right"
-                />
-              </OverlayTrigger>
-            </div>
-          </div>
-        </div>
+        )}
         {monthYearSelected &&
           bankSelected &&
           WhereClause &&
@@ -246,42 +304,62 @@ const MonthExpenditureTable = props => {
                 insertCloneData={insertData}
                 showTooltipFor={t.showTooltipFor}
                 onTableUpdate={data => setDbData(() => [...data])}
-                loaderState={(lState) => setPlanLoader(lState)}
+                loaderState={lState => setPlanLoader(lState)}
               />
             ))}
       </div>
-      {!planLoader &&
-      <div className="row">
-        {planCards.map(plan => (
-          <div key={plan.key} className="col-md-3 mt-10 pr-0 pl-0">
-            <div className="blog-box">
-              <div className="post-media">
-                <div className={`title text-center`}>
-                  <h4 className="posRelative">
-                    {plan.planString}
-                    <sup className="superScript">{plan.planArray.length}</sup>
-                  </h4>
-                </div>
-              </div>
-              <div className={`blog-desc black`}>
-                <div className={`text-center text-${plan.flagString}`}>
-                  <OverlayTrigger
-                    placement="top"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={renderPlanTooltip(props, plan.planArray)}
-                    triggerType="hover"
-                  >
-                    <div className="cursorHelp">
-                      {getPlanAmount(plan.planArray)}
+      {!planLoader && (
+        <div>
+          <div className="row">
+            {totals.map(total => (
+              <div key={total.label} className="col-md-3 mt-10 pr-0 pl-0">
+                <div className="blog-box">
+                  <div className="post-media">
+                    <div className={`title text-center`}>
+                      <h4 className="posRelative">{total.label}</h4>
                     </div>
-                  </OverlayTrigger>
+                  </div>
+                  <div className={`blog-desc black`}>
+                    <div className={`text-center text-${total.flagString}`}>{helpers.indianLacSeperator(total.amount)}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
-      }
+          <div className="row">
+            {planCards.map(plan => (
+              <div key={plan.key} className="col-md-3 mt-10 pr-0 pl-0">
+                <div className="blog-box">
+                  <div className="post-media">
+                    <div className={`title text-center`}>
+                      <h4 className="posRelative">
+                        {plan.planString}
+                        <sup className="superScript">
+                          {plan.planArray.length}
+                        </sup>
+                      </h4>
+                    </div>
+                  </div>
+                  <div className={`blog-desc black`}>
+                    <div className={`text-center text-${plan.flagString}`}>
+                      <OverlayTrigger
+                        placement="top"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={renderPlanTooltip(props, plan.planArray)}
+                        triggerType="hover"
+                      >
+                        <div className="cursorHelp">
+                          {helpers.indianLacSeperator(getPlanAmount(plan.planArray))}
+                        </div>
+                      </OverlayTrigger>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

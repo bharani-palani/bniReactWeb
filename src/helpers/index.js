@@ -57,6 +57,9 @@ const helpers = {
       currency: "INR"
     });
   },
+  lacSeperator: number => {
+    return number.toLocaleString('en-IN');
+  },
   strToNumMonth: {
     // usage: strToNumMonth["Mar"] | output: "03"
     Jan: "01",
@@ -141,7 +144,7 @@ const helpers = {
     const now = new Date();
     let year = now.getFullYear();
     let month = now.getMonth() + 2;
-    if(month > 12) {
+    if (month > 12) {
       year += 1;
       month = 1;
     }
@@ -153,7 +156,7 @@ const helpers = {
     return `${yyyy}-${mm}-01`;
   },
   getNow: () => {
-    const leadingZeros = (number) => {
+    const leadingZeros = number => {
       let num = Number(number);
       return num < 10 ? `0${num}` : num;
     };
@@ -164,8 +167,7 @@ const helpers = {
     const hh = leadingZeros(now.getHours());
     const mm = leadingZeros(now.getMinutes());
     const ss = leadingZeros(now.getSeconds());
-    const zzz = leadingZeros(now.getMilliseconds());
-    return `${yyyy}-${mmm}-${dd}T${hh}|${mm}|${ss}|${zzz}`;
+    return `${yyyy}-${mmm}-${dd} ${hh}:${mm}:${ss}`;
   }
 };
 
