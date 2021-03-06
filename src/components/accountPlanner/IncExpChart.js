@@ -70,11 +70,8 @@ const IncExpChart = props => {
             width={220}
             legend={false}
             data={d.cData}
-            formatValues={(values, total) =>
-              `${helpers.indianLacSeperator(values)} / (${(
-                (values / total) *
-                100
-              ).toFixed(2)}%)`
+            // formatValues={(values, total) => `${helpers.indianLacSeperator(values)} / (${((values / total) * 100).toFixed(2)}%)`
+            formatValues={(values, total) => `${helpers.indianLacSeperator(values)}`
             }
           />
         </div>

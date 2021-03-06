@@ -7,6 +7,7 @@ import apiInstance from "../../services/apiServices";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import PlanInfoModal from "./PlanInfoModal";
 
 const MonthExpenditureTable = props => {
   const { monthYearSelected, bankSelected } = props;
@@ -16,6 +17,8 @@ const MonthExpenditureTable = props => {
   const [dbData, setDbData] = useState([]);
   const [planLoader, setPlanLoader] = useState(false);
   const [totals, setTotals] = useState([]);
+  const [openPlanModal, setOpenPlanModal] = useState(false); // change to false
+  const [selectedPlan, setSelectedPlan] = useState({});
 
   useEffect(() => {
     if (monthYearSelected && bankSelected) {
@@ -132,7 +135,11 @@ const MonthExpenditureTable = props => {
     const totals = [
       { amount: plan.incomeTotal, label: "Income", flagString: "success" },
       { amount: plan.expenseTotal, label: "Expense", flagString: "info" },
-      { amount: (plan.incomeTotal - plan.expenseTotal), label: "Balance", flagString: "danger" },
+      {
+        amount: plan.incomeTotal - plan.expenseTotal,
+        label: "Balance",
+        flagString: "danger"
+      },
       { amount: plan.planTotal, label: "Planning", flagString: "warning" }
     ];
     setTotals(totals);
@@ -164,7 +171,8 @@ const MonthExpenditureTable = props => {
     ];
     setPlanCards(cards);
   };
-  const getPlanAmount = planArray => planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0);
+  const getPlanAmount = planArray =>
+    planArray.reduce((x, y) => x + y.inc_exp_plan_amount, 0);
   const exportToPdf = () => {
     const body = dbData.map(
       (
@@ -222,7 +230,9 @@ const MonthExpenditureTable = props => {
       body: [mTotal]
     });
 
-    const pTotal = planCards.map(plan => helpers.lacSeperator(getPlanAmount(plan.planArray)));
+    const pTotal = planCards.map(plan =>
+      helpers.lacSeperator(getPlanAmount(plan.planArray))
+    );
     doc.autoTable({
       styles: { overflow: "linebreak", halign: "center" },
       theme: "striped",
@@ -232,8 +242,45 @@ const MonthExpenditureTable = props => {
 
     doc.save(`${monthExpenditureConfig[0].Table}-${now}`);
   };
+
+  const onPlanClick = (planString, key) => {
+    let [smonth, year] = monthYearSelected.split("-");
+    const month = helpers.strToNumMonth[smonth];
+    const calDays = new Date(year, month, 0).getDate();
+    const criteriaString = "ROUND(ifnull(a.inc_exp_plan_amount / a.inc_exp_amount,0)*100,2)";
+    let clause = {startDate: `${year}-${month}-01`, endDate: `${year}-${month}-${calDays}`, bankSelected};
+    switch(key){
+      case "goodPlans":
+        clause = {...clause, criteria: `${criteriaString} > 100.00`}
+      break;
+      case "achievedPlans":
+        clause = {...clause, criteria: `${criteriaString} = 100.00`}
+      break;
+      case "badPlans":
+        clause = {...clause, criteria: `${criteriaString} > 0.00 and ${criteriaString} < 100.00`}
+      break;
+      case "noPlans":
+        clause = {...clause, criteria: `${criteriaString} = 0.00`}
+      break;
+      default:
+    }
+    setOpenPlanModal(true); 
+    setSelectedPlan(clause);
+  }
   return (
     <div className="settings">
+      {openPlanModal && (
+        <PlanInfoModal
+          className="backendUpdate"
+          show={openPlanModal}
+          onHide={() => setOpenPlanModal(false)}
+          size="lg"
+          animation={false}
+          monthYearSelected={monthYearSelected}
+          bankSelected={bankSelected}
+          selectedPlan={selectedPlan}
+        />
+      )}
       <div className="backendConfigureSection">
         {!planLoader && (
           <div className="equal-grid-2 mt-10">
@@ -320,7 +367,9 @@ const MonthExpenditureTable = props => {
                     </div>
                   </div>
                   <div className={`blog-desc black`}>
-                    <div className={`text-center text-${total.flagString}`}>{helpers.indianLacSeperator(total.amount)}</div>
+                    <div className={`text-center text-${total.flagString}`}>
+                      {helpers.indianLacSeperator(total.amount)}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -348,8 +397,10 @@ const MonthExpenditureTable = props => {
                         overlay={renderPlanTooltip(props, plan.planArray)}
                         triggerType="hover"
                       >
-                        <div className="cursorHelp">
-                          {helpers.indianLacSeperator(getPlanAmount(plan.planArray))}
+                        <div onClick={() => onPlanClick(plan.planString, plan.key)} className="cursorHelp">
+                          {helpers.indianLacSeperator(
+                            getPlanAmount(plan.planArray)
+                          )}
                         </div>
                       </OverlayTrigger>
                     </div>
