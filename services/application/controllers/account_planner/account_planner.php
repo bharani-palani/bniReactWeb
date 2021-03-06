@@ -172,7 +172,7 @@ class account_planner extends CI_Controller
 		// }
 		if ($validate === 1) {
 			$post = array(
-				"startrDate" => $this->input->post("startrDate"),
+				"startDate" => $this->input->post("startDate"),
 				"endDate" => $this->input->post("endDate"),
 				"bankSelected" => $this->input->post("bankSelected"),
 				"criteria" => $this->input->post("criteria"),
