@@ -82,6 +82,7 @@ $route['account_planner/getCreditCardChartData'] = 'account_planner/account_plan
 $route['account_planner/getIncExpTemplate'] = 'account_planner/account_planner/getIncExpTemplate';
 $route['account_planner/credit_card_list'] = 'account_planner/account_planner/credit_card_list';
 $route['account_planner/credit_card_details'] = 'account_planner/account_planner/credit_card_details';
+$route['account_planner/get_plan_details'] = 'account_planner/account_planner/get_plan_details';
 $route['account_planner/getAccountPlanner'] = 'account_planner/account_planner/getAccountPlanner';
 $route['account_planner/postAccountPlanner'] = 'account_planner/account_planner/postAccountPlanner';
 

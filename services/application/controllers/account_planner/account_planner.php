@@ -161,6 +161,28 @@ class account_planner extends CI_Controller
 			$this->auth->response($op, array("query" => $data["query"]), 200);
 		}
 	}
+	public function get_plan_details()
+	{
+		$validate = $this->auth->validateAll();
+		if ($validate === 2) {
+			$this->auth->invalidTokenResponse();
+		}
+		// if ($validate === 3) {
+		// 	$this->auth->invalidDomainResponse();
+		// }
+		if ($validate === 1) {
+			$post = array(
+				"startrDate" => $this->input->post("startrDate"),
+				"endDate" => $this->input->post("endDate"),
+				"bankSelected" => $this->input->post("bankSelected"),
+				"criteria" => $this->input->post("criteria"),
+			);
+			$data = $this->account_planner_model->get_plan_details($post);
+			$op["response"] = $data["result"];
+			$this->auth->response($op, array("query" => $data["query"]), 200);
+		}
+	}
+
 	public function getAccountPlanner()
 	{
 		$validate = $this->auth->validateAll();
@@ -198,5 +220,4 @@ class account_planner extends CI_Controller
 			$this->auth->response($data, array(), 200);
 		}
 	}
-
 }

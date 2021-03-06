@@ -95,6 +95,31 @@ class account_planner_model extends CI_Model
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
 	}
 
+	function get_plan_details($post)
+	{
+		$startDate = $post['startDate'];
+		$endDate = $post['endDate'];
+		$bankSelected = $post['bankSelected'];
+		$criteria = $post['criteria'];
+		$this->db
+			->select(array(
+				a.inc_exp_name,
+				a.inc_exp_amount,
+				a.inc_exp_plan_amount,
+				c.vendor_name,
+				c.vendor_limit
+			), false)
+			->from('income_expense as a')
+			->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
+			->join('vendors as c', 'b.inc_exp_cat_vendor = c.vendor_id ', 'left')
+			->where('a.inc_exp_date >=', $startDate)
+			->where('a.inc_exp_date <=', $endDate)
+			->where('a.inc_exp_bank', $bankSelected)
+			->where($criteria);
+		$query = $this->db->get();
+		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
+	}
+
 	function getAccountPlanner($post)
 	{
 		$Table = $post["Table"];
