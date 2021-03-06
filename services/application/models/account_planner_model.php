@@ -103,11 +103,11 @@ class account_planner_model extends CI_Model
 		$criteria = $post['criteria'];
 		$this->db
 			->select(array(
-				a.inc_exp_name,
-				a.inc_exp_amount,
-				a.inc_exp_plan_amount,
-				c.vendor_name,
-				c.vendor_limit
+				'a.inc_exp_name',
+				'a.inc_exp_amount',
+				'a.inc_exp_plan_amount',
+				'c.vendor_name',
+				'c.vendor_limit'
 			), false)
 			->from('income_expense as a')
 			->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
