@@ -243,11 +243,11 @@ const MonthExpenditureTable = props => {
     doc.save(`${monthExpenditureConfig[0].Table}-${now}`);
   };
 
-  const onPlanClick = (planString, key) => {
+  const onPlanClick = (key) => {
     let [smonth, year] = monthYearSelected.split("-");
     const month = helpers.strToNumMonth[smonth];
     const calDays = new Date(year, month, 0).getDate();
-    const criteriaString = "ROUND(ifnull(a.inc_exp_plan_amount / a.inc_exp_amount,0)*100,2)";
+    const criteriaString = "ROUND(IFNULL(a.inc_exp_plan_amount / a.inc_exp_amount, 0) * 100, 2)";
     let clause = {startDate: `${year}-${month}-01`, endDate: `${year}-${month}-${calDays}`, bankSelected};
     switch(key){
       case "goodPlans":
@@ -257,7 +257,7 @@ const MonthExpenditureTable = props => {
         clause = {...clause, label: "Achieved plans", criteria: `${criteriaString} = 100`}
       break;
       case "badPlans":
-        clause = {...clause, label: "Bad plans", criteria: `${criteriaString} > 0 and ${criteriaString} < 100`}
+        clause = {...clause, label: "Bad plans", criteria: `${criteriaString} > 0 AND ${criteriaString} < 100`}
       break;
       case "noPlans":
         clause = {...clause, label: "No plans", criteria: `${criteriaString} = 0`}
@@ -397,7 +397,7 @@ const MonthExpenditureTable = props => {
                         overlay={renderPlanTooltip(props, plan.planArray)}
                         triggerType="hover"
                       >
-                        <div onClick={() => onPlanClick(plan.planString, plan.key)} className="cursorHelp">
+                        <div onClick={() => onPlanClick(plan.key)} className="cursorHelp">
                           {helpers.indianLacSeperator(
                             getPlanAmount(plan.planArray)
                           )}
