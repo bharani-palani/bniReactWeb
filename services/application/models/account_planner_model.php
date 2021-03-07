@@ -108,14 +108,15 @@ class account_planner_model extends CI_Model
 				'a.inc_exp_plan_amount',
 				'c.vendor_name',
 				'c.vendor_limit'
-			), false)
+			), FALSE)
 			->from('income_expense as a')
 			->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
 			->join('vendors as c', 'b.inc_exp_cat_vendor = c.vendor_id ', 'left')
 			->where($criteria)
 			->where('a.inc_exp_date >=', $startDate)
 			->where('a.inc_exp_date <=', $endDate)
-			->where('a.inc_exp_bank', $bankSelected);
+			->where('a.inc_exp_bank', $bankSelected)
+			->order_by('inc_exp_name','inc_exp_amount','inc_exp_plan_amount');
 		$query = $this->db->get();
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
 	}
