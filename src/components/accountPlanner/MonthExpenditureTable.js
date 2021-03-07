@@ -247,7 +247,7 @@ const MonthExpenditureTable = props => {
     let [smonth, year] = monthYearSelected.split("-");
     const month = helpers.strToNumMonth[smonth];
     const calDays = new Date(year, month, 0).getDate();
-    const criteriaString = "ROUND(IFNULL(a.inc_exp_plan_amount / a.inc_exp_amount, 0) * 100, 2)";
+    const criteriaString = "IFNULL(`a`.`inc_exp_plan_amount` / `a`.`inc_exp_amount`, 0) * 100";
     let clause = {startDate: `${year}-${month}-01`, endDate: `${year}-${month}-${calDays}`, bankSelected};
     switch(key){
       case "goodPlans":
