@@ -115,7 +115,7 @@ class account_planner_model extends CI_Model
 			->where('a.inc_exp_date >=', $startDate)
 			->where('a.inc_exp_date <=', $endDate)
 			->where('a.inc_exp_bank', $bankSelected)
-			->where($criteria,NULL,FALSE);
+			->where($criteria);
 		$query = $this->db->get();
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
 	}

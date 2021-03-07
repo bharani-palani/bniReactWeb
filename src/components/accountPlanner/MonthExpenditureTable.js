@@ -251,16 +251,16 @@ const MonthExpenditureTable = props => {
     let clause = {startDate: `${year}-${month}-01`, endDate: `${year}-${month}-${calDays}`, bankSelected};
     switch(key){
       case "goodPlans":
-        clause = {...clause, label: "Good plans", criteria: `${criteriaString} > 100.00`}
+        clause = {...clause, label: "Good plans", criteria: `${criteriaString} > 100`}
       break;
       case "achievedPlans":
-        clause = {...clause, label: "Achieved plans", criteria: `${criteriaString} = 100.00`}
+        clause = {...clause, label: "Achieved plans", criteria: `${criteriaString} = 100`}
       break;
       case "badPlans":
-        clause = {...clause, label: "Bad plans", criteria: `${criteriaString} > 0.00 and ${criteriaString} < 100.00`}
+        clause = {...clause, label: "Bad plans", criteria: `${criteriaString} > 0 and ${criteriaString} < 100`}
       break;
       case "noPlans":
-        clause = {...clause, label: "No plans", criteria: `${criteriaString} = 0.00`}
+        clause = {...clause, label: "No plans", criteria: `${criteriaString} = 0`}
       break;
       default:
     }
