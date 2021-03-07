@@ -257,7 +257,7 @@ const MonthExpenditureTable = props => {
         clause = {...clause, label: "Achieved plans", criteria: `${criteriaString} = 100`}
       break;
       case "badPlans":
-        clause = {...clause, label: "Bad plans", criteria: `${criteriaString} > 0 AND ${criteriaString} < 100`}
+        clause = {...clause, label: "Bad plans", criteria: `(${criteriaString} > 0 AND ${criteriaString} < 100)`}
       break;
       case "noPlans":
         clause = {...clause, label: "No plans", criteria: `${criteriaString} = 0`}
