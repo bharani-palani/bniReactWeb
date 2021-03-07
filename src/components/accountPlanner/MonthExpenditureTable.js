@@ -247,20 +247,19 @@ const MonthExpenditureTable = props => {
     let [smonth, year] = monthYearSelected.split("-");
     const month = helpers.strToNumMonth[smonth];
     const calDays = new Date(year, month, 0).getDate();
-    const criteriaString = "IFNULL(`a`.`inc_exp_plan_amount` / `a`.`inc_exp_amount`, 0) * 100";
     let clause = {startDate: `${year}-${month}-01`, endDate: `${year}-${month}-${calDays}`, bankSelected};
     switch(key){
       case "goodPlans":
-        clause = {...clause, label: "Good plans", criteria: `${criteriaString} > 100`}
+        clause = {...clause, label: "Good plans", criteria: `G100`}
       break;
       case "achievedPlans":
-        clause = {...clause, label: "Achieved plans", criteria: `${criteriaString} = 100`}
+        clause = {...clause, label: "Achieved plans", criteria: `E100`}
       break;
       case "badPlans":
-        clause = {...clause, label: "Bad plans", criteria: `${criteriaString} > 0 AND ${criteriaString} < 100`}
+        clause = {...clause, label: "Bad plans", criteria: `0TO100`}
       break;
       case "noPlans":
-        clause = {...clause, label: "No plans", criteria: `${criteriaString} = 0`}
+        clause = {...clause, label: "No plans", criteria: `E0`}
       break;
       default:
     }

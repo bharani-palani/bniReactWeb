@@ -108,15 +108,31 @@ class account_planner_model extends CI_Model
 				'a.inc_exp_plan_amount',
 				'c.vendor_name',
 				'c.vendor_limit'
-			), FALSE)
+			), false)
 			->from('income_expense as a')
 			->join('income_expense_category as b', 'a.inc_exp_category = b.inc_exp_cat_id', 'left')
 			->join('vendors as c', 'b.inc_exp_cat_vendor = c.vendor_id ', 'left')
-			->where($criteria)
 			->where('a.inc_exp_date >=', $startDate)
 			->where('a.inc_exp_date <=', $endDate)
-			->where('a.inc_exp_bank', $bankSelected)
-			->order_by('inc_exp_name','inc_exp_amount','inc_exp_plan_amount');
+			->where('a.inc_exp_bank', $bankSelected);
+		switch($criteria) {
+			case "G100":
+				$this->db->where("IFNULL(`a`.`inc_exp_plan_amount` / `a`.`inc_exp_amount`, 0) * 100 >", 100);
+			break;
+			case "E100":
+				$this->db->where("IFNULL(`a`.`inc_exp_plan_amount` / `a`.`inc_exp_amount`, 0) * 100 =", 100);
+			break;
+			case "0TO100":
+				$this->db
+					->where("IFNULL(`a`.`inc_exp_plan_amount` / `a`.`inc_exp_amount`, 0) * 100 >", "0")
+					->where("IFNULL(`a`.`inc_exp_plan_amount` / `a`.`inc_exp_amount`, 0) * 100 <", "100");
+			break;
+			case "E0":
+				$this->db->where("IFNULL(`a`.`inc_exp_plan_amount` / `a`.`inc_exp_amount`, 0) * 100 =", 0);
+			break;
+			default;
+		}
+		$this->db->order_by('inc_exp_name');
 		$query = $this->db->get();
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
 	}
