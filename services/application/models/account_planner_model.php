@@ -95,7 +95,7 @@ class account_planner_model extends CI_Model
 		return array("query" => $this->db->last_query(), "result" => get_all_rows($query));
 	}
 
-	function get_plan_details($post)
+	function getPlanDetails($post)
 	{
 		$startDate = $post['startDate'];
 		$endDate = $post['endDate'];

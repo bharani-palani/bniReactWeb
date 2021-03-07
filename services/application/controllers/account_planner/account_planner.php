@@ -161,7 +161,7 @@ class account_planner extends CI_Controller
 			$this->auth->response($op, array("query" => $data["query"]), 200);
 		}
 	}
-	public function get_plan_details()
+	public function getPlanDetails()
 	{
 		$validate = $this->auth->validateAll();
 		if ($validate === 2) {
@@ -177,7 +177,7 @@ class account_planner extends CI_Controller
 				"bankSelected" => $this->input->post("bankSelected"),
 				"criteria" => $this->input->post("criteria"),
 			);
-			$data = $this->account_planner_model->get_plan_details($post);
+			$data = $this->account_planner_model->getPlanDetails($post);
 			$op["response"] = $data["result"];
 			$this->auth->response($op, array("query" => $data["query"]), 200);
 		}
