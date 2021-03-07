@@ -8,11 +8,14 @@ import Loader from "react-loader-spinner";
 const PlanInfoModal = props => {
   const { monthYearSelected, bankSelected, selectedPlan } = props;
   const [table, setTable] = useState([]);
+  const [allLoader, setAllLoader] = useState(true);
   useEffect(() => {
+    setAllLoader(true);
     const a = getPlanDetails();
     Promise.all([a]).then(r => {
       const data = r[0];
       setTable(data);
+      setAllLoader(false);
     });
   }, [monthYearSelected, bankSelected, selectedPlan]);
 
@@ -53,10 +56,9 @@ const PlanInfoModal = props => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="table-responsive">
-          {table && table.length > 0 ? (
+        <div className="table-responsive p-10">
+          {!allLoader ? (
             <table className="table table-condensed">
-              <thead>
                 <tr>
                   <th>#</th>
                   <th>Expenditure</th>
@@ -64,9 +66,7 @@ const PlanInfoModal = props => {
                   <th>Planned</th>
                   <th>Difference</th>
                 </tr>
-              </thead>
-              <tbody>
-                {table.map((t, i) => {
+                {table.length > 0 ? table.map((t, i) => {
                   const diff = doDifference(
                     t.inc_exp_plan_amount,
                     t.inc_exp_amount
@@ -86,8 +86,11 @@ const PlanInfoModal = props => {
                       </td>
                     </tr>
                   );
-                })}
-              </tbody>
+                }) : (
+                  <tr>
+                    <td className="text-center noRecords" colSpan="5">No records</td>
+                  </tr>
+                )}
             </table>
           ) : (
             loaderComp()

@@ -48,17 +48,6 @@ const MonthExpenditureTable = props => {
     </Tooltip>
   );
 
-  const renderPlanTooltip = (props, planArray) => {
-    const values = planArray.map(p => p.inc_exp_name).join(" | ");
-    return values ? (
-      <Tooltip id="button-tooltip-2" className="in show" {...props}>
-        {values}
-      </Tooltip>
-    ) : (
-      <Tooltip />
-    );
-  };
-
   const cloneFromTemplate = () => {
     const a = getTemplate();
     Promise.all([a]).then(r => {
@@ -243,29 +232,33 @@ const MonthExpenditureTable = props => {
     doc.save(`${monthExpenditureConfig[0].Table}-${now}`);
   };
 
-  const onPlanClick = (key) => {
+  const onPlanClick = key => {
     let [smonth, year] = monthYearSelected.split("-");
     const month = helpers.strToNumMonth[smonth];
     const calDays = new Date(year, month, 0).getDate();
-    let clause = {startDate: `${year}-${month}-01`, endDate: `${year}-${month}-${calDays}`, bankSelected};
-    switch(key){
+    let clause = {
+      startDate: `${year}-${month}-01`,
+      endDate: `${year}-${month}-${calDays}`,
+      bankSelected
+    };
+    switch (key) {
       case "goodPlans":
-        clause = {...clause, label: "Good plans", criteria: `G100`}
-      break;
+        clause = { ...clause, label: "Good plans", criteria: `G100` };
+        break;
       case "achievedPlans":
-        clause = {...clause, label: "Achieved plans", criteria: `E100`}
-      break;
+        clause = { ...clause, label: "Achieved plans", criteria: `E100` };
+        break;
       case "badPlans":
-        clause = {...clause, label: "Bad plans", criteria: `0TO100`}
-      break;
+        clause = { ...clause, label: "Bad plans", criteria: `0TO100` };
+        break;
       case "noPlans":
-        clause = {...clause, label: "No plans", criteria: `E0`}
-      break;
+        clause = { ...clause, label: "No plans", criteria: `E0` };
+        break;
       default:
     }
-    setOpenPlanModal(true); 
+    setOpenPlanModal(true);
     setSelectedPlan(clause);
-  }
+  };
   return (
     <div className="settings">
       {openPlanModal && (
@@ -390,18 +383,14 @@ const MonthExpenditureTable = props => {
                   </div>
                   <div className={`blog-desc black`}>
                     <div className={`text-center text-${plan.flagString}`}>
-                      <OverlayTrigger
-                        placement="top"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={renderPlanTooltip(props, plan.planArray)}
-                        triggerType="hover"
+                      <div
+                        onClick={() => onPlanClick(plan.key)}
+                        className="cursorPointer"
                       >
-                        <div onClick={() => onPlanClick(plan.key)} className="cursorHelp">
-                          {helpers.indianLacSeperator(
-                            getPlanAmount(plan.planArray)
-                          )}
-                        </div>
-                      </OverlayTrigger>
+                        {helpers.indianLacSeperator(
+                          getPlanAmount(plan.planArray)
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
