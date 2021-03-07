@@ -43,12 +43,14 @@ const PlanInfoModal = props => {
   };
   const doDifference = (plan, actual) => {
     let diff = Number(plan) - Number(actual);
-    return helpers.indianLacSeperator(diff);
-  }
+    return diff;
+  };
   return (
     <Modal {...props} style={{ zIndex: 9999 }}>
       <Modal.Header closeButton>
-        <Modal.Title>{monthYearSelected} {selectedPlan.label}</Modal.Title>
+        <Modal.Title>
+          {monthYearSelected} {selectedPlan.label}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="table-responsive">
@@ -65,14 +67,25 @@ const PlanInfoModal = props => {
               </thead>
               <tbody>
                 {table.map((t, i) => {
-                  const diff = doDifference(t.inc_exp_plan_amount, t.inc_exp_amount);
-                  return (<tr>
-                    <td>{i + 1}</td>
-                    <td>{t.inc_exp_name}</td>
-                    <td>{t.inc_exp_amount}</td>
-                    <td>{t.inc_exp_plan_amount}</td>
-                    <td className={`text-${diff >= 0 ? "success" : "danger"}`}>{diff >= 0 ? `+${diff}` : `(${diff})`}</td>
-                  </tr>)
+                  const diff = doDifference(
+                    t.inc_exp_plan_amount,
+                    t.inc_exp_amount
+                  );
+                  return (
+                    <tr>
+                      <td>{i + 1}</td>
+                      <td>{t.inc_exp_name}</td>
+                      <td>{t.inc_exp_amount}</td>
+                      <td>{t.inc_exp_plan_amount}</td>
+                      <td
+                        className={`text-${diff >= 0 ? "success" : "danger"}`}
+                      >
+                        {diff >= 0
+                          ? `+${helpers.indianLacSeperator(diff)}`
+                          : `(${helpers.indianLacSeperator(diff)})`}
+                      </td>
+                    </tr>
+                  );
                 })}
               </tbody>
             </table>
