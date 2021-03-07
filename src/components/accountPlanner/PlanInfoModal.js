@@ -43,7 +43,7 @@ const PlanInfoModal = props => {
   };
   const doDifference = (plan, actual) => {
     let diff = Number(plan) - Number(actual);
-    return diff;
+    return helpers.indianLacSeperator(diff);
   }
   return (
     <Modal {...props} style={{ zIndex: 9999 }}>
@@ -71,7 +71,7 @@ const PlanInfoModal = props => {
                     <td>{t.inc_exp_name}</td>
                     <td>{t.inc_exp_amount}</td>
                     <td>{t.inc_exp_plan_amount}</td>
-                    <td className={`text-${diff >= 0 ? "success" : "danger"}`}>{diff >= 0 ? diff : `(${diff})`}</td>
+                    <td className={`text-${diff >= 0 ? "success" : "danger"}`}>{diff >= 0 ? `+${diff}` : `(${diff})`}</td>
                   </tr>)
                 })}
               </tbody>
