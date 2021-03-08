@@ -189,9 +189,9 @@ const MonthExpenditureTable = props => {
     const now = helpers.getNow();
     const head = [
       "#",
-      "Name",
+      "Transaction",
       "Amount",
-      "Plan amount",
+      "Planned",
       "Type",
       "Date",
       "Comments"
@@ -354,8 +354,8 @@ const MonthExpenditureTable = props => {
               <div key={total.label} className="col-md-3 mt-10 pr-0 pl-0">
                 <div className="blog-box">
                   <div className="post-media">
-                    <div className={`title text-center`}>
-                      <h4 className="posRelative">{total.label}</h4>
+                    <div className={`title p-6 text-center`}>
+                      <h4 className="posRelative fs-13">{total.label}</h4>
                     </div>
                   </div>
                   <div className={`blog-desc black`}>
@@ -372,8 +372,8 @@ const MonthExpenditureTable = props => {
               <div key={plan.key} className="col-md-3 mt-10 pr-0 pl-0">
                 <div className="blog-box">
                   <div className="post-media">
-                    <div className={`title text-center`}>
-                      <h4 className="posRelative">
+                    <div className={`title p-6 text-center`}>
+                      <h4 className="posRelative fs-13">
                         {plan.planString}
                         <sup className="superScript">
                           {plan.planArray.length}
