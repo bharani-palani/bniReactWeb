@@ -263,7 +263,7 @@ const MonthExpenditureTable = props => {
     <div className="settings">
       {openPlanModal && (
         <PlanInfoModal
-          className="backendUpdate"
+          className="planInfoModal"
           show={openPlanModal}
           onHide={() => setOpenPlanModal(false)}
           size="lg"

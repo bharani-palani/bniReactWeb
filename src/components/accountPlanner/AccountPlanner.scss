@@ -60,22 +60,31 @@
   .react-datetime-picker {
     cursor: pointer;
     .react-datetime-picker__wrapper {
-      border:0;
+      border: 0;
       rect {
         stroke: $fluorescent-color;
       }
-    }  
+    }
   }
 }
 .cardWrapper {
   line-height: 3;
   padding: 2rem;
-  &:hover, &.active{
+  &:hover,
+  &.active {
     color: $fluorescent-color;
   }
   cursor: pointer;
   .fa {
     font-size: 36px;
     display: block;
+  }
+}
+.planInfoModal {
+  .table {
+    min-width: 600px;
+    th, td {
+      padding: 3px;
+    }
   }
 }
